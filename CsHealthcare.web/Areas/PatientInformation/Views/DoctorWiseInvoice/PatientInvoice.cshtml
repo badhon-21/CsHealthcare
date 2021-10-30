@@ -1,0 +1,226 @@
+﻿
+@model CsHealthcare.ViewModel.Patient.InPatientDoctorInvoiceModel
+
+@{
+    ViewBag.Title = "InPatient Doctor Invoice";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    @*<div class="col-md-1"></div>*@
+    <div class="col-md-12">
+        <div class="portlet light">
+            <div class="form-horizontal">
+                <input type="hidden" id="tId" name="tId" value="" />
+                <div class="form-group">
+                    <div class="control-label col-md-2" style="margin-left: -50px">Date</div>
+                    <div class="col-md-3">
+                        <input class="form-control datetimepicker" type="datetime" name="Date" id="Date" placeholder="pick a date">
+                        @*<input id="Date" name="Date" value="" class="form-control "/>*@
+                    </div>
+                    <div class="control-label col-md-2">Patient Code</div>
+                    <div class="col-md-3">
+                        <input id="txtPatientCode" name="PatientCode" value="" class="form-control " />
+
+                    </div>
+
+                    <div class="actions margin-right-8">
+                        <a class="btn btn-circle green-jungle" style="width: 8% !important;" onclick="javascript: loadStatement(); ">
+                            <i class="fa fa-search"></i> Search
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bullseye font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp uppercase">@ViewBag.Title</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                    <a href="javascript:;" data-load="true" class="reload">
+
+                    </a>
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+                    <a class="btn btn-circle green-jungle btn-sm">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                    @*<a class="btn btn-circle green-jungle btn-sm" href="@SessionManager.DashBoard">
+                            <i class="fa fa-chevron-left"></i> Back
+                        </a>*@
+                </div>
+            </div>
+            <hr style="margin-top: 0;">
+            <div class="portlet-body portlet-empty" id="tblTest">
+
+
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+    @*<div class="col-md-1"></div>*@
+</div>
+
+
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+@section page_styles {
+
+
+    <link href="~/assets/global/plugins/select2/css/select2.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <link href="~/assets/global/plugins/typeahead/typeahead.css" rel="stylesheet" />
+    <style>
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+            width: 422px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+            .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+                color: #fff;
+                background-color: #0097cf;
+            }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+}
+
+
+
+@section Scripts {
+
+
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/assets/global/plugins/select2/js/select2.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/jquery.datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+
+    <script>
+        jQuery(document).ready(function() {
+            $(".datetimepicker").datepicker("setDate", new Date());;
+            initPatientCodeAutoComplete();
+        });
+
+
+        function initPatientCodeAutoComplete() {
+            $('#txtPatientCode').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /PatientInformation/DoctorWiseInvoice/LoadPatientCode",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.PatientCode,
+                                    value: val.PatientCode
+
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                $("#tId").val(patient.Id);
+                //getPatientId();
+                //$("#txtPatientName").val(patient.Name);
+                //$("#txtMobileNumber").val(patient.Mobile);
+            });
+
+        }
+        function loadStatement() {
+            var loadArea = $("#tblTest");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("PatientWiseList", "DoctorWiseInvoice", new {Area = "PatientInformation" }))",
+                data: { "Date": $('#Date').val(), "patientcode": $('#txtPatientCode').val() },
+            dataType: "html",
+            success: function (result) {
+                loadArea.html(result);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                var msg = 'Fail to load  List.';
+                alert(msg);
+            }
+        });
+        }
+
+    </script>
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

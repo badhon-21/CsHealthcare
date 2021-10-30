@@ -1,0 +1,2827 @@
+﻿@{
+    ViewBag.Title = "History";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="hidden" id="txtPatientId" value="@ViewBag.PatientId" />
+        <input type="hidden" id="txtDoctorId" value="@ViewBag.DoctorId" />
+        <div class="page-content" style="min-height:247px">
+            <div class="container-fluid">
+
+                <div id="appointment_list_container" class="row">
+
+                    <div @*style="width: 155px;"*@ class="profile-sidebar col-md-2 row">
+                        <!-- PORTLET MAIN -->
+                        <div class="portlet light profile-sidebar-portlet">
+                            <!-- SIDEBAR USERPIC -->
+                            <div class="profile-userpic">
+                                <img alt="" class="img-responsive" src="~/assets/layouts/layout3/img/avatar.png" style="width: 100%;">
+                            </div>
+                            <!-- END SIDEBAR USERPIC -->
+                            <!-- SIDEBAR USER TITLE -->
+                            <div class="profile-usertitle">
+                                <div class="profile-usertitle-name" id="viewPatientName">
+                                    -----
+                                </div>
+                                <div class="profile-usertitle-job" id="viewPatientAge">
+                                    -----
+                                </div>
+
+                            </div>
+                            <!-- END SIDEBAR USER TITLE -->
+                            <!-- SIDEBAR BUTTONS -->
+                            <div class="profile-userbuttons">
+                                <a class="btn btn-circle btn-danger btn-sm" href="@Url.Action("ViewPatientInfo", "History", new {Area = "PatientManagement"})" data-modal="">
+                                    Full Profile
+                                </a>
+                            </div>
+                            <!-- END SIDEBAR BUTTONS -->
+                            <!-- SIDEBAR MENU -->
+                            <div class="profile-usermenu">
+
+                            </div>
+                            <!-- END MENU -->
+                        </div>
+                        <!-- END PORTLET MAIN -->
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-file-text-o font-red-sunglo"></i>
+                                    <span class="caption-subject font-red-sunglo bold uppercase">Histories</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse">
+                                    </a>
+
+                                    <a href="javascript:;" class="fullscreen">
+                                    </a>
+                                </div>
+
+                            </div>
+                            <hr style="margin-top: 0;" />
+                            <div class="portlet-body" id="oldHistoriesList">
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-10">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-file-text-o font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp uppercase">Patient History</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse">
+                                    </a>
+                                    <a href="javascript:;" class="fullscreen">
+                                    </a>
+                                </div>
+                                <div class="actions margin-right-10">
+                                    <a class="btn btn-circle green-jungle btn-sm" href="@Url.Action("Index", "History", new {Area = "PatientManagement"})">
+                                        <i class="fa fa-chevron-left"></i> Back
+                                    </a>
+                                </div>
+                                <div class="actions margin-right-10">
+                                    <a class="btn btn-circle green-jungle btn-sm" onclick="javascript: pullPreviousHistory(); ">
+                                        <i class="fa fa-plus"></i> Previous
+                                    </a>
+                                </div>
+                                <div class="actions margin-right-10">
+                                    <a class="btn btn-circle green-jungle btn-sm" onclick="javascript: insertPatientHisotry(); ">
+                                        <i class="fa fa-plus"></i> Save
+                                    </a>
+                                </div>
+                            </div>
+                            <hr style="margin-top: 0;" />
+                            <div class="portlet-body portlet-empty" id="loadData">
+                                <div class="tabbable tabbable-custom tabbable-noborder  tabbable-reversed">
+                                    <ul class="nav nav-tabs">
+                                        <li class="active">
+                                            <a href="#tab_0" data-toggle="tab">
+                                                History
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#tab_1" data-toggle="tab">
+                                                Personal Hisotry
+                                            </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="#tab_2" data-toggle="tab">
+                                                Prescription
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#tab_3" data-toggle="tab">
+                                                Other
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="tab-content">
+
+                                        <div class="tab-pane active" id="tab_0" style="margin-bottom: 212px;">
+
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="fa fa-bug font-red-sunglo"></i>
+                                                        <span class="caption-subject font-red-sunglo uppercase">Problems</span>
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+
+                                                        <a href="javascript:;" class="fullscreen">
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <hr style="margin-top: 0;" />
+                                                <div class="portlet-body" id="chiefComlaintList">
+
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-md-3" style="float: left; width: 45.5% !important;">
+                                                        <input type="hidden" id="txtChiefComplaintId" value="" />
+                                                        <input id="txtChiefComplaint" maxlength="250" required="required" class="form-control chiefComplaint" placeholder="Chief Complaint" type="text" />
+                                                    </div>
+
+                                                    <div class="row col-md-3" style="float: left; width: 36.8% !important;">
+                                                        <input type="hidden" id="txtChiefComplaintDurationId" value="" />
+                                                        <input id="txtChiefComplaintDuration" maxlength="250" class="form-control chiefComplaintDuration" placeholder="Chief Complaint Duration" type="text" />
+                                                    </div>
+
+                                                    <div class="col-md-1">
+                                                        <a class="btn  green-jungle btn-sm" onclick="javascript: ChiefComplaintList();">
+                                                            <i class="fa fa-plus"></i> Add
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="fa fa-cog font-red-sunglo"></i>
+                                                        <span class="caption-subject font-red-sunglo uppercase">General Exam</span>
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+
+                                                        <a href="javascript:;" class="fullscreen">
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <hr style="margin-top: 0;" />
+                                                <div class="portlet-body">
+
+                                                    <div class="row form-group">
+
+                                                        <div class="col-md-3">
+                                                            <div class="col-md-12">Height:</div>
+                                                            <div class="col-md-8">
+                                                                <input id="txtHeight" name="txtHeight" required="required" class="form-control" placeholder="" type="text" />
+                                                            </div>
+                                                            <div class="col-md-1 row">
+                                                                (cm)
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-3">
+                                                            <div class="col-md-12">weight :</div>
+                                                            <div class="col-md-8">
+                                                                <input id="txtWeight" required="required" class="form-control" placeholder="" type="text" />
+                                                            </div>
+                                                            <div class="col-md-1 row">
+                                                                (kg)
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-3">
+                                                            <div class="col-md-12">BP sys:</div>
+                                                            <div class="col-md-8">
+                                                                <input id="txtBP" maxlength="20" required="required" class="form-control" placeholder="" type="text" />
+                                                            </div>
+                                                            <div class="col-md-1 row">
+                                                                (mmHg)
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-3">
+                                                            <div class="col-md-12">Temperature:</div>
+                                                            <div class="col-md-8">
+                                                                <input id="txtTemperature" maxlength="20" required="required" class="form-control" placeholder="" type="text" />
+                                                            </div>
+                                                            <div class="col-md-1 row">
+                                                                (Ferh)
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="row form-group">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-12">Pulse:</div>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">Rate/Min:</div>
+                                                                <div class="col-md-8">
+                                                                    <input id="txtRateMin" maxlength="20" required="required" class="form-control" placeholder="" type="text" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">Rythm:</div>
+                                                                <div class="col-md-8">
+                                                                    <input id="txtRythm" maxlength="20" required="required" class="form-control" placeholder="" type="text" />
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-4">
+                                                                <div class="col-md-12">Type:</div>
+                                                                <div class="col-md-8">
+                                                                    <input id="txtType" maxlength="20" required="required" class="form-control" placeholder="" type="text" />
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="fa fa-cube font-red-sunglo"></i>
+                                                        <span class="caption-subject font-red-sunglo uppercase">Investigation</span>
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+
+                                                        <a href="javascript:;" class="fullscreen">
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <hr style="margin-top: 0;" />
+                                                <div class="portlet-body" id="investigationList">
+
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-md-3" style="float: left; width: 21% !important;">
+                                                        <input type="hidden" id="txtInvestigationId" value="" />
+                                                        <input id="TestCategoryName" maxlength="250" required="required" class="form-control testCategory" placeholder="Test Category" type="text" />
+                                                    </div>
+
+                                                    <div class="row col-md-3" style="float: left; width: 16% !important;">
+                                                        <input id="TestName" maxlength="250" required="required" class="form-control testName" placeholder="Test name" type="text" />
+                                                    </div>
+
+                                                    <div class="col-md-3" style="float: left; width: 53% !important;">
+                                                        <input id="TestFindings" maxlength="250" required="required" class="form-control" placeholder="Findings" type="text" />
+                                                    </div>
+
+                                                    <div class="col-md-1">
+                                                        <a class="btn  green-jungle btn-sm" onclick="javascript:UpdateInvestigation();">
+                                                            <i class="fa fa-plus"></i> Add
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="fa fa-info-circle font-red-sunglo"></i>
+                                                        <span class="caption-subject font-red-sunglo uppercase">Allergy Information</span>
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+
+                                                        <a href="javascript:;" class="fullscreen">
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <hr style="margin-top: 0;" />
+                                                <div class="portlet-body" id="AlleryInfo">
+
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-md-3" style="float: left; width: 45.5% !important;">
+                                                        <input type="hidden" id="txtAllergyId" value="0" />
+                                                        <input id="txtAllergyTitle" maxlength="250" required="required" class="form-control allergy" placeholder="Allergy Title" type="text" />
+                                                    </div>
+
+                                                    <div class="row col-md-3" style="float: left; width: 36.8% !important;">
+                                                        <input type="hidden" id="txtSubstanceId" value="0" />
+                                                        <input id="txtSubstanceTitle" maxlength="250" class="form-control allergySubstance" placeholder="Substance Title" type="text" />
+                                                    </div>
+
+                                                    <div class="col-md-1">
+                                                        <a class="btn  green-jungle btn-sm" onclick="javascript: AllergyList();">
+                                                            <i class="fa fa-plus"></i> Add
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="fa fa-chain font-red-sunglo"></i>
+                                                        <span class="caption-subject font-red-sunglo uppercase">H/O Past Illness</span>
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+
+                                                        <a href="javascript:;" class="fullscreen">
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <hr style="margin-top: 0;" />
+                                                <div class="portlet-body" id="hoPastIllnessList">
+
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-md-3" style="float: left; width: 45.5% !important;">
+                                                        <input type="hidden" id="txtDiseaseId" value="0" />
+                                                        <input id="txtDisease" maxlength="50" required="required" class="form-control disease" placeholder="Disease" type="text" />
+                                                    </div>
+
+                                                    <div class="row col-md-3" style="float: left; width: 36.7% !important;">
+                                                        <input type="hidden" id="txtConditionId" value="0" />
+                                                        <input id="txtCondition" maxlength="150" class="form-control diseaseCondition" placeholder="Condition" type="text" />
+                                                    </div>
+
+                                                    <div class="col-md-1">
+                                                        <a class="btn  green-jungle btn-sm" onclick="javascript: PastIllnessList();">
+                                                            <i class="fa fa-plus"></i> Add
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="tab-pane" id="tab_1" style="margin-bottom: 212px;">
+
+                                            <div class="portlet light">
+
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="fa fa-pencil-square font-red-sunglo"></i>
+                                                        <span class="caption-subject font-red-sunglo uppercase">Personal History</span>
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+
+                                                        <a href="javascript:;" class="fullscreen">
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <hr style="margin-top: 0;" />
+                                                <div class="row form-group">
+
+                                                    <div class="col-md-7 form-group">
+                                                        <div class="col-md-3 control-label">Marital Status:</div>
+                                                        <div class="col-md-6 control-label">
+                                                            <select id="ddlMaritalStatus" class="form-control">
+                                                                <option value="Single">Single</option>
+                                                                <option value="Married">Married</option>
+                                                                <option value="Divorced">Divorced</option>
+                                                                <option value="widowed">widowed</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-7 form-group">
+                                                        <div class="col-md-3 control-label">Social Status: </div>
+                                                        <div class="col-md-6 control-label">
+                                                            <select id="ddlSocialStatus" class="form-control">
+                                                                <option value="2">Affluent</option>
+                                                                <option value="3">Middle Class</option>
+                                                                <option value="4">Poor</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="fa fa-lightbulb-o font-red-sunglo"></i>
+                                                        <span class="caption-subject font-red-sunglo uppercase">Personal Attribute</span>
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+
+                                                        <a href="javascript:;" class="fullscreen">
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <hr style="margin-top: 0;" />
+                                                <div class="portlet-body" id="personalAttribute">
+
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-md-3" style="float: left; width: 69.2% !important;">
+                                                        <input type="hidden" id="txtAttributeId" value="0" />
+                                                        <input id="txtAttributeTitle" maxlength="100" required="required" class="form-control patientPersonalAttribute" placeholder="Attribute" type="text" />
+                                                    </div>
+
+                                                    <div class="col-md-1">
+                                                        <a class="btn  green-jungle btn-sm" onclick="javascript: PatientPersonalAttributeList();">
+                                                            <i class="fa fa-plus"></i> Add
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="tab-pane" id="tab_2" style="margin-bottom: 212px;">
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="fa fa-plus font-red-sunglo"></i>
+                                                        <span class="caption-subject font-red-sunglo uppercase">Madication</span>
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+
+                                                        <a href="javascript:;" class="fullscreen">
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <hr style="margin-top: 0;" />
+                                                <div class="portlet-body" id="madicationList">
+
+                                                </div>
+                                                <div class="row form-group">
+
+                                                    <div class="row col-md-2" style="width: 13.9%;">
+                                                        <input type="hidden" id="txtPresentationTypeId" value="0" />
+                                                        <input id="txtPresentationType" maxlength="100" required="required" class="form-control" placeholder="Presentation" type="text" />
+                                                    </div>
+
+                                                    <div class="row col-md-2" style="width: 14.7%;">
+                                                        <input type="hidden" id="txtTradeNameId" value="0" />
+                                                        <input id="txtTradeName" maxlength="80" required="required" class="form-control" placeholder="Drug Name" type="text" />
+                                                    </div>
+
+                                                    <div class="col-md-2" style="width: 15.2%;">
+                                                        <input id="txtGenericName" maxlength="80" required="required" class="form-control" placeholder="Generic Name" type="text" />
+                                                    </div>
+
+                                                    <div class="row col-md-2 hide" style="width: 13.4%;">
+                                                        <input type="hidden" id="txtManufacturerNameId" value="0" />
+                                                        <input id="txtManufacturerName" maxlength="50" required="required" class="form-control" placeholder="Manufacturer" type="text" />
+                                                    </div>
+
+                                                    <div class="row col-md-2" style="width: 23.8%; font-family: SutonnyMJ; ">
+                                                        <input type="hidden" id="txtDosesNameId" value="0" />
+                                                        <input id="txtDosesName" maxlength="250" required="required" class="form-control dosesName" placeholder="Doses" type="text" />
+                                                        @*<select id="txtDosesName" class="js-example-basic-single form-control dosesName">
+                                                            
+                                                        </select>*@
+                                                    
+                                                    
+                                                    </div>
+
+                                                    <div class="row col-md-3" style="width: 11%; font-family: SutonnyMJ;">
+                                                        <input type="hidden" id="txtDurationId" value="0" />
+                                                        <input id="txtDuration" maxlength="100" required="required" class="form-control duration" placeholder="Duration" type="text" />
+                                                   
+                                                    
+                                                        @*<select id="txtDuration" class="js-example-basic-single form-control duration">
+                                                            
+                                                        </select>*@
+</div>
+
+                                                    <div class="col-md-2" style="width: 19%; font-family: SutonnyMJ;">
+                                                        <input type="hidden" id="txtAdviceId" value="0" />
+                                                        <input id="txtAdvice" maxlength="200" required="required" class="form-control advice" placeholder="Advice" type="text" />
+                                                    </div>
+
+                                                    <div class="row col-md-2" style="">
+                                                        <a class="btn  green-jungle btn-sm" onclick="javascript:PatientMadicationList(); ">
+                                                            <i class="fa fa-plus"></i>
+                                                        </a>
+                                                        @*<a class="btn  green-jungle btn-sm" title="Set Default" onclick="javascript: SetDefaultRecipe();">
+                                                            <i class="fa fa-desktop"></i>
+                                                        </a>*@
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane" id="tab_3" style="margin-bottom: 212px;">
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="fa  fa-hdd-o font-red-sunglo"></i>
+                                                        <span class="caption-subject font-red-sunglo uppercase">Past History Of Madication</span>
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+
+                                                        <a href="javascript:;" class="fullscreen">
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <hr style="margin-top: 0;" />
+                                                <div class="portlet-body" id="PastHistoryOfMadicationList">
+
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-md-3" style="float: left; width: 45.5% !important;">
+                                                        <input type="hidden" id="txtMxTypeId" value="0" />
+                                                        <input id="txtMxType" maxlength="80" required="required" class="form-control drugType" placeholder="Mx Type" type="text" />
+                                                    </div>
+
+                                                    <div class="row col-md-3" style="float: left; width: 36.8% !important;">
+                                                        <input type="hidden" id="txtDrugId" value="" />
+                                                        <input id="txtDrugName" maxlength="100" required="required" class="form-control drug" placeholder="Drug Name" type="text" />
+                                                    </div>
+
+                                                    <div class="col-md-1">
+                                                        <a class="btn  green-jungle btn-sm" onclick="javascript: PastHistoryOfMadicationList();">
+                                                            <i class="fa fa-plus"></i> Add
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="portlet light">
+                                                <div class="portlet-title">
+                                                    <div class="caption">
+                                                        <i class="fa fa-retweet font-red-sunglo"></i>
+                                                        <span class="caption-subject font-red-sunglo uppercase">Family H/O Disease</span>
+                                                    </div>
+                                                    <div class="tools">
+                                                        <a href="javascript:;" class="collapse">
+                                                        </a>
+
+                                                        <a href="javascript:;" class="remove">
+                                                        </a>
+                                                    </div>
+
+                                                </div>
+                                                <hr style="margin-top: 0;" />
+                                                <div class="portlet-body" id="tableFamilyDisease">
+
+                                                </div>
+                                                <div class="row form-group">
+                                                    <div class="col-md-3" style="float: left; width: 45.5% !important;">
+                                                        <input id="txtFamilyDisease" maxlength="50" required="required" class="form-control disease" placeholder="Disease" type="text" />
+                                                    </div>
+
+                                                    <div class="row col-md-3" style="float: left; width: 36.8% !important;">
+                                                        <input type="hidden" id="txtRelationId" value="" />
+                                                        <input id="txtRelation" maxlength="50" required="required" class="form-control familyTree" placeholder="Relation" type="text" />
+                                                    </div>
+
+                                                    <div class="col-md-1">
+                                                        <a class="btn  green-jungle btn-sm" onclick="javascript:FamilyDiseaseList();">
+                                                            <i class="fa fa-plus"></i> Add
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section page_styles {
+
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+
+    @*<link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/select2/select2.css" />*@
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/typeahead/typeahead.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/uniform/css/uniform.default.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/css/profile.css" />
+    <style>
+        .typeahead {
+            z-index: 1051;
+            margin-top: 2px;
+        }
+
+        .tt-dropdown-menu {
+            z-index: 9051 !important;
+        }
+    </style>
+}
+
+@section Scripts {
+    @*<script type="text/javascript" src="~/Assets/global/plugins/select2/select2.min.js"></script>*@
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/typeahead/typeahead.bundle.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/uniform/jquery.uniform.min.js"></script>
+
+    <script src="~/assets/pages/scripts/form-samples.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script src="~/Assets/Pages/components-pickers.js"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            FormSamples.init();
+            App.blockUI();
+            loadPreviousHistoryList();
+            loadPatientInformation();
+            initChiefComplaintAutoComplete();
+            initChiefComplaintDurationAutoComplete();
+            initTestCategoryAutoComplete();
+            initTestAutoComplete();
+            initPastIllnessDiseaseAutoComplete();
+            initFamilyDiseaseAutoComplete();
+            initDiseaseConditionAutoComplete();
+            initDrugTypeAutoComplete();
+            initDrugAutoComplete();
+            initPatientPersonalAttributeAutoComplete();
+            initAllergyAutoComplete();
+            initAllergySubstanceAutoComplete();
+            initFamilyRelationAutoComplete();
+            initPresentationTypeAutoComplete();
+            //initManufacturerNameAutoComplete();
+            initDrugNameAutoComplete();
+            initGenericNameAutoComplete();
+            initDosesAutoComplete();
+            initDurationAutoComplete();
+            initAdviceAutoComplete();
+            App.unblockUI();
+        });
+
+        function SetDefaultRecipe() {
+            App.blockUI();
+            var tabFamilyDisease = $("#tableFamilyDisease");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("SetDefaultRecipe", "History", new {Area = "PatientManagement"}))",
+                data: { "DrugId": $('#txtTradeNameId').val(), "Doses": $('#txtDosesName').val(), "Duration": $('#txtDuration').val(), "Advice": $('#txtAdvice').val() },
+                dataType: "html",
+                success: function (res) {
+                    App.unblockUI();
+                    alert("Successfully set as a default.");
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                }
+            });
+        }
+
+        function loadPreviousHistoryList() {
+            var loadArea = $("#oldHistoriesList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("PreviousHistoryList", "History", new {Area = "PatientManagement"}))",
+                data: { "PatientId": $('#txtPatientId').val() },
+
+                dataType: "html",
+                success: function (result) {
+                    loadArea.html(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    var msg = 'Fail to load prescription list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function calculateAge(birthMonth, birthDay, birthYear) {
+            var currentDate = new Date();
+            var currentYear = currentDate.getFullYear();
+            var currentMonth = currentDate.getMonth();
+            var currentDay = currentDate.getDate();
+            age = currentYear - birthYear;
+
+            if (currentMonth < birthMonth - 1) {
+                age--;
+            }
+            if (birthMonth - 1 == currentMonth && currentDay < birthDay) {
+                age--;
+            }
+            return age;
+        }
+
+        function pullPreviousHistory() {
+            App.blockUI();
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("PullPreviousHisotry", "History", new {Area = "PatientManagement"}))",
+                data: {
+                    "PatientId": $('#txtPatientId').val(),
+                    "DoctoreId": $('#txtDoctorId').val()
+                },
+                dataType: "html",
+                success: function (result) {
+                    loadPreviousHistory();
+                    App.unblockUI();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                }
+            });
+        }
+
+        function loadPreviousHistory() {
+            loadChiefComplaint();
+        }
+
+        function loadChiefComplaint() {
+            var loadArea = $("#chiefComlaintList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadChiefComplaintList", "History", new {Area = "PatientManagement"}))",
+                data: {},
+                dataType: "html",
+                success: function (result) {
+                    loadArea.html(result);
+                    loadInvestigationList();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load complaint list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+
+        function loadInvestigationList() {
+            var loadArea = $("#investigationList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadInvestigationList", "History", new {Area = "PatientManagement"}))",
+                data: {},
+                dataType: "html",
+                success: function (result) {
+                    loadArea.html(result);
+                    loadGeneralExam();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load investigation list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function loadInvestigation(Id) {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadInvestigation", "History", new {Area = "PatientManagement"}))",
+                data: { "TestId": Id },
+                dataType: "html",
+                success: function (result) {
+                    var value = JSON.parse(result);
+                    $.each(value, function () {
+                        $('#txtInvestigationId').val(value.Id);
+                        $('#TestCategoryName').val(value.TestCategoryName);
+                        $('#TestName').val(value.TestName);
+                        $('#TestFindings').val(value.Findings);
+                    });
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load investigation.';
+                    alert(msg);
+                }
+            });
+        }
+
+        function investigationValidationCheck() {
+            if ($('#TestCategoryName').val() == "") {
+                alert("Please insert test category.");
+                $('#TestCategoryName').focus();
+                return false;
+            } else if ($('#TestName').val() == "") {
+                alert("Please insert test name.");
+                $('#TestName').focus();
+                return false;
+            } else if ($('#TestFindings').val() == "") {
+                alert("Please insert finding.");
+                $('#TestFindings').focus();
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function DeleteInvestigation(TestId) {
+            App.blockUI();
+            var loadArea = $("#investigationList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DeleteInvestigation", "History", new { Area = "PatientManagement" }))",
+                data: { "PatientId": '@ViewBag.PatientId', "TestId": TestId },
+                dataType: "html",
+                success: function (result) {
+                    App.unblockUI();
+                    loadArea.html(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+
+                }
+            });
+        }
+
+        function UpdateInvestigation() {
+            if (investigationValidationCheck()) {
+                App.blockUI();
+                var loadArea = $("#investigationList");
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("UpdateInvestigation", "History", new {Area = "PatientManagement"}))",
+                    data: { "TestCategoryName": $('#TestCategoryName').val(), "TestName": $('#TestName').val(), "Findings": $('#TestFindings').val() },
+                    dataType: "html",
+                    success: function (result) {
+                        loadArea.html(result);
+                        App.unblockUI();
+                        $('#txtInvestigationId').val('');
+                        $('#TestCategoryName').val('');
+                        $('#TestName').val('');
+                        $('#TestFindings').val('');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        App.unblockUI();
+                        var msg = 'Fail to load investigation list.';
+                        if (error == "toastr" && toastr) {
+                            toastr.error(msg);
+                        } else if (error == "notific8" && $.notific8) {
+                            $.notific8('zindex', 11500);
+                            $.notific8(msg, {
+                                theme: 'ruby',
+                                life: 3000
+                            });
+                        } else {
+                            alert(msg);
+                        }
+                    }
+                });
+            }
+        }
+
+
+        function loadGeneralExam() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadGeneralExam", "History", new {Area = "PatientManagement"}))",
+                data: {},
+                dataType: "html",
+                success: function (result) {
+                    var value = JSON.parse(result);
+                    $.each(value, function () {
+                        $('#txtHeight').val(value.Height);
+                        $('#txtWeight').val(value.Weight);
+                        $('#txtBP').val(value.BloodPressure);
+                        $('#txtTemperature').val(value.Temperature);
+                        $('#txtRateMin').val(value.PulseRatePerMinute);
+                        $('#txtRythm').val(value.PluseRythm);
+                        $('#txtType').val(value.PluseType);
+                    });
+
+                    loadAllergyList();
+                    loadPastIllnessList();
+                    loadPersonalHistory();
+                    loadPatientPersonalAttributeList();
+                    loadPatientMadicationList();
+                    loadPastHistoryOfMadicationList();
+                    loadFamilyDiseaseList();
+                    loadPatientInformation();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load general exam.';
+                    alert(msg);
+                }
+            });
+        }
+
+        function loadAllergyList() {
+            var location = $("#AlleryInfo");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadAllergyInformationList", "History", new {Area = "PatientManagement"}))",
+                data: {},
+                dataType: "html",
+                success: function (result) {
+                    location.html(result);
+
+                    $('#txtAllergyId').val('');
+                    $('#txtAllergyTitle').val('');
+                    $('#txtSubstanceId').val('');
+                    $('#txtSubstanceTitle').val('');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load allergy list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function loadPastIllnessList() {
+            var loadArea = $("#hoPastIllnessList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadPastIllnessList", "History", new {Area = "PatientManagement"}))",
+                data: {},
+                dataType: "html",
+                success: function (result) {
+                    loadArea.html(result);
+                    $('#txtDiseaseId').val('');
+                    $('#txtDisease').val('');
+                    $('#txtConditionId').val('');
+                    $('#txtCondition').val('');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load past illness list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function loadPersonalHistory() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadPersonalHistory", "History", new {Area = "PatientManagement"}))",
+                data: {},
+                dataType: "html",
+                success: function (result) {
+                    var value = JSON.parse(result);
+                    $.each(value, function () {
+                        $('#ddlMaritalStatus').val(value.MaritalStatus);
+                        $('#ddlSocialStatus').val(value.SocialEconomicStatusId);
+                    });
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load personal history list.';
+                    alert(msg);
+                }
+            });
+        }
+
+        function loadPatientPersonalAttributeList() {
+            var location = $("#personalAttribute");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadPatientPersonalAttributeList", "History", new {Area = "PatientManagement"}))",
+                data: {},
+                dataType: "html",
+                success: function (result) {
+                    location.html(result);
+                    $('#txtAttributeId').val('');
+                    $('#txtAttributeTitle').val('');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load personal attribute list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function loadPatientMadicationList() {
+            var tabFamilyDisease = $("#madicationList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadPatientMedicationList", "History", new {Area = "PatientManagement"}))",
+                data: {},
+                dataType: "html",
+                success: function (res) {
+                    tabFamilyDisease.html(res);
+                    $('#txtPresentationTypeId').val('0');
+                    $('#txtPresentationType').val('');
+
+                    $('#txtTradeNameId').val('0');
+                    $('#txtGenericName').val('');
+                    $('#txtTradeName').val('');
+
+                    $('#txtManufacturerNameId').val('0');
+                    $('#txtManufacturerName').val('');
+
+                    $('#txtDosesNameId').val('0');
+                    $('#txtDosesName').val('');
+
+                    $('#txtDurationId').val('0');
+                    $('#txtDuration').val('');
+
+                    $('#txtAdviceId').val('0');
+                    $('#txtAdvice').val('');
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load madication list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function loadPastHistoryOfMadicationList() {
+            var location = $("#PastHistoryOfMadicationList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadPastHistoryOfMadicationList", "History", new {Area = "PatientManagement"}))",
+                data: {},
+                dataType: "html",
+                success: function (result) {
+                    App.unblockUI(location);
+                    location.html(result);
+
+                    $('#txtDrugId').val('');
+                    $('#txtDrugName').val('');
+                    $('#txtMxTypeId').val('');
+                    $('#txtMxType').val('');
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load past history of madication list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function loadFamilyDiseaseList() {
+            var tabFamilyDisease = $("#tableFamilyDisease");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadFamilyDiseaseList", "History", new {Area = "PatientManagement"}))",
+                data: {},
+                dataType: "html",
+                success: function (res) {
+                    tabFamilyDisease.html(res);
+                    $('#txtDiseaseId').val('');
+                    $('#txtFamilyDisease').val('');
+                    $('#txtRelationId').val('');
+                    $('#txtRelation').val('');
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load family disease list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function loadPatientInformation() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("getPatientInformation", "History", new {Area = "PatientManagement"}))",
+                data: { "Id": $('#txtPatientId').val() },
+                dataType: "html",
+                success: function (result) {
+                    var value = JSON.parse(result);
+                    $.each(value, function () {
+                        $('#viewPatientName').text(value.Name);
+                        var dob = new Date(parseInt(value.DateOfBirth.substr(6)));
+                        var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+                        var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+                        var age = calculateAge(dob.getMonth(), dob.getDate(), dob.getFullYear());
+                        $('#viewPatientAge').text(age + " years old");
+                    });
+                },
+                error: function (error) {
+                    App.unblockUI();
+                    var msg = 'Fail to load patient information.';
+                    alert(msg);
+                }
+            });
+        }
+
+        function initChiefComplaintAutoComplete() {
+            $('.chiefComplaint').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " ../../History/GetChiefComplaint",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Title
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, value) {
+                $("#txtChiefComplaintId").val(value.Id);
+                $("#txtChiefComplaintDuration").focus();
+            });
+        }
+
+        function initChiefComplaintDurationAutoComplete() {
+            $('.chiefComplaintDuration').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " ../../History/GetChiefComplaintDuration",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Details
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, value) {
+                $("#txtChiefComplaintDurationId").val(value.Id);
+            });
+        }
+
+        function initTestCategoryAutoComplete() {
+            $('.testCategory').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../Prescription/GetTestCategory",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Description
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+
+            });
+        }
+
+        function initTestAutoComplete() {
+            $('.testName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../Prescription/GetTest",
+                        data: "{'SearchString':'" + searchString + "', 'TestCategory':'" + $('#TestCategoryName').val() + "'}",
+                        chache: false,
+                        success: function (data) {
+                            if (data != false) {
+                                var result = [];
+                                $.each(data, function (index, val) {
+                                    result.push({
+                                        Id: val.Id,
+                                        value: val.Name,
+                                        CategoryName: val.CategoryName
+                                    });
+                                });
+                                cb(result);
+                            }
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#TestCategoryName").val(result.CategoryName);
+            });
+        }
+
+        function initAllergyAutoComplete() {
+            $('.allergy').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../History/GetAllergy",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Title
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtAllergyId").val(result.Id);
+                $("#txtSubstanceTitle").focus();
+                $.ajax({
+                    dataType: 'json',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                    url: " ../../History/setAllergy",
+                    data: "{'Id':'" + $("#txtAllergyId").val() + "'}",
+                    chache: false,
+                    success: function (data) {
+                    },
+                    error: function (err) { alert(err); }
+                });
+
+            });
+        }
+
+        function initAllergySubstanceAutoComplete() {
+            $('.allergySubstance').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../History/GetAllergySubstance",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Title
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtSubstanceId").val(result.Id);
+            });
+        }
+
+        function initFamilyDiseaseAutoComplete() {
+            $('#txtFamilyDisease').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " ../../History/GetDisease",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtDiseaseId").val(result.Id);
+                $("#txtRelation").focus();
+            });
+        }
+
+        function initPastIllnessDiseaseAutoComplete() {
+            $('#txtDisease').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " ../../History/GetDisease",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtDiseaseId").val(result.Id);
+                $("#txtCondition").focus();
+            });
+        }
+
+        function initDiseaseConditionAutoComplete() {
+            $('.diseaseCondition').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " ../../History/GetDiseaseDuration",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Description
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtConditionId").val(result.Id);
+            });
+        }
+
+        function initPatientPersonalAttributeAutoComplete() {
+            $('.patientPersonalAttribute').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../History/GetPatientPersonalAttribute",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Title
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtAttributeId").val(result.Id);
+            });
+        }
+
+        function initPresentationTypeAutoComplete() {
+            $('#txtPresentationType').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../Prescription/GetPresentationType",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Description
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtPresentationTypeId").val(result.Id);
+                $("#txtTradeName").focus();
+                $.ajax({
+                    dataType: 'json',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                    url: " ../../Prescription/setPresentationType",
+                    data: "{'Id':'" + $("#txtPresentationTypeId").val() + "'}",
+                    chache: false,
+                    success: function (data) {
+                        $("#txtTradeName").focus();
+                    },
+                    error: function (err) { alert(err); }
+                });
+            });
+        }
+
+        function initManufacturerNameAutoComplete() {
+            $('#txtManufacturerName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../Prescription/GetManufacturerName",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtManufacturerNameId").val(result.Id);
+                $.ajax({
+                    dataType: 'json',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                    url: " ../../Prescription/setManufacturer",
+                    data: "{'Id':'" + $("#txtManufacturerNameId").val() + "'}",
+                    chache: false,
+                    success: function (data) {
+                    },
+                    error: function (err) { alert(err); }
+                });
+            });
+        }
+
+        function initDrugNameAutoComplete() {
+            $('#txtTradeName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 3,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../Prescription/GetDrugName",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.TradeName + " " + val.UnitStrength,
+                                    PresentationTypeId: val.PresentationTypeId,
+                                    PresentationType: val.PresentationTypeName,
+                                    GenericName: val.GenericName,
+                                    ManufacturerId: val.DrugManufacturerId,
+                                    ManufacturerName: val.ManufacturerName
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtTradeNameId").val(result.Id);
+                $("#txtPresentationTypeId").val(result.PresentationTypeId);
+                $("#txtPresentationType").val(result.PresentationType);
+                $("#txtGenericName").val(result.GenericName);
+                $("#txtManufacturerNameId").val(result.ManufacturerId);
+                $("#txtManufacturerName").val(result.ManufacturerName);
+                $("#txtDosesName").focus();
+                var cities = $('#txtDosesName');
+                var id = '1';
+                /* Add By Babu*/
+
+                $.ajax({
+                    dataType: 'json',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                  
+                    url: " ../../Prescription/GetDosesById",
+                  //  data: "{'SearchString':'" + id + "'}",
+                    chache: false,
+                    success: function (data) {
+                        $("#txtDosesName").empty();
+                      //  $("#txtDosesName").append("<option value='0'>--Select State--</option>");
+                        $.each(data, function (index, optiondata) {
+                            $("#txtDosesName").append("<option value='" + optiondata.Description + "'>" + optiondata.Description + "</option>");
+                        });
+                    }
+                });
+                /* Add By Babu*/
+                $.ajax({
+                    dataType: 'json',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+
+                    url: " ../../Prescription/GetDurationAll",
+                    //  data: "{'SearchString':'" + id + "'}",
+                    chache: false,
+                    success: function (data) {
+                        $("#txtDuration").empty();
+                        //  $("#txtDuration").append("<option value='0'>--Select State--</option>");
+                        $.each(data, function (index, optiondata) {
+                            $("#txtDuration").append("<option value='" + optiondata.Description + "'>" + optiondata.Description + "</option>");
+                        });
+                    }
+                });
+                $.ajax({
+                    dataType: 'json',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                    url: " ../../Prescription/setDrug",
+                    data: "{'Id':'" + $('#txtTradeNameId').val() + "', 'PatientId':'" + $('#txtPatientId').val() + "'}",
+                    chache: false,
+                    success: function (data) {
+                       // $('#txtDosesName').val(data.Doses);
+                        $('#txtDuration').val(data.Duration);
+                        $('#txtAdvice').val(data.Advice);
+                    },
+                    error: function (err) { alert(err); }
+                });
+
+            });
+        }
+
+        function initGenericNameAutoComplete() {
+            $('#txtGenericName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 3,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../Prescription/GetGenericName",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.GenericName
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $.ajax({
+                    dataType: 'json',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                    url: " ../../Prescription/setGenericName",
+                    data: "{'Name':'" + $("#txtGenericName").val() + "'}",
+                    chache: false,
+                    success: function (data) {
+                    },
+                    error: function (err) { alert(err); }
+                });
+            });
+        }
+
+        function initDosesAutoComplete() {
+            $('.dosesName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 0,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../Prescription/GetDoses",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Description
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtDosesNameId").val(result.Id);
+                $("#txtDuration").focus();
+            });
+        }
+        
+        function initDurationAutoComplete() {
+            $('.duration').typeahead({
+              
+                highlight: true,
+                minLength: 0,
+               
+            }, {
+                source: function (searchString, cb) {
+                    if (searchString === '') {
+                        var id = '1';
+                        return $.ajax({
+                            dataType: 'json',
+                            type: 'POST',
+                            contentType: "application/json; charset=utf-8",
+                            //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                            url: " ../../Prescription/GetDuration",
+                            data: "{'SearchString':'" + id + "'}",
+                            chache: false,
+                            success: function (data) {
+                                var result = [];
+                                $.each(data, function (index, val) {
+                                    result.push({
+                                        Id: val.Id,
+                                        value: val.Description
+                                    });
+                                });
+                                cb(result);
+                            }
+                        });
+                    }
+
+                    else {
+                        return $.ajax({
+                            dataType: 'json',
+                            type: 'POST',
+                            contentType: "application/json; charset=utf-8",
+                            //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                            url: " ../../Prescription/GetDuration",
+                            data: "{'SearchString':'" + searchString + "'}",
+                            chache: false,
+                            success: function (data) {
+                                var result = [];
+                                $.each(data, function (index, val) {
+                                    result.push({
+                                        Id: val.Id,
+                                        value: val.Description
+                                    });
+                                });
+                                cb(result);
+                            }
+                        });
+                    }
+                    
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtDurationId").val(result.Id);
+                $("#txtAdvice").focus();
+            });
+        }
+
+        function initDrugTypeAutoComplete() {
+            $('.drugType').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " ../../History/GetDrugType",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Description
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtMxTypeId").val(result.Id);
+                $("#txtDrugName").focus();
+            });
+        }
+
+        function initDrugAutoComplete() {
+            $('.drug').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../History/GetDrug",
+                        data: "{'SearchString':'" + searchString + "', 'DrugPresentationTypeId':'" + $('#txtMxTypeId').val() + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Name,
+                                    PresentationTypeId: val.PresentationTypeId,
+                                    PresentationTypeName: val.PresentationTypeName
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtDrugId").val(result.Id);
+                $("#txtMxTypeId").val(result.PresentationTypeId);
+                $("#txtMxType").val(result.PresentationTypeName);
+            });
+        }
+
+        function initAdviceAutoComplete() {
+            $('.advice').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../Prescription/GetAdvice",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Description
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtAdviceId").val(result.Id);
+            });
+        }
+
+        function initFamilyRelationAutoComplete() {
+            $('.familyTree').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " ../../History/GetFamilyTree",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Title
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, result) {
+                $("#txtRelationId").val(result.Id);
+            });
+        }
+
+        function chiefComplaintValidationCheck() {
+            if ($('#txtChiefComplaint').val() == "") {
+                alert("Please insert chief complaint.");
+                $('#txtChiefComplaint').focus();
+                return false;
+            }
+                //else if ($('#txtChiefComplaintDuration').val() == "") {
+                //    alert("Please insert chief complaint duration.");
+                //    $('#txtChiefComplaintDuration').focus();
+                //    return false;
+                //}
+            else {
+                return true;
+            }
+        }
+
+        function ChiefComplaintList() {
+            if (chiefComplaintValidationCheck()) {
+                App.blockUI();
+                var loadArea = $("#chiefComlaintList");
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("SetChiefComplaintList", "History", new {Area = "PatientManagement"}))",
+                    data: { "ChiefComplaintTitle": $('#txtChiefComplaint').val(), "ChiefComplaintDurationDetails": $('#txtChiefComplaintDuration').val() },
+                    dataType: "html",
+                    success: function (result) {
+                        loadArea.html(result);
+                        $('#txtChiefComplaintId').val('');
+                        $('#txtChiefComplaint').val('');
+                        $('#txtChiefComplaintDurationId').val('');
+                        $('#txtChiefComplaintDuration').val('');
+                        $('.chiefComplaint').typeahead('val', '');
+                        $('.chiefComplaintDuration').typeahead('val', '');
+                        App.unblockUI();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        App.unblockUI();
+                        var msg = 'Fail to load complaint list.';
+                        if (error == "toastr" && toastr) {
+                            toastr.error(msg);
+                        } else if (error == "notific8" && $.notific8) {
+                            $.notific8('zindex', 11500);
+                            $.notific8(msg, {
+                                theme: 'ruby',
+                                life: 3000
+                            });
+                        } else {
+                            alert(msg);
+                        }
+                    }
+                });
+            }
+        }
+
+        function ViewSelectedChiefComplaint(ChiefComplaintId) {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("ViewSelectedChiefComplaint", "History", new {Area = "PatientManagement"}))",
+                data: { "ChiefComplaintId": ChiefComplaintId },
+                dataType: "html",
+                success: function (result) {
+                    var value = JSON.parse(result);
+                    $('#txtChiefComplaint').val(value.ChiefComplaint);
+                    $('#txtChiefComplaintDuration').val(value.ChifComplaintDuration);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load general exam.';
+                    alert(msg);
+                }
+            });
+        }
+
+        function DeleteChiefComplaint(ChiefComplaintId) {
+            App.blockUI();
+            var loadArea = $("#chiefComlaintList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DeleteChiefComplaint", "History", new {Area = "PatientManagement"}))",
+                data: { "ChiefComplaintId": ChiefComplaintId, "HistoryId": $('#txtHistoryId').val() },
+                dataType: "html",
+                success: function (result) {
+                    loadArea.html(result);
+                    App.unblockUI();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                }
+            });
+        }
+
+        function allergyValidationCheck() {
+            if ($('#txtAllergyTitle').val() == "") {
+                alert("Please insert allergy.");
+                $('#txtAllergyTitle').focus();
+                return false;
+            }
+                //else if ($('#txtSubstanceTitle').val() == "") {
+                //    alert("Please insert substance.");
+                //    $('#txtSubstanceTitle').focus();
+                //    return false;
+                //}
+            else {
+                return true;
+            }
+        }
+
+        function AllergyList() {
+            if (allergyValidationCheck()) {
+                App.blockUI();
+                var location = $("#AlleryInfo");
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("SetAllergyInformationList", "History", new {Area = "PatientManagement"}))",
+                    data: { "AllergyTitle": $('#txtAllergyTitle').val(), "AllergySubstanceDetails": $('#txtSubstanceTitle').val() },
+                    dataType: "html",
+                    success: function (result) {
+                        App.unblockUI();
+                        location.html(result);
+
+                        $('#txtAllergyId').val('');
+                        $('#txtAllergyTitle').val('');
+                        $('#txtSubstanceId').val('');
+                        $('#txtSubstanceTitle').val('');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        App.unblockUI();
+                        var msg = 'Fail to load allergy list.';
+                        if (error == "toastr" && toastr) {
+                            toastr.error(msg);
+                        } else if (error == "notific8" && $.notific8) {
+                            $.notific8('zindex', 11500);
+                            $.notific8(msg, {
+                                theme: 'ruby',
+                                life: 3000
+                            });
+                        } else {
+                            alert(msg);
+                        }
+                    }
+                });
+            }
+        }
+
+        function ViewAllergyInformation(AllergyId) {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("ViewAllergyInformation", "History", new {Area = "PatientManagement"}))",
+                data: { "AllergyId": AllergyId },
+                dataType: "html",
+                success: function (result) {
+                    var value = JSON.parse(result);
+                    $('#txtAllergyTitle').val(value.AllergyName);
+                    $('#txtSubstanceTitle').val(value.AllergySubstanceName);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to allergy.';
+                    alert(msg);
+                }
+            });
+        }
+
+        function DeleteAllergy(AllergyId) {
+            App.blockUI();
+            var location = $("#AlleryInfo");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DeleteAllergyInformation", "History", new {Area = "PatientManagement"}))",
+                data: { "AllergyId": AllergyId, "HistoryId": $('#txtHistoryId').val() },
+                dataType: "html",
+                success: function (result) {
+                    App.unblockUI();
+                    location.html(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to delete allergy list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function pastIllnessValidationCheck() {
+            if ($('#txtDisease').val() == "") {
+                alert("Please insert disease.");
+                $('#txtDisease').focus();
+                return false;
+            }
+                //else if ($('#txtCondition').val() == "") {
+                //    alert("Please insert condition.");
+                //    $('#txtCondition').focus();
+                //    return false;
+                //}
+            else {
+                return true;
+            }
+        }
+
+        function PastIllnessList() {
+            if (pastIllnessValidationCheck()) {
+                App.blockUI();
+                var loadArea = $("#hoPastIllnessList");
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("SetPastIllnessList", "History", new {Area = "PatientManagement"}))",
+                    data: { "DiseaseName": $('#txtDisease').val(), "DiseaseConditionDescription": $('#txtCondition').val() },
+                    dataType: "html",
+                    success: function (result) {
+                        App.unblockUI();
+                        loadArea.html(result);
+
+                        $('#txtDiseaseId').val('');
+                        $('#txtDisease').val('');
+                        $('#txtConditionId').val('');
+                        $('#txtCondition').val('');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        App.unblockUI();
+                        var msg = 'Fail to load past illness list.';
+                        if (error == "toastr" && toastr) {
+                            toastr.error(msg);
+                        } else if (error == "notific8" && $.notific8) {
+                            $.notific8('zindex', 11500);
+                            $.notific8(msg, {
+                                theme: 'ruby',
+                                life: 3000
+                            });
+                        } else {
+                            alert(msg);
+                        }
+                    }
+                });
+            }
+        }
+
+        function ViewPastIllness(DiseaseId) {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("ViewPastIllness", "History", new {Area = "PatientManagement"}))",
+                data: { "DiseaseId": DiseaseId },
+                dataType: "html",
+                success: function (result) {
+                    var value = JSON.parse(result);
+                    $('#txtDisease').val(value.Disease);
+                    $('#txtCondition').val(value.DiseaseCondition);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to allergy.';
+                    alert(msg);
+                }
+            });
+        }
+
+        function DeletePastIllness(DiseaseId) {
+            App.blockUI();
+            var loadArea = $("#hoPastIllnessList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DeletePastIllness", "History", new {Area = "PatientManagement"}))",
+                data: { "DiseaseId": DiseaseId, "HistoryId": $('#txtHistoryId').val() },
+                dataType: "html",
+                success: function (result) {
+                    App.unblockUI();
+                    loadArea.html(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to delete past illness list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function personalAttributeValidationCheck() {
+            if ($('#txtAttributeTitle').val() == "") {
+                alert("Please insert attribute.");
+                $('#txtAttributeTitle').focus();
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function PatientPersonalAttributeList() {
+            if (personalAttributeValidationCheck()) {
+                App.blockUI();
+                var location = $("#personalAttribute");
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("SetPatientPersonalAttributeList", "History", new {Area = "PatientManagement"}))",
+                    data: { "PatientPersonalAttributeTitle": $('#txtAttributeTitle').val() },
+                    dataType: "html",
+                    success: function (result) {
+                        App.unblockUI();
+                        location.html(result);
+
+                        $('#txtAttributeId').val('');
+                        $('#txtAttributeTitle').val('');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        App.unblockUI();
+                        var msg = 'Fail to load personal attribute list.';
+                        if (error == "toastr" && toastr) {
+                            toastr.error(msg);
+                        } else if (error == "notific8" && $.notific8) {
+                            $.notific8('zindex', 11500);
+                            $.notific8(msg, {
+                                theme: 'ruby',
+                                life: 3000
+                            });
+                        } else {
+                            alert(msg);
+                        }
+                    }
+                });
+            }
+        }
+
+        function DeletePatientPersonalAttribute(Id) {
+            App.blockUI();
+            var location = $("#personalAttribute");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DeletePatientPersonalAttribute", "History", new {Area = "PatientManagement"}))",
+                data: { "Id": Id, "HistoryId": $('#txtHistoryId').val() },
+                dataType: "html",
+                success: function (result) {
+                    App.unblockUI();
+                    location.html(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to delete personal attribute list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function pastHistoryOfMadicationValidationCheck() {
+            if ($('#txtMxType').val() == "") {
+                alert("Please insert Mx Type.");
+                $('#txtMxType').focus();
+                return false;
+            } else if ($('#txtDrugName').val() == "") {
+                alert("Please insert medicine name.");
+                $('#txtDrugName').focus();
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function PastHistoryOfMadicationList() {
+            if (pastHistoryOfMadicationValidationCheck()) {
+                App.blockUI();
+                var location = $("#PastHistoryOfMadicationList");
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("SetPastHistoryOfMadicationList", "History", new {Area = "PatientManagement"}))",
+                    data: { "DrugName": $('#txtDrugName').val(), "DrugPresentationTypeDescription": $('#txtMxType').val() },
+                    dataType: "html",
+                    success: function (result) {
+                        App.unblockUI();
+                        location.html(result);
+
+                        $('#txtDrugId').val('');
+                        $('#txtDrugName').val('');
+                        $('#txtMxTypeId').val('0');
+                        $('#txtMxType').val('');
+
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        App.unblockUI();
+                        var msg = 'Fail to load past history of madication list.';
+                        if (error == "toastr" && toastr) {
+                            toastr.error(msg);
+                        } else if (error == "notific8" && $.notific8) {
+                            $.notific8('zindex', 11500);
+                            $.notific8(msg, {
+                                theme: 'ruby',
+                                life: 3000
+                            });
+                        } else {
+                            alert(msg);
+                        }
+                    }
+                });
+            }
+        }
+
+        function DeletePastHistoryOfMadication(DrugId) {
+            App.blockUI();
+            var location = $("#PastHistoryOfMadicationList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DeletePastHistoryOfMadication", "History", new {Area = "PatientManagement"}))",
+                data: { "DrugId": DrugId, "HistoryId": $('#txtHistoryId').val() },
+                dataType: "html",
+                success: function (result) {
+                    App.unblockUI();
+                    location.html(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to delete past history of madication list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function familyDiseaseValidationCheck() {
+            if ($('#txtFamilyDisease').val() == "") {
+                alert("Please insert family disease name.");
+                $('#txtFamilyDisease').focus();
+                return false;
+            } else if ($('#txtRelation').val() == "") {
+                alert("Please insert relation with family member.");
+                $('#txtRelation').focus();
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function ViewFamilyDisease(DiseaseId) {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("ViewFamilyDisease", "History", new {Area = "PatientManagement"}))",
+                data: { "DiseaseId": DiseaseId },
+                dataType: "html",
+                success: function (result) {
+                    var value = JSON.parse(result);
+                    $('#txtFamilyDisease').val(value.DiseaseName);
+                    $('#txtRelation').val(value.FamilyTreeTitle);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to family disease.';
+                    alert(msg);
+                }
+            });
+        }
+
+        function FamilyDiseaseList() {
+            if (familyDiseaseValidationCheck()) {
+                App.blockUI();
+                var tabFamilyDisease = $("#tableFamilyDisease");
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("SetFamilyDiseaseList", "History", new {Area = "PatientManagement"}))",
+                    data: { "DiseaseName": $('#txtFamilyDisease').val(), "FamilyTreeName": $('#txtRelation').val() },
+                    dataType: "html",
+                    success: function (res) {
+                        App.unblockUI();
+                        tabFamilyDisease.html(res);
+                        $('#txtDiseaseId').val('');
+                        $('#txtFamilyDisease').val('');
+                        $('#txtRelationId').val('');
+                        $('#txtRelation').val('');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        App.unblockUI();
+                        alert(msg);
+                    }
+                });
+            }
+        }
+
+        function DeleteFamilyDisease(DiseaseId) {
+            App.blockUI();
+            var tabFamilyDisease = $("#tableFamilyDisease");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DeleteFamilyDisease", "History", new {Area = "PatientManagement"}))",
+                data: { "DiseaseId": DiseaseId, "HistoryId": $('#txtHistoryId').val() },
+                dataType: "html",
+                success: function (res) {
+                    App.unblockUI();
+                    tabFamilyDisease.html(res);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to delete family disease list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function patientMadicationValidationCheck() {
+            if ($('#txtPresentationType').val() == "") {
+                alert("Please insert presentaion type.");
+                $('#txtPresentationType').focus();
+                return false;
+            } else if ($('#txtTradeName').val() == "") {
+                alert("Please insert trade name.");
+                $('#txtTradeName').focus();
+                return false;
+            } else if ($('#txtDosesName').val() == "") {
+                alert("Please insert doses.");
+                $('#txtDosesName').focus();
+                return false;
+            }
+                //else if ($('#txtDuration').val() == "") {
+                //    alert("Please insert duration.");
+                //    $('#txtDuration').focus();
+                //    return false;
+                //}
+            else {
+                return true;
+            }
+        }
+
+        function ViewPatientMadicationList(drugId) {
+
+            /* Add By Babu*/
+
+            $.ajax({
+                dataType: 'json',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+
+                url: " ../../Prescription/GetDosesById",
+                //  data: { 'drugId': drugId },
+                data: "{'drugId':'" + drugId + "'}",
+                chache: false,
+                success: function (data) {
+                    $("#txtDosesName").empty();
+                    //  $("#txtDosesName").append("<option value='0'>--Select State--</option>");
+                    $.each(data, function (index, optiondata) {
+                        $("#txtDosesName").append("<option value='" + optiondata.Description + "'>" + optiondata.Description + "</option>");
+                    });
+                }
+            });
+            /* Add By Babu*/
+            $.ajax({
+                dataType: 'json',
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+
+                url: " ../../Prescription/GetDurationAll",
+                //  data: "{'SearchString':'" + id + "'}",
+                chache: false,
+                success: function (data) {
+                    $("#txtDuration").empty();
+                    //  $("#txtDuration").append("<option value='0'>--Select State--</option>");
+                    $.each(data, function (index, optiondata) {
+                        $("#txtDuration").append("<option value='" + optiondata.Description + "'>" + optiondata.Description + "</option>");
+                    });
+                }
+            });
+
+
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("ViewPatientMedication", "History", new {Area = "PatientManagement"}))",
+                data: { "drugId": drugId },
+                dataType: "html",
+                success: function (result) {
+                    var value = JSON.parse(result);
+                    $('#txtPresentationType').val(value.PresentationTypeName);
+                    $('#txtTradeName').val(value.DrugName);// + " " + value.UnitStrength);
+                    $('#txtGenericName').val(value.GenericName);
+                    $('#txtManufacturerName').val(value.ManufacturerName);
+                    $('#txtDosesName').val(value.DrugDoseDescription);
+                    $('#txtDuration').val(value.DrugDurationDescription);
+                    $('#txtAdvice').val(value.DoctorNote);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load general exam.';
+                    alert(msg);
+                }
+            });
+        }
+
+        function PatientMadicationList() {
+            if (patientMadicationValidationCheck()) {
+                App.blockUI();
+                var tabFamilyDisease = $("#madicationList");
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("SetPatientMedicationList", "History", new {Area = "PatientManagement"}))",
+                    data: { "PresentationTypeDescription": $('#txtPresentationType').val(), "DrugName": $('#txtTradeName').val(), "ManufacturerName": $('#txtManufacturerName').val(), "DosesId": $('#txtDosesNameId').val(), "DosesDescription": $('#txtDosesName').val(), "DurationDescription": $('#txtDuration').val(), "Advice": $('#txtAdvice').val() },
+                    dataType: "html",
+                    success: function (res) {
+                        App.unblockUI();
+                        tabFamilyDisease.html(res);
+                        $('#txtPresentationTypeId').val('0');
+                        $('#txtPresentationType').val('');
+                        $('#txtPresentationType').focus();
+
+                        $('#txtTradeNameId').val('0');
+                        $('#txtGenericName').val('');
+                        $('#txtTradeName').val('');
+
+                        $('#txtManufacturerNameId').val('0');
+                        $('#txtManufacturerName').val('');
+
+                        $('#txtDosesNameId').val('0');
+                        $('#txtDosesName').val('');
+
+                        $('#txtDurationId').val('0');
+                        $('#txtDuration').val('');
+
+                        $('#txtAdviceId').val('0');
+                        $('#txtAdvice').val('');
+                        $('.dosesName').typeahead('val', '');
+                        $('.duration').typeahead('val', '');
+                        $('.advice').typeahead('val', '');
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        App.unblockUI();
+                        var msg = 'Fail to load patient madication list.';
+                        if (error == "toastr" && toastr) {
+                            toastr.error(msg);
+                        } else if (error == "notific8" && $.notific8) {
+                            $.notific8('zindex', 11500);
+                            $.notific8(msg, {
+                                theme: 'ruby',
+                                life: 3000
+                            });
+                        } else {
+                            alert(msg);
+                        }
+                    }
+                });
+            }
+        }
+
+        function deletePatientMadicationList(drugId) {
+            App.blockUI();
+            var tabFamilyDisease = $("#madicationList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DeletePatientMadication", "History", new {Area = "PatientManagement"}))",
+                data: { "drugId": drugId, "HistoryId": $('#txtHistoryId').val() },
+                dataType: "html",
+                success: function (res) {
+                    App.unblockUI();
+                    tabFamilyDisease.html(res);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to delete patient madication list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function insertPatientHisotry() {
+            App.blockUI();
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("InsertHistory", "History", new {Area = "PatientManagement"}))",
+                data: {
+                    "PatientId": $('#txtPatientId').val(),
+                    "DoctorId": $('#txtDoctorId').val(),
+                    "Height": $('#txtHeight').val(),
+                    "Width": $('#txtWeight').val(),
+                    "BloodPressure": $('#txtBP').val(),
+                    "Temperature": $('#txtTemperature').val(),
+                    "PulseRate": $('#txtRateMin').val(),
+                    "Rythm": $('#txtRythm').val(),
+                    "PulseType": $('#txtType').val(),
+                    "MaritalStatus": $('#ddlMaritalStatus').val(),
+                    "SocialStatus": $('#ddlSocialStatus').val()
+                },
+                dataType: "html",
+                success: function (result) {
+                    window.location = "@(@Url.Action("Index", "History", new {Area = "PatientManagement"}))";
+                },
+                error: function (error) {
+                    App.unblockUI();
+                    var msg = 'Fail to insert patient history.';
+                    alert(msg);
+                }
+            });
+        }
+
+    </script>
+
+}

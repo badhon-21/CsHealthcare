@@ -1,0 +1,76 @@
+﻿@using Cs.Utility
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-question font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp bold uppercase">Patient List</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                    <a href="javascript:;" data-load="true" data-url="@Url.Action("List", "PatientAdmission", new {Area = "Cabin"})" class="reload">
+
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+                    <a class="btn btn-circle green-jungle btn-sm" href="@Url.Action("Create", "PatientAdmission", new {Area = "Cabin"})">
+                        <i class="fa fa-plus"></i> Add New
+                    </a>
+                    <a class="btn btn-circle green-jungle btn-sm" href="@SessionManager.DashBoard">
+                        <i class="fa fa-chevron-left"></i> Back
+                    </a>
+                </div>
+            </div>
+
+            <div class="portlet-body portlet-empty">
+
+
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+
+</div>
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+@section page_styles {
+
+    @*<link href="~/assets/global/plugins/select2/css/select2.css" rel="stylesheet" />*@
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+
+}
+
+@section Scripts {
+    <script src="~/assets/global/plugins/select2/js/select2.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/jquery.datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+
+    <script>
+        jQuery(document).ready(function () {
+            //loadStatement();
+        });
+
+    </script>
+}
+

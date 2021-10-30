@@ -1,0 +1,101 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.PageTitle = "Dashboard";
+}
+
+<!-- BEGIN PROFILE CONTENT -->
+<div class="container">
+    <div class="profile-content">
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <!-- BEGIN PORTLET -->
+                <div class="portlet light ">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="icon-bar-chart theme-font hide"></i>
+                            <span class="caption-subject font-blue-madison bold uppercase">Quick Menu</span>
+                            <span class="caption-helper hide">weekly stats...</span>
+                        </div>
+
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+
+                            @*  <a href="javascript:;" data-load="true" data-url="@Url.Action("patientLocationHistory", "Patient", new {Area = "MsAdmin", id = Model.Id})" c class="reload">
+                                </a>*@
+                            <a href="javascript:;" class="remove">
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="portlet-body  portlet-empty">
+                        <div class="tiles">
+                            <a href="@Url.Action("Index", "Drug", new {area = "MedicineCorner"})" class="tile  bg-blue-hoki">
+
+                                <div class="tile-body">
+                                    <i class="fa fa-adn"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Drugs List
+                                    </div>
+                                    <div class="number">
+
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="@Url.Action("Create", "PurchaseOrder", new {area = "MedicineCorner"})" class="tile  bg-blue-hoki">
+
+                                <div class="tile-body">
+                                    <i class="fa fa-adn"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Purchase Order
+                                    </div>
+                                    <div class="number">
+
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="@Url.Action("Create", "PharmacyRequisition", new {area = "MedicineCorner"})" class="tile  bg-blue-hoki">
+
+                                <div class="tile-body">
+                                    <i class="fa fa-adn"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Pharmacy Requisition 
+                                    </div>
+                                    <div class="number">
+
+                                    </div>
+                                </div>
+                            </a>
+                            
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- END PORTLET -->
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+    <!-- END PROFILE CONTENT -->
+</div>
+
+
+
+

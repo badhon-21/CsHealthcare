@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.HumanResource.ItemStockOutDetailsModel>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StoreItemName)
+        </td>
+
+        <td style="width: 10% !important">
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        @*<td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>*@
+        @*<td style="width: 15% !important">
+                @Html.DisplayFor(modelItem => item.SalePrice)
+            </td>
+            <td style="width: 15% !important">
+                @Html.DisplayFor(modelItem => item.CostPrice)
+            </td>*@
+
+        @*<td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.SubTotal)
+        </td>*@
+
+
+        <td style="width: 15% !important">
+            <a class="btn btn-primary btn-icon legitRipple" title="Edit" onclick="javascript: EditStore('@item.StoreItemId');"><i class="icon-pencil"></i></a>
+            
+        </td>
+    </tr>
+}
+
+
+

@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsHealthcare.web", "CsHealthcare.web\CsHealthcare.web.csproj", "{7FBED758-FF7E-49DB-8EE3-1D8A2A625F3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cs.Utility", "Cs.Utility\Cs.Utility.csproj", "{89D250C6-8225-4B7C-A112-768169196D7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsHealthcare.DataAccess", "CsHealthcare.DataAccess\CsHealthcare.DataAccess.csproj", "{401694A6-EE7B-4651-89F1-A6F27E65FE4D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsHealthcare.ViewModel", "CsHealthcare.ViewModel\CsHealthcare.ViewModel.csproj", "{23EEBAF9-CD9C-4C4D-BE12-8ECDC575BB8D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsHealthcare.Repositories", "CsHealthcare.Repositories\CsHealthcare.Repositories.csproj", "{2875746D-66F0-4D9F-8A3B-9C3DB6A84B0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsHealthcare.RepositoriesInterface", "CsHealthcare.RepositoriesInterface\CsHealthcare.RepositoriesInterface.csproj", "{3AD95D5C-15E8-44BF-84F7-CF6133C070B9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsHealthcare.Services", "CsHealthcare.Services\CsHealthcare.Services.csproj", "{3AF4C5CF-F890-40A5-A713-28B0D7DCCA84}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7FBED758-FF7E-49DB-8EE3-1D8A2A625F3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FBED758-FF7E-49DB-8EE3-1D8A2A625F3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FBED758-FF7E-49DB-8EE3-1D8A2A625F3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FBED758-FF7E-49DB-8EE3-1D8A2A625F3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89D250C6-8225-4B7C-A112-768169196D7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89D250C6-8225-4B7C-A112-768169196D7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89D250C6-8225-4B7C-A112-768169196D7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89D250C6-8225-4B7C-A112-768169196D7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{401694A6-EE7B-4651-89F1-A6F27E65FE4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{401694A6-EE7B-4651-89F1-A6F27E65FE4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{401694A6-EE7B-4651-89F1-A6F27E65FE4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{401694A6-EE7B-4651-89F1-A6F27E65FE4D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23EEBAF9-CD9C-4C4D-BE12-8ECDC575BB8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23EEBAF9-CD9C-4C4D-BE12-8ECDC575BB8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23EEBAF9-CD9C-4C4D-BE12-8ECDC575BB8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23EEBAF9-CD9C-4C4D-BE12-8ECDC575BB8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2875746D-66F0-4D9F-8A3B-9C3DB6A84B0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2875746D-66F0-4D9F-8A3B-9C3DB6A84B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2875746D-66F0-4D9F-8A3B-9C3DB6A84B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2875746D-66F0-4D9F-8A3B-9C3DB6A84B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AD95D5C-15E8-44BF-84F7-CF6133C070B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AD95D5C-15E8-44BF-84F7-CF6133C070B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AD95D5C-15E8-44BF-84F7-CF6133C070B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AD95D5C-15E8-44BF-84F7-CF6133C070B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AF4C5CF-F890-40A5-A713-28B0D7DCCA84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AF4C5CF-F890-40A5-A713-28B0D7DCCA84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AF4C5CF-F890-40A5-A713-28B0D7DCCA84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AF4C5CF-F890-40A5-A713-28B0D7DCCA84}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://codespecies.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Cs.Utility\\Cs.Utility.csproj
+		SccProjectName1 = Cs.Utility
+		SccLocalPath1 = Cs.Utility
+		SccProjectUniqueName2 = CsHealthcare.DataAccess\\CsHealthcare.DataAccess.csproj
+		SccProjectName2 = CsHealthcare.DataAccess
+		SccLocalPath2 = CsHealthcare.DataAccess
+		SccProjectUniqueName3 = CsHealthcare.Repositories\\CsHealthcare.Repositories.csproj
+		SccProjectName3 = CsHealthcare.Repositories
+		SccLocalPath3 = CsHealthcare.Repositories
+		SccProjectUniqueName4 = CsHealthcare.RepositoriesInterface\\CsHealthcare.RepositoriesInterface.csproj
+		SccProjectName4 = CsHealthcare.RepositoriesInterface
+		SccLocalPath4 = CsHealthcare.RepositoriesInterface
+		SccProjectUniqueName5 = CsHealthcare.Services\\CsHealthcare.Services.csproj
+		SccProjectName5 = CsHealthcare.Services
+		SccLocalPath5 = CsHealthcare.Services
+		SccProjectUniqueName6 = CsHealthcare.ViewModel\\CsHealthcare.ViewModel.csproj
+		SccProjectName6 = CsHealthcare.ViewModel
+		SccLocalPath6 = CsHealthcare.ViewModel
+		SccProjectUniqueName7 = CsHealthcare.web\\CsHealthcare.web.csproj
+		SccProjectName7 = CsHealthcare.web
+		SccLocalPath7 = CsHealthcare.web
+	EndGlobalSection
+EndGlobal

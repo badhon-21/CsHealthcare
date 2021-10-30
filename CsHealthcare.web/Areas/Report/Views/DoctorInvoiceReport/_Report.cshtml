@@ -1,0 +1,23 @@
+﻿
+@model IEnumerable<CsHealthcare.ViewModel.Patient.DoctorInvoiceSummaryModel>
+
+
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @item.Date.ToString("d")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DoctorName)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        
+
+
+    </tr>
+}

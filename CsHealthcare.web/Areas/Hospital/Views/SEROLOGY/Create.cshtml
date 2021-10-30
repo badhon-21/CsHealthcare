@@ -1,0 +1,576 @@
+﻿
+@model CsHealthcare.ViewModel.Diagnostic.BioChemistryModel
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-question font-green-sharp"></i>
+                        <span class="caption-subject font-green-sharp uppercase">SEROLOGY</span>
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+                        <a href="javascript:;" class="fullscreen">
+                        </a>
+                        @*<div class="" style="text-align: left;">
+                                <a class="btn default" style="width: 35%; margin-top: 30px" href="@Url.Action("Index", "RE", new {Area = "Hospital"})">Cancel</a>
+                                <input type="submit" value="Save" class="btn green" style="width: 35%; margin-top: 30px" />
+                            </div>*@
+                    </div>
+                    <div class="actions margin-right-10">
+
+                    </div>
+                </div>
+                <hr style="margin-top: 0;">
+                <div class="portlet-body portlet-empty">
+
+
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                        <input type="hidden" id="dId" name="dId" value="" />
+                        <input type="hidden" id="PatientId" name="PatientId" value="" />
+                        <input type="hidden" id="PatientCode" name="PatientCode" value="" />
+                        <input type="hidden" id="ReferanceName" name="ReferanceName" value="" />
+                        <input type="hidden" id="Age" name="Age" value="" />
+                        <form>
+
+                            <div class="col-xs-3">
+
+                                <div class="content-group">
+                                    <div class="col-xs-6" style="min-width:150px">
+                                        <h4>Patient Name</h4>
+                                    </div>
+                                    <div class="col-xs-6" style="min-width:200px">
+                                        <div class="input-group">
+                                            <input id="PatientName" class="form-control" name="PatientName" value="" />
+                                            @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+
+                                <div class="content-group">
+                                    <div class="col-xs-6" style="min-width:200px">
+                                        <h4>Specimen Name</h4>
+                                    </div>
+                                    <div class="col-xs-6" style="min-width:200px">
+                                        <div class="input-group">
+                                            <input id="SpecimenName" class="form-control" name="SpecimenName" value="" />
+                                            @Html.ValidationMessageFor(model => model.SpecimenName, "", new { @class = "text-danger" })
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-3">
+
+                                <div class="content-group">
+                                    <div class="col-xs-6" style="min-width:200px">
+                                        <h4>Department Name</h4>
+                                    </div>
+                                    <div class="col-xs-6" style="min-width:200px">
+                                        <div class="input-group">
+                                            <input id="Department" class="form-control" name="Department" value="" />
+                                            @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="col-xs-4" style="min-width:150px">
+                                    <h4>Date</h4>
+                                </div>
+                                <div class="col-xs-8" style="min-width:150px">
+                                    <div class="input-group">
+                                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control datetimepicker ", @type = "datetime" } })
+
+                                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Investigation</th>
+                                    <th> Result</th>
+                                    <th> Unit</th>
+                                    <th> Refference Range</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @*<tr>
+                                        <td><b>Blood Glucose Random</b></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>*@
+                                <tr>
+                                    <td>C-Reactive Protein (CRP)</td>
+
+                                    <td> <input name="CRP" class="form-control " value="" placeholder="" /></td>
+
+                                    <td> <input name="CRPUnit" class="form-control " value="mg/L" readonly="" placeholder="" /></td>
+                                    <td> <input name="CRPRef" class="form-control " value="< 6.0 " readonly="" placeholder="" /></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td>ASO</td>
+
+                                    <td> <input name="ASO" class="form-control " placeholder="" /></td>
+                                    <td> <input name="ASOUnit" class="form-control " value="IU/ml" readonly="" placeholder="" /></td>
+                                    <td> <input name="ASORef" class="form-control " value="< 8.0" readonly="" placeholder="" /></td>
+
+                                </tr>
+                                <tr>
+                                    <td>TSH</td>
+
+                                    <td><input name="RA" class="form-control" value="" /></td>
+                                    <td><input name="RAUnit" class="form-control" value="µIu/ml" readonly="" /></td>
+                                    <td><input name="RARef" class="form-control" value="Adult: 0.47-5.01 Children: 0.70-5.70 Infants: 0.80-9.10 Newborns: 1.00-25.00 " readonly="" /></td>
+                                    @*<td></td>
+                                        <td></td>*@
+                                </tr>
+
+
+                                <tr>
+
+
+                                    <td>HBsAg</td>
+
+                                    <td><input name="HBsAg" class="form-control" value="" /></td>
+                                    <td><input name="HBsAgUnit" class="form-control" value="pg/mL	" readonly="" /></td>
+                                    <td><input name="HBsAgRef" class="form-control" value="1.45-3.48 " readonly="" /></td>
+                                    @*<td></td>
+                                        <td> 1.003-1.035</td>*@
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>BloodGroup</td>
+
+                                    <td><input name="BloodGroup" value="" class="form-control" /></td>
+                                    <td><input name="BloodGroupUnit" value="ng/dl" readonly="" class="form-control" /></td>
+                                    <td><input name="BloodGroupRef" value="Adults : 0.71-1.85 Children : 0.77-2.08 Infants : 0.77-2.32 Newborns : 2.16-5.25" readonly="" class="form-control" /></td>
+
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>RhFactor</td>
+
+                                    <td><input class="form-control" name="RhFactor" value="" /></td>
+                                    <td><input class="form-control" name="RhFactorUnit" value="mIU/ml" readonly="" /></td>
+                                    <td><input class="form-control" name="RhFactorRef" value="Male: 1.27-19.26 Female: Mid Follicular Phase: 3.85-8.78 Mid Cycle Peak: 4.54-22.51 Mid Luteal Phase: 1.20-12.86 Postmenopausal: 10.87-58.64" readonly="" /></td>
+
+
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>Urine for Pregnancy Test</td>
+
+                                    <td><input class="form-control" name="UrineforPregnancyTest" value="" /></td>
+                                    <td><input class="form-control" name="UrineforPregnancyTestUnit" value="mIU/ml" readonly="" /></td>
+                                    <td><input class="form-control" name="UrineforPregnancyTestRef" value="Male:2.0-12.0 Female:Follicular Phase-2.0-15.0 Midcycle peak-22.0-105.0 Luteal phase-0.6-19.0 Postmenopausal-16.0-64.0" readonly="" /></td>
+                                    @*<td></td>
+                                        <td> </td>*@
+                                </tr>
+
+
+
+                                <tr>
+
+
+                                    <td>
+                                        VDRL
+                                    </td>
+
+                                    <td><input class="form-control" name="VDRL" value="" /></td>
+                                    <td><input class="form-control" name="VDRLUnit" value="ng/mL" readonly="" /></td>
+                                    <td><input class="form-control" name="VDRLRef" value="Male: 2.5-17,Female: 1.9-25" readonly="" /></td>
+                                    @*<td></td>
+                                        <td> </td>*@
+                                </tr>
+                                <tr>
+
+
+                                    <td>
+                                        TO
+                                    </td>
+
+                                    <td><input class="form-control" name="TO" value="" /></td>
+                                    <td><input class="form-control" name="TOUnit" value="ng/dL	" readonly="" /></td>
+                                    <td><input class="form-control" name="TORef" value="Male: 200-810,Female: 0-119" readonly="" /></td>
+                                    @*<td></td>
+                                        <td> </td>*@
+                                </tr>
+                            <tr>
+
+
+                                <td>
+                                    TH
+                                </td>
+
+                                <td><input class="form-control" name="TH" value=""/></td>
+                                <td><input class="form-control" name="THUnit" value="ng/mL" readonly=""/></td>
+                                <td><input class="form-control" name="THLRef" value="Male: 2.5-17,Female: 1.9-25" readonly=""/></td>
+                                @*<td></td>
+            <td> </td>*@
+                            </tr>
+                            <tr>
+
+
+                                <td>
+                                    AH
+                                </td>
+
+                                <td><input class="form-control" name="AH" value=""/></td>
+                                <td><input class="form-control" name="AHUnit" value="ng/mL" readonly=""/></td>
+                                <td><input class="form-control" name="AHRef" value="Male: 2.5-17,Female: 1.9-25" readonly=""/></td>
+                                @*<td></td>
+            <td> </td>*@
+                            </tr>
+
+                            <tr>
+
+
+                                <td>
+                                    BH
+                                </td>
+
+                                <td><input class="form-control" name="BH" value=""/></td>
+                                <td><input class="form-control" name="BHUnit" value="ng/mL" readonly=""/></td>
+                                <td><input class="form-control" name="BHRef" value="Male: 2.5-17,Female: 1.9-25" readonly=""/></td>
+                                @*<td></td>
+            <td> </td>*@
+                            </tr>
+
+                            <tr>
+
+
+                                <td>
+                                    AO
+                                </td>
+
+                                <td><input class="form-control" name="AO" value=""/></td>
+                                <td><input class="form-control" name="AOUnit" value="ng/mL" readonly=""/></td>
+                                <td><input class="form-control" name="AORef" value="Male: 2.5-17,Female: 1.9-25" readonly=""/></td>
+
+                            </tr>
+
+                                <tr>
+
+
+                                    <td>
+                                        AO
+                                    </td>
+
+                                    <td><input class="form-control" name="AO" value="" /></td>
+                                    <td><input class="form-control" name="AOUnit" value="ng/mL" readonly="" /></td>
+                                    <td><input class="form-control" name="AORef" value="Male: 2.5-17,Female: 1.9-25" readonly="" /></td>
+
+                                </tr>
+                                <tr>
+
+
+                                    <td>
+                                        BO
+                                    </td>
+
+                                    <td><input class="form-control" name="BO" value="" /></td>
+                                    <td><input class="form-control" name="BOUnit" value="ng/mL" readonly="" /></td>
+                                    <td><input class="form-control" name="BORef" value="Male: 2.5-17,Female: 1.9-25" readonly="" /></td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+
+                        <div class="modal-footer">
+                            <a class="btn default" style="width: 15%;" href="@Url.Action("Index", "SEROLOGY", new {Area = "Hospital"})">Cancel</a>
+                            <input type="submit" value="Save" class="btn green" style="width: 15%;" />
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        }
+
+        <!-- END Portlet PORTLET-->
+
+    </div>
+
+</div>
+
+@section page_styles {
+
+
+    <link href="~/assets/global/plugins/select2/css/select2.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <link href="~/assets/global/plugins/typeahead/typeahead.css" rel="stylesheet" />
+
+    <style>
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+            width: 422px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            max-height: 200px;
+            overflow: auto;
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+            .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+                color: #fff;
+                background-color: #0097cf;
+            }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+
+}
+
+@section Scripts {
+
+    <script src="~/assets/global/plugins/select2/js/select2.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/jquery.datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+
+            initpatientAutoComplete();
+            initSpecimenAutoComplete();
+            $(".datetimepicker").datepicker();
+        });
+
+
+        function initpatientAutoComplete() {
+            $('#PatientName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /Hospital/SEROLOGY/LoadPatient",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.Name,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                $("#dId").val(patient.Id);
+                $("#PatientId").val(patient.Id);
+                LoadPatientCode();
+                LoadReferencName();
+                LoadAge();
+            });
+
+        }
+
+        function initSpecimenAutoComplete() {
+            $('#SpecimenName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /Hospital/SEROLOGY/LoadSpecimen",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.Name,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                //$("#dId").val(patient.Id);
+
+
+            });
+
+        }
+
+        function LoadPatientCode() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("PatientCode", "SEROLOGY", new {Area = "Hospital" }))",
+                data: { "Id": $("#dId").val() },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+                //alert(t);
+                $('#PatientCode').val(t);
+
+                //$('#Total').val(t.T_Price);
+                // $('#quantity').focus();
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+
+
+        function LoadReferencName() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("ReferanceName", "SEROLOGY", new {Area = "Hospital" }))",
+                data: { "Id": $("#dId").val() },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+                //alert(t);
+                $('#ReferanceName').val(t);
+
+                //$('#Total').val(t.T_Price);
+                // $('#quantity').focus();
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+        function LoadAge() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("Age", "SEROLOGY", new {Area = "Hospital" }))",
+                data: { "Id": $("#dId").val() },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+                //alert(t);
+                $('#Age').val(t);
+
+                //$('#Total').val(t.T_Price);
+                // $('#quantity').focus();
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+    </script>
+}
+
+
+
+
+
+

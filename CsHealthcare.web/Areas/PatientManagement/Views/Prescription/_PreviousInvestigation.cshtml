@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Patient.PatientInvestigationModel>
+
+
+<table class="table table-striped table-bordered table-hover" id="tabChiefComplaintList">
+    <thead>
+        <tr>
+            <th style="width: 20% !important">
+                @Html.DisplayNameFor(model => model.TestCategoryName)
+            </th>
+            <th style="width: 15% !important">
+                @Html.DisplayNameFor(model => model.TestName)
+            </th>
+            <th style="width: 50% !important">
+                @Html.DisplayNameFor(model => model.Findings)
+            </th>
+            <th style="width: 20% !important">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width: 20% !important">
+                    @Html.DisplayFor(modelItem => item.TestCategoryName)
+                </td>
+                <td style="width: 15% !important">
+                    @Html.DisplayFor(modelItem => item.TestName)
+                </td>
+                <td style="width: 50% !important">
+                    @*<input id="txtFindings" value="@item.Findings" required="required" class="form-control" placeholder="Findings" type="text"/>*@
+                    @Html.DisplayFor(modelItem => item.Findings)
+                </td>
+                <td style="width: 20% !important">
+                    <a class="btn btn-xs green" title="Load" onclick="javascript: ViewPreviousInvestigation(@item.TestId); "><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-xs btn-danger" title="Delete" onclick="javascript: if (confirm('Are you sure you want to do operation?') == false) return false; DeletePreviousInvestigation(@item.TestId); "><i class="fa fa-trash-o"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@*<script src="~/Assets/Page/table-managed.js"></script>*@
+<script>
+    jQuery(document).ready(function () {
+
+
+    });
+</script>

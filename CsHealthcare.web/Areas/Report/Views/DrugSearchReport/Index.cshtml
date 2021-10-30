@@ -1,0 +1,333 @@
+﻿
+@using Cs.Utility
+@*@model CsHealthcare.ViewModel.Doctor.DoctorAppointmentModel*@
+
+@{
+    ViewBag.Title = "Drug Laser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="page-content" style="min-height:247px">
+            <div class="container-fluid">
+
+                <div id="appointment_list_container" class="row" style="">
+
+                    <div class="col-md-12">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-bell font-green-sharp"></i>
+                                    <span class="caption-subject uppercase font-green-sharp">@ViewBag.Title</span>
+                                </div>
+                                @*<div class="tools">
+                                    <a href="javascript:;" class="collapse"></a>
+                                    <a href="javascript:;" data-load="true" data-url="@Url.Action("DrugCurrectStockList", "DrugSearchReport", new {Area = "Report" })" class="reload"></a>
+                                    <a href="javascript:;" class="fullscreen"></a>
+                                </div>*@
+                                <input id="DrugId" name="DrugId" type="hidden" class="form-control" value="" style="width: 212px" placeholder=""/>
+
+                            </div>
+                            <div class="col-xs-5">
+
+                                <div class="content-group">
+                                    <div class="col-xs-4">
+                                        <h5 class="">Drug Name:</h5>
+                                    </div>
+                                    <div class="col-xs-8">
+                                        <div  style="width: 300px; padding-left: 14%; padding-top: 5px">
+                                            <input id="DrugName" name="DrugName" class="form-control" value="" style="width: 212px" placeholder="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-2">
+                                <div class="" style="padding-top: 5px">
+                                    <input type="button" class="btn bg-indigo-300 legitRipple" value="Search" onclick=" javascript: loadStatement(); " id="incomebtn">
+                                </div>
+                            </div>
+                            <div class="portlet green-meadow box">
+                                <div class="portlet-body portlet-empty" id="tblTest">
+
+
+                                </div>
+                            </div>
+                            <div class="portlet green-meadow box">
+                                <div class="portlet-body portlet-empty" id="tblSale">
+
+
+                                </div>
+                            </div>
+                            <div class="portlet green-meadow box">
+                                <div class="portlet-body portlet-empty" id="tblInPatient">
+
+
+                                </div>
+                            </div>
+                            <div class="portlet green-meadow box">
+                                <div class="portlet-body portlet-empty" id="tblBuffer">
+
+
+                                </div>
+                            </div>
+                            <div class="portlet green-meadow box">
+                                <div class="portlet-body portlet-empty" id="tblHospital">
+
+
+                                </div>
+                            </div>
+                            </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section page_styles {
+   <link href="~/Content/icofont/css/icofont.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+<link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+<link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/typeahead/typeahead.css" />
+<style>
+    .tt-query {
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    .tt-hint {
+        color: #999;
+    }
+
+    .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+        width: 422px;
+        margin-top: 4px;
+        padding: 4px 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    }
+
+    .tt-suggestion {
+        padding: 3px 20px;
+        line-height: 24px;
+    }
+
+        .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+            color: #fff;
+            background-color: #0097cf;
+        }
+
+        .tt-suggestion p {
+            margin: 0;
+        }
+</style>
+}
+
+
+
+
+@section Scripts {
+    <script type="text/javascript" src="~/Assets/global/plugins/select2/js/select2.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/typeahead/typeahead.bundle.min.js"></script>
+    <script src="~/Assets/Pages/components-pickers.js"></script>
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+
+    <script>
+
+        jQuery(document).ready(function () {
+            ComponentsPickers.init();
+            $('#txtAppointmentDate').val(getTodate());
+            
+            initDrugAutoComplete();
+        });
+
+        function getTodate() {
+            var dob = new Date();
+            var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+            var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+            return (month + "/" + day + "/" + dob.getFullYear());
+        }
+
+        function initDrugAutoComplete() {
+            $('#DrugName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /MedicineCorner/DrugStockIn/LoadDrugs",
+                        data: "{'SearchString':'" + searchString + "' }",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.D_ID,
+                                    Name: val.D_TRADE_NAME,
+                                    value: val.D_TRADE_NAME + ' ' + val.DPT_DESCRIPTION + ' (' + val.D_UNIT_STRENGTH + ')'
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                $("#DrugId").val(patient.Id);
+                //LoadDrugType();
+                //LoadManufacturer();
+                //$("#txtPatientName").val(patient.Name);
+                //$("#txtMobileNumber").val(patient.Mobile);
+            });
+
+        }
+        function loadStatement() {
+            var loadArea = $("#tblTest");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DrugCurrectStockList", "DrugSearchReport", new {Area = "Report" }))",
+                data: { "DrugId": $('#DrugId').val() },
+            dataType: "html",
+            success: function (result) {
+                //var value = JSON.parse(result);
+
+                loadArea.html(result);
+                loadSale();
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set sells list.';
+                alert(msg);
+            }
+        });
+        }
+
+
+        function loadSale() {
+            var loadArea = $("#tblSale");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DrugSaleList", "DrugSearchReport", new {Area = "Report" }))",
+                data: { "DrugId": $('#DrugId').val() },
+            dataType: "html",
+            success: function (result) {
+                //var value = JSON.parse(result);
+
+                loadArea.html(result);
+
+                loadInPatient();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set sells list.';
+                alert(msg);
+            }
+        });
+        }
+
+        function loadInPatient() {
+            var loadArea = $("#tblInPatient");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("InPatientDrugSaleList", "DrugSearchReport", new {Area = "Report" }))",
+                data: { "DrugId": $('#DrugId').val() },
+            dataType: "html",
+            success: function (result) {
+                //var value = JSON.parse(result);
+
+                loadArea.html(result);
+                loadBuffer();
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set sells list.';
+                alert(msg);
+            }
+        });
+        }
+
+         function loadBuffer() {
+            var loadArea = $("#tblBuffer");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("BufferStockList", "DrugSearchReport", new {Area = "Report" }))",
+                data: { "DrugId": $('#DrugId').val() },
+            dataType: "html",
+            success: function (result) {
+                //var value = JSON.parse(result);
+
+                loadArea.html(result);
+                loadHospital();
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set sells list.';
+                alert(msg);
+            }
+        });
+        }
+
+        function loadHospital() {
+            var loadArea = $("#tblHospital");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("HospitalSaleList", "DrugSearchReport", new {Area = "Report" }))",
+                data: { "DrugId": $('#DrugId').val() },
+            dataType: "html",
+            success: function (result) {
+                //var value = JSON.parse(result);
+
+                loadArea.html(result);
+
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set sells list.';
+                alert(msg);
+            }
+        });
+        }
+
+
+
+    </script>
+
+}

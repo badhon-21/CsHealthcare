@@ -1,0 +1,48 @@
+﻿@*@model List<CsHealthcare.Areas.AppointmentSystem.Controllers.DailyAmount>*@
+
+@{
+    Layout = "~/Views/Shared/_PdfLayout.cshtml";
+    ViewBag.Title = "PrintDailyPayment";
+}
+<paragraph style="font-family: Helvetica; font-size: 18px; font-style: italic; margin-top: 20px;">
+    <chunk style="color: white;">.</chunk>
+</paragraph>
+
+<table width="100%" cellpadding="1.0" cellspacing="1.0" widths="3;4;2">
+    <row>
+        <cell borderwidth="0.5" left="true" right="false" top="true" bottom="false">
+            <chunk style="font-size: 8px; font-weight: bold;">Patient Id</chunk>
+        </cell>
+        <cell borderwidth="0.5" left="true" right="false" top="true" bottom="false">
+            <chunk style="font-size: 8px; font-weight: bold;">Name</chunk>
+        </cell>
+        <cell borderwidth="0.5" left="true" right="true" top="true" bottom="false" horizontalalign="right">
+            <chunk style="font-size: 8px; font-weight: bold;">Amount</chunk>
+        </cell>
+    </row>
+    @foreach (var value in Model)
+    {
+        <row>
+            <cell borderwidth="0.5" left="true" right="false" top="true" bottom="false">
+                <chunk style="font-size: 8px;">@value.Id</chunk>
+            </cell>
+            <cell borderwidth="0.5" left="true" right="false" top="true" bottom="false">
+                <chunk style="font-size: 8px;">@value.Name</chunk>
+            </cell>
+            <cell borderwidth="0.5" left="true" right="true" top="true" bottom="false" horizontalalign="right">
+                <chunk style="font-size: 8px;">@value.Amount</chunk>
+            </cell>
+        </row>
+    }
+    <row>
+        <cell borderwidth="0.5" left="false" right="false" top="true" bottom="false">
+            <chunk style="font-size: 8px;"></chunk>
+        </cell>
+        <cell borderwidth="0.5" left="false" right="false" top="true" bottom="false">
+            <chunk style="font-size: 8px;"></chunk>
+        </cell>
+        <cell borderwidth="0.5" left="false" right="false" top="true" bottom="false" horizontalalign="right">
+            @*<chunk style="font-size: 8px; font-weight: bold;">Total: @Model.Sum(s=>s.Amount)</chunk>*@
+        </cell>
+    </row>
+</table>

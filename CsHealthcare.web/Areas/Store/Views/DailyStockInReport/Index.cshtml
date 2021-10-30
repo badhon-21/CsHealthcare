@@ -1,0 +1,187 @@
+﻿
+
+
+@{
+    ViewBag.Title = "Daily StockIn Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@media print {
+        .printOnly {
+            display: block;
+        }
+        /* write your css rules*/
+        .form-group {
+            margin-bottom: 2px;
+        }
+
+        .page-content {
+            padding: 0 !important;
+        }
+
+        .print-nopadding {
+            padding: 0 !important;
+        }
+    }
+    /*for desktop*/
+    @@media screen {
+        .printOnly {
+            display: none;
+        }
+        /*for all display view*/
+
+    }
+</style>
+
+<div class="page-container">
+    <!-- Page content -->
+    <div class="page-content">
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <div class="col-xs-12 printOnly">
+                <hgroup class="title-group text-center" style="margin: 5px 0; padding: 0">
+                    <h3>Better Life Hospital</h3>
+                    <h5 class="subtitle">1 East Rampura, D.I.T. Road , Dhaka-1219</h5>
+                    <h5 class="subtitle">Daily StockIn Summary </h5>
+                </hgroup>
+            </div>
+        
+            <div class="panel">
+                @*<div class="col-md-1">
+                    </div>*@
+                <div class="portlet light">
+                    <div class="portlet-title" id="titlebtn">
+                        <div class="caption">
+                            <i class="fa fa-flask font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp uppercase">@ViewBag.Title</span>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body">
+                            
+                            <div class="row" id="datebtn">
+                                <form>
+
+                                    <div class="col-xs-5">
+
+                                        <div class="content-group">
+                                            <div class="col-xs-4">
+                                                <h5 class="">Date</h5>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                                    <input class="form-control datetimepicker" type="datetime" name="FromDate" id="FromDate" placeholder="pick a date">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-xs-2">
+                                        <div class="">
+                                            <input type="button" class="btn bg-indigo-300 legitRipple" value="Search" onclick="javascript: loadStatement(); " id="incomebtn">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                        
+
+
+                            <div class="portlet-body" id="tblTest">
+                                
+                            </div>
+
+                        
+
+                            <br /><br />
+                            <button id="btnPrint" onclick="myFunction()" class="btn btn-lg blue hidden-print margin-bottom-5" style="background-color: #1e90ff; color: white;float: right;">Print <i class="icon-printer2"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            $(".datetimepicker").datepicker("setDate", new Date());
+            //loadTodayStatement();
+        });
+
+
+        function loadStatement() {
+            var loadArea = $("#tblTest");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("Report", "DailyStockInReport", new {Area = "Store" }))",
+                data: { "FromDate": $('#FromDate').val() },
+            dataType: "html",
+            success: function (result) {
+                //var value = JSON.parse(result);
+
+                loadArea.html(result);
+               
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to load item list.';
+                alert(msg);
+            }
+        });
+        }
+     
+
+
+        function myFunction() {
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("btnPrint");
+            var button = document.getElementById("incomebtn");
+            var title = document.getElementById("titlebtn");
+            var date = document.getElementById("datebtn");
+            printButton.style.visibility = 'hidden';
+            button.style.visibility = 'hidden';
+            title.style.visibility = 'hidden';
+            date.style.visibility = 'hidden';
+            window.print();
+            //Set the print button to 'visible' again
+            //[Delete this line if you want it to stay hidden after printing]
+            printButton.style.visibility = 'visible';
+            button.style.visibility = 'visible';
+            title.style.visibility = 'visible';
+            date.style.visibility = 'visible';
+        }
+
+
+
+
+
+
+
+
+
+    </script>
+
+}
+
+
+
+
+

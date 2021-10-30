@@ -1,0 +1,136 @@
+﻿
+@model CsHealthcare.ViewModel.MedicineCorner.DrugSaleModel
+
+@{
+    ViewBag.Title = "PrintInvoiceEditMode";
+    Layout = null;
+}
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@print {
+        .hide-from-printer {
+            display: none;
+        }
+    }
+</style>
+<div style="min-height: 400px; width:460px; font-size: 11px; margin: 20%">
+
+    <div style="width: 100%; text-align:center">
+        <h4>Cash memo</h4>
+    </div>
+
+
+    <div style="width: 100%; display: table;">
+        <div style="width: 40%; float: left; display: table-cell;">
+            <div style="width: 35%; float: left;">Memo NO:</div>
+            <div id="Id" style="width: 58%; float: left;">@Model.MemoNo</div>
+        </div>
+        <div style="width: 30%; float: right;">
+            <div style="float: left; margin-right: 5px;">Bill Date:</div>
+            <div style="float: left; margin-right: 5px;">@Model.CreatedDate.ToString("dd/MM/yyyy")</div>
+
+        </div>
+        <div style="width: 30%; float: right;">
+            <div style="float: left; margin-right: 5px;">Bill Time:</div>
+            <div style="float: left; margin-right: 5px;">@Model.CreatedDate.ToString("T")</div>
+
+        </div>
+    </div>
+    @{
+        if (@Model.PatientName != null)
+        {
+            <div style="width: 100%; display: table;">
+                <div style="width: 100%; float: left; display: table-cell;">
+                    <div style="width: 20%; float: left;">Patient Name:</div>
+                    <div id="Id" style="width: 58%; float: left;">@Model.PatientName</div>
+                </div>
+
+            </div>
+       }
+    }
+   
+
+    <div style="width: 100%;Display:block"></div>
+    <div style="width: 100%;margin-top: 5px; float:left;border-top: dotted 1px;border-bottom: dotted 1px;">
+
+
+        <div style="width: 5%; float: left; font-weight: bold">SL.</div>
+        <div style="width: 55%; float: left; font-weight: bold">Drug Name</div>
+        <div style="width: 5%; float: left; font-weight: bold">Qty</div>
+        <div style="width: 10%; float: left; font-weight: bold;text-align: right;">Unit Price</div>
+        
+        <div style="width: 10%; float: left; font-weight: bold;text-align: right;">Amount</div>
+       
+
+
+    </div>
+    @{
+        // csharp code block
+        // everything in here is code, don't have to use @
+        int counter = 1;
+       
+
+    }
+    
+    @foreach (var item in @Model.DrugSaleDetailsModel)
+    {
+        int qty = (int)item.Quantity;
+       
+        <div style="width: 100%; float: left; ">
+            <div style="width: 5%; float: left;">@counter</div>
+            <div style="width: 55%; float: left;">@item.DrugName &nbsp;&nbsp;@item.DrugType &nbsp;&nbsp;(@item.UnitStrength)</div>
+            <div style="width: 5%; float: left;">@qty</div>
+            <div style="width: 10%; float: left; text-align: right">@item.UnitPrice</div>
+            <div style="width: 10%; float: left; text-align: right">@item.Total</div>
+
+
+        </div>
+
+        counter++;
+    }
+
+
+
+    <div style="width: 100%; float: left; display:block; text-align: right;margin-left: 0%"><hr>Sub Total Amount:<span>@Model.SalePrice</span></div>
+
+
+    @*<div style="width: 100%;display:block; text-align: right;margin-left: 0%">Discount: <span>@totalDiscount.ToString("0.00")</span></div>
+
+
+    <div style="width: 100%;display:block; text-align: right;margin-left: 0%">Net Payable:<span>@Model.TotalAmount</span></div>
+
+    <div style="width: 100%;display:block; text-align: right;margin-left: 0%">Received Amount: <span>@Model.GivenAmount</span></div>*@
+   
+
+
+    <div style="float: left; width: 100%; display: block; text-align: left; margin-left: 0%; border:">Prepared By: <span>@Model.CreatedBy</span></div>
+  
+    <div style="width: 100%; text-align: center;">
+        <button id="btnPrint" onclick="myFunction()" class="hide-from-printer" style="margin-top:10%">Print </button>
+        <a id="btnCancel" href="@Url.Action("Create", "DrugSale", new {Area = "MedicineCorner"})" type="button" class="" style="margin-left: 1%;" class="hide-from-printer">Cancel</a>
+    </div>
+
+</div>
+<script>
+    function myFunction() {
+        //Get the print button and put it into a variable
+        var printButton = document.getElementById("btnPrint");
+        var cancelButton = document.getElementById("btnCancel");
+        //Set the print button visibility to 'hidden'
+        printButton.style.visibility = 'hidden';
+        cancelButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print();
+        //Set the print button to 'visible' again
+        //[Delete this line if you want it to stay hidden after printing]
+        printButton.style.visibility = 'visible';
+        cancelButton.style.visibility = 'visible';
+
+
+    }
+   
+</script>

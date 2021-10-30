@@ -1,0 +1,273 @@
+﻿@using Cs.Utility
+@model CsHealthcare.ViewModel.Doctor.DoctorAppointmentModel
+
+@{
+    ViewBag.Title = "User Wise Daily Appointment Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@media print {
+        .printOnly {
+            display: block;
+        }
+        /* write your css rules*/
+        .form-group {
+            margin-bottom: 2px;
+        }
+
+        .page-content {
+            padding: 0 !important;
+        }
+
+        .print-nopadding {
+            padding: 0 !important;
+        }
+    }
+    /*for desktop*/
+    @@media screen {
+        .printOnly {
+            display: none;
+        }
+        /*for all display view*/
+
+    }
+</style>
+<div class="row">
+    <div class="col-xs-12">
+
+        <div class="page-content" style="min-height:247px">
+            <div class="container-fluid">
+                <div class="col-md-12 printOnly">
+                    <hgroup class="title-group text-center" style="margin: 5px 0; padding: 0">
+                        <h3>Better Life Hospital</h3>
+                        <h5 class="subtitle">1 East Rampura, D.I.T. Road , Dhaka-1219</h5>
+                        @*<h5 class="subtitle">Training On Basic Biotechnology</h5>*@
+                    </hgroup>
+                </div>
+                <div class="portlet light">
+                    <div class="portlet-title ">
+                        <div class="caption printOnly">
+                            <i class="icon-social-dribbble font-green-sharp"></i>
+                            <span class="caption-subject uppercase font-green-sharp">@ViewBag.Title</span>
+                        </div>
+                        <div class="tools" id="collapse">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+                            <a href="javascript:;" class="fullscreen">
+                            </a>
+                        </div>
+                        <div class="actions margin-right-10" id="dashboard">
+                            <a class="btn btn-circle green-jungle" href="@SessionManager.DashBoard">
+                                <i class="fa fa-arrow-left"></i>Back
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="modal-body">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="control-label col-xs-1">Date</div>
+                                    <div class="col-xs-3">
+                                        <input id="txtAppointmentDate" required="required" name="txtAppointmentDate" value="" class="form-control date-picker" placeholder="Appointment Date" type="text" />
+                                    </div>
+                                    <div class="control-label col-xs-1">User</div>
+                                    <div class="col-xs-4">
+                                        <select id="ddlUser" class="form-control"></select>
+                                    </div>
+                                    <div class="actions margin-right-10">
+                                        <a id="searchbtn" class="btn btn-circle green-jungle" style="" onclick="javascript:CurrentAppointmentList();">
+                                            <i class="fa fa-search"></i> Search
+                                        </a>
+                                        @*<a class="btn btn-circle green-jungle" style="width: 8% !important;" target="_blank" href="@Url.Action("ReportSample", "Appointment", new {area = "AppointmentSystem"})">
+                                                <i class="fa fa-print"></i> Print
+                                            </a>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="appointment_list_container" class="row" style="">
+
+                    <div class="col-xs-12">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption ">
+                                    <i class="fa fa-bell font-green-sharp"></i>
+                                    <span class="caption-subject uppercase font-green-sharp">Appointment List</span>
+                                </div>
+                                <div class="tools " id="fullscreen">
+                                    <a href="javascript:;" class="collapse">
+                                    </a>
+
+                                    <a href="javascript:;" class="fullscreen">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body portlet-empty" id="loadData">
+
+
+                            </div>
+                        </div>
+
+                        <button id="btnPrint" onclick="myFunction()" class="btn btn-lg blue hidden-print margin-bottom-5" style="background-color: #1e90ff; color: white;float: right;">Print <i class="icon-printer2"></i></button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section page_styles {
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/select2/css/select2.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/typeahead/typeahead.css" />
+}
+
+@section Scripts {
+    <script type="text/javascript" src="~/Assets/global/plugins/select2/js/select2.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/typeahead/typeahead.bundle.min.js"></script>
+    <script src="~/Assets/Pages/components-pickers.js"></script>
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+
+    <script>
+
+        jQuery(document).ready(function () {
+            ComponentsPickers.init();
+            $('#txtAppointmentDate').val(getTodate());
+            LoadUserList();
+        });
+
+
+
+        function myFunction() {
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("btnPrint");
+            var button = document.getElementById("searchbtn");
+            var sale = document.getElementById("collapse");
+            var sale1 = document.getElementById("dashboard");
+            var sale2 = document.getElementById("fullscreen");
+
+            printButton.style.visibility = 'hidden';
+            button.style.visibility = 'hidden';
+            sale.style.visibility = 'hidden';
+            sale1.style.visibility = 'hidden';
+            sale2.style.visibility = 'hidden';
+
+
+            window.print();
+           
+
+            
+            printButton.style.visibility = 'visible';
+            button.style.visibility = 'visible';
+            sale.style.visibility = 'visible';
+            sale1.style.visibility = 'visible';
+            sale2.style.visibility = 'visible';
+        }
+
+        function getTodate() {
+            var dob = new Date();
+            var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+            var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+            return (month + "/" + day + "/" + dob.getFullYear());
+        }
+
+        function LoadUserList() {
+            App.blockUI();
+            var options = $("#ddlUser");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadUserList", "UserWiseDailyAppointmentSummeryReport", new {Area = "AppointmentSystem"}))",
+                data: {},
+                dataType: "html",
+                success: function (result) {
+                    var t = JSON.parse(result);
+                    $.each(t, function () {
+                        options.append($("<option />").val(this.Name).text(this.Name));
+                    });
+                    CurrentAppointmentList();
+                    App.unblockUI();
+                },
+                error: function (error) {
+                    App.unblockUI();
+                    var msg = 'Fail to load user list';
+                    alert(msg);
+                }
+            });
+        }
+
+        function searchValidationCheck() {
+            if ($('#txtAppointmentDate').val() == "") {
+                alert("Please insert appointment date.");
+                $('#txtAppointmentDate').focus();
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function CurrentAppointmentList() {
+            if (searchValidationCheck()) {
+                App.blockUI();
+                var el = $("#loadData");
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("UserWiseDailyAppointmentSummaryList", "UserWiseDailyAppointmentSummeryReport", new {Area = "AppointmentSystem"}))",
+                    data: { "AppointmentDate": $('#txtAppointmentDate').val(), "User": $('#ddlUser').val() },
+                    dataType: "html",
+                    success: function (res) {
+                        App.unblockUI();
+                        el.html(res);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        App.unblockUI();
+                        var msg = 'Fail to load appointment list.';
+                        if (error == "toastr" && toastr) {
+                            toastr.error(msg);
+                        } else if (error == "notific8" && $.notific8) {
+                            $.notific8('zindex', 11500);
+                            $.notific8(msg, {
+                                theme: 'ruby',
+                                life: 3000
+                            });
+                        } else {
+                            alert(msg);
+                        }
+                    }
+                });
+            }
+        }
+
+
+
+    </script>
+
+}

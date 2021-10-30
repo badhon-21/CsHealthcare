@@ -1,0 +1,1027 @@
+﻿
+@model CsHealthcare.ViewModel.HumanResource.EmployeeInfoModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Edit Employee Information";
+}
+
+
+
+<div class="row">
+    @using (Html.BeginForm("Edit", "EmployeeInfo", new { area = "HumanResource" }, FormMethod.Post, new { @class = "form-horizontal form-row-seperated" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-12">
+
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="caption">
+                                <i class="icon-puzzle font-grey-gallery"></i>
+                                <span class="caption-subject bold font-grey-gallery uppercase">
+                                    @ViewBag.Title
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <input type="submit" value="UPDATE" class="btn dark " style="width: 25%; margin-left:40%" />
+                            <a href="@Url.Action("Index", "EmployeeInfo", new {Area = "HumanResource"})" type="button" class="btn green" style="margin-left: 1%;width:25%">Back</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="portlet-body">
+
+
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.Code)
+                        <input type="hidden" id="tId" name="tId" value="" />
+                        <div class="col-md-12">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="control-label col-md-3">
+                                        <label>Emp Code</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                        @*@Html.ValidationMessageFor(model => model.Code, "", new { @class = "text-danger" })*@
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="control-label col-md-3">
+                                        <label>First Name</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="text" name="FirstName" value="@Model.FirstName" required />
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="control-label col-md-3">
+                                        <label>Middle Name</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="text" name="MiddleName" value="@Model.MiddleName" required />
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group">
+                                    <div class="control-label col-md-3">
+                                        <label>Last Name</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="text" name="LastName"  value="@Model.LastName"required />
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="control-label col-md-3">
+                                        <label>Date Of Birth</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control datetimepicker" type="datetime" name="DateOfBirth"  value="@Model.DateOfBirth"required />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="control-label col-md-3">
+                                        <label>Birth Place</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="text" name="BirthPlace" value="@Model.BirthPlace" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="control-label col-md-3">
+                                        <label>Shift ID</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="text" name="ShiftId" value="@Model.ShiftId" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="control-label col-md-3">
+                                        <label>Badgen ID</label>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="text" name="Badgenumber" value="@Model.Badgenumber" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Employee Image</label>
+                                    <div class="col-md-9">
+                                        @*@if (Model.Photo != null && Model.Photo != " ")
+                                        {
+                                            <img id="EmployeeInfoImage" Title="@Model.FirstName" style="width: 44%; margin-top: 5px;" class="product-pic img-responsive"
+                                                 src="/@Model.Photo" alt="Employee Image" />
+                                        }
+                                        else
+                                        {
+                                            <img id="EmployeeInfoImage" Title="No Image" style="width: 45%; margin-top: 5px;" class="product-pic img-responsive"
+                                                 src="~/Image/no-image.jpg" alt="No Image" />
+                                        }*@
+
+                                        <a class="btn blue-ebonyclay" href="@Url.Action("EmployeeInfoImage", "EmployeeInfo", new {Area = "HumanResource"})" data-modal="" style="margin-top: 5px;">
+                                            <i class="fa fa-upload"></i>
+                                            Upload Image
+                                        </a>
+                                       @* @Html.Hidden("filePath", string.Empty, new { id = "filePath" })*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-md-12 text-center">
+                                  </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @*<div class="row">*@
+            <div class="col-md-12">
+                <div class="portlet light bordered">
+
+                    <ul class="nav nav-tabs">
+
+                        <li class="active">
+                            <a href="#tab_personal" data-toggle="tab"> Personal </a>
+                        </li>
+
+                        <li class="">
+                            <a href="#tab_family" data-toggle="tab"> Family </a>
+                        </li>
+
+                        <li class="">
+                            <a href="#tab_contact" data-toggle="tab"> Contact </a>
+                        </li>
+
+                        <li class="">
+                            <a href="#tab_workinfo" data-toggle="tab"> Work Info </a>
+                        </li>
+                        <li class="">
+                            <a href="#tab_education" data-toggle="tab"> Education </a>
+                        </li>
+                        <li class="">
+                            <a href="#tab_emergency" data-toggle="tab"> EmergencyContact </a>
+                        </li>
+
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="tab_personal">
+                            <div class="row">
+
+
+
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10">
+                                    <div class="portlet light bordered ">
+                                        <!-- BEGIN Portlet PORTLET-->
+                                        <div class="portlet-body portlet-empty" style="min-height: 250px; margin-top: 20px">
+
+
+                                            <div class="form-horizontal">
+
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>Gender</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <select class="form-control" name="Gender" aria-valuetext="@Model.Gender" id="Gender">
+                                                                    <option value="Male" selected="selected">Male</option>
+                                                                    <option value="Female">Female</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>Religion</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+
+                                                                <select class="form-control" name="Religion" aria-valuetext="@Model.Religion"id="Religion">
+                                                                    <option value="Islam" selected="selected">Islam</option>
+                                                                    <option value="Hindu">Hindu</option>
+                                                                </select>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>Nationality</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+
+                                                                @*@Html.EditorFor(model => model.Nationality, new { htmlAttributes = new { @class = "form-control" } })
+                                                                @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })*@
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>Blood Group</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <select class="form-control" name="BloodGroup"aria-valuetext="@Model.BloodGroup" id="BloodGroup">
+                                                                    <option value="1" selected="selected">O+</option>
+                                                                    <option value="2">O-</option>
+                                                                    <option value="3">A+</option>
+                                                                    <option value="4">A-</option>
+                                                                    <option value="5" >B+</option>
+                                                                    <option value="6">B-</option>
+                                                                    <option value="7" >AB+</option>
+                                                                    <option value="8">AB-</option>
+
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>National ID</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="text" name="NationalId" value="@Model.NationalId" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>Passport No.</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="text" name="PassportNumber"  value="@Model.PassportNumber"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>TIN No</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="text" name="TinNumber" value="@Model.TinNumber" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- END Portlet PORTLET-->
+                                                @*</div>*@
+                                                @*</div>*@
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="tab_family">
+                            <div class="row">
+
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
+
+                                    <div class="portlet light bordered ">
+                                        <!-- BEGIN Portlet PORTLET-->
+                                        <div class="portlet-body portlet-empty" style="min-height: 250px;">
+                                            <div class="form-horizontal">
+                                                <div class="col-md-12">
+
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>Father's Name</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" type="text" name="FatherName" value="@Model.FatherName"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>Occupation</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" type="text" name="FatherOccupation"value="@Model.FatherOccupation" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>Mother's Name</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" type="text" name="MotherName" value="@Model.MotherName"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>Occupation</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" type="text" name="MotherOccupation"value="@Model.MotherOccupation" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+
+                                    <div class="portlet light bordered ">
+                                        <!-- BEGIN Portlet PORTLET-->
+                                        <div class="portlet-body portlet-empty" style="min-height: 250px;">
+                                            <div class="form-horizontal">
+                                                <div class="col-md-12">
+
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>Marital Status</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <select class="form-control" name="MaritalStatus" aria-valuetext="@Model.MaritalStatus" id="MaritalStatus">
+                                                                <option value="Married" selected="selected">Married</option>
+                                                                <option value="UnMarried">UnMarried</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>Marriage Date</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control datetimepicker" type="datetime" name="MarriageDate"  value="@Model.MarriageDate"/>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>SpouseName</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" type="text" name="SpouseName" value="@Model.SpouseName" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>Occupation</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" type="text" name="SpouseOccupation" value="@Model.SpouseOccupation" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade " id="tab_contact">
+                            <div class="row">
+
+
+
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10">
+                                    <div class="portlet light bordered ">
+                                        <!-- BEGIN Portlet PORTLET-->
+                                        <div class="portlet-body portlet-empty" style="min-height: 250px; margin-top: 20px">
+
+
+                                            <div class="form-horizontal">
+
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>Present Address</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="text" name="PresentAddress" value="@Model.PresentAddress" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>Permanent Address</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="text" name="PermanentAddress"value="@Model.PermanentAddress" />
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>Phone</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="text" name="Phone"value="@Model.Phone" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>Mobile</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="text" name="Mobile" value="@Model.Mobile"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>Email</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="text" name="Email"value="@Model.Email" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <div class="control-label col-md-3">
+                                                                <label>Website</label>
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <input class="form-control" type="text" name="Website"value="@Model.Website" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="tab_workinfo">
+                            <div class="row">
+
+
+
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <div class="portlet light bordered ">
+                                        <!-- BEGIN Portlet PORTLET-->
+                                        <div class="portlet-body portlet-empty" style="height: 250px; margin-top: 20px">
+
+
+                                            <div class="form-horizontal">
+
+                                                <div class="col-md-12">
+
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>Designation</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            @Html.DropDownList("EmployeeDesignationId", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                                                            @Html.ValidationMessageFor(model => model.EmployeeDesignationId, "", new { @class = "text-danger" })
+
+
+                                                            @*<input class="form-control" type="text" name="EmployeeDesignation"/>*@
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>Department</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            @*<input class="form-control" type="text" name="Department"/>*@
+
+                                                            @Html.DropDownList("DepartmentId", null, htmlAttributes: new { @class = "form-control", @required = "required" })
+                                                            @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>Contract Type</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" type="text" name="ContractType"value="@Model.ContractType" readonly/>
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>Contract Period</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control" type="text" name="ContractPeriod"value="@Model.ContractPeriod" readonly />
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-3">
+                                                            <label>Joining Date</label>
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <input class="form-control datetimepicker" type="datetime" name="DateOfJob" value="@Model.DateOfJob.Value.ToString("dd/MM/yyyy")" readonly />
+
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2"></div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade" id="tab_education">
+                            <div class="row">
+
+
+
+                                @*<div class="col-md-1"></div>*@
+                                <div class="col-md-12">
+                                    <div class="portlet light bordered ">
+                                        <!-- BEGIN Portlet PORTLET-->
+                                        <div class="portlet-body portlet-empty" style="min-height:500px; margin-top: 20px">
+
+                                            <div class="col-md-12 row form-group">
+
+
+
+                                                <div class="col-md-2" style="width:15%!important">
+                                                    <input id="tDegreeName" name="DegreeName" class="form-control" placeholder="Cirtificate"  />
+                                                </div>
+                                                <div class="col-md-2" style="width:15%!important">
+                                                    <input id="Institution" name="Institution" class="form-control" placeholder="Institution" />
+                                                </div>
+
+                                                <div class="col-md-2" style="width:15%!important">
+                                                    <input id="Grade" name="Grade" class="form-control" placeholder="Grade" />
+                                                </div>
+
+                                                <div class="col-md-1" style="width:10%!important">
+                                                    <input id="Scale" name="Scale" class="form-control" placeholder="Scale" />
+                                                </div>
+                                                <div class="col-md-2" style="width:15%!important">
+                                                    <input id="tYear" name="Year" class="form-control" placeholder="Year" />
+                                                </div>
+                                                <div class="col-md-2" style="width:20%!important">
+                                                    <input id="CourseDuration" name="CourseDuration" class="form-control" placeholder="CourseDuration" />
+                                                </div>
+
+                                                <div class="col-md-1" style="width:10%!important">
+                                                    <a id="addbtn" onclick="javascript: EditEducationlist();" class="btn btn-primary dropdown-toggle">
+                                                        Add
+                                                    </a>
+                                                    <a id="updatebtn" onclick="javascript: EditEducationlist();" class="btn btn-primary dropdown-toggle" style="display: none;">
+                                                        Update
+                                                    </a>
+                                                </div>
+
+                                            </div>
+
+                                            <br /><br />
+                                            <div class="col-md-12 form-group">
+                                                <table class="table table-striped table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 15% !important">
+                                                                Degree Name
+                                                            </th>
+                                                            <th style="width: 15% !important">
+                                                                Institution
+                                                            </th>
+                                                            <th style="width: 15% !important">
+                                                                Grade
+                                                            </th>
+                                                            <th style="width: 15% !important">
+                                                                Scale
+                                                            </th>
+                                                            <th style="width: 15% !important">
+                                                                Year
+                                                            </th>
+                                                            <th style="width: 15% !important">
+                                                                Course Duration
+                                                            </th>
+
+                                                            <th style="width: 15% !important">
+                                                                Action
+                                                            </th>
+
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="educationlist"></tbody>
+                                                </table>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="col-md-1"></div>*@
+                            </div>
+
+                        </div>
+                        <div class="tab-pane fade" id="tab_emergency">
+                            <div class="row">
+
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
+
+                                    <div class="portlet light bordered ">
+                                        <!-- BEGIN Portlet PORTLET-->
+                                        <div class="portlet-body portlet-empty" style="min-height: 350px;">
+                                            <div class="form-horizontal">
+                                                <div class="col-md-12">
+
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-4">
+                                                            <label>Primary Contact Name</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" name="ContactName1" value="@Model.ContactName1" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-4">
+                                                            <label>Relationship</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" name="Relationship1" value="@Model.Relationship1" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-4">
+                                                            <label>Address</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" name="Address1" value="@Model.Address1"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-4">
+                                                            <label>Home Phone</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" name="Homephone1"value="@Model.Homephone1" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-4">
+                                                            <label>Work Phone</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" name="Workphone1"value="@Model.Workphone1" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-4">
+                                                            <label>Cell Phone</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" name="Cellphone1"value="@Model.Cellphone1" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-5">
+
+                                    <div class="portlet light bordered ">
+                                        <!-- BEGIN Portlet PORTLET-->
+                                        <div class="portlet-body portlet-empty" style="min-height: 350px;">
+                                            <div class="form-horizontal">
+                                                <div class="col-md-12">
+
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-4">
+                                                            <label>Second Contact Name</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" name="ContactName2"value="@Model.ContactName2" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-4">
+                                                            <label>Relationship</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" name="Relationship2"value="@Model.Relationship2" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-4">
+                                                            <label>Address</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" name="Address2" value="@Model.Address2"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-4">
+                                                            <label>Home Phone</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" name="Homephone2"value="@Model.Homephone2" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-4">
+                                                            <label>Work Phone</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" name="Workphone2"value="@Model.Workphone2" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="control-label col-md-4">
+                                                            <label>Cell Phone</label>
+                                                        </div>
+                                                        <div class="col-md-8">
+                                                            <input class="form-control" type="text" name="Cellphone2" value="@Model.Cellphone2"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        @*</div>*@
+    }
+</div>
+
+
+
+@section page_styles {
+    <link href="~/assets/global/plugins/jcrop/css/jquery.Jcrop.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/Assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-process.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js"></script>
+
+  <script type="text/javascript">
+      $(document).ready(function () {
+          $(".datetimepicker").datepicker();
+          $('#BloodGroup').val('@ViewBag.BloodGroup');
+          $('#MaritalStatus').val('@ViewBag.MaritalStatus');
+          $('#Gender').val('@ViewBag.Gender');
+          $('#Religion').val('@ViewBag.Religion');
+          loadEducationDetails();
+      });
+
+      function EditEducationlist() {
+          //if (SellsDetailsValidationCheck()) {
+          //App.blockUI();
+          var loadArea = $("#educationlist");
+          $.ajax({
+              type: "GET",
+              cache: false,
+              url: "@(@Url.Action("EditEducationList", "EmployeeInfo", new {Area = "HumanResource" }))",
+              data: {  "degreeName": $('#tDegreeName').val(), "institution": $('#Institution').val(), "grade": $('#Grade').val(), "scale": $('#Scale').val(), "year": $('#tYear').val(), "courseDuration": $('#CourseDuration').val() },
+              dataType: "html",
+              success: function (result) {
+                  //App.unblockUI();
+                  //loadsellsDetails();
+                  loadArea.html(result);
+                  //$('#tId').val('');
+                  $('#tDegreeName').val('');
+                  $('#Institution').val('');
+                  $('#Grade').val('');
+                  $('#Scale').val('');
+                  $('#CourseDuration').val('');
+                  $('#tYear').val('');
+                  $('#addbtn').show();
+                  $('#updatebtn').hide();
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                  //App.unblockUI();
+                  var msg = 'Fail to set sells list.';
+                  alert(msg);
+              }
+          });
+          // }
+      }
+
+
+
+      function EditEducation(DegreeName) {
+          $.ajax({
+              type: "GET",
+              cache: false,
+              url: "@(@Url.Action("EditEducation", "EmployeeInfo", new {Area = "HumanResource" }))",
+              data: { "degreeName": DegreeName },
+              dataType: "html",
+              success: function (result) {
+                  //App.unblockUI();
+                  //alert(result);
+                  var value = JSON.parse(result);
+
+
+                  //$('#tId').val(value.Id);
+                  $('#tDegreeName').val(value.DegreeName);
+                  $('#Institution').val(value.Institution);
+                  $('#Grade').val(value.Grade);
+                  $('#Scale').val(value.Scale);
+                  $('#CourseDuration').val(value.CourseDuration);
+                  $('#tYear').val(value.Year);
+                  $('#addbtn').hide();
+                  $('#updatebtn').show();
+
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                  //App.unblockUI();
+                  var msg = 'Fail to load test information.';
+                  alert(msg);
+              }
+          });
+      }
+
+      function loadEducationDetails() {
+          var loadArea = $("#educationlist");
+          $.ajax({
+              type: "GET",
+              cache: false,
+              url: "@(@Url.Action("loadEducationList", "EmployeeInfo", new { Area = "HumanResource" }))",
+              data: {},
+              dataType: "html",
+              success: function (result) {
+                  //loadsellsDetails();
+                  loadArea.html(result);
+
+              },
+              error: function (xhr, ajaxOptions, thrownError) {
+                  //App.unblockUI();
+              }
+          });
+      }
+
+</script>
+}

@@ -1,0 +1,507 @@
+﻿@model CsHealthcare.ViewModel.Patient.PatientLaserModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Create", "PatientLaser", new { area = "PatientInformation" }, FormMethod.Post, new { @id = "sale_form", @class = "" }))
+{
+
+    <div class="row ">
+        <div class="col-md-12">
+            <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="portlet light ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-share font-dark"></i>
+                        <span class="caption-subject font-dark bold uppercase">IPD ADVANCE PAYMENT</span>
+                    </div>
+
+                </div>
+                <div class="portlet-body" style="overflow: hidden">
+                    <h4>Patient Code</h4>
+                    <div class="search-bar ">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="input-group">
+                                
+                                    <input id="txtPatientCode" name="txtPatientCode" value="" placeholder="Search for patient..." class="form-control " />
+                                    <span class="input-group-btn">
+                                    
+                                        <a class="btn blue uppercase bold" onclick="javascript: getPatientInformation(); ">
+                                            <i class="fa fa-search"></i> Search
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                   <div class="col-md-6">
+                                    <div class="col-md-12">
+                                         <div class="col-md-7" style="margin-left: 0px">
+                                            <input id="txtPatientName" name="txtPatientName" value="" type="hidden" class="form-control " />
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            
+                                
+                                <input type="hidden" id="tId" name="tId" value="" />
+                                <input type="hidden" id="PatientId" name="PatientId" value="" />
+                                <input type="hidden" id="CabinId" name="CabinId" value="" />
+                                <input type="hidden" id="BedId" name="BedId" value="" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="col-md-12 ">
+                        <!-- BEGIN Portlet PORTLET-->
+                        <div class="portlet box red">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icofont icofont-bed-patient"></i>Admited Patient Information
+                                </div>
+
+                            </div>
+                            <div class="portlet-body" style="overflow: hidden">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="">Date Of Admission :</label>
+                                        <div class="col-md-3">
+                                            <input id="DateOfAdmission" name="DateOfAdmission" class="form-control datetimepicker" type="datetime" readonly="" placeholder="Pick a date" />
+
+                                        </div>
+                                        <label class="col-md-2 control-label" for="">Voucher Number :</label>
+                                        <div class="col-md-3">
+                                            <input id="VoucherNo" name="VoucherNo" class="form-control" readonly="" value="" />
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="">Patient Code  :</label>
+                                        <div class="col-md-3">
+                                            <input id="PatientCode" name="PatientCode" class="form-control " readonly="" placeholder="Patient Code" />
+                                        </div>
+                                        <label class="col-md-2 control-label" for="">Patient Name:</label>
+                                        <div class="col-md-5">
+                                            <input id="PatientName" name="PatientName" class="form-control " readonly="" placeholder="Patient Name" />
+                                        </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="">Cabin Name :</label>
+                                        <div class="col-md-3">
+                                            <input id="CabinAmount" name="CabinAmount" class="form-control" value="" />
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Portlet PORTLET-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    
+
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <div class="portlet light">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="fa fa-question font-green-sharp"></i>
+                                                <span class="caption-subject font-green-sharp uppercase">Advance Entry Details</span>
+                                            </div>
+                                            <div class="tools">
+                                                <a href="javascript:;" class="collapse">
+                                                </a>
+                                                <a href="javascript:;" class="fullscreen">
+                                                </a>
+                                            </div>
+                                            <div class="actions margin-right-10">
+
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body portlet-empty" style="min-height: 450px; margin-top: 20px">
+                                            <div class="modal-body">
+                                                <div class="form-horizontal">
+                                                    @*<div class="caption">
+                                                            <i class="fa fa-question font-green-sharp"></i>
+                                                            <span class="caption-subject font-green-sharp uppercase">Test Information</span>
+                                                        </div>*@
+                                                    <br />
+                                                    <div class="col-md-12 row form-group">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-6">
+                                                                <div class="col-md-6">ReceivedDate :</div>
+                                                                <div class="col-md-6">
+                                                                    <input id="ReceivedDate" name="ReceivedDate" class="form-control" value="@DateTime.Today.ToString("d")" />
+                                                                </div>
+                                                            </div>
+
+                                                            @*<div class="col-md-3">
+                                                                    <input id="Discount" name="Discount" class="form-control twodigitdecimalnumber" placeholder="Discount" oninput="calculate()" />
+                                                                </div>*@
+
+                                                            @*<div class="col-md-6">
+                                                                <div class="col-md-6">Patient Code :</div>
+                                                                <div class="col-md-6">
+                                                                    <input id="PatientCode" name="PatientCode" class="form-control " placeholder="Patient Code" />
+                                                                </div>
+                                                            </div>*@
+                                                        </div>
+                                                    </div>
+                                                    @*<div class="col-md-12 row form-group">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-6">
+                                                                <div class="col-md-6">Voucher Number :</div>
+                                                                <div class="col-md-6">
+                                                                    <input id="VoucherNo" name="VoucherNo" class="form-control" value="" />
+                                                                </div>
+                                                            </div>
+
+                                                       
+                                                            <div class="col-md-6">
+                                                                <div class="col-md-6">Patient Name :</div>
+                                                                <div class="col-md-6">
+                                                                    <input id="PatientName" name="PatientName" class="form-control " placeholder="Patient Name" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>*@
+
+                                                    <div class="col-md-12 row form-group">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-6">
+                                                                <div class="col-md-6">Advance Amount :</div>
+                                                                <div class="col-md-6">
+                                                                    <input id="AdvanceAmount" name="AdvanceAmount" class="form-control" value="" placeholder="Advance Amount " />
+                                                                </div>
+                                                            </div>
+
+                                                            @*<div class="col-md-3">
+                                                                    <input id="Discount" name="Discount" class="form-control twodigitdecimalnumber" placeholder="Discount" oninput="calculate()" />
+                                                                </div>*@
+
+                                                            <div class="col-md-6">
+                                                                <div class="col-md-6">Payment Type :</div>
+                                                                <div class="col-md-6">
+                                                                    <select id="AdvanceType" name="Advancetype" class="form-control">
+                                                                        <option value="">Select</option>
+                                                                        <option value="Cash">Cash</option>
+                                                                        <option value="Cheque">Cheque</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 row form-group" id="chequeNo">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-6">
+                                                                <div class="col-md-6">Cheque Number :</div>
+                                                                <div class="col-md-6">
+                                                                    <input id="ChequeNumber" name="ChequeNumber" class="form-control" value="" placeholder="Cheque Number " />
+                                                                </div>
+                                                            </div>
+
+                                                            @*<div class="col-md-3">
+                                                                    <input id="Discount" name="Discount" class="form-control twodigitdecimalnumber" placeholder="Discount" oninput="calculate()" />
+                                                                </div>*@
+
+                                                            <div class="col-md-6">
+                                                                <div class="col-md-6">Bank Name :</div>
+                                                                <div class="col-md-6">
+                                                                    <input id="BankName" name="BankName" class="form-control" value="" placeholder="Bank Name" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 row form-group">
+                                                        <div class="col-md-12">
+                                                            <div class="col-md-6">
+                                                                <div class="col-md-6">Remarks :</div>
+                                                                <div class="col-md-6">
+                                                                    <input id="Remarks" name="Remarks" class="form-control" value="" placeholder="Remarks " />
+                                                                </div>
+                                                            </div>
+
+                                                            @*<div class="col-md-3">
+                                                                    <input id="Discount" name="Discount" class="form-control twodigitdecimalnumber" placeholder="Discount" oninput="calculate()" />
+                                                                </div>*@
+
+
+                                                        </div>
+                                                    </div>
+                                                    <br /><br /><br /><br />
+                                                    <div class="row ">
+                                                        <div class="" style="text-align: center;">
+
+                                                            <a class="btn default" style="width: 15%;margin-top: 60px" href="@Url.Action("Index", "PatientLaser", new {Area = "PatientInfromation"})">Cancel</a>
+                                                            <input id="btnSave" onclick="javascript:return ShowMessage();" type="submit" value="Save" class="btn green" style="width: 15%;margin-top: 60px" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- END Portlet PORTLET-->
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+              
+
+
+}
+
+@section page_styles
+{
+    <link href="~/assets/global/plugins/jcrop/css/jquery.Jcrop.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/typeahead/typeahead.css" rel="stylesheet" />
+    @*<link href="~/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>*@
+    <link href="~/assets/global/plugins/select2/css/select2.css" rel="stylesheet" />
+    <link href="~/Assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" />
+
+    <style>
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+            width: 422px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+            .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+                color: #fff;
+                background-color: #0097cf;
+            }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+}
+
+
+@section Scripts {
+    <script src="~/Scripts/angular.min.js"></script>
+
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/scripts/jquery.format.1.05.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/select2/js/select2.min.js"></script>
+
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script src="~/assets/pages/components-pickers.js"></script>
+
+    <script src="~/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            allowInt();
+            initPatientCodeAutoComplete();
+
+            //initDoctorAutoComplete();
+
+            //$('#txtPatientType').val('Old');
+
+            //$(".datetimepicker").datepicker();
+
+            //ComponentsPickers.init();
+            //$('#txtDateOfBirth').val(getTodate());
+            $('#AdvanceType').on('change', function () {
+                AdvanceType();
+
+            });
+
+        });
+
+
+        function getTodate() {
+            var dob = new Date();
+            var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+            var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+            return (month + "/" + day + "/" + dob.getFullYear());
+        }
+
+        function allowInt() {
+            $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+        }
+
+
+        function initPatientCodeAutoComplete() {
+            $('#txtPatientCode').typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 2,
+                    limit: 8
+                }, {
+                    source: function (searchString, cb) {
+                        return $.ajax({
+                            dataType: 'json',
+                            type: 'POST',
+                            contentType: "application/json; charset=utf-8",
+                            url: " /PatientInformation/PatientLaser/LoadPatientCode",
+                            data: "{'SearchString':'" + searchString + "'}",
+                            chache: false,
+                            success: function (data) {
+                                var result = [];
+                                $.each(data, function (index, val) {
+                                    result.push({
+                                        Id: val.Id,
+                                        Name: val.PatientCode,
+                                        value: val.PatientCode
+                                    });
+                                });
+                                cb(result);
+                            }
+                        });
+                    }
+                }).on("typeahead:selected", function (obj, patient) {
+                    $("#tId").val(patient.Id);
+                    getPatientId();
+                    //LoadPrice();
+                    //$("#txtPatientName").val(patient.Name);
+                    //$("#txtMobileNumber").val(patient.Mobile);
+                });
+
+        }
+
+        function getPatientId() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("GetPatientId", "PatientLaser", new {Area = "PatientInformation" }))",
+                data: { "Id": $("#tId").val(), "PatientCode": $("#txtPatientCode").val() },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+
+                $('#PatientId').val(t);
+
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+        function getPatientInformation() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("PatientInformation", "PatientLaser", new {Area = "PatientInformation" }))",
+                data: { "PatientId": $("#PatientId").val(), "PatientCode": $("#txtPatientCode").val() },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+
+                $('#txtPatientName').val(t.PatientName);
+                $('#PatientName').val(t.PatientName);
+                $('#PatientCode').val(t.PatientCode);
+                $('#CabinId').val(t.CabinId);
+                $('#VoucherNo').val(t.VoucherNo);
+                $('#CabinAmount').val(t.CabinId);
+                var dateString = (t.patientAdmissionDate).substr(6);
+                var currentTime = new Date(parseInt(dateString));
+                var month = currentTime.getMonth() + 1;
+                var day = currentTime.getDate();
+                var year = currentTime.getFullYear();
+                var date = month + "/" + day + "/" + year;
+                $('#DateOfAdmission').val(date);
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+
+        function ShowMessage() {
+            var result = confirm("Do your want to save?");
+            if (result) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        function AdvanceType() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("AdvanceType", "PatientLaser", new {Area = "PatientInformation" }))",
+                data: { "AdvanceType": $("#AdvanceType").val()  },
+            dataType: "html",
+            success: function (result) {
+
+
+             //   alert(result);
+                if (result == "Cheque") {
+                    $('#chequeNo').show();
+                } else {
+                    $('#chequeNo').hide();
+                }
+
+
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+
+    </script>
+}

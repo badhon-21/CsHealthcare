@@ -1,0 +1,230 @@
+﻿
+
+@model CsHealthcare.ViewModel.Cabin.ICUModel
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-question font-green-sharp"></i>
+                        <span class="caption-subject font-green-sharp uppercase">ICU Information</span>
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+                        <a href="javascript:;" class="fullscreen">
+                        </a>
+                    </div>
+                    <div class="actions margin-right-10">
+
+                    </div>
+                </div>
+                @*<hr style="margin-top: 0;">*@
+                <div class="portlet-body portlet-empty">
+
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new {@class = "control-label col-md-3"})
+                                <div class="col-md-4">
+                                    @Html.EditorFor(model => model.Name, new {htmlAttributes = new {@class = "form-control", @required = "required"}})
+                                    @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-question font-green-sharp"></i>
+                                        <span class="caption-subject font-green-sharp uppercase">Bed Information</span>
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse">
+                                        </a>
+                                        <a href="javascript:;" class="fullscreen">
+                                        </a>
+                                    </div>
+                                    <div class="actions margin-right-10">
+
+                                    </div>
+                                </div>
+                                <div class="portlet-body portlet-empty" style="min-height: 450px; margin-top: 20px">
+                                    <div class="modal-body">
+                                        <div class="form-horizontal">
+                                            @*<div class="caption">
+                                                    <i class="fa fa-question font-green-sharp"></i>
+                                                    <span class="caption-subject font-green-sharp uppercase">Test Information</span>
+                                                </div>*@
+                                            <br/>
+                                            <div class="col-md-12 row form-group">
+
+                                                <div class="col-md-3">
+                                                    <input id="BedName" name="BedName" class="form-control" placeholder="Bed Name"/>
+                                                </div>
+
+                                                @*<div class="col-md-3">
+                                                        <input id="Discount" name="Discount" class="form-control twodigitdecimalnumber" placeholder="Discount" oninput="calculate()" />
+                                                    </div>*@
+
+                                                <div class="col-md-2">
+                                                    <input id="PriceByDay" name="PriceByDay" class="form-control twodigitdecimalnumber" placeholder="Daily Price" oninput=""/>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input id="PriceByHour" name="PriceByHour" class="form-control twodigitdecimalnumber" placeholder="Hourly Price" oninput=""/>
+                                                </div>
+
+
+                                                <div class="col-md-1">
+                                                    <a id="addbtn" onclick=" javascript: SetBedList(); " class="btn btn-primary dropdown-toggle">
+                                                        Add
+                                                    </a>
+                                                    <a id="updatebtn" onclick=" javascript: SetBedList(); " class="btn btn-primary dropdown-toggle" style="display: none;">
+                                                        Update
+                                                    </a>
+                                                </div>
+
+                                            </div>
+
+                                            <br/><br/><br/><br/>
+                                            <div class="col-md-12 form-group">
+                                                <table class="table table-striped table-bordered table-hover" id="tabChiefComplaintList">
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width: 15% !important">
+                                                            Bed Name
+                                                        </th>
+                                                        @*<th style="width: 15% !important">
+                                                                    Discount
+                                                                </th>*@
+                                                        <th style="width: 15% !important">
+                                                            Daily Price
+                                                        </th>
+                                                        <th style="width: 15% !important">
+                                                            Hourly Price
+                                                        </th>
+
+                                                        <th style="width: 15% !important">Action</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody id="testDetailsList"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- END Portlet PORTLET-->
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn default" style="width: 15%;" href="@Url.Action("Index", "ICU", new {Area = "Cabin"})">Cancel</a>
+                        <input type="submit" value="Save" class="btn green" style="width: 15%;"/>
+                    </div>
+
+
+                
+            </div>
+
+            <!-- END Portlet PORTLET-->
+        @*</div>*@
+        <div class="col-md-1"></div>
+    </div>
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            allowInt();
+            decimal_with_two_digit();
+
+        });
+
+
+        function allowInt() {
+            $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+        }
+
+        function decimal_with_two_digit() {
+            $(".twodigitdecimalnumber").format({ precision: 2, allow_negative: false, autofix: true });
+        }
+
+
+
+
+        function SetBedList() {
+            //if (SellsDetailsValidationCheck()) {
+            //App.blockUI();
+            var loadArea = $("#testDetailsList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("SetBedList", "ICU", new {Area = "Cabin" }))",
+                data: { "BedName": $('#BedName').val(), "PriceByDay": $('#PriceByDay').val(), "PriceByHour": $('#PriceByHour').val() },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+                
+                loadArea.html(result);
+                $('#BedName').val('');
+
+                $('#PriceByDay').val('');
+                $('#PriceByHour').val('');
+               
+
+                $('#addbtn').show();
+                $('#updatebtn').hide();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set  list.';
+                alert(msg);
+            }
+        });
+        // }
+        }
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+

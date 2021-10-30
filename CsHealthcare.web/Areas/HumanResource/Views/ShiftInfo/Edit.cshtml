@@ -1,0 +1,193 @@
+﻿
+@model CsHealthcare.ViewModel.HumanResource.ShiftInfoModel
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-question font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp uppercase">Edit Shift Information</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+
+                </div>
+            </div>
+            <hr style="margin-top: 0;">
+            <div class="portlet-body portlet-empty">
+
+
+                @using (Html.BeginForm())
+                {
+                    @*@Html.AntiForgeryToken()*@
+
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(model => model.Id)
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                                @Html.LabelFor(model => model.Type, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    <select id="shiftType" name="Type" class="form-control">
+                                        <option value="Roster">Roster</option>
+                                        <option value="Toster">Toster</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-md-4"></div>
+
+                            </div>
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StartDay, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.StartDay, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.StartDay, "", new { @class = "text-danger" })
+                                </div>
+
+
+
+                                @Html.LabelFor(model => model.DayOn, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.DayOn, new { htmlAttributes = new { @class = "form-control", Type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.DayOn, "", new { @class = "text-danger" })
+
+                                </div>
+
+
+                                @Html.LabelFor(model => model.DayOff, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.DayOff, new { htmlAttributes = new { @class = "form-control", Type = "text" } })
+                                    @Html.ValidationMessageFor(model => model.DayOff, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="control-label col-md-1"></div>
+                                <div class="col-md-4">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.HasLunchDinner) Has Lunch/Dinner?
+                                    </div>
+                                </div>
+
+                                <div class="col-md-7"></div>
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.BeginTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.BeginTime, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.BeginTime, "", new { @class = "text-danger" })
+                                </div>
+
+
+
+                                @Html.LabelFor(model => model.Duration, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Duration, "", new { @class = "text-danger" })
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StartTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.StartTime, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.StartTime, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.WorkingHour, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.WorkingHour, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.WorkingHour, "", new { @class = "text-danger" })
+                                </div>
+
+                                @Html.LabelFor(model => model.EndTime, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-2">
+                                    @Html.EditorFor(model => model.EndTime, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.EndTime, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a class="btn default" style="width: 15%;" href="@Url.Action("Index", "ShiftInfo", new {Area = "HumanResource" })">Cancel</a>
+                        <input type="submit" value="Update" class="btn green" style="width: 15%;" />
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+
+    <script type="text/javascript">
+       jQuery(document).ready(function () {
+           $('#shiftType').val('@ViewBag.ShiftType');
+
+       });
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

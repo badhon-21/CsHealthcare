@@ -1,0 +1,259 @@
+﻿@using System.Runtime.InteropServices
+@model List<CsHealthcare.ViewModel.Accounts.GL_ACCOUNTModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .loadingP1 {
+        background-image: url('../../../../assets/Tree/generated-image.gif');
+
+        width: 15px;
+        display: inline-block;
+    }
+
+    .collapse1 {
+        width: 15px;
+        background-repeat: no-repeat;
+        background-position: -36px -17px;
+        display: inline-block;
+        background-image: url('../../../../assets/Tree/ui-icons_454545_256x240.png');
+
+        cursor: pointer;
+    }
+
+    .expand1 {
+        width: 15px;
+        background-image: url('../../../../assets/Tree/ui-icons_454545_256x240.png');
+
+        background-repeat: no-repeat;
+        background-position: -50px -17px;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .treeview1 ul {
+        font: 14px Arial, Sans-Serif;
+        margin: 0px;
+        padding-left: 20px;
+        list-style: none;
+    }
+
+    .treeview1 > li > a {
+        font-weight: bold;
+    }
+
+    .treeview1 li a {
+        padding: 4px;
+        font-size: 12px;
+        display: inline-block;
+        text-decoration: none;
+        width: auto;
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    @*<i class="fa fa-question font-green-sharp"></i>*@
+                    <span class="caption-subject font-green-sharp bold uppercase">GL Account List</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                    @*<a href="javascript:;" data-load="true" data-url="@Url.Action("List", "GLAccount", new {Area = "Accounts" })" class="reload">
+
+                    </a>*@
+                    @*<a href="javascript:;" class="remove">
+                    </a>*@
+                </div>
+                <div class="actions margin-right-10">
+                    <a class="btn btn-circle green-jungle btn-sm" href="@Url.Action("Create", "GLAccount", new {Area = "Accounts"})" >
+                        <i class="fa fa-plus"></i> Create
+                    </a>
+                    @*<a class="btn btn-circle green-jungle btn-sm" href="@SessionManager.DashBoard">
+                            <i class="fa fa-chevron-left"></i> Back
+                        </a>*@
+                </div>
+            </div>
+            <hr style="margin-top:0;">
+            <div class="portlet-body portlet-empty">
+                <h2>GL Account Treeview</h2>
+                <div style="padding: 0px; background-color: #FAFAFA">
+                    @{
+                        <div class="treeview1">
+                            @{
+                                if (Model != null && Model.Count() > 0)
+                                {
+                                    @*Here I will going to load Treeview menus*@
+                                    <ul>
+                                        @foreach (var i in Model)
+                                        {
+                                            <li>
+                                                <span class="collapse1 collapsible1" data-loaded="false" onclick="test(this);" pid="@i.GL_ID">&nbsp;</span>
+                                                @* Here I have added the above span for collapsible button for treeview *@
+                                                @* and data-loaded="false" means its sub menu not loaded yet from database *@
+                                                <span>
+                                                    <a href="@Url.Action("Edit", "GLAccount", new {Area = "Accounts", id = @i.GL_ID})">@i.GL_NAME<span>(</span>@i.GL_MAP_CODE<span>)</span></a>
+                                                </span>
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+
+
+
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+
+</div>
+
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function test(tthis) {
+
+            var this1 = tthis; // Get Click item
+            var data = {
+                pid: $(this1).attr('pid')
+            };
+
+            var isLoaded = $(this1).attr('data-loaded'); // Check data already loaded or not
+            if (isLoaded == "false") {
+                $(this1).addClass("loadingP1");   // Show loading panel
+                $(this1).removeClass("collapse1");
+
+                // Now Load Data Here
+                $.ajax({
+                    url: "@(@Url.Action("GetSubMenu", "GLAccount", new {Area = "Accounts" }))",
+                    type: "GET",
+                data: data,
+                dataType: "json",
+                success: function (d) {
+                    $(this1).removeClass("loadingP1");
+
+                    if (d.length > 0) {
+
+                        var $ul = $("<ul></ul>");
+                        $.each(d, function (i, ele) {
+                            $ul.append(
+                                    $("<li></li>").append(
+
+                                        "<span class='collapse1 collapsible1' data-loaded='false' onclick='test(this);' pid='" + ele.GL_ID + "'>&nbsp;</span>" +
+                                        "<span><a href =GLAccount/Edit/" + ele.GL_ID + ">" + ele.GL_NAME + "(" + ele.GL_MAP_CODE + ")</a></span>"
+                                    )
+                                )
+                        });
+
+                        $(this1).parent().append($ul);
+                        $(this1).addClass('collapse1');
+                        $(this1).toggleClass('collapse1 expand1');
+                        $(this1).closest('li').children('ul').slideDown();
+                    }
+                    else {
+                        // no sub menu
+                        $(this1).css({ 'dispaly': 'inline-block', 'width': '15px' });
+                    }
+
+                    $(this1).attr('data-loaded', true);
+                },
+                error: function () {
+                    alert("Error!");
+                }
+            });
+        }
+            else {
+                // if already data loaded
+                    $(this1).toggleClass("collapse1 expand1");
+        $(this1).closest('li').children('ul').slideToggle();
+            }
+
+
+        }
+
+        $(document).ready(function () {
+
+            @*$(".collapsible1").click(function (e) {
+                e.preventDefault();
+
+                var this1 = $(this); // Get Click item
+                var data = {
+                    pid: $(this).attr('pid')
+                };
+
+                var isLoaded = $(this1).attr('data-loaded'); // Check data already loaded or not
+                if (isLoaded == "false") {
+                    $(this1).addClass("loadingP1");   // Show loading panel
+                    $(this1).removeClass("collapse1");
+
+                    // Now Load Data Here
+                    $.ajax({
+                        url: "@(@Url.Action("GetSubMenu", "GLAccount", new {Area = "Account" }))",
+                        type: "GET",
+                        data: data,
+                        dataType: "json",
+                        success: function (d) {
+                            $(this1).removeClass("loadingP1");
+
+                            if (d.length > 0) {
+
+                                var $ul = $("<ul></ul>");
+                                $.each(d, function (i, ele) {
+                                    $ul.append(
+                                            $("<li></li>").append(
+                                                "<span class='collapse1 collapsible1' data-loaded='false' pid='" + ele.GL_ID + "'>&nbsp;</span>" +
+                                                "<span><a href='" + ele.GL_ID + "'>" + ele.GL_NAME + "</a></span>"
+                                            )
+                                        )
+                                });
+
+                                $(this1).parent().append($ul);
+                                $(this1).addClass('collapse1');
+                                $(this1).toggleClass('collapse1 expand1');
+                                $(this1).closest('li').children('ul').slideDown();
+                            }
+                            else {
+                                // no sub menu
+                                $(this1).css({ 'dispaly': 'inline-block', 'width': '15px' });
+                            }
+
+                            $(this1).attr('data-loaded', true);
+                        },
+                        error: function () {
+                            alert("Error!");
+                        }
+                    });
+                }
+                else {
+                    // if already data loaded
+                    $(this1).toggleClass("collapse1 expand1");
+                    $(this1).closest('li').children('ul').slideToggle();
+                }
+
+            });*@
+        });
+    </script>
+
+}
+
+
+
+
+
+
+

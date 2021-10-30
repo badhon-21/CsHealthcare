@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Patient.InPatienttestBillViewModel>
+<div class="col-md-12 text-center">
+    <h3> Test Bill</h3>
+
+</div>
+
+<table class="table table-striped table-bordered table-hover" id="">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestName)
+            </th>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.ItemQuantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TestTotalAmount)
+            </th>
+
+
+
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Date
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TestName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemQuantity)
+            </td>
+
+            <td style=" text-align:right">
+                @Html.DisplayFor(modelItem => item.TestTotalAmount)
+            </td>
+
+
+
+        </tr>
+    }
+        <tr>
+
+            <td style="text-align: right; font-weight: bold" colspan="3">&nbsp;Total:</td>
+            <td style="text-align: right; font-weight: bold">@Model.Sum(x => x.TestTotalAmount) </td>
+        </tr>
+    </tbody>
+
+</table>
+

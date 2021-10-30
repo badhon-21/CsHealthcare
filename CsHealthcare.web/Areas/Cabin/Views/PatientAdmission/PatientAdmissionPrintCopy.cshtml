@@ -1,0 +1,278 @@
+﻿
+@model CsHealthcare.ViewModel.Cabin.PatientAdmissionModel
+@{
+    ViewBag.Title = "PrintInvoice";
+    Layout = null;
+}
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@print {
+        .hide-from-printer {
+            display: none;
+        }
+    }
+</style>
+<div style="min-height: 400px; width:460px; font-size: 12px; margin: 20%">
+
+    <div style="width: 100%; text-align:center">
+        <h4>Cash memo</h4>
+    </div>
+
+    @*<div style="width: 100%;">
+            <div style="width: 50%; float: left;">
+                <div style="width: 35%; float: left;">Bill Type:</div>
+                <div id="Id" style="width: 65%; float: left;">Normal</div>
+
+            </div>
+            <div style="width: 50%; float: right;">
+              <div style="width: 35%; float: left;">Date:</div>
+                    <div style="width: 65%; float: left;">@Model.CreatedDate.ToString("dd/MM/yyyy")</div>
+
+            </div>
+        </div>*@
+
+    <div style="width: 100%;display: table;">
+        <div style="width: 60%; float: left; display: table-cell;">
+            <div style="width: 42%; float: left;">Cash Receipt No:</div>
+            <div id="Id" style="width: 58%; float: left;">@Model.VoucherNo</div>
+
+        </div>
+        <div style="width: 30%; float: right;">
+            <div style="float: left;margin-right: 5px;">Bill Date:</div>
+            <div style="float: left;margin-right: 5px;">@Model.CreatedDate.ToString("dd/MM/yyyy")</div>
+
+        </div>
+    </div>
+
+    <div style="float: left; width: 500px; margin-bottom: 5px;">
+
+        <div style="width: 350px; float: left;">
+            <div style="width: 80px; float: left;font-weight: bold;">Patient Code:</div>
+            <div style="width: 270px; float: left;">@Model.PatientCode</div>
+
+        </div>
+
+    </div>
+    <div style="float: left; width: 500px; margin-bottom: 5px;">
+
+        <div style="width: 350px; float: left;">
+            <div style="width: 80px; float: left;font-weight: bold;">Patient Name:</div>
+            <div style="width: 270px; float: left;">@Model.PatientName</div>
+
+        </div>
+        
+    </div>
+    <div style="float: left; width: 500px; margin-bottom: 5px;">
+
+        <div style="width: 350px; float: left;">
+            <div style="width: 80px; float: left;font-weight: bold;">Doctor Name:</div>
+            <div style="width: 270px; float: left;">@Model.RrreferenceDoctor</div>
+
+        </div>
+
+    </div>
+
+<div style="float: left; width: 500px; margin-bottom: 10px;">
+
+        
+    <div style="width: 150px; float:left;">
+        <div style="width: 50%; float: left;">Cabin Name:</div>
+        <div style="width: 50%; float: left;">@Model.CabinName </div>
+
+    </div>
+    <div style="width: 250px; float:left;">
+        <div style="width: 50%; float: left;">Admission Date:</div>
+        <div style="width: 50%; float: left;">@Model.CreatedDate </div>
+
+    </div>
+</div>
+    <legend>Emergency Contract:</legend>
+    <div style="border: 1px solid; float: left; padding: 5px;width: 450px;">
+        <div style="width: 100%;display: table;">
+            <div style="width: 60%; float: left; display: table-cell;">
+                <div style="width: 42%; float: left;">Contact Person:</div>
+                <div id="Id" style="width: 58%; float: left;">@Model.EmergencyContactName</div>
+
+            </div>
+            <div style="width: 30%; float: right;">
+                <div style="float: left;margin-right: 5px;">Relation:</div>
+                <div style="float: left;margin-right: 5px;">@Model.EmergencyContactPersonRelation</div>
+
+            </div>
+        </div>
+        <div style="width: 100%;display: table;">
+            <div style="width: 60%; float: left; display: table-cell;">
+                <div style="width: 42%; float: left;">Address:</div>
+                <div id="Id" style="width: 58%; float: left;">@Model.EmergencyContactPersonAddress</div>
+
+            </div>
+            <div style="width: 30%; float: right;">
+                <div style="float: left;margin-right: 5px;">Mobile:</div>
+                <div style="float: left;margin-right: 5px;">@Model.EmergencyContactMobile</div>
+
+            </div>
+        </div>
+        <div style="width: 100%;display: table;">
+            <div style="width: 60%; float: left; display: table-cell;">
+                <div style="width: 42%; float: left;">Telephone:</div>
+                <div id="Id" style="width: 58%; float: left;">@Model.Telephone</div>
+
+            </div>
+            <div style="width: 30%; float: right;">
+                <div style="float: left;margin-right: 5px;">Home Phone:</div>
+                <div style="float: left;margin-right: 5px;">@Model.HomePhone</div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div style="width: 100%; float: left; display:block; text-align: right;"><hr>Admission Free:<span>@Model.AdmissionFee</span></div>
+    
+    <div style="width: 100%;display:block; text-align: right;">Cabin Price:<span>@Model.CabinAmount</span></div>
+
+    <div style="width: 100%;display:block; text-align: right;">Total Amount:<span>@Model.TotalAmount</span></div>
+    @if (@Model.DeuAmount > 0)
+    {
+        <div style="width: 100%; text-align: right;">Due Amount: <span>@Model.DeuAmount</span></div>
+    }
+    <div style="width: 100%;margin-top: 60px;text-align: center;float: left;">
+        <div style="width: 33%;float: left;">User Name :@Model.CreatedBy </div>
+
+    </div>
+    @*<div style="width: 100%; float: left;">
+            <div style="width: 40%; float: left;">
+                <div style="width: 35%; float: left;"></div>
+                <div style="width: 65%; float: left;"></div>
+
+            </div>
+            <div style="width: 60%; float: right;">
+                <div style="width: 65%; float: left;">Total:</div>
+                <div style="width: 35%; float: left;"></div>
+
+            </div>
+        </div>
+
+        <div style="width: 100%; float: left;">
+            <div style="width: 40%; float: left;">
+                <div style="width: 35%; float: left;"></div>
+                <div style="width: 65%; float: left;"></div>
+
+            </div>
+            <div style="width: 60%; float: right;">
+                <div style="width: 65%; float: left;">Discount:</div>
+                <div style="width: 35%; float: left;">@Model.Discount%</div>
+
+            </div>
+        </div>
+        <div style="width: 100%; float: left;">
+            <div style="width: 40%; float: left;">
+                <div style="width: 35%; float: left;"></div>
+                <div style="width: 65%; float: left;"></div>
+
+            </div>
+            <div style="width: 60%; float: right;">
+                <div style="width: 65%; float: left;">Total Payable:</div>
+                <div style="width: 35%; float: left;">@Model.GrandTotal</div>
+
+            </div>
+        </div>*@
+        @*<div style="width: 100%; float: left;">
+                <div style="width: 40%; float: left;">
+                    <div style="width: 35%; float: left;"></div>
+                    <div style="width: 65%; float: left;"></div>
+
+                </div>
+                <div style="width: 60%; float: right;">
+                    <div style="width: 65%; float: left;">Total Received:</div>
+                    <div style="width: 35%; float: left;">@Model.GivenAmount</div>
+
+                </div>
+            </div>*@
+
+        @*<div style="width: 100%; float: left;">
+                <div style="width: 40%; float: left;">
+                    <div style="width: 35%; float: left;"></div>
+                    <div style="width: 65%; float: left;"></div>
+
+                </div>
+                <div style="width: 60%; float: right;">
+                    <div style="width: 65%; float: left;">Change:</div>
+                    <div style="width: 35%; float: left;">@Model.ChangeAmount</div>
+
+                </div>
+            </div>*@
+
+        @*<div style="width: 100%; float: left; margin-bottom: 10px; ">
+                <div style="width: 40%; float: left;">
+                    <div style="width: 35%; float: left;"></div>
+                    <div style="width: 65%; float: left;"></div>
+
+                </div>
+                <div style="width: 60%; float: right;">
+                    <div style="width: 65%; float: left;">Payment Mode:</div>
+                    <div style="width: 35%; float: left;">@Model.TransactionType</div>
+
+                </div>
+            </div>*@
+        <div style="width: 100%; text-align: center;">
+            <button id="btnPrint" onclick="myFunction()" class="hide-from-printer" style="margin-top:10%">Print </button>
+            <a id="btnCancel" href="@Url.Action("Create", "PatientAdmission", new {Area = "Cabin"})" type="button" class="" style="margin-left: 1%;" class="hide-from-printer">Cancel</a>
+        </div>
+
+    </div>
+    <script>
+function myFunction() {
+    //Get the print button and put it into a variable
+    var printButton = document.getElementById("btnPrint");
+    var cancelButton = document.getElementById("btnCancel");
+    //Set the print button visibility to 'hidden'
+    printButton.style.visibility = 'hidden';
+    cancelButton.style.visibility = 'hidden';
+    //Print the page content
+    window.print();
+    //Set the print button to 'visible' again
+    //[Delete this line if you want it to stay hidden after printing]
+    printButton.style.visibility = 'visible';
+    cancelButton.style.visibility = 'visible';
+
+
+}
+jQuery(document).ready(function () {
+    getTotal();
+
+});
+function getTotal() {
+    $.ajax({
+
+        type: "GET",
+        cache: false,
+        url: "@(@Url.Action("LoadTotalPrice", "Patient", new {Area = "PatientInformation" }))",
+        data: { "Id": $("#Id").val() },
+    dataType: "html",
+    success: function (result) {
+
+        //var t = JSON.parse(result);
+        //$('#Price').val(t.T_Price);
+        $('#totalPrice').text(result);
+        // $('#quantity').focus();
+    },
+    error: function (error) {
+        //Metronic.unblockUI();
+        var msg = 'Fail to load .';
+        alert(msg);
+    }
+});
+}
+    </script>
+
+
+
+
+
+
+

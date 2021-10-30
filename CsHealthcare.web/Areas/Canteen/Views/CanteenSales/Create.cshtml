@@ -1,0 +1,620 @@
+﻿@model CsHealthcare.ViewModel.Canteen.SellsModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "CanteenSales", new { area = "Canteen" }, FormMethod.Post, new { @id = "sale_form", @class = "" }))
+{
+    <input type="hidden" id="SaleType" name="SaleType" value="Sale" />
+    <div class="row">
+        <div class="col-md-12">
+           
+                <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+                <input type="hidden" id="SellsNo" name="SellsNo" value="@Model.SellsNo" />
+                <input type="hidden" id="ProCateId" name="ProCateId" value="" />
+                <input type="hidden" id="ProId" name="ProId" value="" />
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            @*<i class="fa fa-question font-green-sharp"></i>*@
+                            <span class="caption-subject font-green-sharp uppercase"> Sales Register</span>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+                            <a href="javascript:;" class="fullscreen">
+                            </a>
+                        </div>
+                        <div class="actions margin-right-10">
+
+                        </div>
+                    </div>
+     
+                        <div class="portlet-body">
+
+                            <div class="row">
+                                <div class="col-md-9">
+
+                                    <div class="col-md-12 form-group">
+
+                                        <div class="col-md-2">
+                                            <input id="ProductCategoryId" name="ProductCategoryId" class="form-control" placeholder="Product Category" />
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <input id="ProductId" name="ProductId" class="form-control" placeholder="Product" />
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <input id="quantity" name="Quantity" class="form-control twodigitdecimalnumber" placeholder="Quantity" />
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <input id="unitPrice" name="UnitPrice" class="form-control twodigitdecimalnumber" placeholder="Unit Price" />
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <input id="Total" name="Total" class="form-control twodigitdecimalnumber" placeholder="Total" disabled />
+                                        </div>
+
+                                        <div class="col-md-1">
+                                            <a id="addbtn" onclick="javascript: SetSellsList();" class="btn btn-primary dropdown-toggle">
+                                                Add
+                                            </a>
+                                            <a id="updatebtn" onclick="javascript: SetSellsList();" class="btn btn-primary dropdown-toggle" style="display: none;">
+                                                Update
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-12 form-group">
+                                        <table class="table table-striped table-bordered table-hover" id="tabChiefComplaintList">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 15% !important">
+                                                        Product
+                                                    </th>
+                                                    <th style="width: 15% !important">
+                                                        Quantity
+                                                    </th>
+                                                    <th style="width: 15% !important">
+                                                        Unit Price
+                                                    </th>
+                                                    <th style="width: 15% !important">
+                                                        Total
+                                                    </th>
+                                                    <th style="width: 15% !important">Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="sellsDetailsList"></tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="col-md-12 hide">
+                                        <div>Notes</div>
+                                        <textarea name="Note" class="form-control" aria-valuetext="Notes- Any relavent information not already covered" rows="1" id="Note"></textarea>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="portlet light">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                @*<i class="fa fa-question font-green-sharp"></i>*@
+                                                <span class="caption-subject font-green-sharp uppercase"> Sales Register</span>
+                                            </div>
+                                            <div class="tools">
+                                                <a href="javascript:;" class="collapse">
+                                                </a>
+                                                <a href="javascript:;" class="fullscreen">
+                                                </a>
+                                            </div>
+                                            <div class="actions margin-right-10">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="portlet-body" style="padding-bottom: 0px !important;" ng-app="">
+                                            <div class="row">
+                                              
+                                                <div class="col-md-12 form-group">
+                                                    <div class="col-md-6 text-left" style="min-width:200px">Item In Cart</div>
+                                                    <div class="col-md-6"style="min-width:200px">
+                                                        <input id="item_in_chart" name="item_in_chart" class="form-control twodigitdecimalnumber" disabled />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <div class="col-md-6 text-left"style="min-width:200px">Sub Total</div>
+                                                    <div class="col-md-6"style="min-width:200px">
+                                                      
+                                                        <div class="input-group">
+
+                                                            <input id="sub_total" type="text" class="form-control">
+                                                            <span class="input-group-addon"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @*<div class="col-md-12 form-group">
+                                                    <div class="col-md-6 text-right">Discount</div>
+                                                    <div class="col-md-6">
+                                                        <input ng-model="Discount" id="Discount" name="Discount" class="form-control twodigitdecimalnumber" />
+                                                    </div>
+                                                </div>*@
+                                                <div class="col-md-12 form-group">
+                                                    <div class="col-md-6 text-left" style="min-width:200px">Total Pay</div>
+                                                    <div class="col-md-6"style="min-width:200px">
+                                                      
+                                                        <div class="input-group">
+
+                                                            <input id="GrandTotal" type="text" class="form-control">
+                                                            <span class="input-group-addon"></span>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 form-group" style="text-align: center;">
+                                                    <a href="@Url.Action("SalePayment", "CanteenSales", new {area = "Canteen"})" class="btn btn-primary dropdown-toggle " style="" data-modal="">Add Payment</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            @*<div class="row">
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-2 text-right">Total no of sale:</div>
+                                    <div class="col-md-1"><strong><span id="total_no_of_sale"></span></strong></div>
+                                    <div class="col-md-2 text-right">Total Amount:</div>
+                                    <div class="col-md-1"><strong><span></span> <span id="total_amount"></span></strong></div>
+                                    <div class="col-md-2 text-right">Current User:</div>
+                                    <div class="col-md-1"><strong><span id="current_user"></span></strong></div>
+                                </div>
+                            </div>*@
+                        </div>
+                   
+                </div>
+            
+        </div>
+    </div>
+}
+
+@section page_styles {
+    <link href="~/assets/global/plugins/jcrop/css/jquery.Jcrop.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/Assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" />
+
+    <link href="~/assets/global/plugins/typeahead/typeahead.css" rel="stylesheet" />
+
+    <style>
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+            width: 422px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            max-height: 200px;
+            overflow: auto;
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+            .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+                color: #fff;
+                background-color: #0097cf;
+            }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+}
+
+@section Scripts{
+    <script src="~/Scripts/angular.min.js"></script>
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            initMenu();
+            keyPressEvent();
+            initProductCategoryAutoComplete();
+            //LoadSaleSummary();
+            decimal_with_two_digit();
+
+            //$('#ProductId').on('change', function () {
+            //    LoadPrice();
+            //});
+
+            //LoadProductCategory();
+            //initProductCategoryEvent();
+
+        });
+
+        function initMenu() {
+            $("#menuDashboard").removeClass("open");
+            $("#menuCustomer").removeClass("open");
+            $("#menuInvoice").addClass("open");
+            $("#menuPayments").removeClass("open");
+            $("#menuReports").removeClass("open");
+            $("#menuSettings").removeClass("open");
+        }
+
+        function keyPressEvent() {
+            $("#quantity").keyup(function () {
+                var quantity = document.getElementById('quantity').value;
+                var unitprice = document.getElementById('unitPrice').value;
+
+                if (quantity == "")
+                    quantity = 0;
+
+                if (unitprice == "")
+                    unitprice = 0;
+
+                var total = (quantity * unitprice);
+                $("#Total").val(total);
+            });
+            $("#unitPrice").keyup(function () {
+                var quantity = document.getElementById('quantity').value;
+                var unitprice = document.getElementById('unitPrice').value;
+
+                if (quantity == "")
+                    quantity = 0;
+
+                if (unitprice == "")
+                    unitprice = 0;
+
+                var total = (quantity * unitprice);
+                $("#Total").val(total);
+            });
+
+            $("#Discount").keyup(function () {
+                var Discount = $('#Discount').val();
+                var SubTotal = $('#sub_total').val();
+                var grandTotal = SubTotal - ((SubTotal * Discount) / 100);
+                $("#GrandTotal").val(grandTotal);
+            });
+        }
+
+        function initProductCategoryAutoComplete() {
+            $('#ProductCategoryId').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /Canteen/CanteenSales/LoadProductCategory",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.Name,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                $("#ProCateId").val(patient.Id);
+                //$("#txtPatientName").val(patient.Name);
+                //$("#txtMobileNumber").val(patient.Mobile);
+            });
+
+            $('#ProductId').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /Canteen/CanteenSales/LoadProduct",
+                        data: "{'SearchString':'" + searchString + "', 'CategoryId':'" + $("#ProCateId").val() + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.Name,
+                                    CategoryId: val.CategoryId,
+                                    CategoryName: val.CategoryName,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {//
+                $("#ProId").val(patient.Id);
+                $("#ProCateId").val(patient.CategoryId);
+                $("#ProductCategoryId").val(patient.CategoryName);
+                LoadPrice();
+                //$("#txtPatientName").val(patient.Name);
+                //$("#txtMobileNumber").val(patient.Mobile);
+            });
+
+        }
+
+        function LoadPrice() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadPrice", "CanteenSales", new {Area = "Canteen" }))",
+                data: { "ProductId": $("#ProId").val() },
+                dataType: "html",
+                success: function (result) {
+                    var t = JSON.parse(result);
+                    $('#unitPrice').val(t.Price);
+                    $('#quantity').focus();
+                },
+                error: function (error) {
+                    //Metronic.unblockUI();
+                    var msg = 'Fail to load .';
+                    alert(msg);
+                }
+            });
+        }
+
+        function decimal_with_two_digit() {
+            $(".twodigitdecimalnumber").format({ precision: 2, allow_negative: false, autofix: true });
+        }
+
+        @*function LoadSaleSummary() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadSaleSummary", "CanteenSales", new {Area = "Canteen" }))",
+                data: {},
+                dataType: "html",
+                success: function (result) {
+                    var t = JSON.parse(result);
+                    $('#total_no_of_sale').append(t.TotalNumberOfSale);
+                    $('#total_amount').append(t.TotalSaleAmount);
+                    $('#current_user').append(t.CurrentUser);
+                },
+                error: function (error) {
+                    //Metronic.unblockUI();
+                    var msg = 'Fail to load .';
+                    alert(msg);
+                }
+            });
+        }*@
+
+        function loadsellsDetails() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("getsellsDetails", "Sells", new {Area = "Sells" }))",
+                data: { "Id": $('#Id').val() },
+                dataType: "html",
+                success: function (result) {
+                    var value = JSON.parse(result);
+                    $('#item_in_chart').val(value.ItemInChart);
+                    $('#sub_total').val(value.SubTotal);
+                    $('#GrandTotal').val(value.SubTotal);
+                    $('#Discount').val('');
+                },
+                error: function (error) {
+                    //Metronic.unblockUI();
+                    var msg = 'Fail to load .';
+                    alert(msg);
+                }
+            });
+        }
+
+        function EditSells(ProductId) {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("EditSells", "Sells", new {Area = "Sells" }))",
+                data: { "ProductId": ProductId },
+                dataType: "html",
+                success: function (result) {
+                    //App.unblockUI();
+                    var value = JSON.parse(result);
+
+                    $('#ProCateId').val(value.ProductCategoryId);
+                    $('#ProductCategoryId').val(value.ProductCategoryName);
+                    $('#ProId').val(value.ProductId);
+                    $('#ProductId').val(value.ProductName);
+
+                    $('#quantity').val(value.Quantity);
+                    $('#unitPrice').val(value.UnitPrice);
+                    $('#Total').val(value.Total);
+                    $('#addbtn').hide();
+                    $('#updatebtn').show();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //App.unblockUI();
+                    var msg = 'Fail to load general exam.';
+                    alert(msg);
+                }
+            });
+        }
+
+        function DeleteSellsDetails(Id, ProductId) {
+            var loadArea = $("#sellsDetailsList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DeleteSellsDetails", "Sells", new {Area = "Sells" }))",
+                data: { "Id": Id, "ProductId": ProductId },
+                dataType: "html",
+                success: function (result) {
+                    //loadsellsDetails();
+                    loadArea.html(result);
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //App.unblockUI();
+                }
+            });
+        }
+
+        function SellsDetailsValidationCheck() {
+            //if ($('#ProductCategoryId').val() == "") {
+            //    alert("Please select category.");
+            //    $('#ProductCategoryId').focus();
+
+            //    return false;
+            //} else
+            if ($('#ProductId').val() == "") {
+                alert("Please select product.");
+                $('#ProductId').focus();
+
+                return false;
+            } else if ($('#quantity').val() == "") {
+                alert("Please insert  quantity.");
+                $('#quantity').focus();
+
+                return false;
+            } else if ($('#unitPrice').val() == "") {
+                alert("Please insert  unit price.");
+                $('#unitPrice').focus();
+
+                return false;
+            } else if ($('#SubTotal').val() == "") {
+                alert("Please insert  SubTotal.");
+                $('#SubTotal').focus();
+
+                return false;
+            } else if ($('#Total').val() == "") {
+                alert("Please insert  Total.");
+                $('#Total').focus();
+
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function SetSellsList() {
+            if (SellsDetailsValidationCheck()) {
+                //App.blockUI();
+                var loadArea = $("#sellsDetailsList");
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("SetSellsList", "CanteenSales", new {Area = "Canteen" }))",
+                    data: { "ProductCategoryId": $('#ProCateId').val(), "ProductId": $('#ProId').val(), "Quantity": $('#quantity').val(), "UnitPrice": $('#unitPrice').val(), "Total": $('#Total').val() },
+                    dataType: "html",
+                    success: function (result) {
+                        //App.unblockUI();
+                        loadsellsDetails();
+                        loadArea.html(result);
+                        $('#ProCateId').val('');
+                        $('#ProductCategoryId').val('');
+                        $('#ProductId').val('');
+                        $('#ProId').val('');
+                        $('#quantity').val('');
+                        $('#unitPrice').val('');
+                        $('#Total').val('');
+                        $('#addbtn').show();
+                        $('#updatebtn').hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //App.unblockUI();
+                        var msg = 'Fail to set sells list.';
+                        alert(msg);
+                    }
+                });
+            }
+        }
+
+        function calculate() {
+            var myBox1 = document.getElementById('quantity').value;
+            var myBox2 = document.getElementById('unitPrice').value;
+            var result = document.getElementById('SubTotal');
+            var total = document.getElementById('Total');
+            var myResult = myBox1 * myBox2;
+            result.value = myResult;
+            total.value = myResult;
+        }
+
+        function multiply() {
+            var myBox1 = document.getElementById('SubTotal').value;
+            var myBox2 = document.getElementById('Discount').value;
+            var result = document.getElementById('Total');
+            var myResult = myBox1 - (myBox1 * myBox2 / 100);
+            result.value = myResult;
+        }
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode
+            if (charCode != 43 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+                //alert(" ");
+                return false;
+            }
+            return true;
+        }
+
+      
+        
+        function loadsellsDetails() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("getsellsDetails", "CanteenSales", new {Area = "Canteen" }))",
+                data: { "Id": $('#Id').val() },
+            dataType: "html",
+            success: function (result) {
+                var value = JSON.parse(result);
+                $('#item_in_chart').val(value.ItemInChart);
+                $('#sub_total').val(value.SubTotal);
+                $('#GrandTotal').val(value.SubTotal);
+                $('#Discount').val('');
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+       
+
+
+
+
+    </script>
+}
+
+

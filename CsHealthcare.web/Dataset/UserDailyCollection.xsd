@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="UserDailyCollection" targetNamespace="http://tempuri.org/UserDailyCollection.xsd" xmlns:mstns="http://tempuri.org/UserDailyCollection.xsd" xmlns="http://tempuri.org/UserDailyCollection.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="UserDailyCollection" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="UserDailyCollection" msprop:Generator_UserDSName="UserDailyCollection">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="VW_DAILY_USER_COLLECTION" msprop:Generator_TableClassName="VW_DAILY_USER_COLLECTIONDataTable" msprop:Generator_TableVarName="tableVW_DAILY_USER_COLLECTION" msprop:Generator_TablePropName="VW_DAILY_USER_COLLECTION" msprop:Generator_RowDeletingName="VW_DAILY_USER_COLLECTIONRowDeleting" msprop:Generator_RowChangingName="VW_DAILY_USER_COLLECTIONRowChanging" msprop:Generator_RowEvHandlerName="VW_DAILY_USER_COLLECTIONRowChangeEventHandler" msprop:Generator_RowDeletedName="VW_DAILY_USER_COLLECTIONRowDeleted" msprop:Generator_UserTableName="VW_DAILY_USER_COLLECTION" msprop:Generator_RowChangedName="VW_DAILY_USER_COLLECTIONRowChanged" msprop:Generator_RowEvArgName="VW_DAILY_USER_COLLECTIONRowChangeEvent" msprop:Generator_RowClassName="VW_DAILY_USER_COLLECTIONRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VID" msprop:Generator_ColumnVarNameInTable="columnVID" msprop:Generator_ColumnPropNameInRow="VID" msprop:Generator_ColumnPropNameInTable="VIDColumn" msprop:Generator_UserColumnName="VID" type="xs:string" minOccurs="0" />
+              <xs:element name="CollectionType" msprop:Generator_ColumnVarNameInTable="columnCollectionType" msprop:Generator_ColumnPropNameInRow="CollectionType" msprop:Generator_ColumnPropNameInTable="CollectionTypeColumn" msprop:Generator_UserColumnName="CollectionType" type="xs:string" minOccurs="0" />
+              <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:string" minOccurs="0" />
+              <xs:element name="VoucherNo" msprop:Generator_ColumnVarNameInTable="columnVoucherNo" msprop:Generator_ColumnPropNameInRow="VoucherNo" msprop:Generator_ColumnPropNameInTable="VoucherNoColumn" msprop:Generator_UserColumnName="VoucherNo" type="xs:string" minOccurs="0" />
+              <xs:element name="PatientCode" msprop:Generator_ColumnVarNameInTable="columnPatientCode" msprop:Generator_ColumnPropNameInRow="PatientCode" msprop:Generator_ColumnPropNameInTable="PatientCodeColumn" msprop:Generator_UserColumnName="PatientCode" type="xs:string" minOccurs="0" />
+              <xs:element name="PatientName" msprop:Generator_ColumnVarNameInTable="columnPatientName" msprop:Generator_ColumnPropNameInRow="PatientName" msprop:Generator_ColumnPropNameInTable="PatientNameColumn" msprop:Generator_UserColumnName="PatientName" type="xs:string" minOccurs="0" />
+              <xs:element name="TotalAmount" msprop:Generator_ColumnVarNameInTable="columnTotalAmount" msprop:Generator_ColumnPropNameInRow="TotalAmount" msprop:Generator_ColumnPropNameInTable="TotalAmountColumn" msprop:Generator_UserColumnName="TotalAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="collectedAmount" msprop:Generator_ColumnVarNameInTable="columncollectedAmount" msprop:Generator_ColumnPropNameInRow="collectedAmount" msprop:Generator_ColumnPropNameInTable="collectedAmountColumn" msprop:Generator_UserColumnName="collectedAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="CreatedDate" msprop:Generator_ColumnVarNameInTable="columnCreatedDate" msprop:Generator_ColumnPropNameInRow="CreatedDate" msprop:Generator_ColumnPropNameInTable="CreatedDateColumn" msprop:Generator_UserColumnName="CreatedDate" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="CreatedBy" msprop:Generator_ColumnVarNameInTable="columnCreatedBy" msprop:Generator_ColumnPropNameInRow="CreatedBy" msprop:Generator_ColumnPropNameInTable="CreatedByColumn" msprop:Generator_UserColumnName="CreatedBy" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

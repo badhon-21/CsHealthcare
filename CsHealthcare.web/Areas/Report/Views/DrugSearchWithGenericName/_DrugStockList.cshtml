@@ -1,0 +1,36 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Stock.DrugStockInReportViewModel>
+
+
+<table class="table">
+    <tr>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.DrugName)
+        </th>
+        <th>
+            Company Name
+        </th>
+        <th>
+            Quantity
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugManufacturerName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RemainingQuantity)
+        </td>
+       
+        
+    </tr>
+}
+
+</table>

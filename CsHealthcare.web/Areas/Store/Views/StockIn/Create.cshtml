@@ -1,0 +1,485 @@
+﻿@model CsHealthcare.ViewModel.Store.StockInModel
+
+@{
+    ViewBag.Title = "Cs-Healthcare | Insert StockIn Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @*<div class="col-md-1"></div>*@
+        <div class="col-md-12">
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        @*<i class="fa fa-question font-green-sharp"></i>*@
+                        <span class="caption-subject font-green-sharp uppercase"> Stock In</span>
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+                        <a href="javascript:;" class="fullscreen">
+                        </a>
+                    </div>
+                    <div class="actions margin-right-10">
+
+                    </div>
+                </div>
+
+                <div class="portlet-body portlet-empty">
+
+                    <div class="col-md-12 row form-group">
+
+                        <div class="col-md-3">
+                            <div class="col-md-5">Entry Date </div>
+                            <div class="col-md-7">
+                                <input id="RecordDate" name="RecordDate" class="form-control datetimepicker" type="datetime" value="@DateTime.Now.ToString("d")" placeholder="" />
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-3">
+                            <div class="col-md-5">Lot No: </div>
+                            <div class="col-md-7">
+                                <input id="LotId" name="LotId" class="form-control " style="width:141px ;" value="@ViewBag.LotId" placeholder="" readonly />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="col-md-5">Inv No: </div>
+                            <div class="col-md-7">
+                                <input id="InvNo" name="InvNo" class="form-control twodigitdecimalnumber" placeholder="" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="col-md-5">Inv Date: </div>
+                            <div class="col-md-7">
+                                <input id="InvDate" name="InvDate" class="form-control datetimepicker " type="datetime" value="@DateTime.Now.ToString("d")" placeholder="" />
+                            </div>
+                        </div>
+                      
+
+                    </div>
+               
+                </div>
+            </div>
+            @*<div class="col-md-1"></div>*@
+        </div>
+
+
+        <div class="col-md-12">
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        @*<i class="fa fa-question font-green-sharp"></i>*@
+                        <span class="caption-subject font-green-sharp uppercase">StockIn Details</span>
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+                        <a href="javascript:;" class="fullscreen">
+                        </a>
+                    </div>
+                    <div class="actions margin-right-10">
+
+                    </div>
+                </div>
+
+                <div class="portlet-body portlet-empty">
+                    <div class="col-md-12 form-group">
+                        <table class="table table-striped table-bordered table-hover" id="tabChiefComplaintList">
+                            <thead>
+                                <tr>
+                                    <th style="width: 15% !important">
+                                        Item
+                                    </th>
+                                   
+                                    @*<th style="width: 15% !important">
+        UnitStrength
+    </th>*@
+                                    <th style="width: 7% !important">
+                                        MfgDate
+                                    </th>
+                                    <th style="width: 7% !important">
+                                        ExpDate
+                                    </th>
+                                    <th style="width: 10% !important">
+                                        Qty
+                                    </th>
+                                    <th style="width: 15% !important">
+                                        UnitPrice
+                                    </th>
+                                    <th style="width: 10% !important">
+                                        SalePrice
+                                    </th>
+                                  @*  <th style="width: 15% !important">
+        CostPrice
+    </th>*@
+                                    <th style="width: 15% !important">
+                                        SubTotal
+                                    </th>
+                                    <th style="width: 15% !important">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="StockDetailsList"></tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12 row form-group">
+                        <div class="col-md-3 row">
+                            <div class="col-md-12">
+                               
+                                <input type="hidden" id="dId" name="dId" value="" />
+                                <div class="">
+                                   
+                                    <input class="form-control" id="StoreItemId" name="StoreItemId" value="" placeholder="Item Name" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-9 row" style="padding-left: 10px">
+
+                            <div class="col-md-1 row" style="padding-left: 10px; width: 20% !important">
+
+                                <div class="">
+                                    <input id="MafDate" name="MafDate"class="form-control datetimepicker " type="datetime"/>
+                                </div>
+                            </div>
+                            <div class="col-md-1 row" style="padding-left: 20px; width: 20% !important">
+
+                                <div class="">
+                                    <input id="ExpDate" name="ExpDate" class="form-control datetimepicker " type="datetime" />
+                                </div>
+                            </div>
+                            <div class="col-md-1 row" style="padding-left: 20px; width: 20% !important">
+                       
+                                <div class="">
+                                    <input id="StockQuantity" name="StockQuantity" class="form-control "oninput="calculate()" />
+                                </div>
+                            </div>
+                            <div class="col-md-1 row" style="padding-left: 20px; width: 16% !important">
+                             
+                                <div class="">
+                                    <input id="UnitPrice" name="UnitPrice" class="form-control "oninput="calculate()" />
+                                </div>
+                            </div>
+                            <div class="col-md-1 row" style="padding-left:20px; width: 16% !important">
+                              
+                                <div class="">
+                                    <input id="SalePrice" name="SalePrice" class="form-control " />
+                                </div>
+                            </div>
+                           @* <div class="col-md-2 row" style="padding-left: 50px;width: 20% !important">
+
+        <div class="">
+            <input id="CostPrice" name="CostPrice" class="form-control " />
+        </div>
+    </div>*@
+                            <div class="col-md-1 row" style="padding-left: 20px;width: 18% !important">
+                             
+                                <div class="">
+                                    <input id="SubTotalPrice" name="SubTotalPrice" class="form-control "oninput="calculate()" />
+                                </div>
+                            </div>
+                            <div class="col-md-1"style="padding-left:10%;">
+
+                                <a id="addbtn" onclick="javascript:SetStockDetails(); " class="btn btn-primary dropdown-toggle">
+                                    Add
+                                </a>
+                                <a id="updatebtn" onclick="javascript:SetStockDetails();" class="btn btn-primary dropdown-toggle" style="display: none;">
+                                    Update
+                                </a>
+                            </div>
+                        </div>
+                    
+
+                    </div>
+
+
+                    <br /><br /><br /><br />
+
+                    <div class="col-md-12">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-7">
+                            <div class="col-md-6" style="margin-top: 30px">
+                                <div class="col-md-6">
+                                    TotalQuantity
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="TotalQuantity" name="InvQty" class="form-control " readonly="readonly" placeholder="" />
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6 row" style="padding-left: 30px;margin-top: 30px">
+                                <div class="col-md-6">
+                                    TotalAmount
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="TotalAmount" name="InvAmount" class="form-control "readonly="readonly" placeholder="" />
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-1">
+
+                        </div>
+                    </div>
+
+
+                    <div class="" style="text-align: center;">
+                        <a class="btn default" style="width: 15%;margin-top: 30px" href="@Url.Action("Index", "StockIn", new {Area = "Store"})">Cancel</a>
+                        <input type="submit" value="Save" class="btn green" style="width: 15%;margin-top: 30px" />
+                    </div>
+                </div>
+
+            </div>
+      
+        </div>
+    }
+</div>
+
+@section page_styles {
+
+
+    <link href="~/assets/global/plugins/typeahead/typeahead.css" rel="stylesheet" />
+
+    <style>
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+            width: 422px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            max-height: 200px;
+            overflow: auto;
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+            .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+                color: #fff;
+                background-color: #0097cf;
+            }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+}
+
+@section Scripts {
+
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            //LoadDrug1();
+            initDrugAutoComplete();
+            $(".datetimepicker").datepicker();
+     
+         
+        });
+
+
+
+
+        function initDrugAutoComplete() {
+            $('#StoreItemId').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /Store/StockIn/LoadItem",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.ItemName,
+                                    value: val.ItemName
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, store) {
+                $("#dId").val(store.Id);
+               
+                //$("#txtPatientName").val(patient.Name);
+                //$("#txtMobileNumber").val(patient.Mobile);
+            });
+
+        }
+
+
+        
+
+        function calculate() {
+            var myBox1 = document.getElementById('StockQuantity').value;
+            var myBox2 = document.getElementById('UnitPrice').value;
+            //var result = document.getElementById('SubTotal');
+            var total = document.getElementById('SubTotalPrice');
+            //var total1 = document.getElementById('DeuPrice');
+            var myResult = (myBox1 * myBox2 );
+            total.value = myResult;
+            //total.value = total;
+        }
+
+      
+
+
+
+        function SetStockDetails() {
+            //if (SellsDetailsValidationCheck()) {
+            //App.blockUI();
+            var loadArea = $("#StockDetailsList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("SetStockInDetailsList", "StockIn", new {Area = "Store" }))",
+                data: { "storeItemId": $('#dId').val(), "UnitStrength": $('#UnitStrength').val(), "StockQuantity": $('#StockQuantity').val(), "MfgDate": $('#MafDate').val(), "ExpDate": $('#ExpDate').val(), "UnitPrice": $('#UnitPrice').val(), "salePrice": $('#SalePrice').val(), "SubTotalPrice": $('#SubTotalPrice').val() },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+                //loadsellsDetails();
+                loadArea.html(result);
+                $('#StoreItemId').val('');
+                $('#SalePrice').val('');
+                
+               
+                $('#StockQuantity').val('');
+                $('#UnitPrice').val('');
+                $('#MafDate').val('');
+                $('#ExpDate').val('');
+                //$('#CostPrice').val('');
+                $('#TotalCostPrice').val('');
+
+                $('#addbtn').show();
+                $('#updatebtn').hide();
+
+                getTotal();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set StoreItem Details list.';
+                alert(msg);
+            }
+        });
+        // }
+        }
+
+        function getTotal() {
+            //Metronic.blockUI();
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadTotal", "StockIn", new {Area = "Store"}))",
+                data: {  },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                var t = JSON.parse(result);
+                $('#TotalQuantity').val(t.totalQuantity);
+                $('#TotalAmount').val(t.totalAmount);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+
+        
+        function EditTest(StoreItemId) {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("EditStoreItem", "StockIn", new {Area = "Store" }))",
+                data: { "storeId": StoreItemId },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+                var value = JSON.parse(result);
+
+                $('#dId').val(value.StoreItemId);
+                $('#StoreItemId').val(value.StoreItemName);
+
+
+
+                $('#StockQuantity').val(value.StockQuantity);
+                $('#UnitPrice').val(value.UnitPrice);
+                //$('#CostPrice').val(value.CostPrice);
+                $('#SalePrice').val(value.SalePrice);
+                $('#TotalCostPrice').val(value.TotalCostprice);
+                var dateString = (value.ExpDate).substr(6);
+                var currentTime = new Date(parseInt(dateString));
+                var month = currentTime.getMonth() + 1;
+                var day = currentTime.getDate();
+                var year = currentTime.getFullYear();
+                var date = month + "/" + day + "/" + year;
+                $('#ExpDate').val(date);
+
+
+                var dateString1 = (value.MafDate).substr(6);
+                var currentTime1 = new Date(parseInt(dateString1));
+                var month1 = currentTime1.getMonth() + 1;
+                var day1 = currentTime1.getDate();
+                var year1 = currentTime1.getFullYear();
+                var date1 = month1 + "/" + day1 + "/" + year1;
+                $('#MafDate').val(date1);
+
+
+             
+                $('#addbtn').hide();
+                $('#updatebtn').show();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to load test information.';
+                alert(msg);
+            }
+        });
+        }
+
+    </script>
+}

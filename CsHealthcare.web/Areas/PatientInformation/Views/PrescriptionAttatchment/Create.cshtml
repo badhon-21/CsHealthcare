@@ -1,0 +1,523 @@
+﻿@model CsHealthcare.ViewModel.Patient.PrescriptionAttatchmentModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <div ng-app="">
+        <div class="row">
+
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-question font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp uppercase">Prescription Attatchment</span>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+                            <a href="javascript:;" class="fullscreen">
+                            </a>
+                        </div>
+                        <div class="actions margin-right-10">
+
+                        </div>
+                    </div>
+                    <div class="portlet-body portlet-empty" style="min-height: 250px; margin-top: 0px">
+                        <div class="modal-body">
+                            <div class="form-horizontal">
+
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-5 ">
+                                        <div class="control-label col-md-5 text-right" style="margin-left: 0px">Patient Code</div>
+                                        <div class="col-md-7" style="margin-left: 0px">
+                                            <input id="PatientCode" name="PatientCode" value="" class="form-control " />
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+
+                                        <div class="control-label col-md-4 text-center" style="margin-left: 0px">Doctor Name</div>
+                                        <div class="col-md-7" style="margin-left: 0px">
+                                            <input id="DoctorName" name="DoctorName" value="" class="form-control "/>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-6 ">
+                                        <div class="control-label col-md-4 text-center" style="margin-top: 5px">Prescription Date</div>
+                                        <div class="col-md-7" style="margin-top: 5px;margin-left: 10px">
+                                            <input id="Date" name="Date" value="" class="form-control datetimepicker" type="datetime" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                
+                                <div class="col-md-12">
+
+
+                                    <div class="col-md-8" style="margin-top: 0px">
+@Html.Hidden("UploadedFilePath", string.Empty, new { id = "hf-uploaded-image-path" })
+
+<div class="modal-body">
+    <div class="form-horizontal">
+
+
+        <div class="row col-md-12">
+            <div class="note note-success" style="background-color: #F5F5F5">
+                <p>
+                    The maximum file size for uploads is 2 MB.<br />
+                    Only files (PDF, DOC, DOCX,MSword) are allowed.<br />
+                </p>
+            </div>
+            <div class="row col-md-4">
+
+
+                <span class="btn btn-success fileinput-button" style="background-color: #181B1F;">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <span>Select files...</span>
+                    <!-- The file input field used as target for the file upload widget -->
+                    @Html.TextBoxFor(m => m.MyFile, new { id = "fu-my-simple-upload", type = "file" })
+                </span>
+
+            </div>
+            <div style="word-wrap: break-word;" id="files" class="files col-md-6"></div>
+            <div class="row col-md-2">
+                <p>
+                    <a onclick=" javascript: App.blockUI(); " href="#" id="hl-start-upload" class="btn blue-ebonyclay">Start Upload<i class="fa fa-upload"></i></a>
+                </p>
+            </div>
+        </div>
+
+        <!-- The global progress bar -->
+        <div id="progress" class="progress col-md-12 margin-top-10">
+            <div class="progress-bar progress-bar-success"></div>
+        </div>
+        <div>
+            <span style="margin-top: 10px; color: crimson; font-weight: bold; ">  @ViewBag.message</span>
+        </div>
+        <!-- The container for the uploaded files -->
+        @*<div id="crop-image-area" style="display: none;">
+                 <p style="text-align: right">
+                        <a href="#" id="hl-crop-image" class="btn btn-sm default">Crop Image <i class="fa fa-crop"></i></a>
+                    </p>
+                 <div id="image-size"></div>
+                <p>
+                    <img id="uploaded-image" src="#" class="img-responsive" />
+                </p>
+                <p>
+                    <img id="my-cropped-image" src="#" style="display: none;" />
+                </p>
+                <input id="TempImagePath" type="hidden" value="" />
+                @*  <p><input type="submit" value="Submit" id="btn-my-submit" style="display: none;" /></p>
+            </div>*@
+
+    </div>
+
+</div>
+                                    </div>
+
+
+
+                                </div>
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <input type="hidden" id="tId" name="tId" value="" />
+                                <input type="hidden" id="PatientId" name="PatientId" value="" />
+                                <input type="hidden" id="DoctorId" name="DoctorId" value="" />
+                                <input type="hidden" id="BedId" name="BedId" value="" />
+
+                            </div>
+
+                            <br /><br />
+                            <div class="row ">
+                                <div class="" style="text-align: center;">
+
+                                    <a class="btn default" style="width: 15%;margin-top: 60px" href="@Url.Action("Index", "PatientLaser", new {Area = "PatientInfromation"})">Cancel</a>
+                                    <input id="btnSave" type="submit" value="Save" class="btn green" style="width: 15%;margin-top: 60px" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+
+        </div>
+    </div>
+    <div>
+
+
+
+        
+
+    </div>
+
+
+        <div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false" style="margin: 0 auto;background-color: #fff; width: 600px;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div id='myModalContent'></div>
+                </div>
+            </div>
+        </div>
+}
+
+
+
+
+<script type="text/javascript">
+
+    //************************************** JavaScript for ajax file upload **************************************
+   
+    //************************************** JavaScript for ajax file upload END **************************************
+
+
+</script>
+
+
+
+@section page_styles
+{
+    <link href="~/assets/global/plugins/jcrop/css/jquery.Jcrop.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/typeahead/typeahead.css" rel="stylesheet" />
+    @*<link href="~/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>*@
+    <link href="~/assets/global/plugins/select2/css/select2.css" rel="stylesheet" />
+    <link href="~/Assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" />
+<link href="~/assets/global/plugins/jcrop/css/jquery.Jcrop.css" rel="stylesheet" />
+<link href="~/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <style>
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+            width: 422px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+            .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+                color: #fff;
+                background-color: #0097cf;
+            }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+}
+
+
+@section Scripts {
+    <script src="~/Scripts/angular.min.js"></script>
+
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/scripts/jquery.format.1.05.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/select2/js/select2.min.js"></script>
+   <script src="~/assets/global/plugins/jcrop/js/jquery.Jcrop.js"></script>
+
+<script src="~/assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="~/assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
+<script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-process.js"></script>
+<script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js"></script>
+<script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
+<script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js"></script>
+
+
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script src="~/assets/pages/components-pickers.js"></script>
+
+    <script src="~/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            allowInt();
+            initPatientCodeAutoComplete();
+            initDoctorAutoComplete();
+            //initDoctorAutoComplete();
+
+            //$('#txtPatientType').val('Old');
+
+            $(".datetimepicker").datepicker();
+
+            //ComponentsPickers.init();
+            //$('#txtDateOfBirth').val(getTodate());
+            $('#AdvanceType').on('change', function() {
+                AdvanceType();
+
+            });
+
+        });
+
+
+        function getTodate() {
+            var dob = new Date();
+            var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+            var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+            return (month + "/" + day + "/" + dob.getFullYear());
+        }
+
+        function allowInt() {
+            $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+        }
+
+
+        function initPatientCodeAutoComplete() {
+            $('#PatientCode').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function(searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /PatientInformation/PrescriptionAttatchment/LoadPatientCode",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function(data) {
+                            var result = [];
+                            $.each(data, function(index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.PatientCode,
+                                    value: val.PatientCode
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function(obj, patient) {
+                $("#tId").val(patient.Id);
+                //getPatientId();
+                //LoadPrice();
+                //$("#txtPatientName").val(patient.Name);
+                //$("#txtMobileNumber").val(patient.Mobile);
+            });
+
+        }
+
+        function initDoctorAutoComplete() {
+            $('#DoctorName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function(searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /PatientInformation/PrescriptionAttatchment/LoadDoctor",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function(data) {
+                            var result = [];
+                            $.each(data, function(index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.Name,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function(obj, patient) {
+                $("#DoctorId").val(patient.Id);
+                //getPatientId();
+                //LoadPrice();
+                //$("#txtPatientName").val(patient.Name);
+                //$("#txtMobileNumber").val(patient.Mobile);
+            });
+
+        }
+
+        function getPatientInformation() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("PatientInformation", "PatientLaser", new {Area = "PatientInformation"}))",
+                data: { "PatientId": $("#PatientId").val(), "PatientCode": $("#txtPatientCode").val() },
+                dataType: "html",
+                success: function(result) {
+
+                    var t = JSON.parse(result);
+
+                    $('#txtPatientName').val(t.PatientName);
+                    $('#PatientName').val(t.PatientName);
+                    $('#PatientCode').val(t.PatientCode);
+                    $('#CabinId').val(t.CabinId);
+                    $('#VoucherNo').val(t.VoucherNo);
+                },
+                error: function(error) {
+                    //Metronic.unblockUI();
+                    var msg = 'Fail to load .';
+                    alert(msg);
+                }
+            });
+        }
+
+
+        function AdvanceType() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("AdvanceType", "PatientLaser", new {Area = "PatientInformation"}))",
+                data: { "AdvanceType": $("#AdvanceType").val() },
+                dataType: "html",
+                success: function(result) {
+
+
+                    alert(result);
+                    if (result == "Cheque") {
+                        $('#chequeNo').show();
+                    } else {
+                        $('#chequeNo').hide();
+                    }
+
+
+                },
+                error: function(error) {
+                    //Metronic.unblockUI();
+                    var msg = 'Fail to load .';
+                    alert(msg);
+                }
+            });
+        }
+
+    </script>
+<script type="text/javascript">
+
+    //************************************** JavaScript for ajax file upload **************************************
+    var jqXHRData;
+
+    $(document).ready(function () {
+        'use strict';
+        var uploadButton = $('<button/>')
+            .addClass('btn btn-primary')
+            .prop('disabled', true)
+            .text('Processing...')
+            .on('click', function () {
+                var $this = $(this),
+                    data = $this.data();
+                $this
+                    .off('click')
+                    .text('Abort')
+                    .on('click', function () {
+                        $this.remove();
+                        data.abort();
+                    });
+                data.submit().always(function () {
+                    $this.remove();
+                });
+            });
+
+        $('#fu-my-simple-upload').fileupload({
+            url: '@(@Url.Action("UploadFile", "PrescriptionAttatchment", new {Area = "PatientInformation" }))',
+            dataType: 'json',
+            autoUpload: false,
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            maxFileSize: 5000000,
+            disableImageResize: /Android(?!.*Chrome)|Opera/
+                .test(window.navigator.userAgent),
+            previewMaxWidth: 100,
+            previewMaxHeight: 100,
+            previewCrop: true,
+            add: function (e, data) {
+                jqXHRData = data;
+            },
+            done: function (event, data) {
+                if (data.result.isUploaded) {
+
+                    $("#hf-uploaded-image-path").val(data.result.filePath);
+                    //$("#uploadImageUrl").val(data.result.filePath);
+                    //$("#uploaded-image").attr("src", data.result.filePath + "?t=" + new Date().getTime());
+                    //$("#crop-image-area").fadeIn("slow");
+                    $("#hl-start-upload").hide();
+
+                    //$("#company_logo").attr('src', data.result.filePath);
+                    //$("#filePath").val(data.result.filePath);
+                    App.unblockUI();
+                } else {
+
+                }
+            },
+            progressall: function (e, data) {
+                var progress = parseInt(data.loaded / data.total * 100, 10);
+                $('#progress .progress-bar').css(
+                    'width',
+                    progress + '%'
+                );
+            },
+            fail: function (event, data) {
+                if (data.files[0].error) {
+                    alert(data.files[0].error);
+                }
+            }
+        }).on('fileuploadadd', function (e, data) {
+            data.context = $('<div/>').appendTo('#files');
+            $.each(data.files, function (index, file) {
+                var node = $('<p/>')
+                    .append($('<span/>').text(file.name));
+                node.appendTo(data.context);
+            });
+        }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+    });
+
+    $("#hl-start-upload").on('click', function () {
+        //
+        if (jqXHRData) {
+            jqXHRData.submit();
+        }
+        // alert("No images selected");
+        return false;
+    });
+    //************************************** JavaScript for ajax file upload END **************************************
+
+
+</script>
+}

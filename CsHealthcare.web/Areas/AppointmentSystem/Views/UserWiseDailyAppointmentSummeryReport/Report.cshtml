@@ -1,0 +1,26 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.AppointmentSystem.AppointmentSummaryModel>
+
+
+
+@foreach (var item in Model)
+{
+
+    <tr>
+        <td>
+            <a href="javascript:;"> @Html.DisplayFor(modelItem => item.DoctorName) </a>
+        </td>
+        <td>@Html.DisplayFor(modelItem => item.NoOfPatient) </td>
+        <td>@Html.DisplayFor(modelItem => item.AppointmentFee) </td>
+        <td>
+            <a href="@(Url.Action("ReportDetails", "UserWiseDailyAppointmentSummeryReport", new {area = "AppointmentSystem",  id = item.DoctorId,FromDate = item.FromDate, ToDate= item.ToDate}))" class="btn btn-sm btn-default">
+                <i class="fa fa-search"></i> View
+            </a>
+        </td>
+    </tr>
+
+}
+
+
+
+
+

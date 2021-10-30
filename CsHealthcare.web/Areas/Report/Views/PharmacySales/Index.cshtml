@@ -1,0 +1,414 @@
+﻿@using Cs.Utility
+@{
+    ViewBag.Title = "Daily Sale";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@media print {
+        .printOnly {
+            display: block;
+        }
+        /* write your css rules*/
+        .form-group {
+            margin-bottom: 2px;
+        }
+
+        .page-content {
+            padding: 0 !important;
+        }
+
+        .print-nopadding {
+            padding: 0 !important;
+        }
+    }
+    /*for desktop*/
+    @@media screen {
+        .printOnly {
+            display: none;
+        }
+        /*for all display view*/
+
+    }
+</style>
+
+<div class="row">
+   
+    <div class="col-md-12">
+        <div class="col-xs-12 printOnly">
+            <hgroup class="title-group text-center" style="margin: 5px 0; padding: 0">
+                <h3>Better Life Hospital</h3>
+                <h5 class="subtitle">1 East Rampura, D.I.T. Road , Dhaka-1219</h5>
+                <h5 class="subtitle">InPatient Daily Drug Sale Summary</h5>
+            </hgroup>
+        </div>
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption hidden-print">
+                    <i class="fa fa-flask font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp uppercase">@ViewBag.Title</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                  
+                    <a href="javascript:;" class="fullscreen hidden-print">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+                    @*<a class="btn btn-circle green-jungle btn-sm" href="@Url.Action("Create", "DrugSale", new {Area = "MedicineCorner"})">
+                            <i class="fa fa-plus"></i> New
+                        </a>*@
+                    <a class="btn btn-circle green-jungle btn-sm hidden-print" href="@SessionManager.DashBoard">
+                        <i class="fa fa-chevron-left"></i> Back
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <form>
+
+                    <div class="col-xs-5">
+
+                        <div class="content-group">
+                            <div class="col-xs-4">
+                                <h6 class="">From Date</h6>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                    <input class="form-control datetimepicker" type="datetime" name="FromDate" id="FromDate" placeholder="pick a date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+
+                        <div class="content-group">
+                            <div class="col-xs-3">
+                                <h6 class="">To Date</h6>
+                            </div>
+                            <div class="col-xs-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                    <input class="form-control datetimepicker" type="datetime" name="ToDate" id="ToDate" placeholder="pick a date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="">
+                            <input type="button" class="btn bg-indigo-300 legitRipple" value="Search" onclick=" javascript: loadStatement(); " id="incomebtn">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="portlet-body portlet-empty" >
+
+
+            </div>
+
+            <div class="col-md-12 ">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    @*<div class="portlet red-sunglo box">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-cogs"></i>Total Sale Price
+                            </div>
+                            
+                        </div>
+                        <div class="portlet-body">
+                            <div class="" id="" style="height: 50px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+                            </div>
+                        </div>
+                    </div>*@
+                    <div class="portlet red-sunglo box">
+                        <div class="dashboard-stat2 ">
+                            <div class="display">
+                                <div class="number">
+                                    <h3 class="font-red-haze">
+                                        <span data-counter="counterup" data-value="1349" id="TotalPrice"></span>
+                                    </h3>
+                                    <small>Total Sale Price</small>
+                                </div>
+                                <div class="icon">
+                                    <i class="icofont icofont-drug"></i>
+                                </div>
+                            </div>
+                            @*<div class="progress-info">
+                    <div class="progress">
+                        <span style="width: 85%;" class="progress-bar progress-bar-success red-haze">
+                            <span class="sr-only">85% change</span>
+                        </span>
+                    </div>
+                    <div class="status">
+                        <div class="status-title"> change </div>
+                        <div class="status-number"> 85% </div>
+                    </div>
+                </div>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4"></div>
+                </div>
+
+
+
+
+            <div class="row">
+                <div class="col-md-6 col-sm-12">
+                    <div class="portlet green-meadow box">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-cogs"></i>IPD Sales
+                            </div>
+                            <div class="actions">
+                                <a href="javascript:;" data-load="true" data-url="@Url.Action("DailySaleSummary", "InPatientDrug", new {Area = "PatientInformation"})" class="reload">
+
+                                </a>
+                            </div>
+                        </div>
+                        <div class="portlet-body">
+                            <div class="scroller"  id="listIpd" style="height: 500px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+                                </div>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="portlet red-sunglo box">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-cogs"></i>OPD Sales
+                            </div>
+                            @*<div class="actions">
+                                <a class="btn btn-default btn-sm" href="javascript:;">
+                                    <i class="fa fa-pencil"></i> Edit
+                                </a>
+                            </div>*@
+                        </div>
+                        <div class="portlet-body">
+                            <div class="scroller" id="listOpd" style="height: 500px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-12">
+                    <div class="portlet red-sunglo box">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-cogs"></i>Hospital Sales
+                            </div>
+                            @*<div class="actions">
+                                <a class="btn btn-default btn-sm" href="javascript:;">
+                                    <i class="fa fa-pencil"></i> Edit
+                                </a>
+                            </div>*@
+                        </div>
+                        <div class="portlet-body">
+                            <div class="scroller" id="listHospital" style="height: 500px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            
+            </div>
+            <button id="btnPrint" onclick=" myFunction() " class="btn btn-lg blue hidden-print " style="background-color: #1e90ff; color: white; float: right;margin-top: 40px">Print <i class="icon-printer2"></i></button>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+   
+
+</div>
+
+
+
+
+
+@section Scripts {
+
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script>
+        jQuery(document).ready(function() {
+            $(".datetimepicker").datepicker("setDate", new Date());
+        });
+        function myFunction() {
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("btnPrint");
+            //var button = document.getElementById("incomebtn");
+            //var sale = document.getElementById("sales");
+            //var cancelButton = document.getElementById("btnCancel");
+            //Set the print button visibility to 'hidden'
+            printButton.style.visibility = 'hidden';
+            //button.style.visibility = 'hidden';
+            //sale.style.visibility = 'hidden';
+            //cancelButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print();
+            //Set the print button to 'visible' again
+            //[Delete this line if you want it to stay hidden after printing]
+            printButton.style.visibility = 'visible';
+            //button.style.visibility = 'visible';
+            //sale.style.visibility = 'visible';
+        }
+
+        function loadStatement() {
+            App.blockUI();
+            var loadArea = $("#listIpd");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadIpdSale", "PharmacySales", new {Area = "Report" }))",
+                data: { "FromDate": $("#FromDate").val(), "ToDate": $("#ToDate").val() },
+            dataType: "html",
+            success: function (result) {
+                loadArea.html(result);
+             //   App.unblockUI();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                App.unblockUI();
+                var msg = 'Fail to load  list.';
+                alert(msg);
+            }
+            });
+
+
+           // App.blockUI();
+            var loadAreaOpd = $("#listOpd");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadSale", "DrugSale", new {Area = "MedicineCorner"}))",
+                data: { "FromDate": $("#FromDate").val(), "ToDate": $("#ToDate").val() },
+            dataType: "html",
+            success: function (result) {
+                loadAreaOpd.html(result);
+                App.unblockUI();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                App.unblockUI();
+                var msg = 'Fail to load list.';
+                alert(msg);
+            }
+            });
+
+
+            var loadAreaHospital = $("#listHospital");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadSale", "DepartmentWiseDrugStockOut", new {Area = "MedicineCorner"}))",
+                data: { "FromDate": $("#FromDate").val(), "ToDate": $("#ToDate").val() },
+            dataType: "html",
+            success: function (result) {
+                loadAreaHospital.html(result);
+                // App.unblockUI();
+
+                ///loadTotalPrice();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                App.unblockUI();
+                var msg = 'Fail to load list.';
+                alert(msg);
+            }
+            });
+
+
+            var loadTotalPrice = $("#TotalPrice");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("TotalSalePrice", "PharmacySales", new {Area = "Report" }))",
+                data: { "FromDate": $("#FromDate").val(), "ToDate": $("#ToDate").val() },
+            dataType: "html",
+            success: function (result) {
+                alert(result);
+                loadTotalPrice.text(result);
+                // App.unblockUI();
+
+                
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                App.unblockUI();
+                var msg = 'Fail to load list.';
+                alert(msg);
+            }
+        });
+
+            
+
+
+            @*function loadTotalPrice() {
+                //Metronic.blockUI();
+
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("TotalSalePrice", "PharmacySales", new {Area = "Report"}))",
+                    data: {  },
+                dataType: "html",
+                success: function (result) {
+                    //Metronic.unblockUI();LoadProduct();
+                    //var t = JSON.parse(result);
+
+                    $('#TotalPrice').text(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //Metronic.unblockUI();
+                    var msg = 'Fail to load category list.';
+                    alert(msg);
+                }
+            });
+        }*@
+        }
+        @*var loadTotalPrice = $("#TotalPrice");
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: "@(@Url.Action("TotalSalePrice", "PharmacySales", new {Area = "Report" }))",
+            data: { "FromDate": $("#FromDate").val(), "ToDate": $("#ToDate").val() },
+        dataType: "html",
+            success: function (result) {
+                loadTotalPrice.text(result);
+                // App.unblockUI();
+
+                
+            },
+        error: function (xhr, ajaxOptions, thrownError) {
+            App.unblockUI();
+            var msg = 'Fail to load list.';
+            alert(msg);
+        }
+        });*@
+       
+    </script>
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

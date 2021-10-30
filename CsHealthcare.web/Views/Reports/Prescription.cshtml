@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "Index";
+    ViewBag.PageTitle = "Dashboard";
+    ViewBag.PageSubTitle = " History User";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title hidden">
+                <div class="caption">
+                    <i class="icon-social-dribbble"></i>
+                    <span class="caption-subject uppercase dark">@ViewBag.Title</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                    @*<a href="javascript:;" data-load="true" data-url="@Url.Action("LoadEmployee", "Employees", new {Area = "EmployeeManagement"})" class="reload">
+
+                        </a>*@
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+
+                </div>
+            </div>
+            <div class="portlet-body portlet-empty">
+                <iframe id="ifrmReportViewer" style="height: 1000px; width: 99%;" frameborder="0" scrolling="yes"></iframe>
+
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            ReportValidationCheck();
+        });
+
+        function ReportValidationCheck() {
+            url = "../../Report/rvPrescription.aspx?Id=@ViewBag.Id";
+            var myframe = document.getElementById("ifrmReportViewer");
+            if (myframe != null) {
+                if (myframe.src) {
+                    myframe.src = url;
+                }
+                else if (myframe.contentWindow != null && myframe.contentWindow.location != null) {
+                    myframe.contentWindow.location = url;
+                } else {
+                    myframe.setAttribute('src', url);
+                }
+            }
+            return false;
+        }
+
+        function printdiv() {
+            //Code for adding HTML content to report viwer
+            var headstr = "<html><head><title></title></head><body>";
+            //End of body tag
+            var footstr = "</body></html>";
+            //This the main content to get the all the html content inside the report viewer control
+            //"ReportViewer1_ctl10" is the main div inside the report viewer
+            //controls who helds all the tables and divs where our report contents or data is available
+            var newstr = $(".rptPrint").html();
+            //open blank html for printing
+            var popupWin = window.open('', '_blank');
+            //paste data of printing in blank html page
+            popupWin.document.write(headstr + newstr + footstr);
+            //print the page and see is what you see is what you get
+            popupWin.print();
+            return false;
+        }
+
+    </script>
+}

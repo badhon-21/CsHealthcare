@@ -1,0 +1,344 @@
+﻿
+@model CsHealthcare.ViewModel.Diagnostic.SRETestModel
+@{
+    ViewBag.Title = "Print Urin Routine Examination";
+    Layout = null;
+}
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@print {
+        .hide-from-printer {
+            display: none;
+        }
+    }
+</style>
+<div class="page">
+    <div style="min-height: 400px; width: 460px; font-size: 12px; margin-right: 20%; margin-left: 20%;margin-top: 2%">
+        <h2 style="text-align: center; ">Better Life Hospital Ltd</h2>
+        <div style="text-align: center;">1 East Rampura, D.I.T. Road , Dhaka-1219</div>
+        <div style="width: 100%; text-align: center">
+            <h3>
+                <b>Clinical Pathology Stool</b>
+            </h3>
+        </div>
+
+
+
+        <div style="width: 100%; display: table;">
+            <div style="width: 60%; float: left; display: table-cell;">
+                <div style="width: 42%; float: left;font-weight: bold;">Patient Name</div>
+                <div id="Id" style="width: 58%; float: left;">@Model.PatientName</div>
+
+            </div>
+            <div style="width: 30%; float: right;">
+                <div style="float: left; margin-right: 5px;font-weight: bold;">Patient Code</div>
+                <div style="float: left; margin-right: 5px;">@Model.PatientCode</div>
+
+            </div>
+        </div>
+
+        <div style="float: left; width: 100%; display: table; margin-bottom: 5px;">
+
+            <div style="width: 60%; float: left; display: table-cell;">
+                <div style="width: 42%; float: left; font-weight: bold;">Reference By</div>
+                <div style="width: 58%; float: left;">@Model.ReferanceName</div>
+
+            </div>
+            <div style="width: 30%; float: right;">
+                <div style="float: left;width: 42%;font-weight: bold;">Age</div>
+                <div style="float: left;width: 58%;">@Model.Age</div>
+
+            </div>
+
+        </div>
+       
+        <div style="float: left; width: 100%; display: table; margin-bottom: 5px;">
+
+            <div style="width: 60%; float: left; display: table-cell;">
+                <div style="width: 42%; float: left; font-weight: bold;">Report Date</div>
+                <div style="width: 58%; float: left;">@Model.Date.ToString("dd/MM/yyyy")</div>
+
+            </div>
+
+            <div style="width: 30%; float: right;">
+                <div style="float: left;width: 42%;font-weight: bold;">Dept</div>
+                <div style="float: left;width: 58%;">@Model.Department</div>
+
+            </div>
+
+        </div>
+       
+        <div style="width: 100%; Display: block"></div>
+        <div style="width: 100%; margin-top: 5px; float: left; border-top: dotted 1px; border-bottom: dotted 1px;">
+
+
+            <table style="width: 100%; height: 310px; margin-left: auto; margin-right: auto;" border="1px solid " >
+                <caption>&nbsp;</caption>
+                <thead>
+                    <tr>
+                        <th>Investigation</th>
+                        <th> Result</th>
+                        <th> Unit</th>
+                            <th> Refference Range</th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    <tr>
+                        <td><b>Physical Examination</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>Consistency</td>
+
+                        <td> @Model.Consistency</td>
+
+                        <td>@Model.ConsistencyUnit</td>
+                        <td>@Model.ConsistencyRefer</td>
+                    </tr>
+
+                    <tr>
+                        <td>Colour</td>
+
+                        <td> @Model.Colour</td>
+                        <td> @Model.ColourUnit</td>
+                        <td> @Model.ColourRefer</td>
+                    </tr>
+                    <tr>
+                        <td>Mucus</td>
+
+                        <td>@Model.Mucus</td>
+
+                        <td>@Model.MucusUnit</td>
+                        <td>@Model.MucusRefer</td>
+                    </tr>
+
+
+                    <tr>
+
+
+                        <td>Blood</td>
+
+                        <td>@Model.Blood</td>
+                        <td>@Model.BloodUnit</td>
+                        <td>@Model.BloodRefer</td>
+                    </tr>
+
+
+
+                    <tr>
+
+
+                        <td><b>Chemical Examination</b> </td>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+
+                    <tr>
+
+
+                        <td>Reaction</td>
+
+                        <td>@Model.Reaction</td>
+                        <td>@Model.ReactionUnit</td>
+                        <td>@Model.ReactionRefer</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            Reducing Substance
+                        </td>
+                        <td>@Model.ReducingSubstance</td>
+                        <td>@Model.ReducingSubstanceUnit</td>
+                        <td>@Model.ReducingSubstanceRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>Occult Blood Test</td>
+
+                        <td>@Model.OccultBloodTest</td>
+                        <td>@Model.OccultBloodTestUnit</td>
+                        <td>@Model.OccultBloodTestRefer</td>
+                    </tr>
+
+
+                    <tr>
+
+
+                        <td><b>Microscopic Examination</b></td>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+
+
+                        <td>PusCells</td>
+
+                        <td>@Model.PusCells</td>
+                        <td>@Model.PusCellsUnit</td>
+                        <td>@Model.PusCellsRefer</td>
+                    </tr>
+                    <tr>
+
+
+                        <td>Red Blood Cells</td>
+
+                        <td>@Model.RedBloodCells</td>
+                        <td>@Model.RedBloodCellsUnit</td>
+                        <td>@Model.RedBloodCellsRefer</td>
+                    </tr>
+
+
+                    <tr>
+                        <td>Macrophage</td>
+
+
+                        <td>@Model.Macrophage</td>
+
+                        <td>@Model.MacrophageUnit</td>
+                        <td>@Model.MacrophageRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>VegetableCells %</td>
+
+                        <td>@Model.VegetableCells</td>
+                        <td>@Model.VegetableCellsUnit</td>
+                        <td>@Model.VegetableCellsRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>StarchGranules</td>
+
+                        <td>@Model.StarchGranules</td>
+                        <td>@Model.StarchGranulesUnit</td>
+                        <td>@Model.StarchGranulesRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>MuscleFibres</td>
+
+                        <td>@Model.MuscleFibres</td>
+                        <td>@Model.MuscleFibresUnit</td>
+                        <td>@Model.MuscleFibresRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>FatGlobules</td>
+
+
+                        <td>@Model.FatGlobules</td>
+                        <td>@Model.FatGlobulesUnit</td>
+                        <td>@Model.FatGlobulesRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>Ova</td>
+
+                        <td>@Model.Ova</td>
+                        <td>@Model.OvaUnit</td>
+                        <td>@Model.OvaRefer</td>
+                    </tr>
+                    <tr>
+
+
+                        <td>Protozoa</td>
+
+                        <td>@Model.Protozoa</td>
+                        <td>@Model.ProtozoaUnit</td>
+                        <td>@Model.ProtozoaRefer</td>
+                    </tr>
+
+
+                    <tr>
+
+
+                        <td>Cysts</td>
+
+                        <td>@Model.Cysts</td>
+                        <td>@Model.CystsUnit</td>
+                        <td>@Model.CystsRefer</td>
+                    </tr>
+
+
+
+                    <tr>
+                        <td>
+                            Others
+                        </td>
+                        <td>@Model.Others</td>
+                        <td>@Model.OthersUnit</td>
+                        <td>@Model.OthersRefer</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+
+
+
+
+        <div style="width: 100%; text-align: center;">
+            <button id="btnPrint" onclick=" myFunction() " class="hide-from-printer" style="margin-top: 10%">Print </button>
+            <a id="btnCancel" href="@Url.Action("Create", "SRE", new {Area = "Hospital"})" type="button" class="" style="margin-left: 1%;" class="hide-from-printer">Cancel</a>
+        </div>
+
+    </div>
+</div>
+<script>
+function myFunction() {
+    //Get the print button and put it into a variable
+    var printButton = document.getElementById("btnPrint");
+    var cancelButton = document.getElementById("btnCancel");
+    //Set the print button visibility to 'hidden'
+    printButton.style.visibility = 'hidden';
+    cancelButton.style.visibility = 'hidden';
+    //Print the page content
+    window.print();
+    //Set the print button to 'visible' again
+    //[Delete this line if you want it to stay hidden after printing]
+    printButton.style.visibility = 'visible';
+    cancelButton.style.visibility = 'visible';
+
+
+}
+jQuery(document).ready(function () {
+  
+});
+
+</script>
+
+
+
+
+
+
+

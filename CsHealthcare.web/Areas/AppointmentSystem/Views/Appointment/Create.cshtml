@@ -1,0 +1,157 @@
+﻿@model CsHealthcare.ViewModel.Doctor.DoctorAppointmentModel
+
+@{
+    ViewBag.Title = "Cs-Healthcare | Insert New Appointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title">New  Appointment</h4>
+</div>
+
+@using (Html.BeginForm())
+{
+    @*@Html.AntiForgeryToken()*@
+    <div class="modal-body">
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                <div class="col-md-5"></div>
+                <div class="col-md-5 radio-list">
+                    <label class="radio-inline">
+                        <input type="radio" name="optionsRadios" class="PatientType" id="radOld" value="Old" checked> Old
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="optionsRadios" class="PatientType" id="radNew" value="New"> New
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group patient_name">
+                @Html.LabelFor(model => model.PatientId, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="row col-md-3" style="margin-left: .1%;">
+                    @Html.EditorFor(model => model.PatientId, new {htmlAttributes = new {@class = "form-control", @type="text"}})
+                    @Html.ValidationMessageFor(model => model.PatientId, "", new {@class = "text-danger"})
+                </div>
+                <div class="row col-md-6"style="width: 54.8%;">
+                    @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DoctorId, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.DoctorId, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.DoctorId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                    <input id="txtAppointmentDate1" required="required" name="txtAppointmentDate" value="" class="form-control date-picker" placeholder="Appointment Date" type="text" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Time, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.Time, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Time, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PatientType, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.PatientType, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.PatientType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.AppointmentType, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.AppointmentType, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.AppointmentType, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MobileNo, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control", @type = "Email" } })
+                    @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-6">
+                    @Html.DropDownList("ddlStatus", new List<SelectListItem>() { new SelectListItem { Text = "Active", Value = "A" }, new SelectListItem { Text = "Inactive", Value = "I" } }, new { @class = "form-control", Style = "width:auto" })
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" data-dismiss="modal" class="btn default">Cancel</button>
+        <input type="submit" value="Save" class="btn green" />
+    </div>
+}
+
+
+@section page_styles {
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/select2/select2.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/clockface/css/clockface.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+}
+
+@section Scripts {
+    <script type="text/javascript" src="~/Assets/plugins/select2/select2.min.js"></script>
+    <script type="text/javascript" src="~/Assets/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+
+    <script type="text/javascript" src="~/Assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    @*<script type="text/javascript" src="~/Assets/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+        <script type="text/javascript" src="~/Assets/plugins/clockface/js/clockface.js"></script>
+        <script type="text/javascript" src="~/Assets/plugins/bootstrap-daterangepicker/moment.min.js"></script>
+        <script type="text/javascript" src="~/Assets/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+        <script type="text/javascript" src="~/Assets/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>*@
+
+
+    <script src="~/Assets/Page/table-managed.js"></script>
+    <script src="~/Assets/Page/components-pickers.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            ComponentsPickers.init();
+            initPatientType();
+        })
+
+        function initPatientType() {
+            $(".PatientType").change(function () {
+
+                if ($("#radOld").attr("checked")) {
+                    $('.patient_name').show();
+                }
+                else {
+                    $('.patient_name').hide();
+                }
+            });
+        }
+        
+    </script>
+
+}

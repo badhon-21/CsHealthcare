@@ -1,0 +1,406 @@
+﻿
+
+
+@{
+    ViewBag.Title = "InPatient Test ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bullseye font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp uppercase"></span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                    <a href="javascript:;" data-load="true" @*data-url="@Url.Action("TestPatientList", "RefferencePatientReport", new {Area = "Report"})"*@ class="reload">
+
+                    </a>
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+                    @*<a class="btn btn-circle green-jungle btn-sm" href="@Url.Action("Create", "InPatientTest", new {Area = "PatientInformation"})">
+                            <i class="fa fa-plus"></i> New
+                        </a>*@
+                    @*<a class="btn btn-circle green-jungle btn-sm" href="@SessionManager.DashBoard">
+                            <i class="fa fa-chevron-left"></i> Back
+                        </a>*@
+                </div>
+            </div>
+
+            <div class="row">
+                <form>
+
+                    <div class="col-xs-5">
+
+                        <div class="content-group">
+                            <div class="col-xs-4">
+                                <h6 class="">From Date</h6>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                    <input class="form-control datetimepicker" type="datetime" name="FromDate" id="FromDate" placeholder="pick a date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+
+                        <div class="content-group">
+                            <div class="col-xs-3">
+                                <h6 class="">To Date</h6>
+                            </div>
+                            <div class="col-xs-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                    <input class="form-control datetimepicker" type="datetime" name="ToDate" id="ToDate" placeholder="pick a date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="">
+                            <input type="button" class="btn bg-indigo-300 legitRipple" value="Search" onclick="javascript:loadTodayStatement(); ">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            @*<hr style="margin-top: 0;">*@
+            <div class="portlet-body portlet-empty" >
+
+
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bullseye font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp uppercase">Marketing People Name for Test Patient </span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                    <a href="javascript:;" data-load="true" @*data-url="@Url.Action("TestPatientList", "RefferencePatientReport", new {Area = "Report"})"*@ class="reload">
+
+                    </a>
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+                    @*<a class="btn btn-circle green-jungle btn-sm" href="@Url.Action("Create", "InPatientTest", new {Area = "PatientInformation"})">
+                            <i class="fa fa-plus"></i> New
+                        </a>*@
+                    @*<a class="btn btn-circle green-jungle btn-sm" href="@SessionManager.DashBoard">
+                            <i class="fa fa-chevron-left"></i> Back
+                        </a>*@
+                </div>
+            </div>
+
+            <div class="row">
+              
+            </div>
+            @*<hr style="margin-top: 0;">*@
+            <div class="portlet-body portlet-empty" id="tblTest">
+
+
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bullseye font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp uppercase">Marketing People Name for Opd Therapy Patient </span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                    <a href="javascript:;" data-load="true" @*data-url="@Url.Action("TestPatientList", "RefferencePatientReport", new {Area = "Report"})"*@ class="reload">
+
+                    </a>
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+                    @*<a class="btn btn-circle green-jungle btn-sm" href="@Url.Action("Create", "InPatientTest", new {Area = "PatientInformation"})">
+                            <i class="fa fa-plus"></i> New
+                        </a>*@
+                    @*<a class="btn btn-circle green-jungle btn-sm" href="@SessionManager.DashBoard">
+                            <i class="fa fa-chevron-left"></i> Back
+                        </a>*@
+                </div>
+            </div>
+
+            <div class="row">
+                @*<form>
+
+                    <div class="col-xs-5">
+
+                        <div class="content-group">
+                            <div class="col-xs-4">
+                                <h6 class="">From Date</h6>
+                            </div>
+                            <div class="col-xs-8">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                    <input class="form-control datetimepicker" type="datetime" name="FromDate" id="FromDate" placeholder="pick a date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-5">
+
+                        <div class="content-group">
+                            <div class="col-xs-3">
+                                <h6 class="">To Date</h6>
+                            </div>
+                            <div class="col-xs-9">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                    <input class="form-control datetimepicker" type="datetime" name="ToDate" id="ToDate" placeholder="pick a date">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2">
+                        <div class="">
+                            <input type="button" class="btn bg-indigo-300 legitRipple" value="Search" onclick="javascript:loadTodayStatement(); ">
+                        </div>
+                    </div>
+                </form>*@
+            </div>
+            @*<hr style="margin-top: 0;">*@
+            <div class="portlet-body portlet-empty" id="opdTest">
+
+
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bullseye font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp uppercase">Marketing People Name for OPD Bill Patient </span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                    <a href="javascript:;" data-load="true" @*data-url="@Url.Action("TestPatientList", "RefferencePatientReport", new {Area = "Report"})"*@ class="reload">
+
+                    </a>
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+                    @*<a class="btn btn-circle green-jungle btn-sm" href="@Url.Action("Create", "InPatientTest", new {Area = "PatientInformation"})">
+                            <i class="fa fa-plus"></i> New
+                        </a>*@
+                    @*<a class="btn btn-circle green-jungle btn-sm" href="@SessionManager.DashBoard">
+                            <i class="fa fa-chevron-left"></i> Back
+                        </a>*@
+                </div>
+            </div>
+
+            <div class="row">
+                @*<form>
+
+                        <div class="col-xs-5">
+
+                            <div class="content-group">
+                                <div class="col-xs-4">
+                                    <h6 class="">From Date</h6>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                        <input class="form-control datetimepicker" type="datetime" name="FromDate" id="FromDate" placeholder="pick a date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+
+                            <div class="content-group">
+                                <div class="col-xs-3">
+                                    <h6 class="">To Date</h6>
+                                </div>
+                                <div class="col-xs-9">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                        <input class="form-control datetimepicker" type="datetime" name="ToDate" id="ToDate" placeholder="pick a date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="">
+                                <input type="button" class="btn bg-indigo-300 legitRipple" value="Search" onclick="javascript:loadTodayStatement(); ">
+                            </div>
+                        </div>
+                    </form>*@
+            </div>
+            @*<hr style="margin-top: 0;">*@
+            <div class="portlet-body portlet-empty" id="billTest">
+
+
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+    <div class="col-md-1"></div>
+</div>
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+@section page_styles {
+
+
+    <link href="~/assets/global/plugins/select2/css/select2.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+
+
+
+}
+
+@section Scripts {
+
+
+
+    <script src="~/assets/global/plugins/select2/js/select2.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/jquery.datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+
+<script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+<script>
+        jQuery(document).ready(function() {
+            $(".datetimepicker").datepicker("setDate", new Date());
+        });
+
+
+        function loadTodayStatement() {
+            var loadArea = $("#tblTest");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("TestPatientList", "RefferencePatientReport", new {Area = "Report" }))",
+                data: { "FromDate": $("#FromDate").val(), "ToDate": $("#ToDate").val() },
+            dataType: "html",
+            success: function (result) {
+                //var value = JSON.parse(result);
+
+                loadArea.html(result);
+                loadStatement();
+
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set therapy list.';
+                alert(msg);
+            }
+        });
+        }
+
+    function loadStatement() {
+        var loadArea = $("#opdTest");
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: "@(@Url.Action("OpdPatientList", "RefferencePatientReport", new {Area = "Report" }))",
+            data: { "FromDate": $("#FromDate").val(), "ToDate": $("#ToDate").val() },
+        dataType: "html",
+        success: function (result) {
+            //var value = JSON.parse(result);
+
+            loadArea.html(result);
+            loadOPDbill();
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            //App.unblockUI();
+            var msg = 'Fail to set therapy list.';
+            alert(msg);
+        }
+    });
+    }
+
+
+    function loadOPDbill() {
+        var loadArea = $("#billTest");
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: "@(@Url.Action("OpdBillList", "RefferencePatientReport", new {Area = "Report" }))",
+            data: { "FromDate": $("#FromDate").val(), "ToDate": $("#ToDate").val() },
+        dataType: "html",
+        success: function (result) {
+            //var value = JSON.parse(result);
+
+            loadArea.html(result);
+          
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            //App.unblockUI();
+            var msg = 'Fail to set Bill list.';
+            alert(msg);
+        }
+    });
+    }
+</script>
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+

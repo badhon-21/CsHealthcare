@@ -1,0 +1,169 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    ViewBag.PageTitle = "Dashboard";
+    ViewBag.PageSubTitle = "Super Admin";
+}
+
+<!-- BEGIN PROFILE CONTENT -->
+<div class="container">
+    <div class="profile-content">
+        <div class="row">
+
+
+            <div class="col-md-6">
+                <!-- BEGIN PORTLET -->
+                <div class="portlet light ">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="icon-bar-chart theme-font hide"></i>
+                            <span class="caption-subject font-blue-madison bold uppercase">Quick Menu</span>
+                            <span class="caption-helper hide">weekly stats...</span>
+                        </div>
+
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+
+                            @*  <a href="javascript:;" data-load="true" data-url="@Url.Action("patientLocationHistory", "Patient", new {Area = "MsAdmin", id = Model.Id})" c class="reload">
+                                </a>*@
+                            <a href="javascript:;" class="remove">
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="portlet-body  portlet-empty">
+                        <div class="tiles">
+                            @*<a href="@Url.Action("Index", "Appointment", new {area = "AppointmentSystem"})" class="tile  bg-blue-hoki">
+
+                                <div class="tile-body">
+                                    <i class="fa fa-bell-o"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Appointment
+                                    </div>
+                                    <div class="number">
+                                        6
+                                    </div>
+                                </div>
+                            </a>*@
+                            <a href="@Url.Action("Index", "Enroll", new {area = "AppointmentSystem"})" class="tile bg-red-sunglo">
+                                <div class="tile-body">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Enroll Patient
+                                    </div>
+                                    <div class="number">
+                                        12
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="@Url.Action("Create", "OpdPatientBill", new {area = "PatientInformation"})" class="tile bg-green-turquoise">
+                                <div class="tile-body">
+                                    <i class="icofont icofont-bandage"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        OPD Billing
+                                    </div>
+                                    <div class="number">
+                                        12
+                                    </div>
+                                </div>
+                            </a>
+                           <a href="@Url.Action("Create", "Patient", new {area = "PatientInformation"})" class="tile  bg-blue-madison">
+                                    <div class="tile-body">
+                                        <i class="icofont icofont-laboratory"></i>
+                                    </div>
+                                    <div class="tile-object">
+                                        <div class="name">
+                                            OPD Investigation
+                                        </div>
+                                        <div class="number">
+                                            12
+                                        </div>
+                                    </div>
+                                </a>
+                            <a href="@Url.Action("Create", "OPDTherapy", new {area = "PatientInformation"})" class="tile double bg-purple-studio">
+                                <div class="tile-body">
+                                    <i class="fa fa-shopping-cart"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Physiotherapy Bill
+                                    </div>
+                                    <div class="number">
+                                        121
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="@Url.Action("Index", "PatientTestReportAttachment", new {area = "PatientInformation"})" class="tile  bg-blue-madison">
+                                <div class="tile-body">
+                                    <i class="fa fa-folder"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Investigation Attachment
+                                    </div>
+                                    <div class="number">
+                                        12
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="@Url.Action("Index", "PrescriptionAttatchment", new {area = "PatientInformation"})" class="tile  bg-blue-madison">
+                                <div class="tile-body">
+                                    <i class="fa fa-folder"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                       Prescription Attatchment
+                                    </div>
+                                    <div class="number">
+                                        12
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- END PORTLET -->
+            </div>
+
+
+            <div class="col-md-6">
+                <!-- BEGIN PORTLET -->
+                <div class="portlet light ">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="icon-bar-chart theme-font hide"></i>
+                            <span class="caption-subject font-blue-madison bold uppercase">Completed Patient test History</span>
+                            <span class="caption-helper hide">weekly stats...</span>
+                        </div>
+
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+
+                            @* <a href="javascript:;" data-load="true" data-url="@Url.Action("AdminLocationHistory", "Patient", new { Area = "MsAdmin", id = Model.Id })" c class="reload">
+                                </a>*@
+                            <a href="javascript:;" class="remove">
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="portlet-body  portlet-empty">
+
+                    </div>
+                </div>
+                <!-- END PORTLET -->
+            </div>
+
+        </div>
+
+    </div>
+    <!-- END PROFILE CONTENT -->
+</div>

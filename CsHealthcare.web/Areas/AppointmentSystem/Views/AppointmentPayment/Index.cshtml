@@ -1,0 +1,597 @@
+﻿
+@{
+    ViewBag.Title = "Appointment Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="page-content" style="min-height:247px">
+            <div class="container-fluid">
+
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-social-dribbble font-green-sharp"></i>
+                            <span class="caption-subject uppercase font-green-sharp">@ViewBag.Title</span>
+                        </div>
+                        <div class="tools">
+                            <a class="collapse" href="javascript:;" data-original-title="" title="">
+                            </a>
+
+                            <a class="fullscreen" href="javascript:;" data-original-title="" title="">
+                            </a>
+                        </div>
+                    </div>
+                    <hr style="margin-top:0;">
+                    <div class="portlet-body">
+                        <div class="modal-body">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+
+                                    <div class="control-label col-md-1">Date</div>
+                                    <div class="col-md-3">
+                                        <input id="txtAppointmentDate" required="required" name="txtAppointmentDate" value="" class="form-control date-picker" placeholder="Appointment Date" type="text" />
+                                    </div>
+
+
+                                    <div class="control-label col-md-1">Consultant</div>
+                                    <div class="col-md-4">
+                                        <select id="ddlDoctorInformation" class="form-control"></select>
+                                    </div>
+                                    <div class="actions margin-right-10">
+                                        <a class="btn btn-circle green-jungle btn-sm" onclick="javascript:CurrentAppointmentList();">
+                                            <i class="fa fa-search"></i> Search
+                                        </a>
+                                        <a class="btn btn-circle green-jungle btn-sm" target="_blank" href="@(Url.Action("PrintDailyPayment", "AppointmentPayment", null))">
+                                            <i class="fa fa-print"></i> Print
+                                        </a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="appointment_list_container" class="row" style="">
+
+                    <div class="col-md-4">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-file-text-o font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp bold uppercase">History Taken List</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse">
+                                    </a>
+
+                                    <a href="javascript:;" class="fullscreen">
+                                    </a>
+                                </div>
+
+                            </div>
+                            <hr style="margin-top:0;">
+                            <div class="portlet-body portlet-empty" id="loadEnrolledList">
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-money font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp bold uppercase">Payment</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse">
+                                    </a>
+
+                                    <a href="javascript:;" class="fullscreen">
+                                    </a>
+                                </div>
+
+                            </div>
+                            <hr style="margin-top: 0; margin-bottom: 0;">
+                            <div class="portlet-body portlet-empty">
+
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+                                        <input type="hidden" id="txtPatientId" value="0"/>
+                                        <input type="hidden" id="txtPaymentId" value="0" />
+                                        <div class="form-group">
+                                            <div class="col-md-12 bold text-center form-group" id="days_passed"></div>
+                                        </div>
+
+                                        <div class="form-group patient_name">
+                                            <div class="col-md-2">Id</div>
+                                            <div class="col-md-3">
+                                                <input id="txtId" required="required" class="form-control" type="text"/>
+                                            </div>
+                                            <div class="col-md-4 control-label">Visit No</div>
+                                            <div class="col-md-3">
+                                                <input id="txtVisitNo" required="required" class="form-control" type="text"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group patient_name">
+                                            <div class="col-md-2">Patient Name</div>
+                                            <div class="col-md-10">
+                                                <input id="txtPatientName" required="required" class="form-control" type="text"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group patient_name">
+                                            <div class="col-md-2">Purpose</div>
+                                            <div class="col-md-10">
+                                                <select id="ddlPurpose" class="form-control"></select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group patient_name">
+                                            <div class="col-md-2 control-label">Amount</div>
+                                            <div class="col-md-10">
+                                                <input id="txtAmount" required="required" class="form-control" type="text"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group patient_name">
+                                            <div class="col-md-2">Discount</div>
+                                            <div class="col-md-3">
+                                                <input id="txtDiscount" required="required" class="form-control" type="text"/>
+                                            </div>
+                                            <div class="col-md-4 control-label">Net Amount</div>
+                                            <div class="col-md-3">
+                                                <input id="txtNetAmount" required="required" class="form-control" type="text"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group patient_name">
+                                            <div class="col-md-2">Reason</div>
+                                            <div class="col-md-10">
+                                                <input id="txtReason" required="required" class="form-control" type="text"/>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" class="btn green" style="width: 22%;" onclick=" javascript: SaveAppointmentPayment(); ">Save</button>
+                                    <button type="button" data-dismiss="modal" class="btn green" style="width: 22%;" onclick="">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-money font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp bold uppercase">Today's Payments</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse">
+                                    </a>
+
+                                    <a href="javascript:;" class="fullscreen">
+                                    </a>
+                                </div>
+
+                            </div>
+                            <hr style="margin-top: 0; margin-bottom: 0;">
+                            <div class="portlet-body portlet-empty">
+
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+                                        <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                Total No:
+                                            </div>
+                                            <div id="total_patient_no" class="col-md-6 row">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                Sub Total:
+                                            </div>
+                                            <div id="sub_total" class="col-md-6 row">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                Discount:
+                                            </div>
+                                            <div id="discount" class="col-md-6 row">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-4">
+                                                Grand Total:
+                                            </div>
+                                            <div id="grant_total" class="col-md-6 row">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-money font-green-sharp"></i>
+                                    <span class="caption-subject font-green-sharp bold uppercase">Paid List</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse">
+                                    </a>
+
+                                    <a href="javascript:;" class="fullscreen">
+                                    </a>
+                                </div>
+
+                            </div>
+                            <hr style="margin-top:0;">
+                            <div class="portlet-body portlet-empty" id="paidList">
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section page_styles {
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/select2/select2.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+}
+
+@section Scripts {
+    <script type="text/javascript" src="~/Assets/plugins/select2/select2.min.js"></script>
+    <script type="text/javascript" src="~/Assets/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="~/Assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Assets/Page/components-pickers.js"></script>
+
+    <script>
+
+        jQuery(document).ready(function () {
+            LoadDoctorList();
+            init();
+            initAmountPurpose();
+            calculateNetAmount();
+            DailyPaymentSummary();
+        });
+
+        function init() {
+            $('#txtAppointmentDate').val(getTodate());
+            $("#txtId").prop('disabled', true);
+            $("#txtVisitNo").prop('disabled', true);
+            $("#txtPatientName").prop('disabled', true);
+            $("#txtDateTime").prop('disabled', true);
+            $("#txtAmount").prop('disabled', true);
+            $("#txtNetAmount").prop('disabled', true);
+            $('#txtPaymentId').val('0');
+        }
+
+        function initAmountPurpose() {
+            $('#ddlPurpose').change(function () {
+                getAmountPurpose();
+            });
+        }
+
+        function getAmountPurpose() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("getAmountPurpose", "AppointmentPayment", new { Area = "AppointmentSystem" }))",
+                data: { "Id": $('#ddlPurpose').val() },
+            dataType: "html",
+            success: function (result) {
+                var t = JSON.parse(result);
+                $('#txtAmount').val(t.Amount);
+                $("#txtNetAmount").val(t.Amount);
+            },
+            error: function (error) {
+                Metronic.unblockUI();
+                var msg = 'Fail to load payment type.';
+                alert(msg);
+            }
+        });
+        }
+
+
+        function DailyPaymentSummary() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DailyPaymentSummary", "AppointmentPayment", new { Area = "AppointmentSystem" }))",
+                data: { },
+            dataType: "html",
+            success: function (result) {
+                var t = JSON.parse(result);
+                $('#total_patient_no').empty();
+                $('#sub_total').empty();
+                $('#discount').empty();
+                $('#grant_total').empty();
+
+                $('#total_patient_no').append(t.TotalNo);
+                $('#sub_total').append(t.SubTotal + " Taka");
+                $('#discount').append(t.Discount + " Taka");
+                $('#grant_total').append(t.GrandTotal + " Taka");
+            },
+            error: function (error) {
+                Metronic.unblockUI();
+                var msg = 'Fail to payment summary.';
+                alert(msg);
+            }
+        });
+        }
+
+        function CurrentAppointmentList() {
+            Metronic.blockUI();
+            EnrolledList();
+            Metronic.unblockUI();
+        }
+
+        function LoadDoctorList() {
+            Metronic.blockUI();
+            var options = $("#ddlDoctorInformation");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadDoctorList", "Appointment", new { Area = "AppointmentSystem" }))",
+                data: {},
+                dataType: "html",
+                success: function (result) {
+                    var t = JSON.parse(result);
+                    $.each(t, function () {
+                        options.append($("<option />").val(this.Id).text(this.Name));
+                    });
+                    EnrolledList();
+                    Metronic.unblockUI();
+                },
+                error: function (error) {
+                    Metronic.unblockUI();
+                    var msg = 'Fail to load consultant list';
+                    alert(msg);
+                }
+            });
+        }
+
+        function EnrolledList() {
+            var el = $("#loadEnrolledList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("EnrolledList", "AppointmentPayment", new { Area = "AppointmentSystem" }))",
+                data: { "AppointmentDate": $('#txtAppointmentDate').val(), "DoctorId": $('#ddlDoctorInformation').val() },
+                dataType: "html",
+                success: function (res) {
+                    el.html(res);
+                    PaidList();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    Metronic.unblockUI();
+                    var msg = 'Fail to load enrolled list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function PaidList() {
+            var el = $("#paidList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("PaidList", "AppointmentPayment", new { Area = "AppointmentSystem" }))",
+                data: { "AppointmentDate": $('#txtAppointmentDate').val(), "DoctorId": $('#ddlDoctorInformation').val() },
+                dataType: "html",
+                success: function (res) {
+                    el.html(res);
+                    LoadPaymentTypeList();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    Metronic.unblockUI();
+                    var msg = 'Fail to load paid list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function LoadPaymentTypeList() {
+            $("#ddlPurpose").empty();
+            var options = $("#ddlPurpose");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadPaymentTypeList", "AppointmentPayment", new { Area = "AppointmentSystem" }))",
+                data: { "DoctorId": $('#ddlDoctorInformation').val() },
+                dataType: "html",
+                success: function (result) {
+                    var t = JSON.parse(result);
+                    $.each(t, function () {
+                        options.append($("<option />").val(this.Id).text(this.Description));
+                    });
+                    getAmountPurpose();
+                },
+                error: function (error) {
+                    Metronic.unblockUI();
+                    var msg = 'Fail to load payment type.';
+                    alert(msg);
+                }
+            });
+        }
+
+        function LoadPatientInformation(PatientId) {
+            Metronic.blockUI();
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadPatientSummary", "AppointmentPayment", new { Area = "AppointmentSystem" }))",
+                data: { "PatientId": PatientId },
+                dataType: "html",
+                success: function (result) {
+                    Metronic.unblockUI();
+                    var value = JSON.parse(result);
+                    $('#txtId').val(value.Id);
+                    $('#txtVisitNo').val(value.VisitNo);
+                    $('#txtPatientName').val(value.Name);
+                    $('#days_passed').text(value.Daypassed + " days has passed.");
+                },
+                error: function (error) {
+                    Metronic.unblockUI();
+                    var msg = 'Fail to load patient information';
+                    alert(msg);
+                }
+            });
+        }
+        function LoadPatientPaymentSummary(EnrollId) {
+            Metronic.blockUI();
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadPatientPaymentSummary", "AppointmentPayment", new { Area = "AppointmentSystem" }))",
+                data: { "EnrollId": EnrollId },
+            dataType: "html",
+            success: function (result) {
+                Metronic.unblockUI();
+                var value = JSON.parse(result);
+                $('#txtPaymentId').val(value.Id);
+                $('#txtVisitNo').val(value.VisitNo);
+                $('#txtId').val(value.PatientInformationId);
+                $('#txtPatientName').val(value.PatientInformationName);
+                $('#ddlPurpose').val(value.PaymentPurposeId);
+                $('#txtAmount').val(value.Payment);
+                $('#txtDiscount').val(value.Discount);
+                $('#txtNetAmount').val(value.NetAmount);
+                $('#txtReason').val(value.DiscountReason);
+            },
+            error: function (error) {
+                Metronic.unblockUI();
+                var msg = 'Fail to load patient payment summary';
+                alert(msg);
+            }
+        });
+        }
+        function getTodate() {
+            var dob = new Date();
+            var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+            var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+            return (month + "/" + day + "/" + dob.getFullYear());
+        }
+
+        function dateChangeEvent() {
+            $('.dateofbirth').datepicker().on('changeDate', function (ev) {
+                var dob = new Date($('#txtDateOfBirth').val());
+                var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+                var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+                $('#ddlAge').val(calculateAge(month, day, dob.getFullYear()));
+            });
+        }
+
+        function calculateAge(birthMonth, birthDay, birthYear) {
+            var currentDate = new Date();
+            var currentYear = currentDate.getFullYear();
+            var currentMonth = currentDate.getMonth();
+            var currentDay = currentDate.getDate();
+            age = currentYear - birthYear;
+
+            if (currentMonth < birthMonth - 1) {
+                age--;
+            }
+            if (birthMonth - 1 == currentMonth && currentDay < birthDay) {
+                age--;
+            }
+            return age;
+        }
+
+        function calculateNetAmount() {
+            $("#txtDiscount").keyup(function () {
+                var netAmount = (parseFloat($("#txtAmount").val()) - parseFloat($("#txtDiscount").val()));
+                if (netAmount >= 0)
+                    $("#txtNetAmount").val(netAmount);
+                else
+                    $("#txtNetAmount").val($("#txtAmount").val());
+            });
+        }
+
+       function SaveAppointmentPayment() {
+            Metronic.blockUI();
+            $.ajax({
+                type: "POST",
+                url: "@(@Url.Action("SaveAppointmentPayment", "AppointmentPayment", new { Area = "AppointmentSystem" }))",
+                data: {
+                    "PaymentId": $('#txtPaymentId').val(),
+                    "PatientId": $('#txtId').val(),
+                    "DoctorId": $('#ddlDoctorInformation').val(),
+                    "AppointmentDate": $('#txtAppointmentDate').val(),
+                    "VisitNo": $('#txtVisitNo').val(),
+                    "AmountId": $('#ddlPurpose').val(),
+                    "Amount": $('#txtNetAmount').val(),
+                    "Discount": $('#txtDiscount').val(),
+                    "Reason": $('#txtReason').val()
+                },
+                success: function (data) {
+                    EnrolledList();
+                    PaidList();
+                    $('#txtPaymentId').val('0');
+                    $('#txtId').val('');
+                    $('#txtVisitNo').val('');
+                    $('#txtPatientName').val('');
+                   // $('#ddlPurpose').val('New');
+                    $('#txtAmount').val('');
+                    $('#txtDiscount').val('');
+                    $('#txtNetAmount').val('');
+                    $('#txtReason').val('');
+                    Metronic.unblockUI();
+                },
+                error: function (error) {
+                    Metronic.unblockUI();
+                    var msg = 'Fail to save patient payment.';
+                    alert(msg);
+                }
+            });
+        }
+
+    </script>
+
+}

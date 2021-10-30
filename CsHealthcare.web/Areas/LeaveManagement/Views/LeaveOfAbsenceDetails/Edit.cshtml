@@ -1,0 +1,125 @@
+﻿@model CsHealthcare.ViewModel.LeaveManagement.LeaveOfAbsenceDetailsModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<div class="portlet box blue">*@
+@*<div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-gift"></i> New
+        </div>
+        <div class="tools">
+            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+            <a href="" class="fullscreen" data-original-title="" title=""> </a>
+            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+        </div>
+
+    </div>*@
+<div class="portlet-body">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.FromDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    <input id="FromDate" required="required" name="FromDate" value="@Model.FromDate.ToString("d")" class="form-control date-picker" placeholder="From Date" type="text" />
+                    @*@Html.EditorFor(model => model.LeaveReason, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LeaveReason, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ToDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    <input id="ToDate" required="required" name="ToDate" value="@Model.ToDate.ToString("d")" class="form-control date-picker" placeholder="To Date" type="text" />
+                    @*@Html.EditorFor(model => model.Note, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Note, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.LeaveTypeId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.DropDownList("LeaveTypeId", null, htmlAttributes: new { @class = "form-control border-radius-5", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.LeaveTypeId, "", new { @class = "text-danger" })
+                    @*@Html.EditorFor(model => model.ED_SHORT_FORM, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ED_SHORT_FORM, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.LeaveOfAbsenceMasterId, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.DropDownList("LeaveOfAbsenceMasterId", null, htmlAttributes: new { @class = "form-control border-radius-5", @required = "required" })
+                    @Html.ValidationMessageFor(model => model.LeaveOfAbsenceMasterId, "", new { @class = "text-danger" })
+                    @*@Html.EditorFor(model => model.ED_SHORT_FORM, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ED_SHORT_FORM, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.LeaveYear, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.LeaveYear, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.LeaveYear, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TotalHours, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.TotalHours, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TotalHours, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.ED_FLSA_CODE, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ED_FLSA_CODE, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ED_FLSA_CODE, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ED_GL_ID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ED_GL_ID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ED_GL_ID, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <a href="@Url.Action("Index", "LeaveOfAbsenceDetails", new {area = "LeaveManagement" })" class="btn default">Cancel</a>
+                        <button type="submit" class="btn blue">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>
+@*</div>*@
+
+@section page_styles {
+
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/typeahead/typeahead.css" />
+}
+
+@section Scripts {
+
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/typeahead/typeahead.bundle.min.js"></script>
+    @*<script src="~/Assets/Page/components-pickers.js"></script>
+        <script src="~/Scripts/jquery.format.1.05.js"></script>*@
+}

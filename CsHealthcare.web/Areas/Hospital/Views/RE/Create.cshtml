@@ -1,0 +1,733 @@
+﻿
+@model CsHealthcare.ViewModel.Diagnostic.RETestModel
+
+@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-question font-green-sharp"></i>
+                        <span class="caption-subject font-green-sharp uppercase">Urin Rountin Examination</span>
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                            </a>
+                            <a href="javascript:;" class="fullscreen">
+                            </a>
+                        @*<div class="" style="text-align: left;">
+                            <a class="btn default" style="width: 35%; margin-top: 30px" href="@Url.Action("Index", "RE", new {Area = "Hospital"})">Cancel</a>
+                            <input type="submit" value="Save" class="btn green" style="width: 35%; margin-top: 30px" />
+                        </div>*@
+                    </div>
+                    <div class="actions margin-right-10">
+
+                    </div>
+                </div>
+                <hr style="margin-top: 0;">
+                <div class="portlet-body portlet-empty">
+
+
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        
+
+                        <input type="hidden" id="dId" name="dId" value="" />
+                    <input type="hidden" id="PatientId" name="PatientId" value=""/>
+                    <input type="hidden" id="PatientCode" name="PatientCode" value=""/>
+                    <input type="hidden" id="ReferanceName" name="ReferanceName" value=""/>
+                        <input type="hidden" id="Age" name="Age" value="" />
+                        <form>
+
+                            <div class="col-xs-3">
+
+                                <div class="content-group">
+                                    <div class="col-xs-6" style="min-width:150px">
+                                        <h4>Patient Name</h4>
+                                    </div>
+                                    <div class="col-xs-6" style="min-width:200px">
+                                        <div class="input-group">
+                                            <input id="PatientName" class="form-control" name="PatientName" value="" />
+                                            @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+
+                                <div class="content-group">
+                                    <div class="col-xs-6" style="min-width:200px">
+                                        <h4>Specimen Name</h4>
+                                    </div>
+                                    <div class="col-xs-6" style="min-width:200px">
+                                        <div class="input-group">
+                                            <input id="SpecimenName" class="form-control" name="SpecimenName" value="" />
+                                            @Html.ValidationMessageFor(model => model.SpecimenName, "", new { @class = "text-danger" })
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-3">
+
+                                <div class="content-group">
+                                    <div class="col-xs-6" style="min-width:200px">
+                                        <h4>Department Name</h4>
+                                    </div>
+                                    <div class="col-xs-6" style="min-width:200px">
+                                        <div class="input-group">
+                                            <input id="Department" class="form-control" name="Department" value="" />
+                                            @Html.ValidationMessageFor(model => model.Department, "", new { @class = "text-danger" })
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3">
+                                <div class="col-xs-4" style="min-width:150px">
+                                    <h4>Date</h4>
+                                </div>
+                                <div class="col-xs-8" style="min-width:150px">
+                                    <div class="input-group">
+                                        @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control datetimepicker ", @type = "datetime" } })
+
+                                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <br />
+                        <br />
+                        <br />
+                    <br/>
+                        <br />
+                        <br />
+                        <br />
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Investigation</th>
+                                    <th> Result</th>
+                                    <th> Unit</th>
+                                        <th> Refference Range</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td><b>Physical Examination</b></td>
+                                    <td></td>
+                                    <td></td>
+                                        <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Colour</td>
+
+                                    <td> <input name="Colour" class="form-control " value="" placeholder="" /></td>
+                                    <td> <input name="ColourUnit" class="form-control " value="" placeholder="" /></td>
+                                    <td> <input name="ColourRefer" class="form-control " value="" placeholder="" /></td>
+
+                                    @*<td></td>
+                                        <td></td>*@
+                                </tr>
+
+                            <tr>
+                                <td>Turbidity</td>
+
+                                <td> <input name="Turbidity" class="form-control " value="" placeholder=""/></td>
+                                <td> <input name="TurbidityUnit" class="form-control " value="" placeholder="" /></td>
+                                <td> <input name="TurbidityRefer" class="form-control " value="" placeholder="" /></td>
+
+                                @*<td></td>
+                                        <td></td>*@
+                            </tr>
+
+                                <tr>
+                                    <td>Clarity</td>
+
+                                    <td> <input name="Clarity" class="form-control " value="" placeholder="" /></td>
+                                    <td> <input name="ClarityUnit" class="form-control " value="" placeholder="" /></td>
+                                    <td> <input name="ClarityRefer" class="form-control " value="" placeholder="" /></td>
+                                   
+                                    @*<td></td>
+            <td></td>*@
+                                </tr>
+                            <tr>
+                                    <td>Sediment</td>
+
+                                    <td><input name="Sediment" class="form-control" value="" /></td>
+                                <td><input name="SedimentUnit" class="form-control" value="" /></td>
+                                <td><input name="SedimentRefer" class="form-control" value="" /></td>
+
+                                    @*<td></td>
+                                        <td></td>*@
+                                </tr>
+                                <tr>
+                                    <td><b>Chemical Examination</b></td>
+
+                                    <td></td>
+
+                                    @*<td></td>
+                                        <td></td>*@
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>Specific Gravity</td>
+
+                                    <td><input name="Specificgravity" class="form-control" value="" /></td>
+                                    <td><input name="SpecificgravityUnit" class="form-control" value="" /></td>
+                                    <td><input name="SpecificgravityRefer" class="form-control" value="" /></td>
+
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>Glucose</td>
+
+                                    <td><input name="Glucose" value="" class="form-control" /></td>
+                                    <td><input name="GlucoseUnit" value="" class="form-control" /></td>
+                                    <td><input name="GlucoseRefer" value="" class="form-control" /></td>
+
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>Albumin</td>
+
+                                    <td><input class="form-control" name="Albumin" value="" /></td>
+                                    <td><input class="form-control" name="AlbuminUnit" value="" /></td>
+                                    <td><input class="form-control" name="AlbuminRefer" value="" /></td>
+
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>Blood</td>
+
+                                    <td><input class="form-control" name="Blood" value=""/></td>
+
+                                    <td><input class="form-control" name="BloodUnit" value=""/></td>
+                                    <td><input class="form-control" name="BloodRefer" value="" /></td>
+                                    @*<td></td>
+                                        <td> </td>*@
+                                </tr>
+
+
+                                <tr>
+
+
+                                    <td>Ketones</td>
+
+                                    <td><input class="form-control" name="Ketones" value=""/></td>
+                                    <td><input class="form-control" name="KetonesUnit" value=""/></td>
+                                    <td><input class="form-control" name="KetonesRefer" value="" /></td>
+                                    @*<td></td>
+                                        <td> </td>*@
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Nitrite
+                                    </td>
+                                    <td><input class="form-control" name="Nitrite" value="" /></td>
+                                    <td><input class="form-control" name="NitriteUnit" value="" /></td>
+                                    <td><input class="form-control" name="NitriteRefer" value="" /></td>
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Bilirubin
+                                    </td>
+                                    <td><input class="form-control" name="Bilirubin" value=""/></td>
+                                    <td><input class="form-control" name="BilirubinUnit" value=""/></td>
+                                    <td><input class="form-control" name="BilirubinRefer" value="" /></td>
+                                    @*<td></td>
+                                        <td> </td>*@
+                                </tr>
+                                <tr>
+
+
+                                    <td>Urobilinogen</td>
+
+                                    <td><input class="form-control" name="Urobilinogen" value=""/></td>
+                                    <td><input class="form-control" name="UrobilinogenUnit" value=""/></td>
+                                    <td><input class="form-control" name="UrobilinogenRefer" value="" /></td>
+                                    @*<td></td>
+                                        <td> </td>*@
+                                </tr>
+                                <tr>
+
+
+                                    <td>PH</td>
+
+                                    <td><input class="form-control" name="PH" value=""/></td>
+                                    <td><input class="form-control" name="PHUnit" value=""/></td>
+                                    <td><input class="form-control" name="PHRefer" value="" /></td>
+                                    @*<td></td>
+                                        <td> </td>*@
+                                </tr>
+
+                                <tr>
+                                    <td><b>Microscopic Examination</b></td>
+
+                                    <td></td>
+
+                                    @*<td></td>
+                                        <td></td>*@
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>Puscells</td>
+
+                                    <td><input class="form-control" name="Puscells" value=""/></td>
+                                    <td><input class="form-control" name="PuscellsUnit" value=""/></td>
+                                    <td><input class="form-control" name="PuscellsRefer" value=""/></td>
+                                    
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>EpithelialCells</td>
+
+                                    <td><input class="form-control" name="EpithelialCells" value="" /></td>
+                                    <td><input class="form-control" name="EpithelialCellsUnit" value=""/></td>
+                                    <td><input class="form-control" name="EpithelialCellsRefer" value="" /></td>
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>RedBloodCell</td>
+
+                                    <td><input class="form-control" name="RedBloodCell" value=""/></td>
+                                    <td><input class="form-control" name="RedBloodCellUnit" value=""/></td>
+                                    <td><input class="form-control" name="RedBloodCellRefer" value="" /></td>
+                                    @*<td></td>
+                                        <td> </td>*@
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>WbcCast</td>
+
+
+                                    <td><input class="form-control" name="WbcCast" value=""/></td>
+                                    <td><input class="form-control" name="WbcCastUnit" value=""/></td>
+                                    <td><input class="form-control" name="WbcCastRefer" value="" /></td>
+                                    @*<td></td>
+                                        <td> </td>*@
+                                </tr>
+                            <tr>
+
+
+                                <td>RbcCast</td>
+
+
+                                <td><input class="form-control" name="RbcCast" value=""/></td>
+                                <td><input class="form-control" name="RbcCastUnit" value=""/></td>
+                                <td><input class="form-control" name="RbcCastRefer" value="" /></td>
+                            </tr>
+
+                                <tr>
+
+
+                                    <td>CalciumOxalate</td>
+
+
+                                    <td><input class="form-control" name="CalciumOxalate" value=""/></td>
+                                    <td><input class="form-control" name="CalciumOxalateUnit" value=""/></td>
+                                    <td><input class="form-control" name="CalciumOxalateRefer" value="" /></td>
+                                    @*<td></td>
+            <td> </td>*@
+                                </tr>
+
+
+                            <tr>
+
+
+                                <td>Amorphosphate</td>
+
+
+                                <td><input class="form-control" name="Amorphosphate" value=""/></td>
+                                <td><input class="form-control" name="AmorphosphateUnit" value=""/></td>
+                                <td><input class="form-control" name="AmorphosphateRefer" value="" /></td>
+                                @*<td></td>
+            <td> </td>*@
+                            </tr>
+
+                            <tr>
+
+
+                                <td>Yeast Candida</td>
+
+
+                                <td><input class="form-control" name="YeastCandida" value=""/></td>
+                                <td><input class="form-control" name="YeastCandidaUnit" value=""/></td>
+                                <td><input class="form-control" name="YeastCandidaRefer" value="" /></td>
+                                @*<td></td>
+            <td> </td>*@
+                            </tr>
+
+
+                                <tr>
+
+
+                                    <td>Trichomonas Vaginalis</td>
+
+
+                                    <td><input class="form-control" name="TrichomonasVaginalis" value="" /></td>
+                                    <td><input class="form-control" name="TrichomonasVaginalisUnit" value="" /></td>
+                                    <td><input class="form-control" name="TrichomonasVaginalisRefer" value="" /></td>
+
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>Uric Acid</td>
+
+
+                                    <td><input class="form-control" name="UricAcid" value=""/></td>
+                                    <td><input class="form-control" name="UricAcidUnit" value=""/></td>
+                                    <td><input class="form-control" name="UricAcidRefer" value="" /></td>
+                                    @*<td></td>
+            <td> </td>*@
+                                </tr>
+
+                                <tr>
+
+
+                                    <td>Triple Phosphate</td>
+
+
+                                    <td><input class="form-control" name="TriplePhosphate" value="" /></td>
+                                    <td><input class="form-control" name="TriplePhosphateUnit" value="" /></td>
+
+                                    <td><input class="form-control" name="TriplePhosphateRefer" value="" /></td>
+
+                                    @*<td></td>
+            <td> </td>*@
+                                </tr>
+                            <tr>
+
+
+                                    <td>GranularCast</td>
+
+                                    <td><input class="form-control" name="GranularCast" value="" /></td>
+                                <td><input class="form-control" name="GranularCastUnit" value=""/></td>
+                                <td><input class="form-control" name="GranularCastRefer" value="" /></td>
+                                </tr>
+                                <tr>
+
+
+                                    <td>HyalineCast</td>
+
+                                    <td><input class="form-control" name="HyalineCast" value="" /></td>
+                                    <td><input class="form-control" name="HyalineCastUnit" value="" /></td>
+                                    <td><input class="form-control" name="HyalineCastRefer" value="" /></td>
+
+                                </tr>
+                                <tr>
+
+
+                                    <td>Spermatozoa</td>
+
+                                    <td><input class="form-control" name="Spermatozoa" value="" /></td>
+                                    <td><input class="form-control" name="SpermatozoaUnit" value=""/></td>
+                                    <td><input class="form-control" name="SpermatozoaRefer" value="" /></td>
+                                </tr>
+
+
+                                <tr>
+
+
+                                    <td>Crystals</td>
+
+                                    <td><input class="form-control" name="Crystals" value="" /></td>
+                                    <td><input class="form-control" name="CrystalsUnit" value="" /></td>
+                                    <td><input class="form-control" name="CrystalsRefer" value="" /></td>
+
+                                    @*<td></td>
+                                        <td> </td>*@
+                                </tr>
+                                <tr>
+                                    <td>
+                                        Others
+                                    </td>
+                                    <td><input class="form-control" name="Others" value="" /></td>
+                                    <td><input class="form-control" name="OthersUnit" value=""/></td>
+                                    <td><input class="form-control" name="OthersRefer" value="" /></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+
+                        <div class="modal-footer">
+            <a class="btn default" style="width: 15%;" href="@Url.Action("Index", "RE", new {Area = "Hospital"})">Cancel</a>
+            <input type="submit" value="Save" class="btn green" style="width: 15%;" />
+        </div>
+
+                    </div>
+                </div>
+
+              
+            </div>
+
+
+        }
+
+        <!-- END Portlet PORTLET-->
+
+    </div>
+
+</div>
+
+@section page_styles {
+
+
+    <link href="~/assets/global/plugins/select2/css/select2.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <link href="~/assets/global/plugins/typeahead/typeahead.css" rel="stylesheet" />
+
+    <style>
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+            width: 422px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            max-height: 200px;
+            overflow: auto;
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+            .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+                color: #fff;
+                background-color: #0097cf;
+            }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+
+}
+
+@section Scripts {
+
+    <script src="~/assets/global/plugins/select2/js/select2.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/jquery.datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+
+
+    <script>
+        $(document).ready(function () {
+
+            initpatientAutoComplete();
+            initSpecimenAutoComplete();
+            $(".datetimepicker").datepicker();
+        });
+
+
+        function initpatientAutoComplete() {
+            $('#PatientName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /Hospital/RE/LoadPatient",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.Name,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                $("#dId").val(patient.Id);
+                $("#PatientId").val(patient.Id);
+
+                LoadPatientCode();
+                LoadReferencName();
+                LoadAge();
+            });
+
+        }
+
+        function initSpecimenAutoComplete() {
+            $('#SpecimenName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /Hospital/RE/LoadSpecimen",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.Name,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                //$("#dId").val(patient.Id);
+
+
+            });
+
+        }
+
+        function LoadPatientCode() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("PatientCode", "RE", new {Area = "Hospital" }))",
+                data: { "Id": $("#dId").val() },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+                //alert(t);
+                $('#PatientCode').val(t);
+
+                //$('#Total').val(t.T_Price);
+                // $('#quantity').focus();
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+        function LoadReferencName() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("ReferanceName", "RE", new {Area = "Hospital" }))",
+                data: { "Id": $("#dId").val() },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+                //alert(t);
+                $('#ReferanceName').val(t);
+
+                //$('#Total').val(t.T_Price);
+                // $('#quantity').focus();
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+        function LoadAge() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("Age", "RE", new {Area = "Hospital" }))",
+                data: { "Id": $("#dId").val() },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+                //alert(t);
+                $('#Age').val(t);
+
+                //$('#Total').val(t.T_Price);
+                // $('#quantity').focus();
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+    </script>
+}
+
+

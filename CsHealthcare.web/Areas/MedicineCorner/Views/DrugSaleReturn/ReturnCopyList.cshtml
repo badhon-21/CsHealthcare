@@ -1,0 +1,37 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.MedicineCorner.DrugSaleReturnModel>
+
+
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @item.ReturnDate.ToString("d")
+        </td>
+
+        <td>
+            @item.MemoNo
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugName)
+        </td>
+        <td>
+            @item.ReturnQty
+        </td>
+        <td>
+            @item.ReturnPrice
+        </td>
+        @*<td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>*@
+    </tr>
+}
+
+
+
+
+
+

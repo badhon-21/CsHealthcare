@@ -1,0 +1,25 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.MedicineCorner.DrugDepartmentWiseStockInDetailsModel>
+
+
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Date.ToString("d")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugName)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.RemainingQuantity)
+        </td>
+       
+    </tr>
+}
+
+

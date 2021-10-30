@@ -1,0 +1,308 @@
+﻿
+@model CsHealthcare.ViewModel.Hospital.WardModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Ward Information";
+}
+
+
+<div class="row">
+    @using (Html.BeginForm("Create", "Ward", new { area = "Hospital" }, FormMethod.Post, new { @class = "form-horizontal form-row-seperated" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-12">
+
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="caption">
+                                <i class="icon-puzzle font-grey-gallery"></i>
+                                <span class="caption-subject bold font-grey-gallery uppercase">
+                                    @ViewBag.Title
+                                </span>
+                            </div>
+                        </div>
+                        @*<div class="col-md-6">
+
+                                <input type="submit" value="SAVE" class="btn dark " style="width: 25%; margin-left:40%" />
+                                <a href="@Url.Action("Index", "EmployeeInfo", new {Area = "HumanResource"})" type="button" class="btn green" style="margin-left: 1%;width:25%">Back</a>
+                            </div>*@
+                    </div>
+                </div>
+                <div class="portlet-body">
+
+
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <input type="hidden" id="Id" name="Id" value="@Model.Id" />
+
+                        <div class="col-md-12 row form-group">
+                            <div class="col-md-8">
+                                <div class="control-label col-md-2" style="text-align: left">
+                                    <label>Name </label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                        </div>
+                        @*<div class="col-md-12 row form-group">
+                            <div class="col-md-8">
+                                <div class="control-label col-md-2" style="text-align: left">
+                                    <label>Ward Type </label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.DropDownList("WardTypeId", null, htmlAttributes: new {@class = "form-control border-radius-5", @required = "required"})
+                                </div>
+
+                            </div>
+
+                        </div>*@
+
+                        <div class="col-md-12 row form-group">
+                            <div class="col-md-8">
+                                <div class="control-label col-md-2" style="text-align: left">
+                                    <label>Price By Day </label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.PriceByDay, new {htmlAttributes = new {@class = "form-control twodigitdecimalnumber"}})
+                                    @Html.ValidationMessageFor(model => model.PriceByDay, "", new {@class = "text-danger"})
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12 row form-group">
+                            <div class="col-md-8">
+                                <div class="control-label col-md-2" style="text-align: left">
+                                    <label>Description</label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control twodigitdecimalnumber" } })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                        </div>
+                        @*<div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+                        @*<div class="form-group">
+                            @Html.LabelFor(model => model.WardTypeName, htmlAttributes: new { @class = "control-label col-md-4" })
+
+                            <div class="col-md-8">
+                                @Html.DropDownList("WardTypeId", null, htmlAttributes: new { @class = "form-control border-radius-5", @required = "required" })
+                            </div>
+                        </div>*@
+
+
+
+
+
+                        @*<div class="form-group">
+                            @Html.LabelFor(model => model.PriceByDay, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.PriceByDay, new { htmlAttributes = new { @class = "form-control twodigitdecimalnumber" } })
+                                @Html.ValidationMessageFor(model => model.PriceByDay, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+
+
+
+
+                        <div class="form-group">
+
+                            <div class="col-md-12">
+
+                                <div class="col-md-12 row form-group">
+                                    @*<div><h4>Pharmacy Requisition Details</h4>
+                                        </div>*@
+                                    <div class="caption">
+                                        <i class="icon-puzzle font-grey-gallery"></i>
+                                        <span class="caption-subject bold font-grey-gallery uppercase">
+                                           Bed Details
+                                        </span>
+                                    </div>
+                                    <hr />
+
+
+                                    @*<input type="hidden" id="dId" name="drugId" value="" />*@
+                                    <div class="col-md-3" style="width:25%!important">
+                                        <input id="tName" name="Name" class="form-control" placeholder="Name" />
+                                    </div>
+                                    @*<div class="col-md-3" style="width:25%!important">
+                                        <input id="Type" name="BedType" class="form-control" placeholder="Bed Type" />
+                                    </div>*@
+
+                                    <div class="col-md-3" style="width:25%!important">
+                                        <input id="Price" name="Price" class="form-control twodigitdecimalnumber" placeholder="Price" />
+                                    </div>
+
+
+                                    <div class="col-md-1" style="width:15%!important">
+                                        <a id="addbtn" onclick="javascript: SetBedlist();" class="btn btn-primary dropdown-toggle">
+                                            Add
+                                        </a>
+                                        <a id="updatebtn" onclick="javascript: SetBedlist();" class="btn btn-primary dropdown-toggle" style="display: none;">
+                                            Update
+                                        </a>
+                                    </div>
+
+
+                                </div>
+                                <br /><br />
+                                <div class="col-md-12 form-group">
+                                    <table class="table table-striped table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 15% !important">
+                                                    Name
+                                                </th>
+                                                @*<th style="width: 15% !important">
+                                                    Bed Type
+                                                </th>*@
+                                                <th style="width: 15% !important">
+                                                    Price
+                                                </th>
+
+                                                <th style="width: 15% !important">Action</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody id="bedlist"></tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="" style="text-align: center;">
+                            <a class="btn default" style="width: 15%; margin-top: 30px" href="@Url.Action("Index", "Ward", new {Area = "Hospital"})">Cancel</a>
+                            <input type="submit" value="Save" class="btn green" style="width: 15%; margin-top: 30px" />
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+       
+    }
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            allowInt();
+            decimal_with_two_digit();
+
+        });
+
+
+        function allowInt() {
+            $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+        }
+
+        function decimal_with_two_digit() {
+            $(".twodigitdecimalnumber").format({ precision: 2, allow_negative: false, autofix: true });
+        }
+
+
+        function SetBedlist(){
+            //if (SellsDetailsValidationCheck()) {
+
+            var loadArea = $("#bedlist");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("SetBedList", "Ward", new {Area = "Hospital" }))",
+                data: { "Name": $('#tName').val(), "Price": $('#Price').val()},
+
+            dataType: "html",
+            success: function (result) {
+
+                loadArea.html(result);
+                $('#tName').val('');
+                //$('#Type').val('');
+                $('#Price').val('');
+
+                $('#addbtn').show();
+                $('#updatebtn').hide();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+
+                var msg = 'Fail to set bed list.';
+                alert(msg);
+            }
+        });
+        // }
+        }
+
+
+        function EditBed(Name) {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("EditBed", "Ward", new {Area = "Hospital" }))",
+                data: { "bedName":Name },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+                var value = JSON.parse(result);
+                //$('#BedId').val(value.Name);
+
+                $('#tName').val(value.Name);
+
+
+
+                //$('#Type').val(value.BedType);
+                $('#Price').val(value.Price);
+                //$('#CostPrice').val(value.CostPrice);
+               
+
+
+                $('#addbtn').hide();
+                $('#updatebtn').show();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to load Bed information.';
+                alert(msg);
+            }
+        });
+        }
+
+    </script>
+
+}
+
+
+
+
+

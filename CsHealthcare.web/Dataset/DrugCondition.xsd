@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DrugCondition" targetNamespace="http://tempuri.org/DrugCondition.xsd" xmlns:mstns="http://tempuri.org/DrugCondition.xsd" xmlns="http://tempuri.org/DrugCondition.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DrugCondition" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DrugCondition" msprop:Generator_UserDSName="DrugCondition">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="VW_DRUG_CONDITION" msprop:Generator_TableClassName="VW_DRUG_CONDITIONDataTable" msprop:Generator_TableVarName="tableVW_DRUG_CONDITION" msprop:Generator_TablePropName="VW_DRUG_CONDITION" msprop:Generator_RowDeletingName="VW_DRUG_CONDITIONRowDeleting" msprop:Generator_RowChangingName="VW_DRUG_CONDITIONRowChanging" msprop:Generator_RowEvHandlerName="VW_DRUG_CONDITIONRowChangeEventHandler" msprop:Generator_RowDeletedName="VW_DRUG_CONDITIONRowDeleted" msprop:Generator_UserTableName="VW_DRUG_CONDITION" msprop:Generator_RowChangedName="VW_DRUG_CONDITIONRowChanged" msprop:Generator_RowEvArgName="VW_DRUG_CONDITIONRowChangeEvent" msprop:Generator_RowClassName="VW_DRUG_CONDITIONRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VID" msprop:Generator_ColumnVarNameInTable="columnVID" msprop:Generator_ColumnPropNameInRow="VID" msprop:Generator_ColumnPropNameInTable="VIDColumn" msprop:Generator_UserColumnName="VID" type="xs:string" minOccurs="0" />
+              <xs:element name="CompanyName" msprop:Generator_ColumnVarNameInTable="columnCompanyName" msprop:Generator_ColumnPropNameInRow="CompanyName" msprop:Generator_ColumnPropNameInTable="CompanyNameColumn" msprop:Generator_UserColumnName="CompanyName" type="xs:string" minOccurs="0" />
+              <xs:element name="drugName" msprop:Generator_ColumnVarNameInTable="columndrugName" msprop:Generator_ColumnPropNameInRow="drugName" msprop:Generator_ColumnPropNameInTable="drugNameColumn" msprop:Generator_UserColumnName="drugName" type="xs:string" minOccurs="0" />
+              <xs:element name="box_size" msprop:Generator_ColumnVarNameInTable="columnbox_size" msprop:Generator_ColumnPropNameInRow="box_size" msprop:Generator_ColumnPropNameInTable="box_sizeColumn" msprop:Generator_UserColumnName="box_size" type="xs:int" minOccurs="0" />
+              <xs:element name="ReorderLevel" msprop:Generator_ColumnVarNameInTable="columnReorderLevel" msprop:Generator_ColumnPropNameInRow="ReorderLevel" msprop:Generator_ColumnPropNameInTable="ReorderLevelColumn" msprop:Generator_UserColumnName="ReorderLevel" type="xs:int" minOccurs="0" />
+              <xs:element name="MRP" msprop:Generator_ColumnVarNameInTable="columnMRP" msprop:Generator_ColumnPropNameInRow="MRP" msprop:Generator_ColumnPropNameInTable="MRPColumn" msprop:Generator_UserColumnName="MRP" type="xs:decimal" minOccurs="0" />
+              <xs:element name="totalSaleQty" msprop:Generator_ColumnVarNameInTable="columntotalSaleQty" msprop:Generator_ColumnPropNameInRow="totalSaleQty" msprop:Generator_ColumnPropNameInTable="totalSaleQtyColumn" msprop:Generator_UserColumnName="totalSaleQty" type="xs:int" minOccurs="0" />
+              <xs:element name="totalSaleAmount" msprop:Generator_ColumnVarNameInTable="columntotalSaleAmount" msprop:Generator_ColumnPropNameInRow="totalSaleAmount" msprop:Generator_ColumnPropNameInTable="totalSaleAmountColumn" msprop:Generator_UserColumnName="totalSaleAmount" type="xs:decimal" minOccurs="0" />
+              <xs:element name="totalStockQty" msprop:Generator_ColumnVarNameInTable="columntotalStockQty" msprop:Generator_ColumnPropNameInRow="totalStockQty" msprop:Generator_ColumnPropNameInTable="totalStockQtyColumn" msprop:Generator_UserColumnName="totalStockQty" type="xs:int" minOccurs="0" />
+              <xs:element name="totalreminingQty" msprop:Generator_ColumnVarNameInTable="columntotalreminingQty" msprop:Generator_ColumnPropNameInRow="totalreminingQty" msprop:Generator_ColumnPropNameInTable="totalreminingQtyColumn" msprop:Generator_UserColumnName="totalreminingQty" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

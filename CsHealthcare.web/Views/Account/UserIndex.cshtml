@@ -1,0 +1,63 @@
+﻿@using Cs.Utility
+@model IEnumerable<CsHealthcare.ViewModel.HumanResource.EmployeeInfoModel>
+
+@{
+    ViewBag.Title = "User Management";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-social-dribbble"></i>
+                    <span class="caption-subject uppercase dark">@ViewBag.Title</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+
+                    <a href="javascript:;" data-load="true" data-url="@Url.Action("LoadUser", "Account")" class="reload">
+
+                    </a>
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+                    <a class="btn btn-circle blue-ebonyclay" href="@Url.Action("CreateSolutionUser", "Account")">
+                        <i class="fa fa-plus"></i>New
+                    </a>
+                    <a class="btn btn-circle blue-ebonyclay" href="@SessionManager.DashBoard">
+                        <i class="fa fa-arrow-left"></i>Back
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body portlet-empty">
+
+
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+
+</div>
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section page_styles {
+
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/select2/select2.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+
+}
+
+@section Scripts {
+
+}

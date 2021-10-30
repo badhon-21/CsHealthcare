@@ -1,0 +1,108 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Accounts.PettyCashModel>
+
+<table class="table " id="voucherList">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TransDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VoucherNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+
+            @*<th></th>*@
+        </tr>
+    </thead>
+
+    <tbody id="d">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.TransDate.ToString("dd-MM-yyyy")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VoucherNo)
+                </td>
+                <td>
+                     @item.Amount
+                </td>
+
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>*@
+            </tr>
+        }
+
+    </tbody>
+
+</table>
+
+
+<script>
+
+    jQuery(document).ready(function () {
+
+        var table = $('#voucherList');
+
+        // begin first table
+        table.dataTable({
+
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:",
+                "zeroRecords": "No matching records found"
+            },
+
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+
+            "lengthMenu": [
+                [15, 25, 50, -1],
+                [15, 25, 50, "All"] // change per page values here
+            ],
+            // set the initial value
+            "pageLength": 15,
+            "pagingType": "bootstrap_full_number",
+            "language": {
+                "search": "My search: ",
+                "lengthMenu": "  _MENU_ records",
+                "paginate": {
+                    "previous": "Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            "columnDefs": [{  // set default column settings
+                'orderable': false,
+                'targets': [2]
+            }, {
+                "searchable": false,
+                "targets": [2]
+            }],
+            "order": [
+                [1, "desc"]
+            ] // set first column as a default sort by asc
+        });
+
+        var tableWrapper = jQuery('#OptionList_wrapper');
+
+        tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+    });
+
+</script>

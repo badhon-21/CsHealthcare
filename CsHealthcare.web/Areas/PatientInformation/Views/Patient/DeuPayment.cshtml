@@ -1,0 +1,122 @@
+﻿@model CsHealthcare.ViewModel.Patient.PatientModel
+@{
+    ViewBag.Title = "Deu Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@*<div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title caption-subject font-green-sharp uppercase">@ViewBag.Title</h4>
+    </div>*@
+<div class="col-md-12">
+    <!-- BEGIN Portlet PORTLET-->
+    <div class="portlet light">
+        <div class="portlet-title">
+            <div class="caption">
+                @*<i class="fa fa-question font-green-sharp"></i>*@
+                <span class="caption-subject font-green-sharp uppercase">Due Payment</span>
+            </div>
+            <div class="tools">
+                <a href="javascript:;" class="collapse">
+                </a>
+                <a href="javascript:;" class="fullscreen">
+                </a>
+            </div>
+            <div class="actions margin-right-10">
+
+            </div>
+        </div>
+
+        <div class="portlet-body portlet-empty" style="min-height: 400px">
+
+            <div class="col-md-12 row form-group">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+
+                            
+                            @Html.HiddenFor(model => model.Id)
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.VoucherNo, htmlAttributes: new {@class = "control-label col-md-3"})
+                                <div class="col-md-7">
+                                    <input id="VoucherNo" name="VoucherNo" value="@Model.VoucherNo" class="form-control " placeholder="" type="text"/>
+                                    @Html.ValidationMessageFor(model => model.VoucherNo, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new {@class = "control-label col-md-3"})
+                                <div class="col-md-7">
+                                    <input id="TotalAmount" name="TotalAmount" value="@Model.TotalAmount" class="form-control " placeholder="" type="text"/>
+                                    @Html.ValidationMessageFor(model => model.TotalAmount, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DeuAmount, htmlAttributes: new {@class = "control-label col-md-3"})
+                                <div class="col-md-7">
+                                    <input id="DeuAmount" name="DeuAmount" value="@Model.DeuAmount" class="form-control " placeholder="" type="text"/>
+                                    @Html.ValidationMessageFor(model => model.DeuAmount, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.GivenAmount, htmlAttributes: new {@class = "control-label col-md-3"})
+                                <div class="col-md-7">
+                                    <input id="PaidAmount" name="PaidAmount" value="" class="form-control " placeholder="" type="text"/>
+                                    @Html.ValidationMessageFor(model => model.GivenAmount, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3" style="text-align: right">Deu</div>
+                                <div class="col-md-7">
+                                    <input id="Deu" name="Deu" value="" class="form-control " placeholder="" type="text"/>
+                                    @*@Html.ValidationMessageFor(model => model.ChangeAmount, "", new { @class = "text-danger" })*@
+                                </div>
+                            </div>
+
+                            @*<div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <input type="submit" value="Create" class="btn btn-default"/>
+                            </div>*@
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <input type="submit" value="Add Payment" class="btn btn-primary legitRipple "/>
+
+                    </div>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+                @section Scripts {
+                    <script>
+                        $(document).ready(function () {
+
+
+                            $("#PaidAmount").keyup(function () {
+                                var GrandTotal = parseFloat($("#DeuAmount").val());
+                                var GivenAmount = parseFloat($("#PaidAmount").val());
+                                //var DeuAmount = parseFloat($("#DeuPrice").val());
+                                var ChangeAmount = (GrandTotal - GivenAmount);
+                                //$("#ChangeAmount").val(ChangeAmount);
+                                $("#Deu").val(ChangeAmount);
+
+                                //$("#DeuAmount").val(ChangeAmount);
+                            });
+
+
+                        });
+
+                    </script>
+                }

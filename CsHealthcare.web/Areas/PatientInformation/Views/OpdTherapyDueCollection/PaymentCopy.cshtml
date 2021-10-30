@@ -1,0 +1,223 @@
+﻿
+@using Microsoft.AspNet.Identity
+@model CsHealthcare.ViewModel.Physiotherapy.OpdTherapyDueModel
+@{
+    ViewBag.Title = "PrintInvoiceEditMode";
+    Layout = null;
+}
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@print {
+        .hide-from-printer {
+            display: none;
+        }
+
+       
+    }
+
+     @@media print {
+        .printOnly {
+            display: block;
+        }
+}
+</style>
+<div style="min-height: 400px; width:460px; font-size: 11px; margin: 20%">
+    <div class="col-xs-12 printOnly">
+        <hgroup class="title-group text-center" style="margin: 5px 0; padding: 0">
+            <h3>Better Life Hospital</h3>
+            <h5 class="subtitle">1 East Rampura, D.I.T. Road , Dhaka-1219</h5>
+            <h5 class="subtitle">Physiotherapy Due Collection Report </h5>
+        </hgroup>
+    </div>
+    <div style="width: 100%; text-align:center">
+        <h4>Cash memo</h4>
+    </div>
+
+    <div style="width: 100%; display: table;">
+        <div style="width: 40%; float: left; display: table-cell;">
+            <div style="width: 35%; float: left;">Patient Id:</div>
+            <div id="Id" style="width: 58%; float: left;">@Model.PatientCode</div>
+        </div>
+        <div style="width: 30%; float: left; display: table-cell;">
+            <div style="width: 42%; float: left;">Receipt No:</div>
+            <div id="Id" style="width: 58%; float: left;">@Model.VoucherNo</div>
+        </div>
+        <div style="width: 30%; float: right;">
+            <div style="float: left; margin-right: 5px;">Bill Date:</div>
+            <div style="float: left; margin-right: 5px;">@Model.CreatedDate.ToString("dd/MM/yyyy")</div>
+
+        </div>
+        <div style="width: 30%; float: right;">
+            <div style="float: left; margin-right: 5px;">Bill Time:</div>
+            <div style="float: left; margin-right: 5px;">@Model.CreatedDate.ToString("T")</div>
+
+        </div>
+    </div>
+
+
+    <div style="float: left; width: 500px; margin-bottom: 5px;">
+
+        <div style="width: 300px; float: left;">
+            <div style="width: 80px; float: left;font-weight: bold;">Patient Name:</div>
+            <div style="width: 220px; float: left;">@Model.Name</div>
+
+        </div>
+        <div style="width: 170px; float:left;">
+            <div style="width: 62px; float: left;">Gender/Age:</div>
+            <div style="width: 90px; float: left;">@Model.Sex / @Model.Age (Y) </div>
+
+        </div>
+    </div>
+
+    <div style="float: left; width: 500px; margin-bottom: 10px;">
+
+        <div style="width: 300px; float: left;">
+            <div style="width: 75px; float: left;font-weight: bold;">Refd by:</div>
+            <div style="width: 225px; float: left;">@Model.ReferanceName</div>
+
+        </div>
+        <div style="width: 150px; float:left;">
+            <div style="width: 50%; float: left;">Tel/Mobile:</div>
+            <div style="width: 50%; float: left;">@Model.MobileNumber </div>
+
+        </div>
+    </div>
+    <div style="width: 100%;Display:block"></div>
+    <div style="width: 100%;margin-top: 5px; float:left;border-top: dotted 1px;border-bottom: dotted 1px;">
+
+
+
+        <div style="width: 5%; float: left; font-weight: bold">SL.</div>
+        <div style="width: 55%; float: left; font-weight: bold">Test & Instrument Name</div>
+        <div style="width: 5%; float: left; font-weight: bold">Qty</div>
+        <div style="width: 10%; float: left; font-weight: bold;text-align: center;">U Price</div>
+        <div style="width: 10%; float: left; font-weight: bold;text-align: center;">Dis.</div>
+        <div style="width: 15%; float: left; font-weight: bold;text-align: center;">Amount</div>
+
+
+
+    </div>
+    @{
+        // csharp code block
+        // everything in here is code, don't have to use @
+        int counter = 1;
+        decimal totalDiscount = 0;
+        decimal subtotal = 0;
+        // totalDiscount = Model.PatientDetailsModels.Sum(x=>x.Price) - Model.PatientDetailsModels.Sum(x => x.Total);
+
+    }
+    @foreach (var val in @Model.OpdTherapyDetailsModel)
+    {
+
+        decimal dis = 0;
+        decimal qty = 1;
+        if (val.Discount != null)
+        { dis = (decimal)val.Discount; }
+
+        if (val.Quantity != null)
+        { qty = (decimal)val.Quantity; }
+
+        subtotal = subtotal + (val.TherapyPrice * qty);
+        decimal disprice = (val.TherapyPrice * qty) - ((val.TherapyPrice * qty) * dis / 100);
+
+        var a = disprice.ToString("0.00");
+        //   totalDiscount = totalDiscount + (val.Price - disprice);
+        <div style="width: 100%; float: left; ">
+            <div style="width: 5%; float: left;">@counter</div>
+            <div style="width: 55%; float: left;">@val.PhysiotherapyName</div>
+            <div style="width: 5%; float: left;">@qty</div>
+            <div style="width: 10%; float: left; text-align: right">@val.TherapyPrice</div>
+            <div style="width: 10%; float: left; text-align: center">@dis.ToString("0")</div>
+            <div style="width: 15%; float: left; text-align: right">@a</div>
+
+
+        </div>
+
+        counter++;
+    }
+    @{
+        totalDiscount = subtotal - Model.OpdTherapyDetailsModel.Sum(x => x.SubTotal);
+        var amountDueAft = Model.DeuAmount;
+    }
+
+
+    <div style="width: 100%; float: left; display:block; text-align: right;"><hr>Sub Total Amount:<span>@subtotal</span></div>
+
+
+    <div style="width: 100%;display:block; text-align: right;">Discount: <span>@totalDiscount</span></div>
+
+
+    <div style="width: 100%;display:block; text-align: right;">Net Payable:<span>@Model.TotalAmount</span></div>
+
+    <div style="width: 100%;display:block; text-align: right;">Total Due: <span>@Model.DueCollectedAmount</span></div>
+
+    <div style="width: 100%; text-align: right;">Due Amount Collecton: <span>@Model.DueCollectedAmount</span></div>
+
+    <div style="width: 100%; text-align: right;">After Collecton Due: <span>@amountDueAft</span></div>
+
+    <div style="width: 100%;display:block; text-align: left;">Collection By: <span>@Model.DueCreatedBy.ToUpper()</span></div>
+    <div style="width: 100%;display:block; text-align: left;">Collection Date: <span>@Model.DueCreatedDate.ToString("dd/MM/yyyy hh:mm tt ")</span></div>
+
+    <div style="width: 100%; text-align: center;">
+        <button id="btnPrint" onclick="myFunction()" class="hide-from-printer" style="margin-top:10%">Print </button>
+        <a id="btnCancel" href="@Url.Action("Create", "OpdTherapyDueCollection", new {Area = "PatientInformation"})" type="button" class="" style="margin-left: 1%;" class="hide-from-printer">Cancel</a>
+    </div>
+
+</div>
+
+<script>
+function myFunction() {
+    //Get the print button and put it into a variable
+    var printButton = document.getElementById("btnPrint");
+    var cancelButton = document.getElementById("btnCancel");
+    //Set the print button visibility to 'hidden'
+    printButton.style.visibility = 'hidden';
+    cancelButton.style.visibility = 'hidden';
+    //Print the page content
+    window.print();
+    // $('SelectorToPrint').printElement();
+    //Set the print button to 'visible' again
+    //[Delete this line if you want it to stay hidden after printing]
+    printButton.style.visibility = 'visible';
+    cancelButton.style.visibility = 'visible';
+
+
+}
+jQuery(document).ready(function () {
+    //getTotal();
+
+});
+@*function getTotal() {
+    $.ajax({
+
+        type: "GET",
+        cache: false,
+        url: "@(@Url.Action("LoadTotalPrice", "Patient", new {Area = "PatientInformation" }))",
+        data: { "Id": $("#Id").val() },
+    dataType: "html",
+    success: function (result) {
+
+        //var t = JSON.parse(result);
+        //$('#Price').val(t.T_Price);
+        $('#totalPrice').text(result);
+        // $('#quantity').focus();
+    },
+    error: function (error) {
+        //Metronic.unblockUI();
+        var msg = 'Fail to load .';
+        alert(msg);
+    }
+});
+}*@
+</script>
+
+
+
+
+
+
+

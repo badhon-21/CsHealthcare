@@ -1,0 +1,272 @@
+﻿@model CsHealthcare.ViewModel.Cabin.CabinRentModel
+
+@{
+    ViewBag.Title = "Create";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h5 class="modal-title"><i class="icon-add"></i>@ViewBag.Title</h5>
+    <hr style="margin-bottom: 0px;">
+</div>
+<div class="modal-body">
+    <div class="row">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                <input type="hidden" id="tId" name="tId" value=""/>
+                <input type="hidden" id="CabinId" name="CabinId" value="@ViewBag.CabinId"/>
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.CabinId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.CabinId, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CabinId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    <div class="col-md-4" style="margin-left: 30px">
+                        @Html.LabelFor(model => model.CabinName, htmlAttributes: new {@class = ""})
+                    </div>
+
+                    <div class="col-md-6">
+                        <input id="CabinName" name="CabinName" class="form-control" type="text" placeholder="Cabin Name"/>
+                        @Html.ValidationMessageFor(model => model.CabinName, "", new {@class = "text-danger"})
+                    </div>
+                    
+                    </div>
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.PatientId, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PatientId, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PatientId, "", new { @class = "text-danger" })
+                        </div>*@
+                    <div class="col-md-4" style="margin-left: 30px">Patient Name</div>
+                        <div class="col-md-6">
+                            <input id="PatientId" name="PatientId" class="form-control" placeholder="Patient Name" />
+                        </div>
+                    </div>
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.PatientName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PatientName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PatientName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                <div class="form-group">
+                    <div class="col-md-4" style="margin-left: 30px">Mobile No</div>
+                    <div class="col-md-6">
+                        <input id="MobileNo" class="form-control" type="text"  name="MobileNo" placeholder=""  />
+                        @Html.ValidationMessageFor(model => model.MobileNo, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4" style="margin-left: 30px">Emergency Contact Person</div>
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.EmergencyContactPerson, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.EmergencyContactPerson, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4" style="margin-left: 30px">Rent Date</div>
+                    <div class="col-md-6">
+                        <input id="RentDate" name="RentDate" class="form-control datetimepicker" type="datetime" placeholder="Pick a date"/>
+                        @Html.ValidationMessageFor(model => model.RentDate, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-md-4" style="margin-left: 30px">Rate</div>
+                    <div class="col-md-6">
+                        <input id="Rate" class="form-control" type="text" name="Rate" placeholder="" />
+                        @Html.ValidationMessageFor(model => model.Rate, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4" style="margin-left: 30px">Days</div>
+                    <div class="col-md-6">
+                        <input id="Duration" class="form-control" type="text" name="Duration" oninput="calculate1()"placeholder="" />
+                        @Html.ValidationMessageFor(model => model.Duration, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-4" style="margin-left: 30px">Total Price</div>
+                    <div class="col-md-6">
+                        <input id="TotalPrice" class="form-control" type="text" name="TotalPrice" placeholder="" />
+                        @Html.ValidationMessageFor(model => model.TotalPrice, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input id="btnSave" type="submit" value="Create" class="btn btn-default"/>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+<script src="~/Scripts/typeahead.bundle.min.js"></script>
+ <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+
+<script>
+    
+    $(document).ready(function () {
+        $(".datetimepicker").datepicker();
+
+        initPatientAutoComplete();
+        loadCabinName();
+
+        $('#RentDate').on('change', function () {
+            SelectDate();
+
+        });
+    });
+
+    function loadCabinName() {
+        
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: "@(@Url.Action("loadCabinName", "CabinRent", new {Area = "Cabin" }))",
+            data: { "CabinId": $('#CabinId').val()  },
+            dataType: "html",
+            success: function (result) {
+                var value = JSON.parse(result);
+                   
+                $('#CabinName').val(value.Name);
+                $('#Rate').val(value.Price);
+                    
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set sells list.';
+                alert(msg);
+            }
+        });
+        // }
+    }
+
+
+    function initPatientAutoComplete() {
+        $('#PatientId').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 2,
+            limit: 8
+        }, {
+            source: function (searchString, cb) {
+                return $.ajax({
+                    dataType: 'json',
+                    type: 'POST',
+                    contentType: "application/json; charset=utf-8",
+                    url: " /Cabin/CabinRent/LoadPatient",
+                    data: "{'SearchString':'" + searchString + "'}",
+                    chache: false,
+                    success: function (data) {
+                        var result = [];
+                        $.each(data, function (index, val) {
+                            result.push({
+                                Id: val.Id,
+                                Name: val.Name,
+                                value: val.Name
+                            });
+                        });
+                        cb(result);
+                    }
+                });
+            }
+        }).on("typeahead:selected", function (obj, patient) {
+            $("#tId").val(patient.Id);
+            loadPatientcontact();
+            //$("#txtPatientName").val(patient.Name);
+            //$("#txtMobileNumber").val(patient.Mobile);
+        });
+
+    }
+    function loadPatientcontact() {
+        //if (SellsDetailsValidationCheck()) {
+        //App.blockUI();
+        //var loadArea = $("#testDetailsList");
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: "@(@Url.Action("PatientContact", "CabinRent", new {Area = "Cabin" }))",
+            data: { "Id": $('#tId').val() },
+        dataType: "html",
+        success: function (result) {
+            var value = JSON.parse(result);
+                   
+            $('#MobileNo').val(value);
+                    
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            //App.unblockUI();
+            var msg = 'Fail to set sells list.';
+            alert(msg);
+        }
+    });
+    // }
+    }
+
+    function calculate1() {
+        var myBox1 = document.getElementById('Rate').value;
+        var myBox2 = document.getElementById('Duration').value;
+
+        var result = document.getElementById('TotalPrice');
+
+        var myResult = myBox1 * myBox2;
+
+        result.value = myResult;
+        //result.value = myResult1;
+
+    }
+
+    function SelectDate() {
+        
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: "@(@Url.Action("loadDate", "CabinRent", new {Area = "Cabin" }))",
+            data: { "CabinId": $('#CabinId').val(), "RentDate": $('#RentDate').val() },
+        dataType: "html",
+        success: function (result) {
+            var value = JSON.parse(result);
+            //alert(value);
+            if (value != true) {
+                $('#btnSave').attr("disabled", true);
+                alert("Can not Create any rent on this day");
+            } else {
+                $('#btnSave').attr("disabled", false);
+            }
+           
+                    
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            //App.unblockUI();
+            var msg = 'Fail to set sells list.';
+            alert(msg);
+        }
+    });
+    // }
+    }
+</script>

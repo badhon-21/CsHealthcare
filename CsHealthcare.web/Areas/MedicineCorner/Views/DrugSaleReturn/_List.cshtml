@@ -1,0 +1,100 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.MedicineCorner.DrugSaleReturnModel>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MemoNo)
+        </th>
+       @* <th>
+         @Html.DisplayNameFor(model => model.LotNo)
+     </th>
+    <th>
+             @Html.DisplayNameFor(model => model.DrugSaleId)
+         </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.DrugName)
+        </th>
+
+        @*<th>
+                @Html.DisplayNameFor(model => model.ReturnDiscount)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnQty)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnPrice)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.ReturnSubTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReturnDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TxnNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.ReturnDate)
+        </th>
+        @*<th>Action</th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemoNo)
+            </td>
+           @*  <td>
+        @Html.DisplayFor(modelItem => item.LotNo)
+    </td>
+    <td>
+            @Html.DisplayFor(modelItem => item.DrugSaleId)
+        </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.DrugName)
+            </td>
+
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ReturnDiscount)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnQty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnPrice)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ReturnSubTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReturnDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TxnNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecStatus)
+                </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.)
+                    </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+                </td>*@
+        </tr>
+    }
+
+</table>

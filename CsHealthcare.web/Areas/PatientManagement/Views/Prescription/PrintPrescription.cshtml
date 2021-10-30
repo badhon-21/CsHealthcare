@@ -1,0 +1,305 @@
+﻿@using Cs.Utility
+@model CsHealthcare.DataAccess.Entities.Patient.PatientPrescription
+@{
+    Layout = "~/Views/Shared/_PdfLayout.cshtml";
+    int i = 1;
+    int j = 1;
+    int k = 1;
+}
+
+<paragraph style="font-family:Helvetica;font-size:18px;font-style:italic; margin-top: 20px;">
+    <chunk style="color: white;">.</chunk>
+</paragraph>
+
+<paragraph style="font-family: Helvetica; font-size: 18px; font-style: italic; margin-top: 20px;">
+    <chunk style="color: white;">.</chunk>
+</paragraph>
+
+<paragraph style="font-family: Helvetica; font-size: 18px; font-style: italic; margin-top: 20px;">
+    <chunk style="color: white;">.</chunk>
+</paragraph>
+
+<paragraph style="font-family: Helvetica; font-size: 18px; font-style: italic; margin-top: 20px;">
+    <chunk style="color: white;">.</chunk>
+</paragraph>
+
+
+<table width="100%" cellpadding="1.0" cellspacing="1.0" widths="3;8;4">
+    <row>
+        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+            <chunk style="font-size: 8px;">ID:আয়া </chunk><chunk style="font-weight: bold;font-size: 8px;">@Model.Id</chunk>
+        </cell>
+        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+            <chunk style="font-size: 8px;">Visit No: </chunk><chunk style="font-weight: bold;font-size: 8px;">05</chunk>
+        </cell>
+        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false" horizontalalign="right">
+            <chunk style="font-size: 8px;">Date: </chunk><chunk style="font-weight: bold;font-size: 8px;">@Model.Date.ToString("dd / MM / yyyy")</chunk>
+        </cell>
+    </row>
+</table>
+
+<table width="100%" cellpadding="1.0" cellspacing="1.0" widths="6;6">
+    <row>
+        <cell borderwidth="0.5" left="false" right="false" top="true" bottom="false">
+            <chunk style="font-size: 8px;">Name: </chunk><chunk style="font-weight: bold; font-size: 8px;">@Model.PatientInformation.Name</chunk>
+        </cell>
+        <cell borderwidth="0.5" left="false" right="false" top="true" bottom="false">
+            <chunk style="font-size: 8px;">Age: </chunk><chunk style="font-weight: bold; font-size: 8px;">@Model.PatientInformation.DateOfBirth.ToString("dd / MM / yyyy")</chunk>
+        </cell>
+    </row>
+    <row>
+        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+            <chunk style="font-size: 8px;">Address: </chunk><chunk style="font-weight: bold; font-size: 8px;">@Model.PatientInformation.Address</chunk>
+        </cell>
+        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+            <chunk style="font-size: 8px;">Contact No: </chunk><chunk style="font-weight: bold; font-size: 8px;">@Model.PatientInformation.MobileNumber</chunk>
+        </cell>
+    </row>
+    <row>
+        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="true">
+            <chunk style="font-size: 8px;">Sex: </chunk><chunk style="font-weight: bold; font-size: 8px;">@Model.PatientInformation.Sex</chunk>
+        </cell>
+        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="true">
+            <chunk style="font-size: 8px;">Occupation: </chunk><chunk style="font-weight: bold; font-size: 8px;">@Model.PatientInformation.Occupation.Name</chunk>
+        </cell>
+    </row>
+</table>
+
+<table width="100%" cellpadding="1.0" cellspacing="1.0" widths="5;1;8">
+    <row>
+
+        <cell borderwidth="0.5" left="false" right="true" top="false" bottom="true">
+
+            <table width="100%" cellpadding="1.0" cellspacing="1.0" widths="6;6">
+
+                <row>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="true">
+                        <chunk style="font-size: 10px; font-weight: bold;">Chief Complaint</chunk>
+                    </cell>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false"></cell>
+                </row>
+
+                <row>
+                    <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true">
+                        <chunk style="font-size: 10px; font-weight: bold;">Complaint</chunk>
+                    </cell>
+                    <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true">
+                        <chunk style="font-size: 10px; font-weight: bold;">Duration</chunk>
+                    </cell>
+                </row>
+
+                @foreach (var value in Model.PatientHistory.PatientChiefComplaints)
+                {
+                <row style="height: auto">
+                    <cell borderwidth="0.5" left="true" style="height: auto" right="true" top="false" bottom="true">
+                        <chunk style="font-size: 8px;">@value.ChiefComplaint.Title</chunk>
+                    </cell>
+                    <cell borderwidth="0.5" left="true" style="height: auto" right="true" top="false" bottom="true">
+                        <chunk style="font-size: 8px;">@value.ChiefComplaintDuration.Details</chunk>
+                    </cell>
+                </row>
+                }
+
+                <row>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+
+                    </cell>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false"></cell>
+                </row>
+
+                @if (Model.PatientHistory.PatientFamilyDiseases.Count > 0)
+                {
+                <row>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="true">
+                        <chunk style="font-size: 10px; font-weight: bold;">Family Disease</chunk>
+                    </cell>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false"></cell>
+                </row>
+
+                <row>
+                    <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true">
+                        <chunk style="font-size: 10px; font-weight: bold;">Disease</chunk>
+                    </cell>
+                    <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true">
+                        <chunk style="font-size: 10px; font-weight: bold;">Relation</chunk>
+                    </cell>
+                </row>
+
+                    foreach (var value in Model.PatientHistory.PatientFamilyDiseases)
+                    {
+                <row>
+                    <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true">
+                        <chunk style="font-size: 8px;">@value.Disease.MD_NAME</chunk>
+                    </cell>
+                    <cell borderwidth="0.5" left="true" right="true" top="true" bottom="true">
+                        <chunk style="font-size: 8px;">@value.FamilyTree.Title</chunk>
+                    </cell>
+                </row>
+                    }
+                }
+
+                <row>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+
+                    </cell>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false"></cell>
+                </row>
+
+                <row>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+                        <chunk style="font-size: 10px; font-weight: bold;">General Exam:</chunk>
+                    </cell>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false"></cell>
+                </row>
+
+                <row>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+
+                    </cell>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+                        <chunk style="font-size: 10px;">Height: @Model.PatientHistory.PatientGeneralExams.ToList()[0].Height cm</chunk><br />
+                    </cell>
+                </row>
+
+                <row>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+
+                    </cell>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+                        <chunk style="font-size: 10px;">Weight: @Model.PatientHistory.PatientGeneralExams.ToList()[0].Weight kg</chunk>
+                    </cell>
+                </row>
+
+                <row>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+
+                    </cell>
+                    <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+                        <chunk style="font-size: 10px;">BP: @Model.PatientHistory.PatientGeneralExams.ToList()[0].BloodPressure </chunk>
+                    </cell>
+                </row>
+
+            </table>
+
+        </cell>
+
+        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false"></cell>
+
+        <cell borderwidth="0.5" left="false" right="false" top="true" bottom="false">
+            <table width="100%" cellpadding="1.0" cellspacing="1.0" widths="12">
+
+                @if (Model.PatientTreatments.Count > 0)
+                {
+                    <row>
+                        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="true">
+                            <chunk style="font-size: 10px; font-weight: bold;">
+                                Prescription:
+                            </chunk>
+                        </cell>
+                    </row>
+                    
+                    foreach (var value in Model.PatientTreatments)
+                    {
+
+                        <row>
+                            <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+                                <paragraph>
+                                    <chunk style="font-size: 10px; font-weight: bold;">
+                                      @i. @value.Drug.D_TRADE_NAME @value.Drug.D_UNIT_STRENGTH (@value.Drug.D_GENERIC_NAME)
+                                    </chunk>
+                                </paragraph>
+                                <paragraph>
+                                    <chunk style="font-size: 8px;">
+                                        @value.DrugDose.Description
+                                    </chunk>
+                                </paragraph>
+                                <paragraph font="Vrinda" >
+                                    <chunk style="font-size: 8px; font-family:Vrinda;" >
+                                        @value.DoctorNote.Note
+                                    
+                                   </chunk>
+                                </paragraph>
+                            </cell>
+                        </row>
+                        i= i + 1;
+                    }
+                }
+
+                @if (Model.PatientInvestigations.Count > 0)
+                {
+                    <row>
+                        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="true">
+                            <chunk style="font-size: 10px; font-weight: bold;">
+                                Today's Findings:
+                            </chunk>
+                        </cell>
+                    </row>
+                    foreach (var VARIABLE in Model.PatientInvestigations)
+                    {
+                        <row>
+                            <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+                                <paragraph>
+                                    <chunk style="font-size: 8px;">
+                                        @j. @VARIABLE.Test.T_NAME
+                                    </chunk>
+                                </paragraph>
+                            </cell>
+                        </row>
+                        j = j + 1;
+
+                    }
+                }
+
+                @if (SessionManager.PatientPreviousInvestigation.Count > 0)
+                {
+                    <row>
+                        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="true">
+                            <chunk style="font-size: 10px; font-weight: bold;">
+                                Previous Findings:
+                            </chunk>
+                        </cell>
+                    </row>
+                    foreach (var VARIABLE in SessionManager.PatientPreviousInvestigation)
+                    {
+                        <row>
+                            <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+                                <paragraph>
+                                    <chunk style="font-size: 8px;">
+                                        @k. @VARIABLE.TestName :
+                                    </chunk>
+                                    <chunk style="font-size: 8px; font-family:Vrinda;">
+                                        @VARIABLE.Findings
+                                    </chunk>
+                                </paragraph>
+                                <paragraph font="Vrinda">
+                                    
+                                </paragraph>
+                            </cell>
+                        </row>                        
+                        k = k + 1;
+                    }
+                }
+
+
+
+            </table>
+        </cell>
+
+    </row>
+</table>
+
+<table width="100%" cellpadding="1.0" cellspacing="1.0" widths="6;6">
+    <row>
+        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="true">
+            <chunk style="font-size: 8px;font-weight: bold;">Brief Description: </chunk>
+        </cell>
+        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="true">
+            <chunk style="font-size: 8px;"></chunk>
+        </cell>
+    </row>
+    <row>
+        <cell borderwidth="0.5" left="false" right="false" top="false" bottom="false">
+            <chunk style="font-size: 8px;">@Model.BriefSummary </chunk>
+        </cell>
+    </row>
+</table>

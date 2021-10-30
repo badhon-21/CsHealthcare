@@ -1,0 +1,23 @@
+﻿
+@model IEnumerable<CsHealthcare.ViewModel.Store.StoreRequisitionDetailsModel>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.StoreItemName)
+        </td>
+
+        <td style="width: 10% !important">
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+
+
+        <td style="width: 15% !important">
+                <a class="btn btn-primary btn-icon legitRipple" title="Edit" onclick="javascript: EditStoreItem('@item.StoreItemId');"><i class="icon-pencil"></i></a>
+            <a class="btn btn-xs btn-danger" title="Delete" onclick="javascript: if (confirm('Are you sure you want to do operation?') == false) return false; deletStoreItem('@item.Id','@item.StoreItemId'); "><i class="icon-trash"></i></a>
+        </td>
+    </tr>
+}
+
+

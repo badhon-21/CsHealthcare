@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+
+    @@media print {
+        .printOnly {
+            display: block;
+        }
+        /* write your css rules*/
+        .form-group {
+            margin-bottom: 2px;
+        }
+
+        .page-content {
+            padding: 0 !important;
+        }
+
+        .print-nopadding {
+            padding: 0 !important;
+        }
+    }
+    /*for desktop*/
+    @@media screen {
+        .printOnly {
+            display: none;
+        }
+        /*for all display view*/
+
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="col-xs-12 printOnly">
+                    <hgroup class="title-group text-center" style="margin: 5px 0; padding: 0">
+                        <h3>Better Life Hospital</h3>
+                        <h5 class="subtitle">1 East Rampura, D.I.T. Road , Dhaka-1219</h5>
+                        @*<h5 class="subtitle">Training On Basic Biotechnology</h5>*@
+                    </hgroup>
+                </div>
+                <div class="caption">
+                    @*<i class="fa fa-question font-green-sharp"></i>*@
+                    <span class="caption-subject font-green-sharp bold uppercase">Department Wise Item List</span>
+                </div>
+
+                <div class="tools">
+
+
+                    <a href="javascript:;" data-load="true" data-url="@Url.Action("DepartmentWiseItemList", "Department", new {Area = "Department"})" class="reload">
+
+                    </a>
+
+                    @*<a href="javascript:;" class="remove">
+                    </a>*@
+                </div>
+                <div class="actions margin-right-10">
+                    <button id="btnPrint" onclick="myFunction() " class="btn btn-lg blue hidden-print margin-bottom-5" style="background-color: #1e90ff; color: white; float: right">Print <i class="icon-printer2"></i></button>
+
+                </div>
+            </div>
+            @*<hr style="margin-top:0;">*@
+            <div class="portlet-body ">
+               
+
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+      
+    </div>
+
+</div>
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section page_styles {
+
+
+    <link href="~/assets/global/plugins/select2/css/select2.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+
+
+}
+
+@section Scripts {
+
+    <script src="~/assets/global/plugins/select2/js/select2.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/jquery.datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+
+        });
+        function myFunction() {
+            
+            var printButton = document.getElementById("btnPrint");
+        
+            printButton.style.visibility = 'hidden';
+           
+            window.print();
+            
+            printButton.style.visibility = 'visible';
+           
+        }
+
+
+    </script>
+
+}
+

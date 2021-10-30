@@ -1,0 +1,1031 @@
+﻿@model CsHealthcare.ViewModel.MicrobiologyTest.MicrobiologyTestModel
+@{
+    ViewBag.Title = "DeliveredReport";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<div class="page">
+    <h2 style="text-align: center; ">Better Life Hospital Ltd</h2>
+    <div style="text-align: center;">1 East Rampura, D.I.T. Road , Dhaka-1219</div>
+<div style="text-align: center;">
+    Hot Line:<a class="tel">09639786786,&nbsp;</a><a class="tel">09678786787</a>
+</div>
+    <div style="text-align: center;">
+        <table style="width: 399px; text-align: center; margin-left: 30%; margin-top: 2%">
+            <tbody>
+                <tr>
+                    <td style="width: 399px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MICROBIOLOGY EXAMINATION REPORT</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        <p>&nbsp;</p>
+        <p style="margin-left: 10%; margin-top: 2%">
+            ID No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :@Model.PatientId&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Date:@Model.TestDate.ToString("d")
+        </p>
+        <p style="margin-left:10% ">Patient's Name :@Model.PatientName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Age:@Model.PatientAge Year</p>
+        <p style="margin-left:10% ">Refd. By&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :@Model.ReferredBy</p>
+        <p style="margin-left:10% ">Specimen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :@Model.SpecimenName</p>
+
+
+
+        <p style="margin-left:10% ">@Model.SpecimenName Culture&nbsp; :@Model.Culture</p>
+
+        <p style="margin-left:10% ">Organism Isolated:&nbsp;@Model.OrganismIsolated</p>
+
+        <table class="responsive" style="height:  auto; width:auto ; border: 1px solid; margin-left: 8%; margin-right: 4%;empty-cells:hide;">
+            <tbody>
+            <tr style="height: 31.6px; border: 1px solid">
+                <td style="width: 120.133px; height: 31.6px; border: 1px solid"><b>Sensitivity</b></td>
+                <td style="width: 75.8667px; height: 31.6px; border: 1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> a</b></td>
+                <td style="width: 98px; height: 31.6px; border: 1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> b</b></td>
+                <td style="width: 98px; height: 31.6px; border: 1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> c</b></td>
+                <td style="width: 167px; height: 31.6px; border: 1px solid">&nbsp; <b>Sensitivity</b></td>
+                <td style="width: 59px; height: 31.6px; border: 1px solid">&nbsp;&nbsp;<b> a</b></td>
+                <td style="width: 64px; height: 31.6px; border: 1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> b</b></td>
+                <td style="width: 98px; height: 31.6px; border: 1px solid">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b> c</b></td>
+            </tr>
+            <tr style="height: 30px; ">
+                @if (Model.Ampicillin != null)
+                {
+
+                    <td style="width: 120.133px; height: 30px; border: 1px solid">&nbsp;Ampicillin</td>
+                    if (Model.Ampicillin == "S")
+                     {
+
+                         <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Ampicillin</td>
+                         <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                         <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                     }
+                     else if (Model.Ampicillin == "R")
+                     {
+                         <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                         <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Ampicillin</td>
+                         <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                     }
+                     else 
+                     {
+                         <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                         <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                         <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Ampicillin</td>
+                    }
+                   
+                }
+                else
+                {
+                    <td style="visibility: hidden"></td>
+                    <td style="width: 75.8667px; height: 30px; border: 1px solid;visibility: hidden">&nbsp;</td>
+                    <td style="width: 75.8667px; height: 30px; border: 1px solid;visibility: hidden">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid;visibility: hidden">&nbsp;</td>
+                }
+@if (Model.Amoxycillin != null)
+{
+    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Amoxycillin</td>
+    if (Model.Amoxycillin == "S")
+    {
+
+        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Amoxycillin</td>
+        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+    }
+    else if (Model.Amoxycillin == "R")
+    {
+        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Amoxycillin</td>
+        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+    }
+    else
+    {
+        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Amoxycillin</td>
+    }
+}
+else
+{
+    <td style="visibility: hidden"></td>
+                    <td style="width: 75.8667px; height: 30px; border: 1px solid;visibility: hidden">&nbsp;</td>
+                    <td style="width: 75.8667px; height: 30px; border: 1px solid;visibility: hidden">&nbsp;</td>
+                    <td style="width: 98px; height: 30px; border: 1px solid;visibility: hidden">&nbsp;</td>
+}l
+            </tr>
+                
+                
+
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Amoxyclav</td>
+                    @if (Model.Amoxyclav == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Amoxyclav</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Amoxyclav == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Amoxyclav</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Amoxyclav</td>
+                    }
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Amikacin</td>
+                    @if (Model.Amikacin == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Amikacin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Amikacin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Amikacin</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Amikacin</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Azithromycin</td>
+                    @if (Model.Azithromycin == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Azithromycin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Azithromycin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Azithromycin</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Azithromycin</td>
+                    }
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Carbinicillin</td>
+                    @if (Model.Carbinicillin == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Carbinicillin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Carbinicillin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Carbinicillin</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Carbinicillin</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Cefixime</td>
+                    @if (Model.Cefixime == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Cefixime</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Cefixime == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Cefixime</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Cefixime</td>
+                    }
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Cefotaxime</td>
+                    @if (Model.Cefotaxime == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Cefotaxime</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Cefotaxime == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Cefotaxime</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Cefotaxime</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Cefepime</td>
+                    @if (Model.Cefepime == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Cefepime</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Cefepime == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Cefepime</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Cefepime</td>
+                    }
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Ceftazidime</td>
+                    @if (Model.Ceftazidime == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Ceftazidime</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Ceftazidime == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Ceftazidime</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Ceftazidime</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Ceftiaxone</td>
+                    @if (Model.Ceftiaxone == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Ceftiaxone</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Ceftiaxone == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Ceftiaxone</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Ceftiaxone</td>
+                    }
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Cephalexine</td>
+                    @if (Model.Cephalexine == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Cephalexine</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Cephalexine == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Cephalexine</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Cephalexine</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Chloramphenicol</td>
+                    @if (Model.Chloramphenicol == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Chloramphenicol</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Chloramphenicol == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Chloramphenicol</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Chloramphenicol</td>
+                    }
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Cloxacillin</td>
+                    @if (Model.Cloxacillin == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Cloxacillin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Cloxacillin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Cloxacillin</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Cloxacillin</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Colistin</td>
+                    @if (Model.Colistin == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Colistin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Colistin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Colistin</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Colistin</td>
+                    }
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Cefuroxime</td>
+                    @if (Model.Cefuroxime == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Cefuroxime</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Cefuroxime == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Cefuroxime</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Cefuroxime</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Cephradine</td>
+                    @if (Model.Cephradine == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Cephradine</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Cephradine == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Cephradine</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Cephradine</td>
+                    }
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Ciprofloxacin</td>
+                    @if (Model.Ciprofloxacin == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Ciprofloxacin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Ciprofloxacin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Ciprofloxacin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Ciprofloxacin</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Cotrimoxazole</td>
+                    @if (Model.Cotrimoxazole == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Cotrimoxazole</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Cotrimoxazole == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Cotrimoxazole</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Cotrimoxazole</td>
+                    }
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Doxycycline</td>
+                    @if (Model.Doxycycline == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Doxycycline</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Ciprofloxacin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Doxycycline</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Doxycycline</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Erythromycin</td>
+                    @if (Model.Erythromycin == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Erythromycin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Erythromycin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Erythromycin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Erythromycin</td>
+                    }
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;FusidicAcid</td>
+                    @if (Model.FusidicAcid == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.FusidicAcid</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.FusidicAcid == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.FusidicAcid</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.FusidicAcid</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Gentamycin</td>
+                    @if (Model.Gentamycin == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Gentamycin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Gentamycin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Gentamycin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Gentamycin</td>
+                    }
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Imipenem</td>
+                    @if (Model.Imipenem == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Imipenem</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Imipenem == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Imipenem</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Imipenem</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Meropenem</td>
+                    @if (Model.Meropenem == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Meropenem</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Meropenem == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Meropenem</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Meropenem</td>
+                    }
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;NalidexicAcid</td>
+                    @if (Model.NalidexicAcid == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.NalidexicAcid</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.NalidexicAcid == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.NalidexicAcid</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.NalidexicAcid</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Netilmycin</td>
+                    @if (Model.Netilmycin == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Netilmycin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Netilmycin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Netilmycin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Netilmycin</td>
+                    }
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Nitrofurantion</td>
+                    @if (Model.Nitrofurantion == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Nitrofurantion</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Nitrofurantion == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Nitrofurantion</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Nitrofurantion</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Mecillinam</td>
+                    @if (Model.Mecillinam == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Mecillinam</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Mecillinam == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Mecillinam</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Mecillinam</td>
+                    }
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Oxacillin</td>
+                    @if (Model.Oxacillin == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Oxacillin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Oxacillin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Oxacillin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Oxacillin</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Penicillin</td>
+                    @if (Model.Penicillin == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Penicillin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Penicillin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Penicillin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Penicillin</td>
+                    }
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Rifampicin</td>
+                    @if (Model.Rifampicin == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Rifampicin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Rifampicin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Rifampicin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Rifampicin</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Tetracycline</td>
+                    @if (Model.Tetracycline == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Tetracycline</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Tetracycline == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Tetracycline</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Tetracycline</td>
+                    }
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Tobramycin</td>
+                    @if (Model.Tobramycin == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Tobramycin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Tobramycin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Tobramycin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Tobramycin</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Vancomycin</td>
+                    @if (Model.Vancomycin == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Vancomycin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Vancomycin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Vancomycin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Vancomycin</td>
+                    }
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;PiperacillinOrTazobactam</td>
+                    @if (Model.PiperacillinOrTazobactam == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.PiperacillinOrTazobactam</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.PiperacillinOrTazobactam == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.PiperacillinOrTazobactam</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.PiperacillinOrTazobactam</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Linezolid</td>
+                    @if (Model.Linezolid == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Linezolid</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Linezolid == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Linezolid</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Linezolid</td>
+                    }
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Doripenum</td>
+                    @if (Model.Doripenum == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Doripenum</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Doripenum == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Doripenum</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Doripenum</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Tigecycline</td>
+                    @if (Model.Tigecycline == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Tigecycline</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Tigecycline == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Tigecycline</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Tigecycline</td>
+                    }
+                    <td style="width: 167px; height: 30px; border: 1px solid">&nbsp;Ticarcillin</td>
+                    @if (Model.Ticarcillin == "S")
+                    {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Ticarcillin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Ticarcillin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Ticarcillin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Ticarcillin</td>
+                    }
+                </tr>
+                <tr style="height: 30px;">
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Clindamycin</td>
+                    @if (Model.Clindamycin == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Clindamycin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Clindamycin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Clindamycin</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Clindamycin</td>
+                    }
+                    <td style="width: 167px; height: 30px;border: 1px solid">&nbsp;Levofloxacin</td>
+                    @if (Model.Levofloxacin == "S")
+            {
+
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;@Model.Levofloxacin</td>
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else if (Model.Levofloxacin == "R")
+                    {
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px; border: 1px solid">&nbsp;@Model.Levofloxacin</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                    }
+                    else
+                    {
+                        <td style="width: 75.8667px; height: 30px; border: 1px solid">&nbsp;</td>
+                        <td style="width: 75.8667px; height: 30px;border:1px solid">&nbsp;</td>
+                        <td style="width: 98px; height: 30px;border:1px solid">&nbsp;@Model.Levofloxacin</td>
+                    }
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-left: 10%">S = Sensitive&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; R= Resistant&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I= Intermediate</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+
+        @*<h2 style="text-align: center; ">Better Life Hospital Ltd</h2>
+        <div style="text-align: center;">1 East Rampura, D.I.T. Road , Dhaka-1219</div>
+<div style="text-align: center;">
+    Hot Line:<a class="tel">09639786786,&nbsp;</a><a class="tel">09678786787</a>
+</div>
+    <div style="text-align: center;">
+        <table style="width: 399px; text-align: center; margin-left: 30%; margin-top: 2%">
+            <tbody>
+                <tr>
+                    <td style="width: 399px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MICROBIOLOGY EXAMINATION REPORT</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        <p style="margin-left: 10%; margin-top: 2%">
+            ID No&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :@Model.PatientId&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            Date:@Model.TestDate.ToString("d")
+        </p>
+        <p style="margin-left:10% ">Patient's Name :@Model.PatientName&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Age:@Model.PatientAge Year</p>
+        <p style="margin-left:10% ">Refd. By&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :@Model.ReferredBy</p>
+        <p style="margin-left:10% ">Specimen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :@Model.SpecimenName</p>*@
+
+
+        <p>&nbsp;</p>
+        
+        <div style="width: 100%; text-align: center;">
+            <button id="btnPrint" onclick="myFunction()" class="hide-from-printer" style="margin-top:5%">Print </button>
+            <a id="btnCancel" href="@Url.Action("Index", "TestRequest", new {Area = "Diagnostic"})" type="button" class="" style="margin-left: 1%;" class="hide-from-printer">Cancel</a>
+        </div>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+    </div>
+
+    <style type="text/css">
+        @@page {
+            size: auto;
+            margin-right: 5%;
+        }
+
+        @@print {
+            .hide-from-printer {
+                display: none;
+            }
+        }
+    </style>
+    <script>
+        function myFunction() {
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("btnPrint");
+            var cancelButton = document.getElementById("btnCancel");
+            //Set the print button visibility to 'hidden'
+            printButton.style.visibility = 'hidden';
+            cancelButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print();
+            //Set the print button to 'visible' again
+            //[Delete this line if you want it to stay hidden after printing]
+            printButton.style.visibility = 'visible';
+            cancelButton.style.visibility = 'visible';
+
+
+        }
+    </script>
+

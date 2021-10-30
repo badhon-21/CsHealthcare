@@ -1,0 +1,449 @@
+﻿
+@model CsHealthcare.ViewModel.Diagnostic.RETestModel
+@{
+    ViewBag.Title = "Print Urin Routine Examination";
+    Layout = null;
+}
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@print {
+        .hide-from-printer {
+            display: none;
+        }
+    }
+</style>
+
+<div class="page">
+<div style="min-height: 400px; width: 460px; font-size: 12px; margin-left: 20%; margin-right: 20%;margin-top: 2%">
+    <h2 style="text-align: center; ">Better Life Hospital Ltd</h2>
+    <div style="text-align: center;">1 East Rampura, D.I.T. Road , Dhaka-1219</div>
+    <div style="width: 100%; text-align: center">
+        <h3>
+            <b>Clinical Pathology Urin</b>
+        </h3>
+    </div>
+
+
+
+    <div style="width: 100%; display: table;">
+        <div style="width: 60%; float: left; display: table-cell;">
+            <div style="width: 42%; float: left;font-weight: bold;">Patient Name</div>
+            <div id="Id" style="width: 58%; float: left;">@Model.PatientName</div>
+
+        </div>
+        <div style="width: 30%; float: right;">
+            <div style="float: left; margin-right: 5px;font-weight: bold;">Patient Code</div>
+            <div style="float: left; margin-right: 5px;">@Model.PatientCode</div>
+
+        </div>
+    </div>
+
+    <div style="float: left; width: 100%; display: table; margin-bottom: 5px;">
+
+        <div style="width: 60%; float: left; display: table-cell;">
+            <div style="width: 42%; float: left; font-weight: bold;">Reference By</div>
+            <div style="width: 58%; float: left;">@Model.ReferanceName</div>
+
+        </div>
+
+        <div style="width: 30%; float: right;">
+            <div style="float: left;width: 42%;font-weight: bold;">Age</div>
+            <div style="float: left;width: 58%;">@Model.Age</div>
+
+        </div>
+
+    </div>
+
+    <div style="float: left; width: 100%; display: table; margin-bottom: 5px;">
+
+        <div style="width: 60%; float: left; display: table-cell;">
+            <div style="width: 42%; float: left; font-weight: bold;">Report Date</div>
+            <div style="width: 58%; float: left;">@Model.Date.ToString("dd/MM/yyyy")</div>
+
+        </div>
+        <div style="width: 30%; float: right;">
+            <div style="float: left;width: 42%;font-weight: bold;">Dept</div>
+            <div style="float: left;width: 58%;">@Model.Department</div>
+
+        </div>
+
+    </div>
+
+    <div style="width: 100%; Display: block"></div>
+<div style="width: 100%; margin-top: 5px; float: left; border-top: dotted 1px; border-bottom: dotted 1px;">
+ <table style="width: 100%; height: 310px; margin-left: auto; margin-right: auto;" border="1px solid ">
+<caption>&nbsp;</caption>
+<thead>
+<tr>
+    <th>Investigation</th>
+    <th> Result</th>
+    <th> Unit</th>
+    <th> Refference Range</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+    <td><b>Physical Examination</b></td>
+    <td></td>
+    <td></td>
+    <td></td>
+</tr>
+<tr>
+    <td>Colour </td>
+
+    <td>@Model.Colour </td>
+
+    <td>@Model.ColourUnit </td>
+    <td>@Model.ColourRefer </td>
+</tr>
+
+<tr>
+    <td>Turbidity</td>
+
+    <td> @Model.Turbidity</td>
+
+    <td> @Model.TurbidityUnit</td>
+    <td> @Model.TurbidityRefer</td>
+</tr>
+
+<tr>
+    <td>Clarity</td>
+
+    <td> @Model.Clarity</td>
+
+    <td> @Model.ClarityUnit</td>
+    <td> @Model.ClarityRefer</td>
+</tr>
+<tr>
+    <td>Sediment</td>
+
+    <td>@Model.Sediment</td>
+
+    <td>@Model.SedimentUnit</td>
+    <td>@Model.SedimentRefer</td>
+</tr>
+<tr>
+    <td><b>Chemical Examination</b></td>
+
+    <td></td>
+
+    <td></td>
+    <td></td>
+</tr>
+
+<tr>
+
+
+    <td>Specificgravity</td>
+
+    <td>@Model.Specificgravity</td>
+    <td>@Model.SpecificgravityUnit</td>
+    <td>@Model.SpecificgravityRefer</td>
+</tr>
+
+<tr>
+
+
+    <td>Glucose</td>
+
+    <td>@Model.Glucose</td>
+    <td>@Model.GlucoseUnit</td>
+    <td>@Model.GlucoseRefer</td>
+</tr>
+
+<tr>
+
+
+    <td>Albumin</td>
+
+    <td>@Model.Albumin </td>
+    <td>@Model.AlbuminUnit </td>
+  
+    <td>@Model.AlbuminRefer </td>
+</tr>
+
+<tr>
+
+
+    <td>Blood</td>
+
+    <td>@Model.Blood</td>
+    <td>@Model.BloodUnit</td>
+    <td>@Model.BloodRefer</td>
+</tr>
+
+
+<tr>
+
+
+    <td>Ketones</td>
+
+    <td>@Model.Ketones</td>
+    <td>@Model.KetonesUnit</td>
+    <td>@Model.KetonesRefer</td>
+</tr>
+<tr>
+    <td>
+        Nitrite
+    </td>
+    <td>@Model.Nitrite</td>
+    <td>@Model.NitriteUnit</td>
+    <td>@Model.NitriteRefer</td>
+</tr>
+<tr>
+    <td>
+        Bilirubin
+    </td>
+    <td>@Model.Bilirubin</td>
+    <td>@Model.BilirubinUnit</td>
+    <td>@Model.BilirubinRefer</td>
+</tr>
+<tr>
+
+
+    <td>Urobilinogen</td>
+
+    <td>@Model.Urobilinogen</td>
+    <td>@Model.UrobilinogenUnit</td>
+    <td>@Model.UrobilinogenRefer</td>
+</tr>
+<tr>
+
+
+    <td>PH</td>
+
+    <td>@Model.PH</td>
+    <td>@Model.PHUnit</td>
+    <td>@Model.PHRefer</td>
+</tr>
+
+<tr>
+    <td><b>Microscopic Examination</b></td>
+
+    <td></td>
+
+    <td></td>
+    <td></td>
+</tr>
+
+<tr>
+
+
+    <td>Puscells</td>
+
+    <td>@Model.Puscells</td>
+    <td>@Model.PuscellsUnit</td>
+    <td>@Model.PuscellsRefer</td>
+</tr>
+
+<tr>
+
+
+    <td>EpithelialCells</td>
+
+    <td>@Model.EpithelialCells</td>
+    <td>@Model.EpithelialCellsUnit</td>
+    <td>@Model.EpithelialCellsRefer</td>
+</tr>
+
+<tr>
+
+
+    <td>RedBloodCell</td>
+
+    <td>@Model.RedBloodCell</td>
+    <td>@Model.RedBloodCellUnit</td>
+    <td>@Model.RedBloodCellRefer</td>
+</tr>
+
+<tr>
+
+
+    <td>WbcCast</td>
+
+
+    <td>@Model.WbcCast</td>
+    <td>@Model.WbcCastUnit</td>
+    <td>@Model.WbcCastRefer</td>
+</tr>
+
+
+
+<tr>
+
+
+    <td>RbcCast</td>
+
+
+    <td>@Model.RbcCast</td>
+    <td>@Model.RbcCastUnit</td>
+    <td>@Model.RbcCastRefer</td>
+</tr>
+
+<tr>
+
+
+    <td>CalciumOxalate</td>
+
+
+    <td>@Model.CalciumOxalate</td>
+    <td>@Model.CalciumOxalateUnit</td>
+    <td>@Model.CalciumOxalateRefer</td>
+</tr>
+
+
+<tr>
+
+
+    <td>Amorphosphate</td>
+
+
+    <td>@Model.Amorphosphate</td>
+    <td>@Model.AmorphosphateUnit</td>
+    <td>@Model.AmorphosphateRefer</td>
+</tr>
+
+<tr>
+
+
+    <td>Yeast Candida</td>
+
+
+    <td>@Model.YeastCandida</td>
+    <td>@Model.YeastCandidaUnit</td>
+    <td>@Model.YeastCandidaRefer</td>
+</tr>
+
+
+<tr>
+
+
+    <td>Trichomonas Vaginalis</td>
+
+
+    <td>@Model.TrichomonasVaginalis</td>
+    <td>@Model.TrichomonasVaginalisUnit</td>
+    <td>@Model.TrichomonasVaginalisRefer</td>
+</tr>
+
+<tr>
+
+
+    <td>Uric Acid</td>
+
+
+    <td>@Model.UricAcid</td>
+    <td>@Model.UricAcidUnit</td>
+    <td>@Model.UricAcidRefer</td>
+</tr>
+
+<tr>
+
+
+    <td>Triple Phosphate</td>
+
+
+    <td>@Model.TriplePhosphate</td>
+    <td>@Model.TriplePhosphateUnit</td>
+    <td>@Model.TriplePhosphateRefer</td>
+</tr>
+<tr>
+<tr>
+
+
+    <td>GranularCast</td>
+
+    <td>@Model.GranularCast</td>
+    <td>@Model.GranularCastUnit</td>
+    <td>@Model.GranularCastRefer</td>
+</tr>
+<tr>
+
+
+    <td>HyalineCast</td>
+
+    <td>@Model.HyalineCast</td>
+    <td>@Model.HyalineCastUnit</td>
+    <td>@Model.HyalineCastRefer</td>
+</tr>
+<tr>
+
+
+    <td>Spermatozoa</td>
+
+    <td>@Model.Spermatozoa</td>
+    <td>@Model.SpermatozoaUnit</td>
+    <td>@Model.SpermatozoaRefer</td>
+</tr>
+
+
+<tr>
+
+
+    <td>Crystals</td>
+
+    <td>@Model.Crystals</td>
+    <td>@Model.CrystalsUnit</td>
+    <td>@Model.CrystalsRefer</td>
+</tr>
+<tr>
+    <td>
+        Others
+    </td>
+    <td>@Model.Others</td>
+    <td>@Model.OthersUnit</td>
+    <td>@Model.OthersRefer</td>
+</tr>
+</tbody>
+</table>
+
+
+
+</div>
+
+
+
+
+
+<div style="width: 100%; text-align: center;">
+    <button id="btnPrint" onclick="myFunction()" class="hide-from-printer" style="margin-top: 10%">Print </button>
+    <a id="btnCancel" href="@Url.Action("Create", "RE", new {Area = "Hospital"})" type="button" class="" style="margin-left: 1%;" class="hide-from-printer">Cancel</a>
+</div>
+
+</div>
+</div>
+    <script>
+        function myFunction() {
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("btnPrint");
+            var cancelButton = document.getElementById("btnCancel");
+            //Set the print button visibility to 'hidden'
+            printButton.style.visibility = 'hidden';
+            cancelButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print();
+            //Set the print button to 'visible' again
+            //[Delete this line if you want it to stay hidden after printing]
+            printButton.style.visibility = 'visible';
+            cancelButton.style.visibility = 'visible';
+
+
+        }
+        jQuery(document).ready(function () {
+
+
+        });
+
+    </script>
+
+
+
+
+
+
+

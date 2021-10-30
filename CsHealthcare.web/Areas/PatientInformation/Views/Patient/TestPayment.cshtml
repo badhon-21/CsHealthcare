@@ -1,0 +1,244 @@
+﻿@model CsHealthcare.ViewModel.Patient.PatientModel
+
+@{
+    ViewBag.Title = "Add Payment";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("Create", "Patient", new { area = "PatientInformation" }, FormMethod.Post, new { @id = "sale_form", @class = "" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-header" style="background-color: #ffffff;display: block">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h5 class="modal-title"><i class="icon-add"></i>@ViewBag.Title</h5>
+        @*<hr style="margin-bottom: 0px;">*@
+    </div>
+
+    <div class="modal-body">
+        <div class="row">
+
+
+
+            <input type="hidden" id="SaleType" name="SaleType" value="Confirm"/>
+            @*<input type="hidden" id="Id" name="Id" value="@ViewBag.Id" />*@
+            <input type="hidden" id="Name" name="Name" value="@ViewBag.Name"/>
+            <input type="hidden" id="Sex" name="Sex" value="@ViewBag.Sex"/>
+            <input type="hidden" id="Age" name="Age" value="@ViewBag.Age" />
+            <input type="hidden" id="PatientCode" name="PatientCode" value="@ViewBag.PatientCode" />
+            <input type="hidden" id="Address" name="Address" value="@ViewBag.Address"/>
+            <input type="hidden" id="ReferanceName" name="ReferanceName" value="@ViewBag.ReferenceName" />
+            <input type="hidden" id="MobileNumber" name="MobileNumber" value="@ViewBag.MobileNo" />
+            <input type="hidden" id="SubTotal" name="SubTotal" value="@ViewBag.SubTotal" />
+            <input type="hidden" id="Discount" name="Discount" value="@ViewBag.Discount"/>
+            <input type="hidden" id="ItemQuantity" name="ItemQuantity" value="@ViewBag.ItemQuantity"/>
+            <input type="hidden" id="MarketingBy" name="MarketingBy" value="@ViewBag.MarketingBy"/>
+            <input type="hidden" id="Remark" name="Remark" value="@ViewBag.Remark" />
+            @*<input type="hidden" id="GrandTotal" name="GrandTotal" value="@ViewBag.GrandTotal" />*@
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="col-md-6">
+                    @*<div class="col-md-12 form-group">
+                        
+                        @Html.LabelFor(model => model.VoucherNo, htmlAttributes: new { @class = "control-label col-md-12" })
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" id="VoucherNo" name="VoucherNo" value="@ViewBag.VoucherNumber" />
+                            @Html.ValidationMessageFor(model => model.VoucherNo, "", new { @class = "text-danger" })
+                        </div>
+                        
+                    </div>*@
+                    <div class="col-md-12 form-group">
+                        @*<div id="TotalAmount" class="col-md-12 form-group" >*@
+                        @Html.LabelFor(model => model.TotalAmount, htmlAttributes: new {@class = "control-label col-md-12"})
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" id="TotalAmount" name="TotalAmount" value="@ViewBag.GrandTotal"/>
+                            @Html.ValidationMessageFor(model => model.TotalAmount, "", new {@class = "text-danger"})
+                        </div>
+                        @*</div>*@
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        @Html.LabelFor(model => model.TransactionType, htmlAttributes: new {@class = "control-label col-md-12"})
+                        <div class="col-md-12">
+                            <select id="TransactionType" name="TransactionType" class="form-control">
+                                <option value="Cash">Cash</option>
+                                <option value="Credit Card">Credit Card</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="transaction_no" class="col-md-12 form-group" style="display: none;">
+                        @Html.LabelFor(model => model.TransactionNumber, htmlAttributes: new {@class = "control-label col-md-12"})
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.TransactionNumber, new {htmlAttributes = new {@class = "form-control"}})
+                            @Html.ValidationMessageFor(model => model.TransactionNumber, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        @Html.LabelFor(model => model.GivenAmount, htmlAttributes: new {@class = "control-label col-md-12"})
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.GivenAmount, new {htmlAttributes = new {@class = "form-control  twodigitdecimalnumber",}})
+                            @Html.ValidationMessageFor(model => model.GivenAmount, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        @Html.LabelFor(model => model.ChangeAmount, htmlAttributes: new {@class = "control-label col-md-12"})
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.ChangeAmount, new {htmlAttributes = new {@class = "form-control twodigitdecimalnumber", @Readonly = "Readonly"}})
+                            @Html.ValidationMessageFor(model => model.ChangeAmount, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        @Html.LabelFor(model => model.DeuAmount, htmlAttributes: new {@class = "control-label col-md-12"})
+                        <div class="col-md-12">
+                            @Html.EditorFor(model => model.DeuAmount, new {htmlAttributes = new {@class = "form-control twodigitdecimalnumber",}})
+                            @Html.ValidationMessageFor(model => model.DeuAmount, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-5">
+                    <div class="panel panel-flat">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">Virtual keyboard</h4>
+                            <div class="heading-elements">
+
+                            </div>
+                        </div>
+                        <div class="panel-body" style="padding-bottom: 0px !important;" ng-app="">
+                            <div class="row">
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%;">1</button>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%; width: 95%;">CE</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%;">1</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%;">2</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%;">3</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%;">4</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%;">5</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%;">6</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%;">7</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%;">8</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%;">9</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <div class="col-md-8">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%; width: 95%;">0</button>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button type="button" class="btn btn-default" style="margin-left: 1%; width: 94%;">.</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <input type="submit" id="addbtn" value="Pay Now" class="btn btn-primary legitRipple " />
+        <button type="button" data-dismiss="modal" class="btn btn-default" style="margin-left: 1%;">Cancel</button>
+    </div>
+
+}
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        decimal_with_two_digit();
+
+        $("#GivenAmount").keyup(function () {
+            var GrandTotal = parseFloat($("#GrandTotal").val());
+            var GivenAmount = parseFloat($("#GivenAmount").val());
+            //var DeuAmount = parseFloat($("#DeuPrice").val());
+            var ChangeAmount = (GrandTotal - GivenAmount);
+            $("#ChangeAmount").val(ChangeAmount);
+            $("#DeuAmount").val(ChangeAmount);
+          
+        });
+
+        $('#TransactionType').change(function () {
+            var selectedVal = $('#TransactionType option:selected').attr('value');
+            if (selectedVal == "Cash") {
+                $("#transaction_no").hide();
+            } else if (selectedVal == "Credit Card") {
+                $("#transaction_no").show();
+            }
+        });
+
+    });
+
+    function decimal_with_two_digit() {
+        $(".twodigitdecimalnumber").format({ precision: 2, allow_negative: false, autofix: true });
+    }
+
+    @*function Amount() {
+        $.ajax({
+
+            type: "GET",
+            cache: false,
+            url: "@(@Url.Action("GivenAmount", "Patient", new {Area = "PatientInformation" }))",
+            data: { "amount": $('#GivenAmount').val() },
+        dataType: "html",
+        success: function (result) {
+
+            var t = JSON.parse(result);
+            if (t == true) {
+                var a = "true";
+            } else {
+                var msg = "At First enter the given amount value";
+                alert(msg);
+                $('#addbtn').attr('disabled','disabled');
+                $('#updatebtn').attr('disabled', 'disabled');;
+                    
+            }
+            //calculate();
+            //$('#Total').val(t.T_Price);
+            // $('#quantity').focus();
+        },
+        error: function (error) {
+            //Metronic.unblockUI();
+            var msg = 'Fail to load .';
+            alert(msg);
+        }
+    });
+    }*@
+
+</script>

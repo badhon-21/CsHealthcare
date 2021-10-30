@@ -1,0 +1,27 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Store.StockOutItemSummaryModel>
+
+
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @item.Date.ToString("d")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ItemName)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+
+        @*<td>
+            @Html.DisplayFor(modelItem => item.RemainingQuantity)
+        </td>*@
+
+    </tr>
+}
+
+
+

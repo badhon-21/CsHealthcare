@@ -1,0 +1,185 @@
+﻿@model CsHealthcare.ViewModel.Accounts.GL_ACCOUNTModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-gift"></i> Department
+        </div>
+        <div class="tools">
+            <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+            <a href="" class="fullscreen" data-original-title="" title=""> </a>
+            <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+        </div>
+
+    </div>
+    <div class="portlet-body">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.GC_ID)
+
+                <fieldset>
+                    <legend>Account Description</legend>
+                    <div class="form-group col-md-8">
+                        <label class="col-md-4" style="">Account Code</label>
+                        @*@Html.LabelFor(model => model.GL_CODE, htmlAttributes: new { @class = "control-label col-md-4" })*@
+                        <div class="col-md-8" style="">
+                            @Html.EditorFor(model => model.GL_CODE, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GL_CODE, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label class="col-md-4" style="">Name</label>
+                        @*@Html.LabelFor(model => model.GL_NAME, htmlAttributes: new { @class = "control-label col-md-4" })*@
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.GL_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GL_NAME, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="form-group col-md-8">
+                        <label class="col-md-4" style="">Parent</label>
+                        @*@Html.LabelFor(model => model.GL_MAP_CODE, htmlAttributes: new { @class = "control-label col-md-4" })*@
+                        <div class="col-md-8">
+                            @Html.EditorFor(model => model.GL_MAP_CODE, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GL_MAP_CODE, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    @*<div class="form-group col-md-8">
+                            <label class="col-md-4" style="">Category</label>
+                            @Html.LabelFor(model => model.GL_CATEGORY, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8" >
+                                <select id="GC_ID" name="GL_CATEGORY" class="select"></select>
+                                @Html.EditorFor(model => model.GL_CATEGORY, new { htmlAttributes = new { @class = "form-control" } })
+                                  @Html.ValidationMessageFor(model => model.GL_CATEGORY, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                </fieldset>
+
+
+
+                <fieldset>
+                    <legend>Account Type</legend>
+                    <div class="col-md-4" style="">
+                        <div class="col-md-6"><input type="radio" name="GL_HEAD_TYPE" value="p" checked> Parent</div>
+                        <div class="col-md-6"><input type="radio" name="GL_HEAD_TYPE" value="s"> Subsidiary</div>
+                    </div>
+                </fieldset>
+
+
+
+
+
+
+                <div class="form-group">
+                    @*@Html.LabelFor(model => model.GL_CATEGORY, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            <select id="GC_ID" name="GL_CATEGORY" class="form-control"></select>
+
+                        </div>*@
+                    @*</div>
+
+                        <div class="form-group">*@
+                    @*@Html.LabelFor(model => model.GL_HEAD_TYPE, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-4" style="margin-top:10px">
+                        @*<div class="col-md-6"><input type="radio" name="GL_HEAD_TYPE" value="parent" checked> Parent</div>
+                            <div class="col-md-6"><input type="radio" name="GL_HEAD_TYPE" value="subsidiary"> Subsidiary</div>*@
+
+
+                        @*<select id="GL_HEAD_TYPE" name="GL_HEAD_TYPE" class="select">
+                                <option>P</option>
+                                <option>S</option>
+                            </select>*@
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <label class="col-md-4">Switchable Parent(If any)</label>
+                    @*@Html.LabelFor(model => model.GL_SWITCHABLE_PARENT_ID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.GL_SWITCHABLE_PARENT_ID, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GL_SWITCHABLE_PARENT_ID, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4">Currency</label>
+                    @*@Html.LabelFor(model => model.GL_CURRENCY, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-4">
+                        @*@Html.EditorFor(model => model.GL_CURRENCY, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GL_CURRENCY, "", new { @class = "text-danger" })*@
+                        <select id="GL_CURRENCY" name="GL_CURRENCY" class="select">
+                            <option>BDT</option>
+                            @*<option>2</option>*@
+                        </select>
+
+                    </div>
+                </div>
+                <fieldset>
+                    <legend>Transaction Scope</legend>
+                    <div class="form-group">
+                        @*@Html.LabelFor(model => model.GL_TRANSACTION_SCOPE, htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+                        <div class="col-md-4" style="">
+                            <div class="col-md-6"><input type="radio" name="GL_TRANSACTION_SCOPE" value="en" checked> Enable</div>
+                            <div class="col-md-6"><input type="radio" name="GL_TRANSACTION_SCOPE" value="di"> Disable</div>
+                        </div>
+
+                    </div>
+                </fieldset>
+
+
+                @*<div class="form-group">
+                        @Html.LabelFor(model => model.GL_TRANSACTION_STATUS, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.GL_TRANSACTION_STATUS, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GL_TRANSACTION_STATUS, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GL_DIRECT_POSTING, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.GL_DIRECT_POSTING, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GL_DIRECT_POSTING, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GL_VERIFY_USER, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.GL_VERIFY_USER, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GL_VERIFY_USER, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.GL_VERIFY_DATE_TIME, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.GL_VERIFY_DATE_TIME, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.GL_VERIFY_DATE_TIME, "", new { @class = "text-danger" })
+                        </div>
+                    </div>*@
+
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-2 col-md-10">
+                            <a href="@Url.Action("Index", "GLAccount", new {area = "Accounts"})" class="btn default">Cancel</a>
+                            <button type="submit" class="btn blue">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }      
+    </div>
+</div>

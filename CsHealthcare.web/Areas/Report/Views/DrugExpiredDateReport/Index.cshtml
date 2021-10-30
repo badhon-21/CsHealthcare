@@ -1,0 +1,152 @@
+﻿
+@using Cs.Utility
+
+
+@{
+    ViewBag.Title = "Expired date of Drug ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="page-content" style="min-height:247px">
+            <div class="container-fluid">
+
+                <div id="appointment_list_container" class="row" style="">
+
+                    <div class="col-md-12">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-bell font-green-sharp"></i>
+                                    <span class="caption-subject uppercase font-green-sharp">@ViewBag.Title</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse"></a>
+                                    <a href="javascript:;" data-load="true" class="reload"></a>
+                                    <a href="javascript:;" class="fullscreen"></a>
+                                </div>
+
+                            </div>
+                            <form>
+
+
+
+                                <div class="col-xs-6">
+
+                                    <div class="content-group">
+                                        <div class="col-xs-4">
+                                            <h4 class="">Company :</h4>
+                                        </div>
+                                        <div class="col-xs-8">
+                                            <div class="input-group" style="width:300px;padding-left: 14%;padding-top:5px">
+                                                <select id="DRUG_MANUFACTURERId" name="DRUG_MANUFACTURERId" class="form-control" value="" style="width:212px" placeholder=""></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-2">
+                                    <div class="" style="padding-top:5px">
+                                        <input type="button" class="btn bg-indigo-300 legitRipple" value="Search" onclick="javascript: loadStatement(); " id="incomebtn">
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="portlet-body portlet-empty" id="tblTest">
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section page_styles {
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/select2/css/select2.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/typeahead/typeahead.css" />
+}
+
+@section Scripts {
+    <script type="text/javascript" src="~/Assets/global/plugins/select2/js/select2.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/typeahead/typeahead.bundle.min.js"></script>
+    <script src="~/Assets/Pages/components-pickers.js"></script>
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+
+    <script>
+
+        jQuery(document).ready(function () {
+            LoadManufacturer();
+        });
+
+        function LoadManufacturer() {
+            //Metronic.blockUI();
+            $('#DRUG_MANUFACTURERId').find('option').remove();
+            var options = $("#DRUG_MANUFACTURERId");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadManufacturer", "DrugExpiredDateReport", new {Area = "Report"}))",
+                data: {  },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                var t = JSON.parse(result);
+                options.append($("<option />").val("").text("-Select -"));
+                $.each(t, function () {
+                    options.append($("<option />").val(this.DM_ID).text(this.DM_NAME));
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+
+        function loadStatement() {
+            var loadArea = $("#tblTest");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("Report", "DrugExpiredDateReport", new {Area = "Report" }))",
+                data: { "menufactureId": $('#DRUG_MANUFACTURERId').val() },
+            dataType: "html",
+            success: function (result) {
+                //var value = JSON.parse(result);
+
+                loadArea.html(result);
+
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set sells list.';
+                alert(msg);
+            }
+        });
+        }
+    </script>
+
+}

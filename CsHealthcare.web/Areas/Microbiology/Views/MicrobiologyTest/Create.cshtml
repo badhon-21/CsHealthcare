@@ -1,0 +1,627 @@
+﻿@model CsHealthcare.ViewModel.MicrobiologyTest.MicrobiologyTestModel
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .form-control, output {
+    font-size: 14px;
+    line-height: 1.42857;
+    color: #555;
+    display: inline-block;
+}
+     
+</style>
+
+
+@using (Html.BeginForm())
+{
+<div class="row">
+    @*<div class="col-md-3"></div>*@
+    <div class="col-md-12">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-question font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp uppercase">Microbiology Test </span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+
+                </div>
+            </div>
+            
+            <div class="portlet-body portlet-empty" style="min-height: 900px; margin-top: 20px">
+
+                
+                <div class="modal-body" >
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+                        <input type="hidden" id="PatientId" name="PatientId" value="@Model.PatientId" class="form-control " placeholder="Specimen " />
+                    @*<input type="hidden" id="SpecimenId" name="SpecimenId" value="@Model.SpecimenId" class="form-control " placeholder="Specimen "/>*@
+                        <input type="hidden" id="VoucherNumber" name="VoucherNumber" value="@Model.VoucherNumber" class="form-control " placeholder="Specimen " />
+                        <input type="hidden" id="TestRequestId" name="TestRequestId" value="@Model.TestRequestId" class="form-control " placeholder="Specimen " />
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PatientId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-3">
+                                <input id="PatientName" name="PatientName" value="@Model.PatientName" class="form-control " placeholder="Patient Name" />
+                                @*@Html.ValidationMessageFor(model => model.PatientId, "", new {@class = "text-danger"})*@
+                            </div>
+                            @Html.LabelFor(model => model.PatientAge, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-3">
+                                <input id="PatientAge" name="PatientAge" value="@Model.PatientAge" class="form-control " placeholder="Patient Age" />
+                                @*@Html.ValidationMessageFor(model => model.PatientId, "", new {@class = "text-danger"})*@
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 10px">
+                            @Html.LabelFor(model => model.ReferredBy, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3">
+                                <input id="ReferredBy" name="ReferredBy" value="@Model.ReferredBy" class="form-control " placeholder="Referred By " />
+                                @*@Html.ValidationMessageFor(model => model.SpecimenId, "", new {@class = "text-danger"})*@
+                            </div>
+                        </div>
+                        <div class="form-group" style="margin-top: 10px">
+                            @Html.LabelFor(model => model.SpecimenName, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-3">
+                                <input id="SpecimenName" name="SpecimenName" value="@Model.SpecimenName" class="form-control " placeholder="Specimen " />
+                                @*@Html.ValidationMessageFor(model => model.SpecimenId, "", new {@class = "text-danger"})*@
+                            </div>
+                        </div>
+                        @*<div class="form-group" style="margin-top: 10px">
+                            @Html.LabelFor(model => model.Culture, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3">
+                                <input id="Culture" name="Culture" value="" class="form-control " placeholder=" " />
+                                @Html.ValidationMessageFor(model => model.Culture, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                        <div class="form-group" style="margin-top: 10px">
+                            @Html.LabelFor(model => model.OrganismIsolated, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-3">
+                                <input id="OrganismIsolated" name="OrganismIsolated" value="" class="form-control " placeholder=" " />
+                                @Html.ValidationMessageFor(model => model.OrganismIsolated, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        @*<div class="form-group" style="margin-top: 10px">
+                            @Html.LabelFor(model => model.OrganismIsolated, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-3">
+                                <input id="OrganismIsolated" name="OrganismIsolated" value="" class="form-control " placeholder=" " />
+                                @Html.ValidationMessageFor(model => model.OrganismIsolated, "", new {@class = "text-danger"})
+                            </div>
+                        </div>*@
+                        <div class="row col-md-12 radio-list text-center">
+                            <label class="radio-inline">
+                                <input type="radio" name="optionsRadios" class="GrowthType" id="Growth" onclick=" initGrowthType() " value="Growth" checked> Growth
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="optionsRadios" class="GrowthType" id="NonGrowth" onclick=" loadGrowthType() " value="NonGrowth"> Non-Growth
+                            </label>
+                            <div style="display: none;">
+                                <input type="hidden" id="txtGrowthType" name="txtGrowthType" />
+                            </div>
+                        </div>
+                    <div id="divSensitivity" style="display: none; margin-top: 40px">
+                        <div id="" style="display: ; margin-top: 40px;margin-left:100px;">
+                            <div class="col-md-12 row" style="margin-left: 20px;margin-top: 20px; ">
+                                <span id="speciName">@Model.SpecimenName</span> &nbsp;<label>Culture:</label>
+                                @*<input class="form-control" name="Culture" id="Culture" value=""/>*@
+                                <p id="Culture" name="Culture">
+                                    
+
+                                    <select id="culture6" name="culture6" class="form-control" style="width: 116px">
+                                        <option value="">Select</option>
+                                        <option value="Incubuted">Incubuted</option>
+                                    </select>
+
+                                   
+                                    
+                                    at
+                                    <select id="culture7" name="culture7" class="form-control" style="width: 100px">
+                                        <option value="">Select</option>
+                                        <option value="37&#176;C">37&#176;C</option>
+                                    </select>
+                                    <select id="culture8" name="culture8" class="form-control" style="width: 120px">
+                                        <option value="">Select</option>
+                                        <option value="aerobically">aerobically</option>
+                                    </select>
+                                    
+                                    has yielded the growth of 
+                                </p>
+                            </div>
+
+                        </div>
+                    <div class="col-md-12" style="margin-top: 40px">
+                    <div class="col-md-4 text-right">
+                        <label> <b style="font-size: 15px">Ampicillin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Ampicillin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Ampicillin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Ampicillin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Amoxycillin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Amoxycillin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Amoxycillin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Amoxycillin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Amoxyclav:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Amoxyclav", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Amoxyclav", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Amoxyclav", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Amikacin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Amikacin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Amikacin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Amikacin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Azithromycin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Azithromycin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Azithromycin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Azithromycin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Carbinicillin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Carbinicillin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Carbinicillin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Carbinicillin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Cefixime:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Cefixime", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cefixime", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cefixime", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Cefotaxime:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Cefotaxime", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cefotaxime", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cefotaxime", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Cefepime:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Cefepime", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cefepime", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cefepime", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Ceftazidime:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Ceftazidime", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Ceftazidime", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Ceftazidime", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Ceftiaxone:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Ceftiaxone", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Ceftiaxone", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Ceftiaxone", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Cephalexine:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Cephalexine", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cephalexine", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cephalexine", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Chloramphenicol:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Chloramphenicol", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Chloramphenicol", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Chloramphenicol", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Cloxacillin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Cloxacillin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cloxacillin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cloxacillin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Colistin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Colistin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Colistin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Colistin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Cefuroxime:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Cefuroxime", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cefuroxime", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cefuroxime", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Cephradine:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Cephradine", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cephradine", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cephradine", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Ciprofloxacin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Ciprofloxacin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Ciprofloxacin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Ciprofloxacin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Cotrimoxazole:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Cotrimoxazole", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cotrimoxazole", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cotrimoxazole", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Doxycycline:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Doxycycline", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Doxycycline", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Doxycycline", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Erythromycin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Erythromycin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Erythromycin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Erythromycin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">FusidicAcid:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("FusidicAcid", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("FusidicAcid", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("FusidicAcid", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Gentamycin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Gentamycin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Gentamycin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Gentamycin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Imipenem:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Imipenem", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Imipenem", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Imipenem", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Meropenem:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Meropenem", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Meropenem", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Meropenem", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">NalidexicAcid:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("NalidexicAcid", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("NalidexicAcid", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("NalidexicAcid", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Netilmycin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Netilmycin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Netilmycin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Netilmycin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Nitrofurantion:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Nitrofurantion", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Nitrofurantion", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Nitrofurantion", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Mecillinam:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Mecillinam", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Mecillinam", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Mecillinam", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Oxacillin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Oxacillin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Oxacillin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Oxacillin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Penicillin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Penicillin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Penicillin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Penicillin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Rifampicin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Rifampicin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Rifampicin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Rifampicin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Tetracycline:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Tetracycline", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Tetracycline", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Tetracycline", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Tobramycin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Tobramycin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Tobramycin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Tobramycin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Vancomycin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Vancomycin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Vancomycin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Vancomycin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Piperacillin/Tazobactam:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("PiperacillinOrTazobactam", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("PiperacillinOrTazobactam", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("PiperacillinOrTazobactam", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Linezolid:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Linezolid", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Linezolid", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Linezolid", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Doripenum:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Doripenum", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Doripenum", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Doripenum", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Tigecycline:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Tigecycline", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Tigecycline", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Tigecycline", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Ticarcillin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Ticarcillin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Ticarcillin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Ticarcillin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Clindamycin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Clindamycin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Clindamycin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Clindamycin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Levofloxacin:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Levofloxacin", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Levofloxacin", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Levofloxacin", "I") I
+                    </div>
+                    <div class="col-md-4 text-right">
+                        <label><b style="font-size: 15px">Cepepime:</b></label>
+                        &nbsp;&nbsp;@Html.RadioButton("Cepepime", "S") S
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cepepime", "R") R
+                        &nbsp;&nbsp; &nbsp;&nbsp;@Html.RadioButton("Cepepime", "I") I
+                    </div>
+
+
+
+
+
+                    </div>
+
+                    </div>
+                    <div id="divNonSensitivity" style="display: none; margin-top: 40px">
+                        <div class="col-md-12 row" >
+                            <span id="speciName">@Model.SpecimenName</span> &nbsp;<label>Culture:</label>
+                            @*<input class="form-control" name="Culture" id="Culture" value=""/>*@
+                            <p id="Culture" name="Culture">
+                                Culture &nbsp;
+
+                                <select id="culture1" name="culture1"  class="form-control" style="width: 116px">
+                                    <option value="">Select</option>
+                                    <option value="Incubuted">Incubuted</option>
+                                </select>
+
+                                <select id="culture2" name="culture2"class="form-control" style="width: 116px">
+                                    <option value="">Select</option>
+                                    <option value="aerobically">aerobically</option>
+                                </select>
+                                in presence of
+                                <select id="culture3" name="culture3"class="form-control" style="width: 100px">
+                                    <option value="">Select</option>
+                                    <option value="CO2">CO2</option>
+                                </select>
+                                at
+                                <select id="culture4" name="culture4" class="form-control" style="width: 100px">
+                                    <option value="">Select</option>
+                                    <option value="37&#176;C">37&#176;C</option>
+                                </select>
+                                for
+                                <select id="culture5" name="culture5" class="form-control" style="width: 100px">
+                                    <option value="">Select</option>
+                                    <option value="48h">48h</option>
+                                </select>
+                                has yielded no growth
+                            </p>
+                        </div>
+
+                    </div>
+                        </div>
+
+
+                    <div class="col-md-12 text-center" style="margin-top: 30px">
+                        <a class="btn default" style="width: 15%;" href="@Url.Action("Index", "MicrobiologyTest",new {Area="Microbiology"})">Cancel</a>
+                        <input type="submit" value="Save" class="btn green" style="width: 15%;" />
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+    @*<div class="col-md-3"></div>*@
+</div>
+}
+
+@section page_styles
+{
+
+    <link href="~/assets/global/plugins/typeahead/typeahead.css" rel="stylesheet" />
+
+}
+@section Scripts {
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            allowInt();
+            //initPatientAutoComplete();
+            //initSpecimenAutoComplete();
+        });
+
+        function allowInt() {
+            $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+        }
+
+
+        //function initPatientAutoComplete() {
+        //    $('#PatientName').typeahead({
+        //        hint: true,
+        //        highlight: true,
+        //        minLength: 2,
+        //        limit: 8
+        //    }, {
+        //        source: function (searchString, cb) {
+        //            return $.ajax({
+        //                dataType: 'json',
+        //                type: 'POST',
+        //                contentType: "application/json; charset=utf-8",
+        //                url: " /Microbiology/MicrobiologyTest/LoadPatient",
+        //                data: "{'SearchString':'" + searchString + "'}",
+        //                chache: false,
+        //                success: function (data) {
+        //                    var result = [];
+        //                    $.each(data, function (index, val) {
+        //                        result.push({
+        //                            Id: val.Id,
+        //                            Name: val.Name,
+        //                            value: val.Name,
+        //                            Age: val.Age,
+        //                            ReferredBy: val.ReferanceName
+        //                        });
+        //                    });
+        //                    cb(result);
+        //                }
+        //            });
+        //        }
+        //    }).on("typeahead:selected", function (obj, patient) {
+        //        $("#PatientId").val(patient.Id);
+        //        $("#PatientAge").val(patient.Age);
+        //        $("#ReferredBy").val(patient.ReferanceName);
+        //        //LoadPrice();
+        //        //$("#txtPatientName").val(patient.Name);
+        //        //$("#txtMobileNumber").val(patient.Mobile);
+        //    });
+
+        //}
+        //function initSpecimenAutoComplete() {
+        //    $('#SpecimenName').typeahead({
+        //        hint: true,
+        //        highlight: true,
+        //        minLength: 2,
+        //        limit: 8
+        //    }, {
+        //        source: function (searchString, cb) {
+        //            return $.ajax({
+        //                dataType: 'json',
+        //                type: 'POST',
+        //                contentType: "application/json; charset=utf-8",
+        //                url: " /Microbiology/MicrobiologyTest/LoadSpecimen",
+        //                data: "{'SearchString':'" + searchString + "'}",
+        //                chache: false,
+        //                success: function (data) {
+        //                    var result = [];
+        //                    $.each(data, function (index, val) {
+        //                        result.push({
+        //                            Id: val.Id,
+        //                            Name: val.Name,
+        //                            value: val.Name
+        //                        });
+        //                    });
+        //                    cb(result);
+        //                }
+        //            });
+        //        }
+        //    }).on("typeahead:selected", function (obj, patient) {
+        //        $("#SpecimenId").val(patient.Id);
+        //        $("#speciName").text(patient.Name);
+        //        //LoadPrice();
+        //        //$("#txtPatientName").val(patient.Name);
+        //        //$("#txtMobileNumber").val(patient.Mobile);
+        //    });
+
+        //}
+
+
+        function initGrowthType() {
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadGrowthType", "MicrobiologyTest", new {Area = "Microbiology" }))",
+                data: { "GrowthType": $('#Growth').val() },
+            dataType: "html",
+            success: function (result) {
+                //var value = JSON.parse(result);
+                  
+                if (result != "NonGrowth") {
+                    
+                    $('#divSensitivity').show();
+                    $('#divNonSensitivity').hide();
+                    $("#txtGrowthType").val("Growth");
+                } else {
+                    $('#divSensitivity').hide();
+                }
+
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set sells list.';
+                alert(msg);
+            }
+        });
+        }
+        function loadGrowthType() {
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("GrowthType", "MicrobiologyTest", new {Area = "Microbiology" }))",
+                data: { "GrowthType": $('#NonGrowth').val() },
+            dataType: "html",
+            success: function (result) {
+                //var value = JSON.parse(result);
+                
+                       
+                if (result != "Growth") {
+                    $('#divNonSensitivity').show();
+                    $('#divSensitivity').hide();
+                    $("#txtGrowthType").val("NonGrowth");
+
+                } else {
+                    $('#divSensitivity').show();
+                }
+
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set sells list.';
+                alert(msg);
+            }
+        });
+        }
+
+
+
+    </script>
+
+}
+

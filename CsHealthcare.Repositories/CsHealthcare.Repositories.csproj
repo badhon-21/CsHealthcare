@@ -1,0 +1,287 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2875746D-66F0-4D9F-8A3B-9C3DB6A84B0B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CsHealthcare.Repositories</RootNamespace>
+    <AssemblyName>CsHealthcare.Repositories</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssistantDoctorRepository.cs" />
+    <Compile Include="CabinToCabinTransferRepository.cs" />
+    <Compile Include="CabinTransferBackRepository.cs" />
+    <Compile Include="DrugStockViewRepository.cs" />
+    <Compile Include="InPatientDischargeDraftRepository.cs" />
+    <Compile Include="InPatientDischargeDueCollectionRepository.cs" />
+    <Compile Include="MerketingByRepository.cs" />
+    <Compile Include="OpdPatientDuebillCollectionRepository.cs" />
+    <Compile Include="OpdTherapyDueCollectionRepository.cs" />
+    <Compile Include="PatientAppointmentDialysisRepository.cs" />
+    <Compile Include="AnesthesiaRepository.cs" />
+    <Compile Include="BillingForCheckupPackageDetailsRepository.cs" />
+    <Compile Include="BillingForCheckupPackageRepository.cs" />
+    <Compile Include="BioChemistryRepository.cs" />
+    <Compile Include="CheckInCheckOutRepository.cs" />
+    <Compile Include="DrugDepartmentWiseStockInDetailsRepository.cs" />
+    <Compile Include="DrugDepartmentWiseStockOutDetailsRepository.cs" />
+    <Compile Include="DrugDepartmentWiseStockOutRepository.cs" />
+    <Compile Include="EmployeeAttendanceRepository.cs" />
+    <Compile Include="ENDOCRINOLOGYRepository.cs" />
+    <Compile Include="ICUBedsRepository.cs" />
+    <Compile Include="ICURentRepository.cs" />
+    <Compile Include="ICURepository.cs" />
+    <Compile Include="IMMUNOLOGICALRepository.cs" />
+    <Compile Include="InPatientDischargeSummariesRepository.cs" />
+    <Compile Include="InPatientDischargeSummaryRepository.cs" />
+    <Compile Include="InPatientDrugSaleReturnDetailsRepository.cs" />
+    <Compile Include="InPatientDrugSaleReturnRepository.cs" />
+    <Compile Include="InPatientTransferBackRepository.cs" />
+    <Compile Include="InPatientTransferRepository.cs" />
+    <Compile Include="OpdTherapyDetailsRepository.cs" />
+    <Compile Include="OPDTherapyRepository.cs" />
+    <Compile Include="OperationTheatreRepository.cs" />
+    <Compile Include="PackageDetailsRepository.cs" />
+    <Compile Include="PackageExcludesRepository.cs" />
+    <Compile Include="PackageForCheckUpRepository.cs" />
+    <Compile Include="PackageForCheckupDetailsRepository.cs" />
+    <Compile Include="PackageRepository.cs" />
+    <Compile Include="PatientDueCollectionRepository.cs" />
+    <Compile Include="PatientCardRepository.cs" />
+    <Compile Include="PatientEnrollDialysisRepository.cs" />
+    <Compile Include="PatientDialysisRepository.cs" />
+    <Compile Include="AllergyInformationRepository.cs" />
+    <Compile Include="AllergySubstanceRepository.cs" />
+    <Compile Include="DialysisPaymentRepository.cs" />
+    <Compile Include="AppAppointmentSystemUserRepository.cs" />
+    <Compile Include="AppMedicineCornerUserRepository.cs" />
+    <Compile Include="AppPatientManagementUserRepository.cs" />
+    <Compile Include="AppUserRepository.cs" />
+    <Compile Include="BankAccountRepository.cs" />
+    <Compile Include="BankTransactionRepository.cs" />
+    <Compile Include="BedRepository.cs" />
+    <Compile Include="CabinAmenityRepository.cs" />
+    <Compile Include="CabinRepository.cs" />
+    <Compile Include="CabinTypeRepository.cs" />
+    <Compile Include="CabinRentRepository.cs" />
+    <Compile Include="CanteenFoodInPatientDetailsRepository.cs" />
+    <Compile Include="CanteenFoodInPatientRepository.cs" />
+    <Compile Include="CategoryRepository.cs" />
+    <Compile Include="CBCTestRepository.cs" />
+    <Compile Include="ChiefComplaintDurationRepository.cs" />
+    <Compile Include="ChiefComplaintRepository.cs" />
+    <Compile Include="CustomerRepository.cs" />
+    <Compile Include="DailyExpenseRepository.cs" />
+    <Compile Include="DepartmentDetailsForItemRepository.cs" />
+    <Compile Include="DiseaseConditionRepository.cs" />
+    <Compile Include="DiseaseRepository.cs" />
+    <Compile Include="DoctorAppointmentPaymentRepository.cs" />
+    <Compile Include="DoctorAppointmentRepository.cs" />
+    <Compile Include="DoctorBusinessHolidayRepository.cs" />
+    <Compile Include="DoctorBusinessHourRepository.cs" />
+    <Compile Include="DoctorInformationRepository.cs" />
+    <Compile Include="DoctorNoteRepository.cs" />
+    <Compile Include="DrugDailyStockHistoryRepository.cs" />
+    <Compile Include="DrugDepartmentWiseStockInRepository.cs" />
+    <Compile Include="DrugDoseChartRepository.cs" />
+    <Compile Include="DrugDoseRepository.cs" />
+    <Compile Include="DrugDurationRepository.cs" />
+    <Compile Include="DrugGroupRepository.cs" />
+    <Compile Include="DrugInvoicePaymentRepository.cs" />
+    <Compile Include="DrugSaleDetailsHistoryRepository.cs" />
+    <Compile Include="DrugSaleDetailsRepository.cs" />
+    <Compile Include="DrugSaleHistoryRepository.cs" />
+    <Compile Include="DrugSaleReturnRepository.cs" />
+    <Compile Include="DrugsSelectedGroupsRepository.cs" />
+    <Compile Include="DrugSaleRepository.cs" />
+    <Compile Include="DrugStockDetailsRepository.cs" />
+    <Compile Include="DrugStockInRepository.cs" />
+    <Compile Include="EducationRepository.cs" />
+    <Compile Include="EmergencyContactRepository.cs" />
+    <Compile Include="EmployeeInfoRepository.cs" />
+    <Compile Include="DepartmentRepository.cs" />
+    <Compile Include="DrugMenufacturerRepository.cs" />
+    <Compile Include="DrugPresentationTypeRepository.cs" />
+    <Compile Include="DrugRepository.cs" />
+    <Compile Include="EmployeeDesignationRepository.cs" />
+    <Compile Include="FamilyTreeRepository.cs" />
+    <Compile Include="GLAccountRepository.cs" />
+    <Compile Include="HolidayRepository.cs" />
+    <Compile Include="HospitalInformationRepository.cs" />
+    <Compile Include="InPatientDailyBillDetailsRepository.cs" />
+    <Compile Include="InPatientDailyBillRepository.cs" />
+    <Compile Include="InPatientDischargeRepository.cs" />
+    <Compile Include="InPatientDoctorInvoiceRepository.cs" />
+    <Compile Include="InPatientDrugDetailsRepository.cs" />
+    <Compile Include="InPatientDrugRepository.cs" />
+    <Compile Include="InPatientTestdetailsRepository.cs" />
+    <Compile Include="InPatientTestRepository.cs" />
+    <Compile Include="InsuranceCompanyRepository.cs" />
+    <Compile Include="InsurancePlanRepository.cs" />
+    <Compile Include="ItemStockOutDetailsRepository.cs" />
+    <Compile Include="ItemStockOutRepository.cs" />
+    <Compile Include="LabItemRepository.cs" />
+    <Compile Include="LCRepository.cs" />
+    <Compile Include="LeavePlanRateRepository.cs" />
+    <Compile Include="LeaveOfAbsenceDetailsRepository.cs" />
+    <Compile Include="LeaveOfAbsenceMasterRepository.cs" />
+    <Compile Include="LeavePlanRepository.cs" />
+    <Compile Include="LeaveTypeRepository.cs" />
+    <Compile Include="LoanConfigPlanRepository.cs" />
+    <Compile Include="LoanConfigRepository.cs" />
+    <Compile Include="MicrobiologyTestRepository.cs" />
+    <Compile Include="MsDialysisAmountPurposeRepository.cs" />
+    <Compile Include="MsAmountPurposeRepository.cs" />
+    <Compile Include="OccupationRepository.cs" />
+    <Compile Include="OccurrenceRepository.cs" />
+    <Compile Include="OccurrenceTypeRepository.cs" />
+    <Compile Include="OperationNoteRepository.cs" />
+    <Compile Include="OperationTypeRepository.cs" />
+    <Compile Include="OptPatientBillDetailsRepository.cs" />
+    <Compile Include="OptPatientBillRepository.cs" />
+    <Compile Include="PatientAdmissionDetailsRepository.cs" />
+    <Compile Include="PatientAdmissionRepository.cs" />
+    <Compile Include="PatientAllergyInformationRepository.cs" />
+    <Compile Include="PatientChiefComplaintRepository.cs" />
+    <Compile Include="PatientDetailsRepository.cs" />
+    <Compile Include="PatientEducationRepository.cs" />
+    <Compile Include="PatientEnrollRepository.cs" />
+    <Compile Include="PatientFamilyDiseaseRepository.cs" />
+    <Compile Include="PatientGeneralExamRepository.cs" />
+    <Compile Include="PatientHistoryRepository.cs" />
+    <Compile Include="PatientInformationRepository.cs" />
+    <Compile Include="PatientInvestigationRepository.cs" />
+    <Compile Include="PatientLaserRepository.cs" />
+    <Compile Include="PatientOldInvestigationRepository.cs" />
+    <Compile Include="PatientPastHistoryOfMadicationRepository.cs" />
+    <Compile Include="PatientPastIllnessRepository.cs" />
+    <Compile Include="PatientPersonalAttributeRepository.cs" />
+    <Compile Include="PatientPersonalHistoryDetailsRepository.cs" />
+    <Compile Include="PatientPersonalHistoryRepository.cs" />
+    <Compile Include="PatientPrescriptionRepository.cs" />
+    <Compile Include="PatientRepository.cs" />
+    <Compile Include="PatientSpecialNoteRepository.cs" />
+    <Compile Include="PatientTestReportAttatchmentRepository.cs" />
+    <Compile Include="PatientTreatmentRepository.cs" />
+    <Compile Include="PharmacyRequisitionDetailsRepository.cs" />
+    <Compile Include="PharmacyRequisitionRepository.cs" />
+    <Compile Include="PhysiotherapyRepository.cs" />
+    <Compile Include="PrescriptionAttatchmentRepository.cs" />
+    <Compile Include="ProductRepository.cs" />
+    <Compile Include="PurchaseOrderDetailsRepository.cs" />
+    <Compile Include="PurchaseOrderRepository.cs" />
+    <Compile Include="PurposeOnOTRepository.cs" />
+    <Compile Include="PurposeRepository.cs" />
+    <Compile Include="RentAmbulanceRepository.cs" />
+    <Compile Include="ReportScanCopyRepository.cs" />
+    <Compile Include="Repository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RETestRepository.cs" />
+    <Compile Include="SellsDetailsRepository.cs" />
+    <Compile Include="SellsRepository.cs" />
+    <Compile Include="SEROLOGYRepository.cs" />
+    <Compile Include="ShiftInfoRepository.cs" />
+    <Compile Include="SocialEconomicStatusRepository.cs" />
+    <Compile Include="SpecialNoteRepository.cs" />
+    <Compile Include="SpecimenRepository.cs" />
+    <Compile Include="SRETestRepository.cs" />
+    <Compile Include="StockInDetailsRepository.cs" />
+    <Compile Include="StockInRepository.cs" />
+    <Compile Include="StockOutDetailsRepository.cs" />
+    <Compile Include="StockOutItemRepository.cs" />
+    <Compile Include="StoreItemCategoryRepository.cs" />
+    <Compile Include="StoreItemRepository.cs" />
+    <Compile Include="StoreRequisitionDetailsRepository.cs" />
+    <Compile Include="StoreRequisitionRepository.cs" />
+    <Compile Include="SupplierPaymentRepository.cs" />
+    <Compile Include="SupplierRepository.cs" />
+    <Compile Include="SurgeonNameRepository.cs" />
+    <Compile Include="TaxConfigurationRepository.cs" />
+    <Compile Include="TestCategoryRepository.cs" />
+    <Compile Include="TestNameRepository.cs" />
+    <Compile Include="TestRequestRepository.cs" />
+    <Compile Include="VehicleRepository.cs" />
+    <Compile Include="VisitDiscountRepository.cs" />
+    <Compile Include="VwDrugStocksRepository.cs" />
+    <Compile Include="VW_Department1_Wise_DRUG_STOCKRepository.cs" />
+    <Compile Include="VW_Department_Wise_DRUG_STOCKRepository.cs" />
+    <Compile Include="VwDrugAvilableRepository.cs" />
+    <Compile Include="WardRepository.cs" />
+    <Compile Include="WardTypeRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CsHealthcare.DataAccess\CsHealthcare.DataAccess.csproj">
+      <Project>{401694A6-EE7B-4651-89F1-A6F27E65FE4D}</Project>
+      <Name>CsHealthcare.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CsHealthcare.RepositoriesInterface\CsHealthcare.RepositoriesInterface.csproj">
+      <Project>{3AD95D5C-15E8-44BF-84F7-CF6133C070B9}</Project>
+      <Name>CsHealthcare.RepositoriesInterface</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

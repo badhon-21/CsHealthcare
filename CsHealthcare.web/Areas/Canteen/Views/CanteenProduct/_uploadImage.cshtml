@@ -1,0 +1,173 @@
+﻿
+@model CsHealthcare.ViewModel.Canteen.ProductViewModel
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title"> <i class="fa fa-plus"></i> Add Picture</h4>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.Hidden("UploadedImagePath", string.Empty, new { id = "hf-uploaded-image-path" })
+    @Html.HiddenFor(m => m.CroppedImagePath, new { id = "hf-cropped-image-path" })
+    <div class="modal-body">
+        <div class="form-horizontal">
+
+            <div class="row col-md-12">
+                <div class="note note-success" style="background-color:#F5F5F5">
+                    <p>
+                        The image you upload has to be at least 140x140px.<br />
+                        The maximum image size for uploads is 2 MB.<br />
+                        Only image files (JPG, GIF, PNG) are allowed.<br />
+                    </p>
+                </div>
+            </div>
+
+            <div class="row col-md-12">
+                <div class="row col-md-4">
+
+
+                    <span class="btn btn-success fileinput-button" style="background-color: #181B1F;">
+                        <i class="glyphicon glyphicon-plus"></i>
+                        <span>Select files...</span>
+                        <!-- The file input field used as target for the file upload widget -->
+                        @Html.TextBoxFor(m => m.MyFile, new { id = "fu-my-simple-upload", type = "file" })
+                    </span>
+
+                </div>
+                <div style="word-wrap: break-word;" id="files" class="files col-md-6"></div>
+                <div class="row col-md-2">
+                    <p>
+                        <a onclick="" id="hl-start-upload" class="btn blue-ebonyclay">Start Upload<i class="fa fa-upload"></i></a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- The global progress bar -->
+            <div id="progress" class="progress col-md-12 margin-top-10">
+                <div class="progress-bar progress-bar-success"></div>
+            </div>
+            <!-- The container for the uploaded files -->
+            <div>
+                <span style="margin-top: 10px; color: crimson; font-weight: bold; "> Select files and then Start Upload Before Done </span>
+            </div>
+
+            <div id="crop-image-area" style="display: none;">
+                @*  <p style="text-align: right">
+                        <a href="#" id="hl-crop-image" class="btn btn-sm default">Crop Image <i class="fa fa-crop"></i></a>
+                    </p>*@
+                @*  <div id="image-size"></div>*@
+                <p>
+                    <img id="uploaded-image" src="#" class="img-responsive" />
+                </p>
+                <p>
+                    <img id="my-cropped-image" src="#" style="display: none;" />
+                </p>
+                <input id="TempImagePath" type="hidden" value="" />
+                @*  <p><input type="submit" value="Submit" id="btn-my-submit" style="display: none;" /></p>*@
+            </div>
+
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button id="show_buton" style="display: none" type="button" data-dismiss="modal" class="btn blue-ebonyclay">Done</button>
+        <button class="btn blue-dark" data-dismiss="modal" type="button">Close</button>
+    </div>
+}
+<script type="text/javascript">
+
+    //************************************** JavaScript for ajax file upload **************************************
+    var jqXHRData;
+
+    $(document).ready(function() {
+
+        'use strict';
+        var uploadButton = $('<button/>')
+            .addClass('btn btn-primary')
+            .prop('disabled', true)
+            .text('Processing...')
+            .on('click', function() {
+                var $this = $(this),
+                    data = $this.data();
+                $this
+                    .off('click')
+                    .text('Abort')
+                    .on('click', function() {
+                        $this.remove();
+                        data.abort();
+                    });
+                data.submit().always(function() {
+                    $this.remove();
+                });
+            });
+
+        $('#fu-my-simple-upload').fileupload({
+                    url: '@(@Url.Action("UploadFile", "CanteenProduct", new {Area = "Canteen" }))',
+                dataType: 'json',
+                autoUpload: false,
+                acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+                maxFileSize: 5000000,
+                disableImageResize: /Android(?!.*Chrome)|Opera/
+                    .test(window.navigator.userAgent),
+                previewMaxWidth: 100,
+                previewMaxHeight: 100,
+                previewCrop: true,
+                add: function(e, data) {
+                    jqXHRData = data;
+                },
+                done: function(event, data) {
+                    if (data.result.isUploaded) {
+
+                        $("#hf-uploaded-image-path").val(data.result.filePath);
+                        $("#uploadImageUrl").val(data.result.filePath);
+                        $("#uploaded-image").attr("src", data.result.filePath + "?t=" + new Date().getTime());
+                        $("#crop-image-area").fadeIn("slow");
+                        $("#hl-start-upload").hide();
+
+                        $("#company_logo").attr('src', data.result.filePath);
+                        $("#filePath").val(data.result.filePath);
+                        $('#show_buton').show();
+                        //App.unblockUI();
+                    } else {
+
+                    }
+                },
+                progressall: function(e, data) {
+                    var progress = parseInt(data.loaded / data.total * 100, 10);
+                    $('#progress .progress-bar').css(
+                        'width',
+                        progress + '%'
+                    );
+                },
+                fail: function(event, data) {
+                    if (data.files[0].error) {
+                        alert(data.files[0].error);
+                    }
+                }
+            }).on('fileuploadadd', function(e, data) {
+                data.context = $('<div/>').appendTo('#files');
+                $.each(data.files, function(index, file) {
+                    var node = $('<p/>')
+                        .append($('<span/>').text(file.name));
+                    node.appendTo(data.context);
+                });
+            }).prop('disabled', !$.support.fileInput)
+            .parent().addClass($.support.fileInput ? undefined : 'disabled');
+    });
+
+    $("#hl-start-upload").on('click', function() {
+        //
+        if (jqXHRData) {
+            jqXHRData.submit();
+        }
+        // alert("No images selected");
+        return false;
+    });
+    //************************************** JavaScript for ajax file upload END **************************************
+
+
+</script>
+
+
+

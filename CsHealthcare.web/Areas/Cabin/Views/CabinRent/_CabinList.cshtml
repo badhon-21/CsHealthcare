@@ -1,0 +1,99 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Cabin.AvailableCabinModel>
+
+<div class="row" style="margin-top: 30px">
+    @foreach (var item in Model)
+    {
+        if (item.RentId == 0)
+        {
+            <div class="col-xs-2" style="margin-top: 20px">
+                <a class="btn bg-teal-400 btn-block btn-float btn-float-lg"
+                   href="@Url.Action("Create", "CabinRent", new {Area = "Cabin", id = item.CabinId})" data-modal="" style="padding: 19px 13px 16px;border-radius: 4px">
+                    <i class="icon-users"></i> <span>@Html.DisplayFor(modelItem => item.CabinName)<br />Cabin Booking</span>
+                </a>
+            </div>
+        }
+        else
+        {
+            if (item.RentStatus == "CONFIRM")
+            {
+                <div class="col-xs-2" style="margin-top: 20px">
+                    <a class="btn bg-warning-400 btn-block btn-float btn-float-lg" href="@Url.Action("Create", "CabinRent", new {Area = "Cabin", id = item.CabinId})" data-modal="" style="padding: 19px 13px 16px;border-radius: 4px"><i class="icon-users"></i> <span>@Html.DisplayFor(modelItem => item.CabinName)<a class="" onclick="javascript: if (confirm('Are you sure you want to cancel?') == false) return false; CancelReservation('@item.RentId', '@item.CabinId'); ">Cancel Rent</a></span></a>
+                </div>
+            }
+            else
+            {
+                <div class="col-xs-2" style="margin-top: 20px">
+                    <a class="btn bg-green-600 btn-block btn-float btn-float-lg legitRipple" href="@Url.Action("Edit", "CabinRent", new {Area = "Cabin", id = item.RentId, RoomId = item.CabinId})" data-modal="" style="padding: 19px 13px 16px;border-radius: 4px"><i class="icon-users"></i> <span>@Html.DisplayFor(modelItem => item.CabinName)<br />Create Reservation</span></a>
+                </div>
+            }
+        }
+    }
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model IEnumerable<CsHotels.Models.Room.RoomReservationModel>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            if (item.BookingType == "DayWise")
+            {
+                if (item.Status == "CONFIRM")
+                {
+                    <div class="col-xs-2" style="margin-top: 20px">
+                        <a class="btn bg-warning-400 btn-block btn-float btn-float-lg legitRipple"><i class="icon-users"></i> <span>@Html.DisplayFor(modelItem => item.RoomName)</span><br /><a class="" style="color:tomato "onclick=" javascript: CancelReservation('@item.Id', '@item.RoomId'); "> Cancel Reservation</a></a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-xs-2" style="margin-top: 20px">
+                        <a class="btn bg-green-600 btn-block btn-float btn-float-lg legitRipple" href="@Url.Action("Edit", "RoomReservation", new {Area = "Room", id = item.Id,RoomId=item.RoomId})" data-modal=""><i class="icon-users"></i> <span>@Html.DisplayFor(modelItem => item.RoomName)<br />Create Reservation</span></a>
+                    </div>
+                }
+            }
+            else
+            {
+                if (item.Status == "CONFIRM")
+                {
+                    <div class="col-xs-2" style="margin-top: 20px">
+                        <a class="btn bg-teal-400 btn-block btn-float btn-float-lg legitRipple"  href="@Url.Action("Create", "RoomReservation", new {Area = "Room", id = item.RoomId})" data-modal=""><i class="icon-users"></i> <span>@Html.DisplayFor(modelItem => item.RoomName)<a class="" onclick=" javascript: CancelReservation('@item.Id', '@item.RoomId'); ">Cancel Reservation</a></span></a>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-xs-2" style="margin-top: 20px">
+                        <a class="btn bg-green-600 btn-block btn-float btn-float-lg legitRipple" href="@Url.Action("Edit", "RoomReservation", new {Area = "Room", id = item.Id, RoomId = item.RoomId})" data-modal=""><i class="icon-users"></i> <span>@Html.DisplayFor(modelItem => item.RoomName)<br/>Create Reservation</span></a>
+                    </div>
+                }
+            }
+        }
+
+
+    </div>*@
+
+

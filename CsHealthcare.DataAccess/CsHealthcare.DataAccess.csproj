@@ -1,0 +1,2491 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{401694A6-EE7B-4651-89F1-A6F27E65FE4D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CsHealthcare.DataAccess</RootNamespace>
+    <AssemblyName>CsHealthcare.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppDb.cs" />
+    <Compile Include="APP_CONFIGURATION.cs" />
+    <Compile Include="AspNetRole.cs" />
+    <Compile Include="AspNetUser.cs" />
+    <Compile Include="AspNetUserClaim.cs" />
+    <Compile Include="AspNetUserLogin.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="Core\AuditableEntity.cs" />
+    <Compile Include="Core\BaseEntity.cs" />
+    <Compile Include="Core\IAuditable.cs" />
+    <Compile Include="Core\IntBaseEntity.cs" />
+    <Compile Include="Entity\Accounts\BankAccount.cs" />
+    <Compile Include="Entity\Accounts\BankTransaction.cs" />
+    <Compile Include="Entity\Accounts\CurrencyType.cs" />
+    <Compile Include="Entity\Accounts\DailyExpense.cs" />
+    <Compile Include="Entity\Accounts\GlTransaction.cs" />
+    <Compile Include="Entity\Accounts\GL_ACCOUNT.cs" />
+    <Compile Include="Entity\Accounts\InvoiceCurrencyType.cs" />
+    <Compile Include="Entity\Accounts\LC.cs" />
+    <Compile Include="Entity\Accounts\Supplier.cs" />
+    <Compile Include="Entity\Accounts\SupplierPayment.cs" />
+    <Compile Include="Entity\Accounts\TransactionRecord.cs" />
+    <Compile Include="Entity\Accounts\TransDefination.cs" />
+    <Compile Include="Entity\Ambulance\RentAmbulance.cs" />
+    <Compile Include="Entity\Cabin\Amenity.cs" />
+    <Compile Include="Entity\Cabin\Cabin.cs" />
+    <Compile Include="Entity\Cabin\CabinAmenity.cs" />
+    <Compile Include="Entity\Cabin\CabinRent.cs" />
+    <Compile Include="Entity\Cabin\CabinType.cs" />
+    <Compile Include="Entity\Cabin\ICU.cs" />
+    <Compile Include="Entity\Cabin\ICUBeds.cs" />
+    <Compile Include="Entity\Cabin\PatientAdmission.cs" />
+    <Compile Include="Entity\Cabin\PatientAdmissionDetails.cs" />
+    <Compile Include="Entity\Cabin\Purpose.cs" />
+    <Compile Include="Entity\Canteen\CanteenFoodInPatient.cs" />
+    <Compile Include="Entity\Canteen\CanteenFoodInPatientDetails.cs" />
+    <Compile Include="Entity\Canteen\Category.cs" />
+    <Compile Include="Entity\Canteen\Customer.cs" />
+    <Compile Include="Entity\Canteen\Product.cs" />
+    <Compile Include="Entity\Canteen\Sells.cs" />
+    <Compile Include="Entity\Canteen\SellsDetails.cs" />
+    <Compile Include="Entity\Diagnostic\BioChemistry.cs" />
+    <Compile Include="Entity\Diagnostic\CBCTest.cs" />
+    <Compile Include="Entity\Diagnostic\ENDOCRINOLOGY.cs" />
+    <Compile Include="Entity\Diagnostic\IMMUNOLOGICAL.cs" />
+    <Compile Include="Entity\Diagnostic\RETest.cs" />
+    <Compile Include="Entity\Diagnostic\SEROLOGY.cs" />
+    <Compile Include="Entity\Diagnostic\SRETest.cs" />
+    <Compile Include="Entity\Diagnostic\TestRequest.cs" />
+    <Compile Include="Entity\Diagnostic\TEST_CATEGORY.cs" />
+    <Compile Include="Entity\Diagnostic\Test_Name.cs" />
+    <Compile Include="Entity\Dialysis\PatientAppointmentDialysis.cs" />
+    <Compile Include="Entity\Dialysis\PatientDialysis.cs" />
+    <Compile Include="Entity\Dialysis\DialysisPayment.cs" />
+    <Compile Include="Entity\Dialysis\PatientEnrollDialysis.cs" />
+    <Compile Include="Entity\Disease\AllergyInformation.cs" />
+    <Compile Include="Entity\Disease\AllergySubstance.cs" />
+    <Compile Include="Entity\Doctor\DoctorAppointment.cs" />
+    <Compile Include="Entity\Doctor\DoctorAppointmentPayment.cs" />
+    <Compile Include="Entity\Doctor\DoctorBusinessHoliday.cs" />
+    <Compile Include="Entity\Doctor\DoctorBusinessHour.cs" />
+    <Compile Include="Entity\Doctor\DoctorInformation.cs" />
+    <Compile Include="Entity\Doctor\DoctorNote.cs" />
+    <Compile Include="Entity\Doctor\VisitDiscount.cs" />
+    <Compile Include="Entity\Hospital\Bed.cs" />
+    <Compile Include="Entity\Hospital\MerketingBy.cs" />
+    <Compile Include="Entity\Hospital\OperationType.cs" />
+    <Compile Include="Entity\Hospital\Ward.cs" />
+    <Compile Include="Entity\Hospital\WardType.cs" />
+    <Compile Include="Entity\HumanResource\DepartmentDetailsForItem.cs" />
+    <Compile Include="Entity\HumanResource\EmergencyContact.cs" />
+    <Compile Include="Entity\HumanResource\EmployeeInfo.cs" />
+    <Compile Include="Entity\HumanResource\InsuranceCompany.cs" />
+    <Compile Include="Entity\HumanResource\InsurancePlan.cs" />
+    <Compile Include="Entity\HumanResource\ItemStockOut.cs" />
+    <Compile Include="Entity\HumanResource\ItemStockOutDetails.cs" />
+    <Compile Include="Entity\HumanResource\Shift.cs" />
+    <Compile Include="Entity\HumanResource\ShiftInfo.cs" />
+    <Compile Include="Entity\ICURent.cs" />
+    <Compile Include="Entity\LabItem\LabItem.cs" />
+    <Compile Include="Entity\Master\AttendenceTemp.cs" />
+    <Compile Include="Entity\HumanResource\CheckInCheckOut.cs" />
+    <Compile Include="Entity\Master\DoctorAttendenceCheckInOut.cs" />
+    <Compile Include="Entity\Master\EmployeeAttendenceCheckInOut.cs" />
+    <Compile Include="Entity\Master\Disease.cs" />
+    <Compile Include="Entity\Master\DiseaseCondition.cs" />
+    <Compile Include="Entity\Master\Education.cs" />
+    <Compile Include="Entity\Master\FamilyTree.cs" />
+    <Compile Include="Entity\Master\MsDialysisAmountPurpose.cs" />
+    <Compile Include="Entity\Master\MsAmountPurpose.cs" />
+    <Compile Include="Entity\EmployeeLoan\LoanConfig.cs" />
+    <Compile Include="Entity\EmployeeLoan\loanConfigPlan.cs" />
+    <Compile Include="Entity\Hospital\HospitalInformation.cs" />
+    <Compile Include="Entity\HumanResource\DEPARTMENT.cs" />
+    <Compile Include="Entity\HumanResource\EmployeeDesignation.cs" />
+    <Compile Include="Entity\HumanResource\Holiday.cs" />
+    <Compile Include="Entity\HumanResource\Occurrence.cs" />
+    <Compile Include="Entity\HumanResource\OccurrenceType.cs" />
+    <Compile Include="Entity\HumanResource\TaxConfiguration.cs" />
+    <Compile Include="Entity\LeaveManagement\LeaveOfAbsenceDetails.cs" />
+    <Compile Include="Entity\LeaveManagement\LeaveOfAbsenceMaster.cs" />
+    <Compile Include="Entity\LeaveManagement\LeavePlan.cs" />
+    <Compile Include="Entity\LeaveManagement\LeavePlanRate.cs" />
+    <Compile Include="Entity\LeaveManagement\LeaveType.cs" />
+    <Compile Include="Entity\Master\Occupation.cs" />
+    <Compile Include="Entity\Master\SocialEconomicStatus.cs" />
+    <Compile Include="Entity\Master\SpecialNote.cs" />
+    <Compile Include="Entity\MedicineCorner\DRUG.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugDailyStockHistory.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugDepartmentWiseStockIn.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugDepartmentWiseStockInDetails.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugDepartmentWiseStockOut.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugDepartmentWiseStockOutDetails.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugDose.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugDoseChart.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugDuration.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugGroup.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugInvoicePayment.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugSale.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugSaleDetails.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugSaleDetailsHistory.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugSaleHistory.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugSaleReturn.cs" />
+    <Compile Include="Entity\MedicineCorner\DrugsSelectedGroups.cs" />
+    <Compile Include="Entity\MedicineCorner\DRUG_MANUFACTURER.cs" />
+    <Compile Include="Entity\MedicineCorner\DURG_PRESENTATION_TYPE.cs" />
+    <Compile Include="Entity\MedicineCorner\InPatientDrugSaleReturn.cs" />
+    <Compile Include="Entity\MedicineCorner\InPatientDrugSaleReturnDetails.cs" />
+    <Compile Include="Entity\MedicineCorner\PharmacyRequisition.cs" />
+    <Compile Include="Entity\MedicineCorner\PharmacyRequisitionDetails.cs" />
+    <Compile Include="Entity\MedicineCorner\PurchaseOrder.cs" />
+    <Compile Include="Entity\MedicineCorner\PurchaseOrderDetails.cs" />
+    <Compile Include="Entity\MicrobiologyTest\MicrobiologyTest.cs" />
+    <Compile Include="Entity\MicrobiologyTest\Specimen.cs" />
+    <Compile Include="Entity\Operation\OperationNote.cs" />
+    <Compile Include="Entity\Packages\BillingForCheckupPackage.cs" />
+    <Compile Include="Entity\Packages\BillingForCheckupPackageDetails.cs" />
+    <Compile Include="Entity\Packages\Package.cs" />
+    <Compile Include="Entity\Packages\PackageDetails.cs" />
+    <Compile Include="Entity\Packages\PackageExcludes.cs" />
+    <Compile Include="Entity\Packages\PackageForCheckUp.cs" />
+    <Compile Include="Entity\Packages\PackageForCheckupDetails.cs" />
+    <Compile Include="Entity\Patient\Anesthesia.cs" />
+    <Compile Include="Entity\Patient\AssistantDoctor.cs" />
+    <Compile Include="Entity\Patient\CabinToCabinTransfer.cs" />
+    <Compile Include="Entity\Patient\CabinTransferBack.cs" />
+    <Compile Include="Entity\Patient\ChiefComplaint.cs" />
+    <Compile Include="Entity\Patient\ChiefComplaintDuration.cs" />
+    <Compile Include="Entity\Patient\ICUAdmission.cs" />
+    <Compile Include="Entity\Patient\InPatientDailyBill.cs" />
+    <Compile Include="Entity\Patient\InPatientDailyBillDetails.cs" />
+    <Compile Include="Entity\Patient\InPatientDischarge.cs" />
+    <Compile Include="Entity\Patient\InPatientDischargeDueCollection.cs" />
+    <Compile Include="Entity\Patient\InPatientDischargeSummary.cs" />
+    <Compile Include="Entity\Patient\InPatientDoctorInvoice.cs" />
+    <Compile Include="Entity\Patient\InPatientDrug.cs" />
+    <Compile Include="Entity\Patient\InPatientDrugDetails.cs" />
+    <Compile Include="Entity\Patient\InPatientTest.cs" />
+    <Compile Include="Entity\Patient\InPatientTestdetails.cs" />
+    <Compile Include="Entity\Patient\InPatientTransfer.cs" />
+    <Compile Include="Entity\Patient\InPatientTransferBack.cs" />
+    <Compile Include="Entity\Patient\IpdDraft.cs" />
+    <Compile Include="Entity\Patient\OpdPatientDuebillCollection.cs" />
+    <Compile Include="Entity\Patient\OperationTheatre.cs" />
+    <Compile Include="Entity\Patient\OptPatientBill.cs" />
+    <Compile Include="Entity\Patient\OptPatientBillDetails.cs" />
+    <Compile Include="Entity\Patient\Patient.cs" />
+    <Compile Include="Entity\Patient\PatientCard.cs" />
+    <Compile Include="Entity\Patient\PatientDetails.cs" />
+    <Compile Include="Entity\Patient\PatientDueCollection.cs" />
+    <Compile Include="Entity\Patient\PatientEducation.cs" />
+    <Compile Include="Entity\Patient\PatientInformation.cs" />
+    <Compile Include="Entity\Patient\PatientAllergyInformation.cs" />
+    <Compile Include="Entity\Patient\PatientChiefComplaint.cs" />
+    <Compile Include="Entity\Patient\PatientEnroll.cs" />
+    <Compile Include="Entity\Patient\PatientFamilyDisease.cs" />
+    <Compile Include="Entity\Patient\PatientGeneralExam.cs" />
+    <Compile Include="Entity\Patient\PatientHistory.cs" />
+    <Compile Include="Entity\Patient\PatientInvestigation.cs" />
+    <Compile Include="Entity\Patient\PatientLaser.cs" />
+    <Compile Include="Entity\Patient\PatientOldInvestigation.cs" />
+    <Compile Include="Entity\Patient\PatientPastHistoryOfMadication.cs" />
+    <Compile Include="Entity\Patient\PatientPastIllness.cs" />
+    <Compile Include="Entity\Patient\PatientPersonalAttribute.cs" />
+    <Compile Include="Entity\Patient\PatientPersonalHistory.cs" />
+    <Compile Include="Entity\Patient\PatientPersonalHistoryDetails.cs" />
+    <Compile Include="Entity\Patient\PatientPrescription.cs" />
+    <Compile Include="Entity\Patient\PatientSpecialNote.cs" />
+    <Compile Include="Entity\Patient\PatientTestReportAttatchment.cs" />
+    <Compile Include="Entity\Patient\PatientTreatment.cs" />
+    <Compile Include="Entity\Patient\PrescriptionAttatchment.cs" />
+    <Compile Include="Entity\Patient\PurposeOnOT.cs" />
+    <Compile Include="Entity\Patient\ReportScanCopy.cs" />
+    <Compile Include="Entity\Patient\SurgeonName.cs" />
+    <Compile Include="Entity\Physiotherapy\OPDTherapy.cs" />
+    <Compile Include="Entity\Physiotherapy\OpdTherapyDetails.cs" />
+    <Compile Include="Entity\Physiotherapy\OpdTherapyDueCollection.cs" />
+    <Compile Include="Entity\Physiotherapy\Physiotherapy.cs" />
+    <Compile Include="Entity\Stock\DrugStockDetails.cs" />
+    <Compile Include="Entity\Stock\DrugStockIn.cs" />
+    <Compile Include="Entity\Store\StockIn.cs" />
+    <Compile Include="Entity\Store\StockInDetails.cs" />
+    <Compile Include="Entity\Store\StockOutDetails.cs" />
+    <Compile Include="Entity\Store\StockOutItem.cs" />
+    <Compile Include="Entity\Store\StoreItem.cs" />
+    <Compile Include="Entity\Store\StoreItemCategory.cs" />
+    <Compile Include="Entity\Store\StoreRequisition.cs" />
+    <Compile Include="Entity\Store\StoreRequisitionDetails.cs" />
+    <Compile Include="Entity\User\AppAppointmentSystemUser.cs" />
+    <Compile Include="Entity\User\AppMedicineCornerUser.cs" />
+    <Compile Include="Entity\User\AppPatientManagementUser.cs" />
+    <Compile Include="Entity\User\AppUser.cs" />
+    <Compile Include="Entity\Vehicle.cs" />
+    <Compile Include="Entity\Views\VW_DRUG_AVILABLE_STOCK.cs" />
+    <Compile Include="Entity\Views\VW_DAILY_USER_COLLECTION.cs" />
+    <Compile Include="Entity\Views\VW_DRUG_CONDITION.cs" />
+    <Compile Include="Entity\Views\VW_DRUG_SALE_ALL.cs" />
+    <Compile Include="Entity\Views\VW_IPD_DRUG_SALE_TOTAL.cs" />
+    <Compile Include="Entity\Views\VW_IPD_DRUG_SALE_RETURN.cs" />
+    <Compile Include="Entity\Views\VW_IPD_DRUG_SALE.cs" />
+    <Compile Include="Entity\Views\VDrugs.cs" />
+    <Compile Include="Entity\Views\VW_Department1_Wise_DRUG_STOCK.cs" />
+    <Compile Include="Entity\Views\VW_Department_Wise_DRUG_STOCK.cs" />
+    <Compile Include="Entity\Views\VW_DRUG_STOCK.cs" />
+    <Compile Include="Migrations\201710100914005_init.cs" />
+    <Compile Include="Migrations\201710100914005_init.Designer.cs">
+      <DependentUpon>201710100914005_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710110516552_shift.cs" />
+    <Compile Include="Migrations\201710110516552_shift.Designer.cs">
+      <DependentUpon>201710110516552_shift.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710110628309_stockupdate.cs" />
+    <Compile Include="Migrations\201710110628309_stockupdate.Designer.cs">
+      <DependentUpon>201710110628309_stockupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710150419363_unitPrice.cs" />
+    <Compile Include="Migrations\201710150419363_unitPrice.Designer.cs">
+      <DependentUpon>201710150419363_unitPrice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710170541347_saleDetails.cs" />
+    <Compile Include="Migrations\201710170541347_saleDetails.Designer.cs">
+      <DependentUpon>201710170541347_saleDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710180617355_insurance.cs" />
+    <Compile Include="Migrations\201710180617355_insurance.Designer.cs">
+      <DependentUpon>201710180617355_insurance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710181001296_hh.cs" />
+    <Compile Include="Migrations\201710181001296_hh.Designer.cs">
+      <DependentUpon>201710181001296_hh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710301114276_new.cs" />
+    <Compile Include="Migrations\201710301114276_new.Designer.cs">
+      <DependentUpon>201710301114276_new.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711010529540_upemp.cs" />
+    <Compile Include="Migrations\201711010529540_upemp.Designer.cs">
+      <DependentUpon>201711010529540_upemp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711050833138_saleHistry.cs" />
+    <Compile Include="Migrations\201711050833138_saleHistry.Designer.cs">
+      <DependentUpon>201711050833138_saleHistry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711061034138_mm.cs" />
+    <Compile Include="Migrations\201711061034138_mm.Designer.cs">
+      <DependentUpon>201711061034138_mm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711061044338_nn.cs" />
+    <Compile Include="Migrations\201711061044338_nn.Designer.cs">
+      <DependentUpon>201711061044338_nn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711070445012_sale.cs" />
+    <Compile Include="Migrations\201711070445012_sale.Designer.cs">
+      <DependentUpon>201711070445012_sale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711070712102_edu.cs" />
+    <Compile Include="Migrations\201711070712102_edu.Designer.cs">
+      <DependentUpon>201711070712102_edu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711071003425_newedu.cs" />
+    <Compile Include="Migrations\201711071003425_newedu.Designer.cs">
+      <DependentUpon>201711071003425_newedu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711081036488_all.cs" />
+    <Compile Include="Migrations\201711081036488_all.Designer.cs">
+      <DependentUpon>201711081036488_all.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711081042435_update.cs" />
+    <Compile Include="Migrations\201711081042435_update.Designer.cs">
+      <DependentUpon>201711081042435_update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711090921461_contact.cs" />
+    <Compile Include="Migrations\201711090921461_contact.Designer.cs">
+      <DependentUpon>201711090921461_contact.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711190959553_patientupdate.cs" />
+    <Compile Include="Migrations\201711190959553_patientupdate.Designer.cs">
+      <DependentUpon>201711190959553_patientupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711191113569_aa.cs" />
+    <Compile Include="Migrations\201711191113569_aa.Designer.cs">
+      <DependentUpon>201711191113569_aa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711191122406_details.cs" />
+    <Compile Include="Migrations\201711191122406_details.Designer.cs">
+      <DependentUpon>201711191122406_details.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711200603043_Lc.cs" />
+    <Compile Include="Migrations\201711200603043_Lc.Designer.cs">
+      <DependentUpon>201711200603043_Lc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711201051443_currency.cs" />
+    <Compile Include="Migrations\201711201051443_currency.Designer.cs">
+      <DependentUpon>201711201051443_currency.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711210629413_newlc.cs" />
+    <Compile Include="Migrations\201711210629413_newlc.Designer.cs">
+      <DependentUpon>201711210629413_newlc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711210716268_lcvalue.cs" />
+    <Compile Include="Migrations\201711210716268_lcvalue.Designer.cs">
+      <DependentUpon>201711210716268_lcvalue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711270755355_patienteducation.cs" />
+    <Compile Include="Migrations\201711270755355_patienteducation.Designer.cs">
+      <DependentUpon>201711270755355_patienteducation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711260923583_patientsupdate.cs" />
+    <Compile Include="Migrations\201711260923583_patientsupdate.Designer.cs">
+      <DependentUpon>201711260923583_patientsupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711270641188_patientAge.cs" />
+    <Compile Include="Migrations\201711270641188_patientAge.Designer.cs">
+      <DependentUpon>201711270641188_patientAge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711271111229_a.cs" />
+    <Compile Include="Migrations\201711271111229_a.Designer.cs">
+      <DependentUpon>201711271111229_a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711280503517_dateofbirth.cs" />
+    <Compile Include="Migrations\201711280503517_dateofbirth.Designer.cs">
+      <DependentUpon>201711280503517_dateofbirth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711290942494_gl.cs" />
+    <Compile Include="Migrations\201711290942494_gl.Designer.cs">
+      <DependentUpon>201711290942494_gl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711291116493_cabin.cs" />
+    <Compile Include="Migrations\201711291116493_cabin.Designer.cs">
+      <DependentUpon>201711291116493_cabin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711300653179_edId.cs" />
+    <Compile Include="Migrations\201711300653179_edId.Designer.cs">
+      <DependentUpon>201711300653179_edId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711300827240_ss.cs" />
+    <Compile Include="Migrations\201711300827240_ss.Designer.cs">
+      <DependentUpon>201711300827240_ss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712051015316_testrequest.cs" />
+    <Compile Include="Migrations\201712051015316_testrequest.Designer.cs">
+      <DependentUpon>201712051015316_testrequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712051021397_uprequest.cs" />
+    <Compile Include="Migrations\201712051021397_uprequest.Designer.cs">
+      <DependentUpon>201712051021397_uprequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712030722423_cabinstatus.cs" />
+    <Compile Include="Migrations\201712030722423_cabinstatus.Designer.cs">
+      <DependentUpon>201712030722423_cabinstatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712051107525_patientAmount.cs" />
+    <Compile Include="Migrations\201712051107525_patientAmount.Designer.cs">
+      <DependentUpon>201712051107525_patientAmount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712060704544_aa1.cs" />
+    <Compile Include="Migrations\201712060704544_aa1.Designer.cs">
+      <DependentUpon>201712060704544_aa1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712060820083_testre.cs" />
+    <Compile Include="Migrations\201712060820083_testre.Designer.cs">
+      <DependentUpon>201712060820083_testre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712060948524_deuamount.cs" />
+    <Compile Include="Migrations\201712060948524_deuamount.Designer.cs">
+      <DependentUpon>201712060948524_deuamount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712061011195_voucherno.cs" />
+    <Compile Include="Migrations\201712061011195_voucherno.Designer.cs">
+      <DependentUpon>201712061011195_voucherno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712061449477_dd.cs" />
+    <Compile Include="Migrations\201712061449477_dd.Designer.cs">
+      <DependentUpon>201712061449477_dd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712070040359_TestCodeAdd.cs" />
+    <Compile Include="Migrations\201712070040359_TestCodeAdd.Designer.cs">
+      <DependentUpon>201712070040359_TestCodeAdd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712070608166_operationtype.cs" />
+    <Compile Include="Migrations\201712070608166_operationtype.Designer.cs">
+      <DependentUpon>201712070608166_operationtype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712090450536_ward.cs" />
+    <Compile Include="Migrations\201712090450536_ward.Designer.cs">
+      <DependentUpon>201712090450536_ward.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712090428248_dis.cs" />
+    <Compile Include="Migrations\201712090428248_dis.Designer.cs">
+      <DependentUpon>201712090428248_dis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712091051322_oo.cs" />
+    <Compile Include="Migrations\201712091051322_oo.Designer.cs">
+      <DependentUpon>201712091051322_oo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712111006410_labitem.cs" />
+    <Compile Include="Migrations\201712111006410_labitem.Designer.cs">
+      <DependentUpon>201712111006410_labitem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712130606403_amount.cs" />
+    <Compile Include="Migrations\201712130606403_amount.Designer.cs">
+      <DependentUpon>201712130606403_amount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712131037352_microbiology.cs" />
+    <Compile Include="Migrations\201712131037352_microbiology.Designer.cs">
+      <DependentUpon>201712131037352_microbiology.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712140833387_microupdate.cs" />
+    <Compile Include="Migrations\201712140833387_microupdate.Designer.cs">
+      <DependentUpon>201712140833387_microupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712180455092_date.cs" />
+    <Compile Include="Migrations\201712180455092_date.Designer.cs">
+      <DependentUpon>201712180455092_date.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712180931348_requestup.cs" />
+    <Compile Include="Migrations\201712180931348_requestup.Designer.cs">
+      <DependentUpon>201712180931348_requestup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712181031210_ss1.cs" />
+    <Compile Include="Migrations\201712181031210_ss1.Designer.cs">
+      <DependentUpon>201712181031210_ss1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712190803095_store.cs" />
+    <Compile Include="Migrations\201712190803095_store.Designer.cs">
+      <DependentUpon>201712190803095_store.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712191049464_stock.cs" />
+    <Compile Include="Migrations\201712191049464_stock.Designer.cs">
+      <DependentUpon>201712191049464_stock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712191151001_tt.cs" />
+    <Compile Include="Migrations\201712191151001_tt.Designer.cs">
+      <DependentUpon>201712191151001_tt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712200604288_stockdetails.cs" />
+    <Compile Include="Migrations\201712200604288_stockdetails.Designer.cs">
+      <DependentUpon>201712200604288_stockdetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712210509528_upstock.cs" />
+    <Compile Include="Migrations\201712210509528_upstock.Designer.cs">
+      <DependentUpon>201712210509528_upstock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712211113538_stockout.cs" />
+    <Compile Include="Migrations\201712211113538_stockout.Designer.cs">
+      <DependentUpon>201712211113538_stockout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712230259587_updateDrug.cs" />
+    <Compile Include="Migrations\201712230259587_updateDrug.Designer.cs">
+      <DependentUpon>201712230259587_updateDrug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712240209424_Purchase.cs" />
+    <Compile Include="Migrations\201712240209424_Purchase.Designer.cs">
+      <DependentUpon>201712240209424_Purchase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712240345408_eee.cs" />
+    <Compile Include="Migrations\201712240345408_eee.Designer.cs">
+      <DependentUpon>201712240345408_eee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712240706003_pharmacyr.cs" />
+    <Compile Include="Migrations\201712240706003_pharmacyr.Designer.cs">
+      <DependentUpon>201712240706003_pharmacyr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712241059157_ppp.cs" />
+    <Compile Include="Migrations\201712241059157_ppp.Designer.cs">
+      <DependentUpon>201712241059157_ppp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712241132382_ptype.cs" />
+    <Compile Include="Migrations\201712241132382_ptype.Designer.cs">
+      <DependentUpon>201712241132382_ptype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712250429517_PurchaseUp.cs" />
+    <Compile Include="Migrations\201712250429517_PurchaseUp.Designer.cs">
+      <DependentUpon>201712250429517_PurchaseUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712261050405_micro1.cs" />
+    <Compile Include="Migrations\201712261050405_micro1.Designer.cs">
+      <DependentUpon>201712261050405_micro1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712270538152_ReTest.cs" />
+    <Compile Include="Migrations\201712270538152_ReTest.Designer.cs">
+      <DependentUpon>201712270538152_ReTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712270608200_uptest.cs" />
+    <Compile Include="Migrations\201712270608200_uptest.Designer.cs">
+      <DependentUpon>201712270608200_uptest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712270651353_cbc.cs" />
+    <Compile Include="Migrations\201712270651353_cbc.Designer.cs">
+      <DependentUpon>201712270651353_cbc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712270939405_newmi.cs" />
+    <Compile Include="Migrations\201712270939405_newmi.Designer.cs">
+      <DependentUpon>201712270939405_newmi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712271029562_patientcode.cs" />
+    <Compile Include="Migrations\201712271029562_patientcode.Designer.cs">
+      <DependentUpon>201712271029562_patientcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712280639412_qq.cs" />
+    <Compile Include="Migrations\201712280639412_qq.Designer.cs">
+      <DependentUpon>201712280639412_qq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712280755361_length.cs" />
+    <Compile Include="Migrations\201712280755361_length.Designer.cs">
+      <DependentUpon>201712280755361_length.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712280803253_detailslength.cs" />
+    <Compile Include="Migrations\201712280803253_detailslength.Designer.cs">
+      <DependentUpon>201712280803253_detailslength.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712280615242_specimen.cs" />
+    <Compile Include="Migrations\201712280615242_specimen.Designer.cs">
+      <DependentUpon>201712280615242_specimen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712280940208_reup.cs" />
+    <Compile Include="Migrations\201712280940208_reup.Designer.cs">
+      <DependentUpon>201712280940208_reup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712280959166_ee.cs" />
+    <Compile Include="Migrations\201712280959166_ee.Designer.cs">
+      <DependentUpon>201712280959166_ee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712281025366_rr.cs" />
+    <Compile Include="Migrations\201712281025366_rr.Designer.cs">
+      <DependentUpon>201712281025366_rr.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712300413451_ii.cs" />
+    <Compile Include="Migrations\201712300413451_ii.Designer.cs">
+      <DependentUpon>201712300413451_ii.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712300440542_testquantity.cs" />
+    <Compile Include="Migrations\201712300440542_testquantity.Designer.cs">
+      <DependentUpon>201712300440542_testquantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712300543349_itemquantity.cs" />
+    <Compile Include="Migrations\201712300543349_itemquantity.Designer.cs">
+      <DependentUpon>201712300543349_itemquantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712300633432_patientadmission.cs" />
+    <Compile Include="Migrations\201712300633432_patientadmission.Designer.cs">
+      <DependentUpon>201712300633432_patientadmission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712300923588_amount1.cs" />
+    <Compile Include="Migrations\201712300923588_amount1.Designer.cs">
+      <DependentUpon>201712300923588_amount1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712300950459_voucher.cs" />
+    <Compile Include="Migrations\201712300950459_voucher.Designer.cs">
+      <DependentUpon>201712300950459_voucher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712301150534_up.cs" />
+    <Compile Include="Migrations\201712301150534_up.Designer.cs">
+      <DependentUpon>201712301150534_up.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712301157014_uii.cs" />
+    <Compile Include="Migrations\201712301157014_uii.Designer.cs">
+      <DependentUpon>201712301157014_uii.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712310147186_update-patient-info.cs" />
+    <Compile Include="Migrations\201712310147186_update-patient-info.Designer.cs">
+      <DependentUpon>201712310147186_update-patient-info.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712310547361_update-personal-history-table.cs" />
+    <Compile Include="Migrations\201712310547361_update-personal-history-table.Designer.cs">
+      <DependentUpon>201712310547361_update-personal-history-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712310901225_days.cs" />
+    <Compile Include="Migrations\201712310901225_days.Designer.cs">
+      <DependentUpon>201712310901225_days.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201712311215068_dddd.cs" />
+    <Compile Include="Migrations\201712311215068_dddd.Designer.cs">
+      <DependentUpon>201712311215068_dddd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801010602148_testreport.cs" />
+    <Compile Include="Migrations\201801010602148_testreport.Designer.cs">
+      <DependentUpon>201801010602148_testreport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801011020357_stocout.cs" />
+    <Compile Include="Migrations\201801011020357_stocout.Designer.cs">
+      <DependentUpon>201801011020357_stocout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801011039139_dateup.cs" />
+    <Compile Include="Migrations\201801011039139_dateup.Designer.cs">
+      <DependentUpon>201801011039139_dateup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801020552261_stockdetails1.cs" />
+    <Compile Include="Migrations\201801020552261_stockdetails1.Designer.cs">
+      <DependentUpon>201801020552261_stockdetails1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801020927215_bed.cs" />
+    <Compile Include="Migrations\201801020927215_bed.Designer.cs">
+      <DependentUpon>201801020927215_bed.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801030454349_patientlaser.cs" />
+    <Compile Include="Migrations\201801030454349_patientlaser.Designer.cs">
+      <DependentUpon>201801030454349_patientlaser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801031123221_ccc.cs" />
+    <Compile Include="Migrations\201801031123221_ccc.Designer.cs">
+      <DependentUpon>201801031123221_ccc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801040447547_dailyBill.cs" />
+    <Compile Include="Migrations\201801040447547_dailyBill.Designer.cs">
+      <DependentUpon>201801040447547_dailyBill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801040508226_updatdailybill.cs" />
+    <Compile Include="Migrations\201801040508226_updatdailybill.Designer.cs">
+      <DependentUpon>201801040508226_updatdailybill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801040511491_dept.cs" />
+    <Compile Include="Migrations\201801040511491_dept.Designer.cs">
+      <DependentUpon>201801040511491_dept.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801040716117_deptstockin.cs" />
+    <Compile Include="Migrations\201801040716117_deptstockin.Designer.cs">
+      <DependentUpon>201801040716117_deptstockin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801040731456_qqq.cs" />
+    <Compile Include="Migrations\201801040731456_qqq.Designer.cs">
+      <DependentUpon>201801040731456_qqq.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801041000003_detailsitem.cs" />
+    <Compile Include="Migrations\201801041000003_detailsitem.Designer.cs">
+      <DependentUpon>201801041000003_detailsitem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801041109481_patientdrug.cs" />
+    <Compile Include="Migrations\201801041109481_patientdrug.Designer.cs">
+      <DependentUpon>201801041109481_patientdrug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801041150547_voucher1.cs" />
+    <Compile Include="Migrations\201801041150547_voucher1.Designer.cs">
+      <DependentUpon>201801041150547_voucher1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801041155494_itstockout.cs" />
+    <Compile Include="Migrations\201801041155494_itstockout.Designer.cs">
+      <DependentUpon>201801041155494_itstockout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801051251155_discharge.cs" />
+    <Compile Include="Migrations\201801051251155_discharge.Designer.cs">
+      <DependentUpon>201801051251155_discharge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801051408215_discharge1.cs" />
+    <Compile Include="Migrations\201801051408215_discharge1.Designer.cs">
+      <DependentUpon>201801051408215_discharge1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801051630381_st.cs" />
+    <Compile Include="Migrations\201801051630381_st.Designer.cs">
+      <DependentUpon>201801051630381_st.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801060457582_itout.cs" />
+    <Compile Include="Migrations\201801060457582_itout.Designer.cs">
+      <DependentUpon>201801060457582_itout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801060516252_inpatientdoctor.cs" />
+    <Compile Include="Migrations\201801060516252_inpatientdoctor.Designer.cs">
+      <DependentUpon>201801060516252_inpatientdoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801060709461_bills.cs" />
+    <Compile Include="Migrations\201801060709461_bills.Designer.cs">
+      <DependentUpon>201801060709461_bills.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801060838309_inpatienttest.cs" />
+    <Compile Include="Migrations\201801060838309_inpatienttest.Designer.cs">
+      <DependentUpon>201801060838309_inpatienttest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801060841474_testdate.cs" />
+    <Compile Include="Migrations\201801060841474_testdate.Designer.cs">
+      <DependentUpon>201801060841474_testdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801060909250_bb.cs" />
+    <Compile Include="Migrations\201801060909250_bb.Designer.cs">
+      <DependentUpon>201801060909250_bb.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801070517542_vv.cs" />
+    <Compile Include="Migrations\201801070517542_vv.Designer.cs">
+      <DependentUpon>201801070517542_vv.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801070759378_ggg.cs" />
+    <Compile Include="Migrations\201801070759378_ggg.Designer.cs">
+      <DependentUpon>201801070759378_ggg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801070519021_quantity.cs" />
+    <Compile Include="Migrations\201801070519021_quantity.Designer.cs">
+      <DependentUpon>201801070519021_quantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801070724174_upout.cs" />
+    <Compile Include="Migrations\201801070724174_upout.Designer.cs">
+      <DependentUpon>201801070724174_upout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801070941272_tyui.cs" />
+    <Compile Include="Migrations\201801070941272_tyui.Designer.cs">
+      <DependentUpon>201801070941272_tyui.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801071031000_tttyui.cs" />
+    <Compile Include="Migrations\201801071031000_tttyui.Designer.cs">
+      <DependentUpon>201801071031000_tttyui.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801080921512_optpatient.cs" />
+    <Compile Include="Migrations\201801080921512_optpatient.Designer.cs">
+      <DependentUpon>201801080921512_optpatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801090518370_givenamount.cs" />
+    <Compile Include="Migrations\201801090518370_givenamount.Designer.cs">
+      <DependentUpon>201801090518370_givenamount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801090703397_upquantity.cs" />
+    <Compile Include="Migrations\201801090703397_upquantity.Designer.cs">
+      <DependentUpon>201801090703397_upquantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801091047134_opt.cs" />
+    <Compile Include="Migrations\201801091047134_opt.Designer.cs">
+      <DependentUpon>201801091047134_opt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801100908491_storerequisition.cs" />
+    <Compile Include="Migrations\201801100908491_storerequisition.Designer.cs">
+      <DependentUpon>201801100908491_storerequisition.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801100925377_requantity.cs" />
+    <Compile Include="Migrations\201801100925377_requantity.Designer.cs">
+      <DependentUpon>201801100925377_requantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801131124438_canteen.cs" />
+    <Compile Include="Migrations\201801131124438_canteen.Designer.cs">
+      <DependentUpon>201801131124438_canteen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801140312347_updatestock.cs" />
+    <Compile Include="Migrations\201801140312347_updatestock.Designer.cs">
+      <DependentUpon>201801140312347_updatestock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801140531030_update1.cs" />
+    <Compile Include="Migrations\201801140531030_update1.Designer.cs">
+      <DependentUpon>201801140531030_update1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801180532278_departdrug.cs" />
+    <Compile Include="Migrations\201801180532278_departdrug.Designer.cs">
+      <DependentUpon>201801180532278_departdrug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801180624430_stockdepartment.cs" />
+    <Compile Include="Migrations\201801180624430_stockdepartment.Designer.cs">
+      <DependentUpon>201801180624430_stockdepartment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801180639321_updatedepartmentstock.cs" />
+    <Compile Include="Migrations\201801180639321_updatedepartmentstock.Designer.cs">
+      <DependentUpon>201801180639321_updatedepartmentstock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801180857063_departmentdrugstock.cs" />
+    <Compile Include="Migrations\201801180857063_departmentdrugstock.Designer.cs">
+      <DependentUpon>201801180857063_departmentdrugstock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801210535354_patienttestquantity.cs" />
+    <Compile Include="Migrations\201801210535354_patienttestquantity.Designer.cs">
+      <DependentUpon>201801210535354_patienttestquantity.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801210552191_quantityupdate.cs" />
+    <Compile Include="Migrations\201801210552191_quantityupdate.Designer.cs">
+      <DependentUpon>201801210552191_quantityupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801221041054_admissionupdate.cs" />
+    <Compile Include="Migrations\201801221041054_admissionupdate.Designer.cs">
+      <DependentUpon>201801221041054_admissionupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801221134238_patientadmissionupdate.cs" />
+    <Compile Include="Migrations\201801221134238_patientadmissionupdate.Designer.cs">
+      <DependentUpon>201801221134238_patientadmissionupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801221220171_contactupdate.cs" />
+    <Compile Include="Migrations\201801221220171_contactupdate.Designer.cs">
+      <DependentUpon>201801221220171_contactupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801230726061_patientinfor.cs" />
+    <Compile Include="Migrations\201801230726061_patientinfor.Designer.cs">
+      <DependentUpon>201801230726061_patientinfor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801230527581_upWard.cs" />
+    <Compile Include="Migrations\201801230527581_upWard.Designer.cs">
+      <DependentUpon>201801230527581_upWard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801250602223_canteenfood.cs" />
+    <Compile Include="Migrations\201801250602223_canteenfood.Designer.cs">
+      <DependentUpon>201801250602223_canteenfood.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801250959231_upcanteenPatient.cs" />
+    <Compile Include="Migrations\201801250959231_upcanteenPatient.Designer.cs">
+      <DependentUpon>201801250959231_upcanteenPatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801251136192_conflict.cs" />
+    <Compile Include="Migrations\201801251136192_conflict.Designer.cs">
+      <DependentUpon>201801251136192_conflict.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801271712212_add-Dialysis-table-1.cs" />
+    <Compile Include="Migrations\201801271712212_add-Dialysis-table-1.Designer.cs">
+      <DependentUpon>201801271712212_add-Dialysis-table-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801271736354_add-Dialysis-table-2.cs" />
+    <Compile Include="Migrations\201801271736354_add-Dialysis-table-2.Designer.cs">
+      <DependentUpon>201801271736354_add-Dialysis-table-2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801280452403_diaconflict.cs" />
+    <Compile Include="Migrations\201801280452403_diaconflict.Designer.cs">
+      <DependentUpon>201801280452403_diaconflict.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801280605443_servicecharge.cs" />
+    <Compile Include="Migrations\201801280605443_servicecharge.Designer.cs">
+      <DependentUpon>201801280605443_servicecharge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801281003444_conflict1.cs" />
+    <Compile Include="Migrations\201801281003444_conflict1.Designer.cs">
+      <DependentUpon>201801281003444_conflict1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801281150214_add-Dialysis-table-3.cs" />
+    <Compile Include="Migrations\201801281150214_add-Dialysis-table-3.Designer.cs">
+      <DependentUpon>201801281150214_add-Dialysis-table-3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801291236478_add-Dialysis-table-4.cs" />
+    <Compile Include="Migrations\201801291236478_add-Dialysis-table-4.Designer.cs">
+      <DependentUpon>201801291236478_add-Dialysis-table-4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801290805055_upcon.cs" />
+    <Compile Include="Migrations\201801290805055_upcon.Designer.cs">
+      <DependentUpon>201801290805055_upcon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801300455317_rcon.cs" />
+    <Compile Include="Migrations\201801300455317_rcon.Designer.cs">
+      <DependentUpon>201801300455317_rcon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801300857093_package.cs" />
+    <Compile Include="Migrations\201801300857093_package.Designer.cs">
+      <DependentUpon>201801300857093_package.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801301202420_packageonadmission.cs" />
+    <Compile Include="Migrations\201801301202420_packageonadmission.Designer.cs">
+      <DependentUpon>201801301202420_packageonadmission.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801310736582_noofdaysonpackage.cs" />
+    <Compile Include="Migrations\201801310736582_noofdaysonpackage.Designer.cs">
+      <DependentUpon>201801310736582_noofdaysonpackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801310748485_cabinamountonpackage.cs" />
+    <Compile Include="Migrations\201801310748485_cabinamountonpackage.Designer.cs">
+      <DependentUpon>201801310748485_cabinamountonpackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801310822585_packageondischarge.cs" />
+    <Compile Include="Migrations\201801310822585_packageondischarge.Designer.cs">
+      <DependentUpon>201801310822585_packageondischarge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801310914425_updatedischarge.cs" />
+    <Compile Include="Migrations\201801310914425_updatedischarge.Designer.cs">
+      <DependentUpon>201801310914425_updatedischarge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802010504510_inpatientdrugsalereturn1.cs" />
+    <Compile Include="Migrations\201802010504510_inpatientdrugsalereturn1.Designer.cs">
+      <DependentUpon>201802010504510_inpatientdrugsalereturn1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802010508319_patientcodeonreturn.cs" />
+    <Compile Include="Migrations\201802010508319_patientcodeonreturn.Designer.cs">
+      <DependentUpon>201802010508319_patientcodeonreturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802030555393_admissionfee.cs" />
+    <Compile Include="Migrations\201802030555393_admissionfee.Designer.cs">
+      <DependentUpon>201802030555393_admissionfee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802030839092_otmedicineonpackage.cs" />
+    <Compile Include="Migrations\201802030839092_otmedicineonpackage.Designer.cs">
+      <DependentUpon>201802030839092_otmedicineonpackage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802040518547_decimaltointonsalereturn.cs" />
+    <Compile Include="Migrations\201802040518547_decimaltointonsalereturn.Designer.cs">
+      <DependentUpon>201802040518547_decimaltointonsalereturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802060649142_departmentwisedrugstockout.cs" />
+    <Compile Include="Migrations\201802060649142_departmentwisedrugstockout.Designer.cs">
+      <DependentUpon>201802060649142_departmentwisedrugstockout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802060734435_janina.cs" />
+    <Compile Include="Migrations\201802060734435_janina.Designer.cs">
+      <DependentUpon>201802060734435_janina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802061134478_nullpriceupdateondepartmentwisestockoutdetails.cs" />
+    <Compile Include="Migrations\201802061134478_nullpriceupdateondepartmentwisestockoutdetails.Designer.cs">
+      <DependentUpon>201802061134478_nullpriceupdateondepartmentwisestockoutdetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802071031201_quantitynotnullinpatientdetails.cs" />
+    <Compile Include="Migrations\201802071031201_quantitynotnullinpatientdetails.Designer.cs">
+      <DependentUpon>201802071031201_quantitynotnullinpatientdetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802060532104_conup.cs" />
+    <Compile Include="Migrations\201802060532104_conup.Designer.cs">
+      <DependentUpon>201802060532104_conup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802031451359_Vehicle.cs" />
+    <Compile Include="Migrations\201802031451359_Vehicle.Designer.cs">
+      <DependentUpon>201802031451359_Vehicle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802071101011_conflictmigration.cs" />
+    <Compile Include="Migrations\201802071101011_conflictmigration.Designer.cs">
+      <DependentUpon>201802071101011_conflictmigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802070553283_vehicleup.cs" />
+    <Compile Include="Migrations\201802070553283_vehicleup.Designer.cs">
+      <DependentUpon>201802070553283_vehicleup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802080801047_physiotherapy.cs" />
+    <Compile Include="Migrations\201802080801047_physiotherapy.Designer.cs">
+      <DependentUpon>201802080801047_physiotherapy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802081122300_add-shift.cs" />
+    <Compile Include="Migrations\201802081122300_add-shift.Designer.cs">
+      <DependentUpon>201802081122300_add-shift.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802081125526_add-shift1.cs" />
+    <Compile Include="Migrations\201802081125526_add-shift1.Designer.cs">
+      <DependentUpon>201802081125526_add-shift1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802081920331_add-attendance-table.cs" />
+    <Compile Include="Migrations\201802081920331_add-attendance-table.Designer.cs">
+      <DependentUpon>201802081920331_add-attendance-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802090453549_add-attendance-table1.cs" />
+    <Compile Include="Migrations\201802090453549_add-attendance-table1.Designer.cs">
+      <DependentUpon>201802090453549_add-attendance-table1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802090500577_add-attendance-table2.cs" />
+    <Compile Include="Migrations\201802090500577_add-attendance-table2.Designer.cs">
+      <DependentUpon>201802090500577_add-attendance-table2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802090554291_update-doctor-table.cs" />
+    <Compile Include="Migrations\201802090554291_update-doctor-table.Designer.cs">
+      <DependentUpon>201802090554291_update-doctor-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802090637199_update-tables.cs" />
+    <Compile Include="Migrations\201802090637199_update-tables.Designer.cs">
+      <DependentUpon>201802090637199_update-tables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802090644187_add-doctor-att-table.cs" />
+    <Compile Include="Migrations\201802090644187_add-doctor-att-table.Designer.cs">
+      <DependentUpon>201802090644187_add-doctor-att-table.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802100451550_conflictmigration1.cs" />
+    <Compile Include="Migrations\201802100451550_conflictmigration1.Designer.cs">
+      <DependentUpon>201802100451550_conflictmigration1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802100522577_rentambulance.cs" />
+    <Compile Include="Migrations\201802100522577_rentambulance.Designer.cs">
+      <DependentUpon>201802100522577_rentambulance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802100617431_vehiclefor.cs" />
+    <Compile Include="Migrations\201802100617431_vehiclefor.Designer.cs">
+      <DependentUpon>201802100617431_vehiclefor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802100624025_rentAmount.cs" />
+    <Compile Include="Migrations\201802100624025_rentAmount.Designer.cs">
+      <DependentUpon>201802100624025_rentAmount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802100658404_rentdate.cs" />
+    <Compile Include="Migrations\201802100658404_rentdate.Designer.cs">
+      <DependentUpon>201802100658404_rentdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802101222185_lastconflict.cs" />
+    <Compile Include="Migrations\201802101222185_lastconflict.Designer.cs">
+      <DependentUpon>201802101222185_lastconflict.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802101035178_opdtheraybill.cs" />
+    <Compile Include="Migrations\201802101035178_opdtheraybill.Designer.cs">
+      <DependentUpon>201802101035178_opdtheraybill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802120546005_sds.cs" />
+    <Compile Include="Migrations\201802120546005_sds.Designer.cs">
+      <DependentUpon>201802120546005_sds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802120939408_healthcheakup.cs" />
+    <Compile Include="Migrations\201802120939408_healthcheakup.Designer.cs">
+      <DependentUpon>201802120939408_healthcheakup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802121002232_updateconflict.cs" />
+    <Compile Include="Migrations\201802121002232_updateconflict.Designer.cs">
+      <DependentUpon>201802121002232_updateconflict.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802121142539_ICU&amp;transfer.cs" />
+    <Compile Include="Migrations\201802121142539_ICU&amp;transfer.Designer.cs">
+      <DependentUpon>201802121142539_ICU&amp;transfer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802121228485_migration2.cs" />
+    <Compile Include="Migrations\201802121228485_migration2.Designer.cs">
+      <DependentUpon>201802121228485_migration2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802131026564_dropicuprice.cs" />
+    <Compile Include="Migrations\201802131026564_dropicuprice.Designer.cs">
+      <DependentUpon>201802131026564_dropicuprice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802131033564_icubeds.cs" />
+    <Compile Include="Migrations\201802131033564_icubeds.Designer.cs">
+      <DependentUpon>201802131033564_icubeds.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802131117502_transferupdate.cs" />
+    <Compile Include="Migrations\201802131117502_transferupdate.Designer.cs">
+      <DependentUpon>201802131117502_transferupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802121235158_add-CheckedInCheckedOut.cs" />
+    <Compile Include="Migrations\201802121235158_add-CheckedInCheckedOut.Designer.cs">
+      <DependentUpon>201802121235158_add-CheckedInCheckedOut.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802140451172_nextconflict.cs" />
+    <Compile Include="Migrations\201802140451172_nextconflict.Designer.cs">
+      <DependentUpon>201802140451172_nextconflict.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802140621257_migration3.cs" />
+    <Compile Include="Migrations\201802140621257_migration3.Designer.cs">
+      <DependentUpon>201802140621257_migration3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802140850030_icurent.cs" />
+    <Compile Include="Migrations\201802140850030_icurent.Designer.cs">
+      <DependentUpon>201802140850030_icurent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802150451383_migration4.cs" />
+    <Compile Include="Migrations\201802150451383_migration4.Designer.cs">
+      <DependentUpon>201802150451383_migration4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802151022237_billingforPackageCheckup.cs" />
+    <Compile Include="Migrations\201802151022237_billingforPackageCheckup.Designer.cs">
+      <DependentUpon>201802151022237_billingforPackageCheckup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802170735247_dischargesummary.cs" />
+    <Compile Include="Migrations\201802170735247_dischargesummary.Designer.cs">
+      <DependentUpon>201802170735247_dischargesummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802180719245_operationtimechange.cs" />
+    <Compile Include="Migrations\201802180719245_operationtimechange.Designer.cs">
+      <DependentUpon>201802180719245_operationtimechange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802190524022_investigationondischargesummary.cs" />
+    <Compile Include="Migrations\201802190524022_investigationondischargesummary.Designer.cs">
+      <DependentUpon>201802190524022_investigationondischargesummary.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802190952362_dateforstockin.cs" />
+    <Compile Include="Migrations\201802190952362_dateforstockin.Designer.cs">
+      <DependentUpon>201802190952362_dateforstockin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802200945592_dscountondischarge.cs" />
+    <Compile Include="Migrations\201802200945592_dscountondischarge.Designer.cs">
+      <DependentUpon>201802200945592_dscountondischarge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802240919240_prescriptionattatchment.cs" />
+    <Compile Include="Migrations\201802240919240_prescriptionattatchment.Designer.cs">
+      <DependentUpon>201802240919240_prescriptionattatchment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802250649448_testreportattachment.cs" />
+    <Compile Include="Migrations\201802250649448_testreportattachment.Designer.cs">
+      <DependentUpon>201802250649448_testreportattachment.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802251009226_vcnconcust.cs" />
+    <Compile Include="Migrations\201802251009226_vcnconcust.Designer.cs">
+      <DependentUpon>201802251009226_vcnconcust.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802251736405_ambu11.cs" />
+    <Compile Include="Migrations\201802251736405_ambu11.Designer.cs">
+      <DependentUpon>201802251736405_ambu11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802260555592_conflictmigration2.cs" />
+    <Compile Include="Migrations\201802260555592_conflictmigration2.Designer.cs">
+      <DependentUpon>201802260555592_conflictmigration2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802260941113_vouchernoinpatientlaser.cs" />
+    <Compile Include="Migrations\201802260941113_vouchernoinpatientlaser.Designer.cs">
+      <DependentUpon>201802260941113_vouchernoinpatientlaser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802261130039_operationtheatre.cs" />
+    <Compile Include="Migrations\201802261130039_operationtheatre.Designer.cs">
+      <DependentUpon>201802261130039_operationtheatre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802270826316_anesthesia.cs" />
+    <Compile Include="Migrations\201802270826316_anesthesia.Designer.cs">
+      <DependentUpon>201802270826316_anesthesia.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802271026446_assistantdoctor.cs" />
+    <Compile Include="Migrations\201802271026446_assistantdoctor.Designer.cs">
+      <DependentUpon>201802271026446_assistantdoctor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802271209242_totalamountonot.cs" />
+    <Compile Include="Migrations\201802271209242_totalamountonot.Designer.cs">
+      <DependentUpon>201802271209242_totalamountonot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802270052499_update-dailysis.cs" />
+    <Compile Include="Migrations\201802270052499_update-dailysis.Designer.cs">
+      <DependentUpon>201802270052499_update-dailysis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802280534095_conflictmigrationssssss.cs" />
+    <Compile Include="Migrations\201802280534095_conflictmigrationssssss.Designer.cs">
+      <DependentUpon>201802280534095_conflictmigrationssssss.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803010807584_discountforphysiotherapy.cs" />
+    <Compile Include="Migrations\201803010807584_discountforphysiotherapy.Designer.cs">
+      <DependentUpon>201803010807584_discountforphysiotherapy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803010809408_doctordiscountondischarge.cs" />
+    <Compile Include="Migrations\201803010809408_doctordiscountondischarge.Designer.cs">
+      <DependentUpon>201803010809408_doctordiscountondischarge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803010925107_totalfortheapy.cs" />
+    <Compile Include="Migrations\201803010925107_totalfortheapy.Designer.cs">
+      <DependentUpon>201803010925107_totalfortheapy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803011000006_opdprice.cs" />
+    <Compile Include="Migrations\201803011000006_opdprice.Designer.cs">
+      <DependentUpon>201803011000006_opdprice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803030430259_conmigrationnew.cs" />
+    <Compile Include="Migrations\201803030430259_conmigrationnew.Designer.cs">
+      <DependentUpon>201803030430259_conmigrationnew.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803040542223_biochemistry.cs" />
+    <Compile Include="Migrations\201803040542223_biochemistry.Designer.cs">
+      <DependentUpon>201803040542223_biochemistry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803040548069_otbillondischarge.cs" />
+    <Compile Include="Migrations\201803040548069_otbillondischarge.Designer.cs">
+      <DependentUpon>201803040548069_otbillondischarge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803040830144_salepriceindrug.cs" />
+    <Compile Include="Migrations\201803040830144_salepriceindrug.Designer.cs">
+      <DependentUpon>201803040830144_salepriceindrug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803041001238_patientduecollectiontable.cs" />
+    <Compile Include="Migrations\201803041001238_patientduecollectiontable.Designer.cs">
+      <DependentUpon>201803041001238_patientduecollectiontable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803040852185_serologyref.cs" />
+    <Compile Include="Migrations\201803040852185_serologyref.Designer.cs">
+      <DependentUpon>201803040852185_serologyref.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803050540406_conflictmigration234.cs" />
+    <Compile Include="Migrations\201803050540406_conflictmigration234.Designer.cs">
+      <DependentUpon>201803050540406_conflictmigration234.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803050558033_createdbyonduecollection.cs" />
+    <Compile Include="Migrations\201803050558033_createdbyonduecollection.Designer.cs">
+      <DependentUpon>201803050558033_createdbyonduecollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803050604139_previousdueonpatientduecollection.cs" />
+    <Compile Include="Migrations\201803050604139_previousdueonpatientduecollection.Designer.cs">
+      <DependentUpon>201803050604139_previousdueonpatientduecollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803050612341_newTestDate.cs" />
+    <Compile Include="Migrations\201803050612341_newTestDate.Designer.cs">
+      <DependentUpon>201803050612341_newTestDate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803050852427_patientCard.cs" />
+    <Compile Include="Migrations\201803050852427_patientCard.Designer.cs">
+      <DependentUpon>201803050852427_patientCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803051036281_add-appointment-dialysis.cs" />
+    <Compile Include="Migrations\201803051036281_add-appointment-dialysis.Designer.cs">
+      <DependentUpon>201803051036281_add-appointment-dialysis.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803051236514_newcnflictup.cs" />
+    <Compile Include="Migrations\201803051236514_newcnflictup.Designer.cs">
+      <DependentUpon>201803051236514_newcnflictup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803041718320_uploadView.cs" />
+    <Compile Include="Migrations\201803041718320_uploadView.Designer.cs">
+      <DependentUpon>201803041718320_uploadView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803041923449_stockview.cs" />
+    <Compile Include="Migrations\201803041923449_stockview.Designer.cs">
+      <DependentUpon>201803041923449_stockview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803061118314_editview.cs" />
+    <Compile Include="Migrations\201803061118314_editview.Designer.cs">
+      <DependentUpon>201803061118314_editview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803071042323_vwdepartmentwisestock.cs" />
+    <Compile Include="Migrations\201803071042323_vwdepartmentwisestock.Designer.cs">
+      <DependentUpon>201803071042323_vwdepartmentwisestock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803071056535_editviewdepartmentstock.cs" />
+    <Compile Include="Migrations\201803071056535_editviewdepartmentstock.Designer.cs">
+      <DependentUpon>201803071056535_editviewdepartmentstock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803071139112_marketingbyonpatient.cs" />
+    <Compile Include="Migrations\201803071139112_marketingbyonpatient.Designer.cs">
+      <DependentUpon>201803071139112_marketingbyonpatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803080536502_therapystatus.cs" />
+    <Compile Include="Migrations\201803080536502_therapystatus.Designer.cs">
+      <DependentUpon>201803080536502_therapystatus.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803082236553_addlog.cs" />
+    <Compile Include="Migrations\201803082236553_addlog.Designer.cs">
+      <DependentUpon>201803082236553_addlog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803102012492_otUpdate.cs" />
+    <Compile Include="Migrations\201803102012492_otUpdate.Designer.cs">
+      <DependentUpon>201803102012492_otUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803111220039_quantityoninpatienttest.cs" />
+    <Compile Include="Migrations\201803111220039_quantityoninpatienttest.Designer.cs">
+      <DependentUpon>201803111220039_quantityoninpatienttest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803120545000_changequantityininpatienttest.cs" />
+    <Compile Include="Migrations\201803120545000_changequantityininpatienttest.Designer.cs">
+      <DependentUpon>201803120545000_changequantityininpatienttest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803111200025_resolveconflict.cs" />
+    <Compile Include="Migrations\201803111200025_resolveconflict.Designer.cs">
+      <DependentUpon>201803111200025_resolveconflict.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121211503_nextconflict1.cs" />
+    <Compile Include="Migrations\201803121211503_nextconflict1.Designer.cs">
+      <DependentUpon>201803121211503_nextconflict1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121109156_viewdruglaser.cs" />
+    <Compile Include="Migrations\201803121109156_viewdruglaser.Designer.cs">
+      <DependentUpon>201803121109156_viewdruglaser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803131955416_vwAvalibaledrug.cs" />
+    <Compile Include="Migrations\201803131955416_vwAvalibaledrug.Designer.cs">
+      <DependentUpon>201803131955416_vwAvalibaledrug.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803140547477_migrationforconflict.cs" />
+    <Compile Include="Migrations\201803140547477_migrationforconflict.Designer.cs">
+      <DependentUpon>201803140547477_migrationforconflict.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803140735364_addstatusontestname.cs" />
+    <Compile Include="Migrations\201803140735364_addstatusontestname.Designer.cs">
+      <DependentUpon>201803140735364_addstatusontestname.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803160444491_updateInpadtient.cs" />
+    <Compile Include="Migrations\201803160444491_updateInpadtient.Designer.cs">
+      <DependentUpon>201803160444491_updateInpadtient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803181844108_UpdateAuditLog.cs" />
+    <Compile Include="Migrations\201803181844108_UpdateAuditLog.Designer.cs">
+      <DependentUpon>201803181844108_UpdateAuditLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803190549155_storecategory.cs" />
+    <Compile Include="Migrations\201803190549155_storecategory.Designer.cs">
+      <DependentUpon>201803190549155_storecategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803190807384_storecategoryitem.cs" />
+    <Compile Include="Migrations\201803190807384_storecategoryitem.Designer.cs">
+      <DependentUpon>201803190807384_storecategoryitem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803200508374_add-update.cs" />
+    <Compile Include="Migrations\201803200508374_add-update.Designer.cs">
+      <DependentUpon>201803200508374_add-update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803210536128_newconflict.cs" />
+    <Compile Include="Migrations\201803210536128_newconflict.Designer.cs">
+      <DependentUpon>201803210536128_newconflict.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803210804107_overconflict.cs" />
+    <Compile Include="Migrations\201803210804107_overconflict.Designer.cs">
+      <DependentUpon>201803210804107_overconflict.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803220237339_updateipdsalereturn.cs" />
+    <Compile Include="Migrations\201803220237339_updateipdsalereturn.Designer.cs">
+      <DependentUpon>201803220237339_updateipdsalereturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803221149288_reorderlevel.cs" />
+    <Compile Include="Migrations\201803221149288_reorderlevel.Designer.cs">
+      <DependentUpon>201803221149288_reorderlevel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803270613549_therapyupdate.cs" />
+    <Compile Include="Migrations\201803270613549_therapyupdate.Designer.cs">
+      <DependentUpon>201803270613549_therapyupdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803251028161_cabintocabintransfer&amp;return.cs" />
+    <Compile Include="Migrations\201803251028161_cabintocabintransfer&amp;return.Designer.cs">
+      <DependentUpon>201803251028161_cabintocabintransfer&amp;return.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803271210517_givenamountpreviousinduecollection.cs" />
+    <Compile Include="Migrations\201803271210517_givenamountpreviousinduecollection.Designer.cs">
+      <DependentUpon>201803271210517_givenamountpreviousinduecollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803271341472_updatelog01.cs" />
+    <Compile Include="Migrations\201803271341472_updatelog01.Designer.cs">
+      <DependentUpon>201803271341472_updatelog01.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803280820273_updatelog02.cs" />
+    <Compile Include="Migrations\201803280820273_updatelog02.Designer.cs">
+      <DependentUpon>201803280820273_updatelog02.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803281255500_add-due.cs" />
+    <Compile Include="Migrations\201803281255500_add-due.Designer.cs">
+      <DependentUpon>201803281255500_add-due.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803280644292_opdmarketing.cs" />
+    <Compile Include="Migrations\201803280644292_opdmarketing.Designer.cs">
+      <DependentUpon>201803280644292_opdmarketing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803280836252_opdmarketing1.cs" />
+    <Compile Include="Migrations\201803280836252_opdmarketing1.Designer.cs">
+      <DependentUpon>201803280836252_opdmarketing1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803280843291_merketingby.cs" />
+    <Compile Include="Migrations\201803280843291_merketingby.Designer.cs">
+      <DependentUpon>201803280843291_merketingby.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803280856164_merketingby1.cs" />
+    <Compile Include="Migrations\201803280856164_merketingby1.Designer.cs">
+      <DependentUpon>201803280856164_merketingby1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803310452325_reconflict.cs" />
+    <Compile Include="Migrations\201803310452325_reconflict.Designer.cs">
+      <DependentUpon>201803310452325_reconflict.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803291315306_storeCategoryUp.cs" />
+    <Compile Include="Migrations\201803291315306_storeCategoryUp.Designer.cs">
+      <DependentUpon>201803291315306_storeCategoryUp.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803311843408_addViewIPDSALE.cs" />
+    <Compile Include="Migrations\201803311843408_addViewIPDSALE.Designer.cs">
+      <DependentUpon>201803311843408_addViewIPDSALE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803311922137_addViewIPDSALEReurn.cs" />
+    <Compile Include="Migrations\201803311922137_addViewIPDSALEReurn.Designer.cs">
+      <DependentUpon>201803311922137_addViewIPDSALEReurn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804010306462_addViewIPDSALEttal.cs" />
+    <Compile Include="Migrations\201804010306462_addViewIPDSALEttal.Designer.cs">
+      <DependentUpon>201804010306462_addViewIPDSALEttal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803310652223_cabintrasferbillondischarge.cs" />
+    <Compile Include="Migrations\201803310652223_cabintrasferbillondischarge.Designer.cs">
+      <DependentUpon>201803310652223_cabintrasferbillondischarge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804020024477_dailyCollection.cs" />
+    <Compile Include="Migrations\201804020024477_dailyCollection.Designer.cs">
+      <DependentUpon>201804020024477_dailyCollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804020121445_dailyCollection1.cs" />
+    <Compile Include="Migrations\201804020121445_dailyCollection1.Designer.cs">
+      <DependentUpon>201804020121445_dailyCollection1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804010859122_stringtointdurationincabinrent.cs" />
+    <Compile Include="Migrations\201804010859122_stringtointdurationincabinrent.Designer.cs">
+      <DependentUpon>201804010859122_stringtointdurationincabinrent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804011053319_remarkonpatient.cs" />
+    <Compile Include="Migrations\201804011053319_remarkonpatient.Designer.cs">
+      <DependentUpon>201804011053319_remarkonpatient.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804020511484_migrationconflictfile.cs" />
+    <Compile Include="Migrations\201804020511484_migrationconflictfile.Designer.cs">
+      <DependentUpon>201804020511484_migrationconflictfile.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804020547112_remarks.cs" />
+    <Compile Include="Migrations\201804020547112_remarks.Designer.cs">
+      <DependentUpon>201804020547112_remarks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804020606336_%27teststatus%27.cs" />
+    <Compile Include="Migrations\201804020606336_%27teststatus%27.Designer.cs">
+      <DependentUpon>201804020606336_%27teststatus%27.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804020826170_reconf.cs" />
+    <Compile Include="Migrations\201804020826170_reconf.Designer.cs">
+      <DependentUpon>201804020826170_reconf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804020709286_remarkoninpatienttest.cs" />
+    <Compile Include="Migrations\201804020709286_remarkoninpatienttest.Designer.cs">
+      <DependentUpon>201804020709286_remarkoninpatienttest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804020921243_conflictmigrationfile1.cs" />
+    <Compile Include="Migrations\201804020921243_conflictmigrationfile1.Designer.cs">
+      <DependentUpon>201804020921243_conflictmigrationfile1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804021122547_drugsaleremarks.cs" />
+    <Compile Include="Migrations\201804021122547_drugsaleremarks.Designer.cs">
+      <DependentUpon>201804021122547_drugsaleremarks.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804021236077_conflictproblem.cs" />
+    <Compile Include="Migrations\201804021236077_conflictproblem.Designer.cs">
+      <DependentUpon>201804021236077_conflictproblem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804021105374_departmentonopdbill.cs" />
+    <Compile Include="Migrations\201804021105374_departmentonopdbill.Designer.cs">
+      <DependentUpon>201804021105374_departmentonopdbill.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804021252511_conflictmigration21.cs" />
+    <Compile Include="Migrations\201804021252511_conflictmigration21.Designer.cs">
+      <DependentUpon>201804021252511_conflictmigration21.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804040506417_overconflict1.cs" />
+    <Compile Include="Migrations\201804040506417_overconflict1.Designer.cs">
+      <DependentUpon>201804040506417_overconflict1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804030918370_aa2.cs" />
+    <Compile Include="Migrations\201804030918370_aa2.Designer.cs">
+      <DependentUpon>201804030918370_aa2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804041533564_updatedraft.cs" />
+    <Compile Include="Migrations\201804041533564_updatedraft.Designer.cs">
+      <DependentUpon>201804041533564_updatedraft.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804050340582_updatedraft1.cs" />
+    <Compile Include="Migrations\201804050340582_updatedraft1.Designer.cs">
+      <DependentUpon>201804050340582_updatedraft1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804070626295_physiotherapydue.cs" />
+    <Compile Include="Migrations\201804070626295_physiotherapydue.Designer.cs">
+      <DependentUpon>201804070626295_physiotherapydue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804080545199_payment&amp;dueamountondischarge.cs" />
+    <Compile Include="Migrations\201804080545199_payment&amp;dueamountondischarge.Designer.cs">
+      <DependentUpon>201804080545199_payment&amp;dueamountondischarge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804080830113_ipdduecollection.cs" />
+    <Compile Include="Migrations\201804080830113_ipdduecollection.Designer.cs">
+      <DependentUpon>201804080830113_ipdduecollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804081155147_paymentstatusondischarge.cs" />
+    <Compile Include="Migrations\201804081155147_paymentstatusondischarge.Designer.cs">
+      <DependentUpon>201804081155147_paymentstatusondischarge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804080842191_therapyduecollection.cs" />
+    <Compile Include="Migrations\201804080842191_therapyduecollection.Designer.cs">
+      <DependentUpon>201804080842191_therapyduecollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804090543081_updatedue.cs" />
+    <Compile Include="Migrations\201804090543081_updatedue.Designer.cs">
+      <DependentUpon>201804090543081_updatedue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804081244405_janinamigration.cs" />
+    <Compile Include="Migrations\201804081244405_janinamigration.Designer.cs">
+      <DependentUpon>201804081244405_janinamigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804090558311_admissionnoondischargeduecollection.cs" />
+    <Compile Include="Migrations\201804090558311_admissionnoondischargeduecollection.Designer.cs">
+      <DependentUpon>201804090558311_admissionnoondischargeduecollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804091219416_redu.cs" />
+    <Compile Include="Migrations\201804091219416_redu.Designer.cs">
+      <DependentUpon>201804091219416_redu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804100759128_opddue.cs" />
+    <Compile Include="Migrations\201804100759128_opddue.Designer.cs">
+      <DependentUpon>201804100759128_opddue.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804101100456_opdduecollection.cs" />
+    <Compile Include="Migrations\201804101100456_opdduecollection.Designer.cs">
+      <DependentUpon>201804101100456_opdduecollection.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804120612259_drugSale.cs" />
+    <Compile Include="Migrations\201804120612259_drugSale.Designer.cs">
+      <DependentUpon>201804120612259_drugSale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Modelfactory\IModelfactory.cs" />
+    <Compile Include="Modelfactory\Modelfactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CsHealthcare.ViewModel\CsHealthcare.ViewModel.csproj">
+      <Project>{23eebaf9-cd9c-4c4d-be12-8ecdc575bb8d}</Project>
+      <Name>CsHealthcare.ViewModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201710100914005_init.resx">
+      <DependentUpon>201710100914005_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710110516552_shift.resx">
+      <DependentUpon>201710110516552_shift.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710110628309_stockupdate.resx">
+      <DependentUpon>201710110628309_stockupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710150419363_unitPrice.resx">
+      <DependentUpon>201710150419363_unitPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710170541347_saleDetails.resx">
+      <DependentUpon>201710170541347_saleDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710180617355_insurance.resx">
+      <DependentUpon>201710180617355_insurance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710181001296_hh.resx">
+      <DependentUpon>201710181001296_hh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710301114276_new.resx">
+      <DependentUpon>201710301114276_new.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711010529540_upemp.resx">
+      <DependentUpon>201711010529540_upemp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711050833138_saleHistry.resx">
+      <DependentUpon>201711050833138_saleHistry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061034138_mm.resx">
+      <DependentUpon>201711061034138_mm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061044338_nn.resx">
+      <DependentUpon>201711061044338_nn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711070445012_sale.resx">
+      <DependentUpon>201711070445012_sale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711070712102_edu.resx">
+      <DependentUpon>201711070712102_edu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711071003425_newedu.resx">
+      <DependentUpon>201711071003425_newedu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711081036488_all.resx">
+      <DependentUpon>201711081036488_all.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711081042435_update.resx">
+      <DependentUpon>201711081042435_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711090921461_contact.resx">
+      <DependentUpon>201711090921461_contact.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711190959553_patientupdate.resx">
+      <DependentUpon>201711190959553_patientupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711191113569_aa.resx">
+      <DependentUpon>201711191113569_aa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711191122406_details.resx">
+      <DependentUpon>201711191122406_details.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711200603043_Lc.resx">
+      <DependentUpon>201711200603043_Lc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711201051443_currency.resx">
+      <DependentUpon>201711201051443_currency.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711210629413_newlc.resx">
+      <DependentUpon>201711210629413_newlc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711210716268_lcvalue.resx">
+      <DependentUpon>201711210716268_lcvalue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711260923583_patientsupdate.resx">
+      <DependentUpon>201711260923583_patientsupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711270755355_patienteducation.resx">
+      <DependentUpon>201711270755355_patienteducation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711270641188_patientAge.resx">
+      <DependentUpon>201711270641188_patientAge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711271111229_a.resx">
+      <DependentUpon>201711271111229_a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711280503517_dateofbirth.resx">
+      <DependentUpon>201711280503517_dateofbirth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711290942494_gl.resx">
+      <DependentUpon>201711290942494_gl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711291116493_cabin.resx">
+      <DependentUpon>201711291116493_cabin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711300653179_edId.resx">
+      <DependentUpon>201711300653179_edId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711300827240_ss.resx">
+      <DependentUpon>201711300827240_ss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712051015316_testrequest.resx">
+      <DependentUpon>201712051015316_testrequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712051021397_uprequest.resx">
+      <DependentUpon>201712051021397_uprequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712030722423_cabinstatus.resx">
+      <DependentUpon>201712030722423_cabinstatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712051107525_patientAmount.resx">
+      <DependentUpon>201712051107525_patientAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712060704544_aa1.resx">
+      <DependentUpon>201712060704544_aa1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712060820083_testre.resx">
+      <DependentUpon>201712060820083_testre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712060948524_deuamount.resx">
+      <DependentUpon>201712060948524_deuamount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712061011195_voucherno.resx">
+      <DependentUpon>201712061011195_voucherno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712061449477_dd.resx">
+      <DependentUpon>201712061449477_dd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712070040359_TestCodeAdd.resx">
+      <DependentUpon>201712070040359_TestCodeAdd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712070608166_operationtype.resx">
+      <DependentUpon>201712070608166_operationtype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712090450536_ward.resx">
+      <DependentUpon>201712090450536_ward.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712090428248_dis.resx">
+      <DependentUpon>201712090428248_dis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712091051322_oo.resx">
+      <DependentUpon>201712091051322_oo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712111006410_labitem.resx">
+      <DependentUpon>201712111006410_labitem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712130606403_amount.resx">
+      <DependentUpon>201712130606403_amount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712131037352_microbiology.resx">
+      <DependentUpon>201712131037352_microbiology.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712140833387_microupdate.resx">
+      <DependentUpon>201712140833387_microupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712180455092_date.resx">
+      <DependentUpon>201712180455092_date.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712180931348_requestup.resx">
+      <DependentUpon>201712180931348_requestup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712181031210_ss1.resx">
+      <DependentUpon>201712181031210_ss1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712190803095_store.resx">
+      <DependentUpon>201712190803095_store.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712191049464_stock.resx">
+      <DependentUpon>201712191049464_stock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712191151001_tt.resx">
+      <DependentUpon>201712191151001_tt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712200604288_stockdetails.resx">
+      <DependentUpon>201712200604288_stockdetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712210509528_upstock.resx">
+      <DependentUpon>201712210509528_upstock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712211113538_stockout.resx">
+      <DependentUpon>201712211113538_stockout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712230259587_updateDrug.resx">
+      <DependentUpon>201712230259587_updateDrug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712240209424_Purchase.resx">
+      <DependentUpon>201712240209424_Purchase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712240345408_eee.resx">
+      <DependentUpon>201712240345408_eee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712240706003_pharmacyr.resx">
+      <DependentUpon>201712240706003_pharmacyr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712241059157_ppp.resx">
+      <DependentUpon>201712241059157_ppp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712241132382_ptype.resx">
+      <DependentUpon>201712241132382_ptype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712250429517_PurchaseUp.resx">
+      <DependentUpon>201712250429517_PurchaseUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712261050405_micro1.resx">
+      <DependentUpon>201712261050405_micro1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712270538152_ReTest.resx">
+      <DependentUpon>201712270538152_ReTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712270608200_uptest.resx">
+      <DependentUpon>201712270608200_uptest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712270651353_cbc.resx">
+      <DependentUpon>201712270651353_cbc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712270939405_newmi.resx">
+      <DependentUpon>201712270939405_newmi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712271029562_patientcode.resx">
+      <DependentUpon>201712271029562_patientcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712280639412_qq.resx">
+      <DependentUpon>201712280639412_qq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712280755361_length.resx">
+      <DependentUpon>201712280755361_length.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712280803253_detailslength.resx">
+      <DependentUpon>201712280803253_detailslength.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712280615242_specimen.resx">
+      <DependentUpon>201712280615242_specimen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712280940208_reup.resx">
+      <DependentUpon>201712280940208_reup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712280959166_ee.resx">
+      <DependentUpon>201712280959166_ee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712281025366_rr.resx">
+      <DependentUpon>201712281025366_rr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712300413451_ii.resx">
+      <DependentUpon>201712300413451_ii.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712300440542_testquantity.resx">
+      <DependentUpon>201712300440542_testquantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712300543349_itemquantity.resx">
+      <DependentUpon>201712300543349_itemquantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712300633432_patientadmission.resx">
+      <DependentUpon>201712300633432_patientadmission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712300923588_amount1.resx">
+      <DependentUpon>201712300923588_amount1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712300950459_voucher.resx">
+      <DependentUpon>201712300950459_voucher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712301150534_up.resx">
+      <DependentUpon>201712301150534_up.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712301157014_uii.resx">
+      <DependentUpon>201712301157014_uii.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712310147186_update-patient-info.resx">
+      <DependentUpon>201712310147186_update-patient-info.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712310547361_update-personal-history-table.resx">
+      <DependentUpon>201712310547361_update-personal-history-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712310901225_days.resx">
+      <DependentUpon>201712310901225_days.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712311215068_dddd.resx">
+      <DependentUpon>201712311215068_dddd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801010602148_testreport.resx">
+      <DependentUpon>201801010602148_testreport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801011020357_stocout.resx">
+      <DependentUpon>201801011020357_stocout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801011039139_dateup.resx">
+      <DependentUpon>201801011039139_dateup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801020552261_stockdetails1.resx">
+      <DependentUpon>201801020552261_stockdetails1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801020927215_bed.resx">
+      <DependentUpon>201801020927215_bed.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801030454349_patientlaser.resx">
+      <DependentUpon>201801030454349_patientlaser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801031123221_ccc.resx">
+      <DependentUpon>201801031123221_ccc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801040447547_dailyBill.resx">
+      <DependentUpon>201801040447547_dailyBill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801040508226_updatdailybill.resx">
+      <DependentUpon>201801040508226_updatdailybill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801040731456_qqq.resx">
+      <DependentUpon>201801040731456_qqq.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801041109481_patientdrug.resx">
+      <DependentUpon>201801041109481_patientdrug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801041150547_voucher1.resx">
+      <DependentUpon>201801041150547_voucher1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051251155_discharge.resx">
+      <DependentUpon>201801051251155_discharge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051408215_discharge1.resx">
+      <DependentUpon>201801051408215_discharge1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801051630381_st.resx">
+      <DependentUpon>201801051630381_st.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801060516252_inpatientdoctor.resx">
+      <DependentUpon>201801060516252_inpatientdoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801060709461_bills.resx">
+      <DependentUpon>201801060709461_bills.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801060838309_inpatienttest.resx">
+      <DependentUpon>201801060838309_inpatienttest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801060841474_testdate.resx">
+      <DependentUpon>201801060841474_testdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801070517542_vv.resx">
+      <DependentUpon>201801070517542_vv.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801040511491_dept.resx">
+      <DependentUpon>201801040511491_dept.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801040716117_deptstockin.resx">
+      <DependentUpon>201801040716117_deptstockin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801041000003_detailsitem.resx">
+      <DependentUpon>201801041000003_detailsitem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801041155494_itstockout.resx">
+      <DependentUpon>201801041155494_itstockout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801060457582_itout.resx">
+      <DependentUpon>201801060457582_itout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801060909250_bb.resx">
+      <DependentUpon>201801060909250_bb.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801070519021_quantity.resx">
+      <DependentUpon>201801070519021_quantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801070724174_upout.resx">
+      <DependentUpon>201801070724174_upout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801070941272_tyui.resx">
+      <DependentUpon>201801070941272_tyui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801070759378_ggg.resx">
+      <DependentUpon>201801070759378_ggg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801071031000_tttyui.resx">
+      <DependentUpon>201801071031000_tttyui.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801080921512_optpatient.resx">
+      <DependentUpon>201801080921512_optpatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801090518370_givenamount.resx">
+      <DependentUpon>201801090518370_givenamount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801090703397_upquantity.resx">
+      <DependentUpon>201801090703397_upquantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801091047134_opt.resx">
+      <DependentUpon>201801091047134_opt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801100908491_storerequisition.resx">
+      <DependentUpon>201801100908491_storerequisition.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801100925377_requantity.resx">
+      <DependentUpon>201801100925377_requantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801131124438_canteen.resx">
+      <DependentUpon>201801131124438_canteen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801140312347_updatestock.resx">
+      <DependentUpon>201801140312347_updatestock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801140531030_update1.resx">
+      <DependentUpon>201801140531030_update1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801180532278_departdrug.resx">
+      <DependentUpon>201801180532278_departdrug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801180624430_stockdepartment.resx">
+      <DependentUpon>201801180624430_stockdepartment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801180639321_updatedepartmentstock.resx">
+      <DependentUpon>201801180639321_updatedepartmentstock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801180857063_departmentdrugstock.resx">
+      <DependentUpon>201801180857063_departmentdrugstock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801210535354_patienttestquantity.resx">
+      <DependentUpon>201801210535354_patienttestquantity.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801210552191_quantityupdate.resx">
+      <DependentUpon>201801210552191_quantityupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801221041054_admissionupdate.resx">
+      <DependentUpon>201801221041054_admissionupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801221134238_patientadmissionupdate.resx">
+      <DependentUpon>201801221134238_patientadmissionupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801221220171_contactupdate.resx">
+      <DependentUpon>201801221220171_contactupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801230527581_upWard.resx">
+      <DependentUpon>201801230527581_upWard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801250602223_canteenfood.resx">
+      <DependentUpon>201801250602223_canteenfood.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801250959231_upcanteenPatient.resx">
+      <DependentUpon>201801250959231_upcanteenPatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801230726061_patientinfor.resx">
+      <DependentUpon>201801230726061_patientinfor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801271712212_add-Dialysis-table-1.resx">
+      <DependentUpon>201801271712212_add-Dialysis-table-1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801271736354_add-Dialysis-table-2.resx">
+      <DependentUpon>201801271736354_add-Dialysis-table-2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801251136192_conflict.resx">
+      <DependentUpon>201801251136192_conflict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801280452403_diaconflict.resx">
+      <DependentUpon>201801280452403_diaconflict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801280605443_servicecharge.resx">
+      <DependentUpon>201801280605443_servicecharge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801281003444_conflict1.resx">
+      <DependentUpon>201801281003444_conflict1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801281150214_add-Dialysis-table-3.resx">
+      <DependentUpon>201801281150214_add-Dialysis-table-3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801291236478_add-Dialysis-table-4.resx">
+      <DependentUpon>201801291236478_add-Dialysis-table-4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801290805055_upcon.resx">
+      <DependentUpon>201801290805055_upcon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801300455317_rcon.resx">
+      <DependentUpon>201801300455317_rcon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801300857093_package.resx">
+      <DependentUpon>201801300857093_package.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801301202420_packageonadmission.resx">
+      <DependentUpon>201801301202420_packageonadmission.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801310736582_noofdaysonpackage.resx">
+      <DependentUpon>201801310736582_noofdaysonpackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801310748485_cabinamountonpackage.resx">
+      <DependentUpon>201801310748485_cabinamountonpackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801310822585_packageondischarge.resx">
+      <DependentUpon>201801310822585_packageondischarge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801310914425_updatedischarge.resx">
+      <DependentUpon>201801310914425_updatedischarge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802010504510_inpatientdrugsalereturn1.resx">
+      <DependentUpon>201802010504510_inpatientdrugsalereturn1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802010508319_patientcodeonreturn.resx">
+      <DependentUpon>201802010508319_patientcodeonreturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802030555393_admissionfee.resx">
+      <DependentUpon>201802030555393_admissionfee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802030839092_otmedicineonpackage.resx">
+      <DependentUpon>201802030839092_otmedicineonpackage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802031451359_Vehicle.resx">
+      <DependentUpon>201802031451359_Vehicle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802040518547_decimaltointonsalereturn.resx">
+      <DependentUpon>201802040518547_decimaltointonsalereturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802060649142_departmentwisedrugstockout.resx">
+      <DependentUpon>201802060649142_departmentwisedrugstockout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802060734435_janina.resx">
+      <DependentUpon>201802060734435_janina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802061134478_nullpriceupdateondepartmentwisestockoutdetails.resx">
+      <DependentUpon>201802061134478_nullpriceupdateondepartmentwisestockoutdetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802071031201_quantitynotnullinpatientdetails.resx">
+      <DependentUpon>201802071031201_quantitynotnullinpatientdetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802060532104_conup.resx">
+      <DependentUpon>201802060532104_conup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802070553283_vehicleup.resx">
+      <DependentUpon>201802070553283_vehicleup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802071101011_conflictmigration.resx">
+      <DependentUpon>201802071101011_conflictmigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802081122300_add-shift.resx">
+      <DependentUpon>201802081122300_add-shift.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802081125526_add-shift1.resx">
+      <DependentUpon>201802081125526_add-shift1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802081920331_add-attendance-table.resx">
+      <DependentUpon>201802081920331_add-attendance-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802090453549_add-attendance-table1.resx">
+      <DependentUpon>201802090453549_add-attendance-table1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802090500577_add-attendance-table2.resx">
+      <DependentUpon>201802090500577_add-attendance-table2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802090554291_update-doctor-table.resx">
+      <DependentUpon>201802090554291_update-doctor-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802090637199_update-tables.resx">
+      <DependentUpon>201802090637199_update-tables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802090644187_add-doctor-att-table.resx">
+      <DependentUpon>201802090644187_add-doctor-att-table.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802100522577_rentambulance.resx">
+      <DependentUpon>201802100522577_rentambulance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802100617431_vehiclefor.resx">
+      <DependentUpon>201802100617431_vehiclefor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802100624025_rentAmount.resx">
+      <DependentUpon>201802100624025_rentAmount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802100658404_rentdate.resx">
+      <DependentUpon>201802100658404_rentdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802080801047_physiotherapy.resx">
+      <DependentUpon>201802080801047_physiotherapy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802100451550_conflictmigration1.resx">
+      <DependentUpon>201802100451550_conflictmigration1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802101222185_lastconflict.resx">
+      <DependentUpon>201802101222185_lastconflict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802101035178_opdtheraybill.resx">
+      <DependentUpon>201802101035178_opdtheraybill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802120546005_sds.resx">
+      <DependentUpon>201802120546005_sds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802120939408_healthcheakup.resx">
+      <DependentUpon>201802120939408_healthcheakup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802121002232_updateconflict.resx">
+      <DependentUpon>201802121002232_updateconflict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802121142539_ICU&amp;transfer.resx">
+      <DependentUpon>201802121142539_ICU&amp;transfer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802121228485_migration2.resx">
+      <DependentUpon>201802121228485_migration2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802131026564_dropicuprice.resx">
+      <DependentUpon>201802131026564_dropicuprice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802131033564_icubeds.resx">
+      <DependentUpon>201802131033564_icubeds.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802131117502_transferupdate.resx">
+      <DependentUpon>201802131117502_transferupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802121235158_add-CheckedInCheckedOut.resx">
+      <DependentUpon>201802121235158_add-CheckedInCheckedOut.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802140451172_nextconflict.resx">
+      <DependentUpon>201802140451172_nextconflict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802140621257_migration3.resx">
+      <DependentUpon>201802140621257_migration3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802140850030_icurent.resx">
+      <DependentUpon>201802140850030_icurent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802150451383_migration4.resx">
+      <DependentUpon>201802150451383_migration4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802151022237_billingforPackageCheckup.resx">
+      <DependentUpon>201802151022237_billingforPackageCheckup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802170735247_dischargesummary.resx">
+      <DependentUpon>201802170735247_dischargesummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802180719245_operationtimechange.resx">
+      <DependentUpon>201802180719245_operationtimechange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802190524022_investigationondischargesummary.resx">
+      <DependentUpon>201802190524022_investigationondischargesummary.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802190952362_dateforstockin.resx">
+      <DependentUpon>201802190952362_dateforstockin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802200945592_dscountondischarge.resx">
+      <DependentUpon>201802200945592_dscountondischarge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802240919240_prescriptionattatchment.resx">
+      <DependentUpon>201802240919240_prescriptionattatchment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802250649448_testreportattachment.resx">
+      <DependentUpon>201802250649448_testreportattachment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802251009226_vcnconcust.resx">
+      <DependentUpon>201802251009226_vcnconcust.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802251736405_ambu11.resx">
+      <DependentUpon>201802251736405_ambu11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802260555592_conflictmigration2.resx">
+      <DependentUpon>201802260555592_conflictmigration2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802260941113_vouchernoinpatientlaser.resx">
+      <DependentUpon>201802260941113_vouchernoinpatientlaser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802261130039_operationtheatre.resx">
+      <DependentUpon>201802261130039_operationtheatre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802270826316_anesthesia.resx">
+      <DependentUpon>201802270826316_anesthesia.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802271026446_assistantdoctor.resx">
+      <DependentUpon>201802271026446_assistantdoctor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802271209242_totalamountonot.resx">
+      <DependentUpon>201802271209242_totalamountonot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802270052499_update-dailysis.resx">
+      <DependentUpon>201802270052499_update-dailysis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802280534095_conflictmigrationssssss.resx">
+      <DependentUpon>201802280534095_conflictmigrationssssss.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803010807584_discountforphysiotherapy.resx">
+      <DependentUpon>201803010807584_discountforphysiotherapy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803010809408_doctordiscountondischarge.resx">
+      <DependentUpon>201803010809408_doctordiscountondischarge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803010925107_totalfortheapy.resx">
+      <DependentUpon>201803010925107_totalfortheapy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803011000006_opdprice.resx">
+      <DependentUpon>201803011000006_opdprice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803030430259_conmigrationnew.resx">
+      <DependentUpon>201803030430259_conmigrationnew.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803040542223_biochemistry.resx">
+      <DependentUpon>201803040542223_biochemistry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803040548069_otbillondischarge.resx">
+      <DependentUpon>201803040548069_otbillondischarge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803040830144_salepriceindrug.resx">
+      <DependentUpon>201803040830144_salepriceindrug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803041001238_patientduecollectiontable.resx">
+      <DependentUpon>201803041001238_patientduecollectiontable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803040852185_serologyref.resx">
+      <DependentUpon>201803040852185_serologyref.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803041718320_uploadView.resx">
+      <DependentUpon>201803041718320_uploadView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803041923449_stockview.resx">
+      <DependentUpon>201803041923449_stockview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803050540406_conflictmigration234.resx">
+      <DependentUpon>201803050540406_conflictmigration234.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803050558033_createdbyonduecollection.resx">
+      <DependentUpon>201803050558033_createdbyonduecollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803050604139_previousdueonpatientduecollection.resx">
+      <DependentUpon>201803050604139_previousdueonpatientduecollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803050612341_newTestDate.resx">
+      <DependentUpon>201803050612341_newTestDate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803050852427_patientCard.resx">
+      <DependentUpon>201803050852427_patientCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803051036281_add-appointment-dialysis.resx">
+      <DependentUpon>201803051036281_add-appointment-dialysis.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803051236514_newcnflictup.resx">
+      <DependentUpon>201803051236514_newcnflictup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803061118314_editview.resx">
+      <DependentUpon>201803061118314_editview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803071042323_vwdepartmentwisestock.resx">
+      <DependentUpon>201803071042323_vwdepartmentwisestock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803071056535_editviewdepartmentstock.resx">
+      <DependentUpon>201803071056535_editviewdepartmentstock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803071139112_marketingbyonpatient.resx">
+      <DependentUpon>201803071139112_marketingbyonpatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803080536502_therapystatus.resx">
+      <DependentUpon>201803080536502_therapystatus.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803082236553_addlog.resx">
+      <DependentUpon>201803082236553_addlog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803102012492_otUpdate.resx">
+      <DependentUpon>201803102012492_otUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803111220039_quantityoninpatienttest.resx">
+      <DependentUpon>201803111220039_quantityoninpatienttest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803120545000_changequantityininpatienttest.resx">
+      <DependentUpon>201803120545000_changequantityininpatienttest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803111200025_resolveconflict.resx">
+      <DependentUpon>201803111200025_resolveconflict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121211503_nextconflict1.resx">
+      <DependentUpon>201803121211503_nextconflict1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121109156_viewdruglaser.resx">
+      <DependentUpon>201803121109156_viewdruglaser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803131955416_vwAvalibaledrug.resx">
+      <DependentUpon>201803131955416_vwAvalibaledrug.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803140547477_migrationforconflict.resx">
+      <DependentUpon>201803140547477_migrationforconflict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803140735364_addstatusontestname.resx">
+      <DependentUpon>201803140735364_addstatusontestname.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803160444491_updateInpadtient.resx">
+      <DependentUpon>201803160444491_updateInpadtient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803181844108_UpdateAuditLog.resx">
+      <DependentUpon>201803181844108_UpdateAuditLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803190549155_storecategory.resx">
+      <DependentUpon>201803190549155_storecategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803190807384_storecategoryitem.resx">
+      <DependentUpon>201803190807384_storecategoryitem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803200508374_add-update.resx">
+      <DependentUpon>201803200508374_add-update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803210536128_newconflict.resx">
+      <DependentUpon>201803210536128_newconflict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803210804107_overconflict.resx">
+      <DependentUpon>201803210804107_overconflict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803220237339_updateipdsalereturn.resx">
+      <DependentUpon>201803220237339_updateipdsalereturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803221149288_reorderlevel.resx">
+      <DependentUpon>201803221149288_reorderlevel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803270613549_therapyupdate.resx">
+      <DependentUpon>201803270613549_therapyupdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803251028161_cabintocabintransfer&amp;return.resx">
+      <DependentUpon>201803251028161_cabintocabintransfer&amp;return.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803271210517_givenamountpreviousinduecollection.resx">
+      <DependentUpon>201803271210517_givenamountpreviousinduecollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803271341472_updatelog01.resx">
+      <DependentUpon>201803271341472_updatelog01.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803280820273_updatelog02.resx">
+      <DependentUpon>201803280820273_updatelog02.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803280644292_opdmarketing.resx">
+      <DependentUpon>201803280644292_opdmarketing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803280836252_opdmarketing1.resx">
+      <DependentUpon>201803280836252_opdmarketing1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803280843291_merketingby.resx">
+      <DependentUpon>201803280843291_merketingby.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803280856164_merketingby1.resx">
+      <DependentUpon>201803280856164_merketingby1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803281255500_add-due.resx">
+      <DependentUpon>201803281255500_add-due.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803310452325_reconflict.resx">
+      <DependentUpon>201803310452325_reconflict.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803291315306_storeCategoryUp.resx">
+      <DependentUpon>201803291315306_storeCategoryUp.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803311843408_addViewIPDSALE.resx">
+      <DependentUpon>201803311843408_addViewIPDSALE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803311922137_addViewIPDSALEReurn.resx">
+      <DependentUpon>201803311922137_addViewIPDSALEReurn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804010306462_addViewIPDSALEttal.resx">
+      <DependentUpon>201804010306462_addViewIPDSALEttal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803310652223_cabintrasferbillondischarge.resx">
+      <DependentUpon>201803310652223_cabintrasferbillondischarge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804020024477_dailyCollection.resx">
+      <DependentUpon>201804020024477_dailyCollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804020121445_dailyCollection1.resx">
+      <DependentUpon>201804020121445_dailyCollection1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804010859122_stringtointdurationincabinrent.resx">
+      <DependentUpon>201804010859122_stringtointdurationincabinrent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804011053319_remarkonpatient.resx">
+      <DependentUpon>201804011053319_remarkonpatient.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804020511484_migrationconflictfile.resx">
+      <DependentUpon>201804020511484_migrationconflictfile.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804020547112_remarks.resx">
+      <DependentUpon>201804020547112_remarks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804020606336_%27teststatus%27.resx">
+      <DependentUpon>201804020606336_%27teststatus%27.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804020826170_reconf.resx">
+      <DependentUpon>201804020826170_reconf.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021122547_drugsaleremarks.resx">
+      <DependentUpon>201804021122547_drugsaleremarks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804020709286_remarkoninpatienttest.resx">
+      <DependentUpon>201804020709286_remarkoninpatienttest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804020921243_conflictmigrationfile1.resx">
+      <DependentUpon>201804020921243_conflictmigrationfile1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021236077_conflictproblem.resx">
+      <DependentUpon>201804021236077_conflictproblem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021105374_departmentonopdbill.resx">
+      <DependentUpon>201804021105374_departmentonopdbill.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804021252511_conflictmigration21.resx">
+      <DependentUpon>201804021252511_conflictmigration21.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804040506417_overconflict1.resx">
+      <DependentUpon>201804040506417_overconflict1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804030918370_aa2.resx">
+      <DependentUpon>201804030918370_aa2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804041533564_updatedraft.resx">
+      <DependentUpon>201804041533564_updatedraft.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804050340582_updatedraft1.resx">
+      <DependentUpon>201804050340582_updatedraft1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804070626295_physiotherapydue.resx">
+      <DependentUpon>201804070626295_physiotherapydue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804080545199_payment&amp;dueamountondischarge.resx">
+      <DependentUpon>201804080545199_payment&amp;dueamountondischarge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804080830113_ipdduecollection.resx">
+      <DependentUpon>201804080830113_ipdduecollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804081155147_paymentstatusondischarge.resx">
+      <DependentUpon>201804081155147_paymentstatusondischarge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804080842191_therapyduecollection.resx">
+      <DependentUpon>201804080842191_therapyduecollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804090543081_updatedue.resx">
+      <DependentUpon>201804090543081_updatedue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804081244405_janinamigration.resx">
+      <DependentUpon>201804081244405_janinamigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804090558311_admissionnoondischargeduecollection.resx">
+      <DependentUpon>201804090558311_admissionnoondischargeduecollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804091219416_redu.resx">
+      <DependentUpon>201804091219416_redu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804100759128_opddue.resx">
+      <DependentUpon>201804100759128_opddue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804101100456_opdduecollection.resx">
+      <DependentUpon>201804101100456_opdduecollection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804120612259_drugSale.resx">
+      <DependentUpon>201804120612259_drugSale.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ViewScript\ViewsSql.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

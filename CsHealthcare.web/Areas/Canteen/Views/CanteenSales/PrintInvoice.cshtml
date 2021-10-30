@@ -1,0 +1,222 @@
+﻿
+@model CsHealthcare.ViewModel.Canteen.SellsModel
+@{
+    ViewBag.Title = "PrintInvoiceEditMode";
+    Layout = null;
+}
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    .page {
+        width: 21cm;
+        min-height: 29.7cm;
+        padding: 1cm;
+        background: white;
+    }
+
+    .subpage {
+        padding: 1cm;
+        height: 256mm;
+        outline: 2cm #FFEAEA solid;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    table {
+        border-spacing: 5px;
+    }
+
+    th, td {
+        padding: 3px;
+    }
+
+    @@print {
+        .hide-from-printer {
+            display: none;
+        }
+    }
+</style>
+
+<div class="page">
+
+    <h2 style="text-align: center; line-height: 0px;">Better Life Hospital Ltd</h2>
+    <div style="text-align: center;">1 East Rampura, D.I.T. Road , Dhaka-1219</div>
+    <div style="text-align: center;">
+        Hot Line:<a class="tel">09639786786,&nbsp;</a><a class="tel">09678786787</a>
+    </div>
+    <div style="text-align: center;margin: 10px auto;"><h4 style="text-decoration: underline;">Sales Copy </h4> </div>
+    <div>
+        @*<p >PurchaseDate: &nbsp;@Model.RecordDate.ToString("d")</p>
+            <p >Company Name: &nbsp;@Model.DRUG_MANUFACTURERName</p>*@
+
+        <table style="margin :0 auto; border :1px solid">
+            <tbody>
+                <tr>
+                    <td style="width: 96px;">Invoice:</td>
+                    <td style="width: 376px;">@Model.SellsNo</td>
+                    <td style="width: 100px;">Date</td>
+                    <td style="width: 216px;">@Model.SellsDate.ToString("dd/MM/yyyy")</td>
+                </tr>
+                <tr>
+                    <td style="width: 96px;">User:</td>
+                    <td style="width: 376px; " colspan="3">@Model.CreatedBy</td>
+
+                </tr>
+                @*<tr>
+                    <td style="width: 96px;">REQ By</td>
+                    <td style="width: 376px; " colspan="3">@Model.RequisitionBy</td>
+
+                </tr>*@
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+
+
+    @*<div style="width: 100%;display: table;">
+
+            <div style="width: 30%; float: right;">
+                <div style="float: left; margin-right: 5px;">Requisition Date:@Model.RequisitionDate</div>
+
+            </div>
+
+            <div style="width: 30%; float: right;">
+                <div style="width: 80px; float: left; font-weight: bold;">Requisition No:@Model.RequisitionNo</div>
+
+            </div>
+
+            <div style="width: 40%; float: right;">
+                <div style="width: 80px; float: left;">Requisition By:@Model.RequisitionBy</div>
+
+            </div>
+        </div>*@
+
+
+    <br />
+    <div style="width: 100%;text-align: center;"><span>Please supply the following lists of item</span></div>
+    <div style="width: 100%;Display:block"></div><br />
+
+    <table style="height: 105px; margin: 10px auto; width: 100%;">
+        <tbody>
+            <tr>
+                <td style="width: 35px;">SL</td>
+                <td style="width: 35px;">Item Details</td>
+                <td style="width: 200px;">Quantity</td>
+                <td style="width: 75px;text-align: center">Rate</td>
+                <td style="width: 75px; text-align: center">Total</td>
+            </tr>
+            @{
+                // csharp code block
+                // everything in here is code, don't have to use @
+                int counter = 1;
+            }
+            @foreach (var item in Model.SellsDetailsModels)
+            {
+                int qty = (int)@item.Quantity;
+                <tr>
+                    <td style="width: 35px;">@counter</td>
+                    <td style="width: 200px;">@item.ProductName</td>
+                    <td style="width: 75px;text-align: center">@item.Quantity</td>
+                    <td style="width: 75px; text-align: center">@item.UnitPrice</td>
+                    <td style="width: 75px; text-align: center">@item.Total</td>
+                </tr>
+                counter++;
+            }
+
+            @*<tr>
+                @{
+                    int total = (int)Model.PharmacyRequisitionDetailsModel.Sum(x => x.Quantity);
+                }
+                <td style="width: 35px;">&nbsp;</td>
+                <td style="width: 35px;">&nbsp;</td>
+                <td style="width: 200px; text-align: center">&nbsp;Total Quantity:</td>
+                <td style="width: 75px; text-align: center">@total</td>
+            </tr>*@
+        </tbody>
+    </table>
+
+
+
+    @*<div style="width: 100%;margin-top: 5px; float:left;border-top: dotted 1px;border-bottom: dotted 1px;">
+
+
+            <div style="width: 10%; float: left; font-weight: bold">SL</div>
+            <div style="width: 70%; float: left; font-weight: bold">Name of Drugs</div>
+            <div style="width: 20%; float: left; font-weight: bold;text-align: right;">Quantity</div>
+
+
+
+        </div>
+        @{
+            // csharp code block
+            // everything in here is code, don't have to use @
+            int counter = 1;
+        }
+        @foreach (var val in @Model.PharmacyRequisitionDetailsModel)
+        {
+
+            <div style="width: 100%; float: left; border: 1px solid;">
+                <div style="width: 10%; float: left;">@counter</div>
+                <div style="width: 70%; float: left;">@val.DrugName &nbsp;@val.PresenatationType&nbsp;@val.UnitStrength</div>
+
+                <div style="width: 20%; float: left; text-align: right">@val.Quantity</div>
+
+            </div>
+
+            counter++;
+        }*@
+
+
+
+    <div style="width: 100%;margin-top: 60px;text-align: center;float: left;">
+        <div style="width: 33%;float: left;">Prepared By</div>
+        <div style="width: 33%;float: left;">Checked By</div>
+        <div style="width: 33%;float: left;">Approved By</div>
+    </div>
+
+    <div style="width: 100%; text-align: center;">
+        <button id="btnPrint" onclick="myFunction()" class="hide-from-printer" style="margin-top:10%">Print </button>
+        <a id="btnCancel" href="@Url.Action("Create", "CanteenSales", new {Area = "Canteen"})" type="button" class="" style="margin-left: 1%;" class="hide-from-printer">Cancel</a>
+    </div>
+
+</div>
+<script>
+function myFunction() {
+    //Get the print button and put it into a variable
+    var printButton = document.getElementById("btnPrint");
+    var cancelButton = document.getElementById("btnCancel");
+    //Set the print button visibility to 'hidden'
+    printButton.style.visibility = 'hidden';
+    cancelButton.style.visibility = 'hidden';
+    //Print the page content
+    window.print();
+    //Set the print button to 'visible' again
+    //[Delete this line if you want it to stay hidden after printing]
+    printButton.style.visibility = 'visible';
+    cancelButton.style.visibility = 'visible';
+
+
+}
+jQuery(document).ready(function () {
+
+
+});
+
+</script>
+
+
+
+
+
+
+

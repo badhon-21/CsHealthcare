@@ -1,0 +1,359 @@
+﻿
+@model CsHealthcare.DataAccess.ViewModel.Dialysis.PatientDialysisModel
+
+@{
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-question font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp uppercase">Patient Dialysis Information</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+
+                </div>
+            </div>
+            
+            <div class="portlet-body portlet-empty">
+
+                @using (Html.BeginForm())
+                {
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-cog font-red-sunglo"></i>
+                                        <span class="caption-subject font-red-sunglo uppercase">Basic Information</span>
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse">
+                                        </a>
+
+                                        <a href="javascript:;" class="fullscreen">
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="portlet-body">
+
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-1">Code:</div>
+                                            <div class="col-md-2 bold">@Model.PatientCode</div>
+                                            <div class="col-md-1">Name:</div>
+                                            <div class="col-md-6 bold">@Model.PatientName</div>
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-1">Age:</div>
+                                            <div class="col-md-2">@Model.PatientAge</div>
+                                            <div class="col-md-2">Blood Group:</div>
+                                            <div class="col-md-2">@Model.BloodGroup</div>
+                                            <div class="col-md-1">Sex:</div>
+                                            <div class="col-md-2">@Model.Sex</div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-cog font-red-sunglo"></i>
+                                        <span class="caption-subject font-red-sunglo uppercase">Consultant Information</span>
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse">
+                                        </a>
+
+                                        <a href="javascript:;" class="fullscreen">
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="row">
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-6">
+                                                <div class="control-label col-md-5">Consultant Name:</div>
+                                                <div class="col-md-7">
+                                                    @Html.EditorFor(model => model.ConsultantName, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.ConsultantName, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="control-label col-md-5">Contact Number:</div>
+                                                <div class="col-md-7">
+                                                    @Html.EditorFor(model => model.ConsultantContactNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                                    @Html.ValidationMessageFor(model => model.ConsultantContactNumber, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-cog font-red-sunglo"></i>
+                                        <span class="caption-subject font-red-sunglo uppercase">Previous History</span>
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse">
+                                        </a>
+
+                                        <a href="javascript:;" class="fullscreen">
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="row">
+                                        
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-6">
+                                                <div class="control-label col-md-6">Last Dialysis Taken Hospital:</div>
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.LastDialysisTakenHospital, new {htmlAttributes = new {@class = "form-control"}})
+                                                    @Html.ValidationMessageFor(model => model.ConsultantContactNumber, "", new {@class = "text-danger"})
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="control-label col-md-6">Last Dialysis Taken Date:</div>
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.LastDialysisTakenDate, new {htmlAttributes = new {@class = "form-control date-picker" } })
+                                                    @Html.ValidationMessageFor(model => model.LastDialysisTakenDate, "", new {@class = "text-danger"})
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-6">
+                                                <div class="control-label col-md-6">No of Taken Dialysis:</div>
+                                                <div class="col-md-6">
+                                                    @Html.EditorFor(model => model.NoOfTakenDialysis, new { htmlAttributes = new { @class = "form-control integer" } })
+                                                    @Html.ValidationMessageFor(model => model.NoOfTakenDialysis, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="fa fa-cog font-red-sunglo"></i>
+                                        <span class="caption-subject font-red-sunglo uppercase">Dialysis Information</span>
+                                    </div>
+                                    <div class="tools">
+                                        <a href="javascript:;" class="collapse">
+                                        </a>
+
+                                        <a href="javascript:;" class="fullscreen">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="row">
+
+                                        <div class="col-md-12 form-group">
+                                            <div class="control-label col-md-1">HB(%):</div>
+                                            <div class="col-md-2">
+                                                @Html.EditorFor(model => model.Hemoglobin, new {htmlAttributes = new {@class = "form-control"}})
+                                                @Html.ValidationMessageFor(model => model.Hemoglobin, "", new {@class = "text-danger"})
+                                            </div>
+                                            <div class="control-label col-md-1">Machine Number:</div>
+                                            <div class="col-md-3">
+                                                @Html.EditorFor(model => model.MachinNumber, new { htmlAttributes = new { @class = "form-control integer" } })
+                                                @Html.ValidationMessageFor(model => model.MachinNumber, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <h3>Pre Dialysis</h3>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-5">
+                                                    <div class="control-label col-md-6">Body Weight(Kg):</div>
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.PreDialysisBodyWeight, new {htmlAttributes = new {@class = "form-control"}})
+                                                        @Html.ValidationMessageFor(model => model.PreDialysisBodyWeight, "", new {@class = "text-danger"})
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="control-label col-md-6">BP:</div>
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.PreDialysisBodyBP, new {htmlAttributes = new {@class = "form-control"}})
+                                                        @Html.ValidationMessageFor(model => model.PreDialysisBodyBP, "", new {@class = "text-danger"})
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-5">
+                                                    <div class="control-label col-md-6">Pulse:</div>
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.PreDialysisBodyPulse, new {htmlAttributes = new {@class = "form-control"}})
+                                                        @Html.ValidationMessageFor(model => model.PreDialysisBodyPulse, "", new {@class = "text-danger"})
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="control-label col-md-6">Resp:</div>
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.PreDialysisBodyResp, new {htmlAttributes = new {@class = "form-control"}})
+                                                        @Html.ValidationMessageFor(model => model.PreDialysisBodyResp, "", new {@class = "text-danger"})
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-5">
+                                                    <div class="control-label col-md-6">Temp:</div>
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.PreDialysisBodyTemp, new {htmlAttributes = new {@class = "form-control"}})
+                                                        @Html.ValidationMessageFor(model => model.PreDialysisBodyTemp, "", new {@class = "text-danger"})
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <h3>Post Dialysis</h3>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-5">
+                                                    <div class="control-label col-md-6">Body Weight(Kg):</div>
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.PostDialysisBodyWeight, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.PostDialysisBodyWeight, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="control-label col-md-6">BP:</div>
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.PostDialysisBodyBP, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.PostDialysisBodyBP, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-5">
+                                                    <div class="control-label col-md-6">Pulse:</div>
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.PostDialysisBodyPulse, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.PostDialysisBodyPulse, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-5">
+                                                    <div class="control-label col-md-6">Resp:</div>
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.PostDialysisBodyResp, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.PostDialysisBodyResp, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <div class="col-md-5">
+                                                    <div class="control-label col-md-6">Temp:</div>
+                                                    <div class="col-md-6">
+                                                        @Html.EditorFor(model => model.PostDialysisBodyTemp, new { htmlAttributes = new { @class = "form-control" } })
+                                                        @Html.ValidationMessageFor(model => model.PostDialysisBodyTemp, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12 form-group">
+                                            <div class="control-label col-md-1">Last Weight:</div>
+                                            <div class="col-md-1">
+                                                @Html.EditorFor(model => model.LastWeight, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.LastWeight, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a class="btn default" style="width: 15%;" href="@Url.Action("Index", "PatientDialysis", new {Area = "Dialysis"})">Cancel</a>
+                        <input type="submit" value="Save" class="btn green" style="width: 15%;" />
+                    </div>
+
+                }
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+</div>
+
+@section page_styles {
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+
+}
+
+@section Scripts {
+<script type="text/javascript" src="~/Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="~/Assets/Pages/components-pickers.js"></script>
+
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            allowInt();
+            ComponentsPickers.init();
+            $('#LastDialysisTakenDate').val(getTodate());
+        });
+
+        function getTodate() {
+            var dob = new Date();
+            var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+            var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+            return (month + "/" + day + "/" + dob.getFullYear());
+        }
+
+        function allowInt() {
+            $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+        }
+
+
+
+
+
+
+
+
+    </script>
+
+}
+
+
+
+

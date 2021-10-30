@@ -1,0 +1,46 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Patient.PatientReportSummaryModel>
+
+
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @item.Date.ToString("d")
+        </td>
+        <td>
+            @item.Date.ToString("t")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PatientName)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.VoucherNo)
+        </td>
+        <td style="text-align: right">
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+      <!--td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td-->
+    </tr>
+}
+
+<tr>
+   
+
+    <td style="text-align: right; font-weight: bold" colspan="4">
+      Total:
+    </td>
+    <td style="text-align: right;font-weight: bold">
+        @Model.Sum(x=>x.Amount)
+    </td>
+  
+</tr>
+
+
+
+

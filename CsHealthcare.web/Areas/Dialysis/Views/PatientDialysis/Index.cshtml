@@ -1,0 +1,206 @@
+﻿@using Cs.Utility
+
+@{
+    ViewBag.Title = "Dialysis Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="portlet light">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-file-text-o font-green-sharp"></i>
+            <span class="caption-subject font-green-sharp uppercase">@ViewBag.Title</span>
+        </div>
+        <div class="tools">
+            <a href="javascript:;" class="collapse">
+            </a>
+            <a href="javascript:;" class="fullscreen">
+            </a>
+        </div>
+        <div class="actions margin-right-10">
+            <a class="btn btn-circle green-jungle" href="@SessionManager.DashBoard">
+                <i class="fa fa-arrow-left"></i>Back
+            </a>
+        </div>
+    </div>
+    <hr style="margin-top: 0;"/>
+    <div class="portlet-body">
+        <div class="modal-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+
+                    <div class="control-label col-md-1">Date</div>
+                    <div class="col-md-3">
+                        <input id="txtAppointmentDate" required="required" name="txtAppointmentDate" value="" class="form-control date-picker" placeholder="Appointment Date" type="text"/>
+                    </div>
+
+                    <div class="actions margin-right-10">
+                        <a class="btn btn-circle green-jungle" onclick="javascript:searchHistory();">
+                            <i class="fa fa-search"></i> Search
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    @*<i class="fa fa-question font-green-sharp"></i>*@
+                    <span class="caption-subject font-green-sharp bold uppercase">Enrolled Dialysis List</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                </div>
+            </div>
+            <hr style="margin-top: 0;">
+
+            <div class="portlet-body portlet-empty" id="enrolled_dialysis">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    @*<i class="fa fa-question font-green-sharp"></i>*@
+                    <span class="caption-subject font-green-sharp bold uppercase">Completed Dialysis List</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                </div>
+            </div>
+            <hr style="margin-top: 0;">
+
+            <div class="portlet-body portlet-empty" id="completed_dialysis">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section page_styles {
+    <link href="~/assets/global/plugins/select2/css/select2.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+<link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+
+}
+
+@section Scripts {
+
+    <script src="~/assets/global/plugins/select2/js/select2.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/jquery.datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+<script type="text/javascript" src="~/Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="~/Assets/Pages/components-pickers.js"></script>
+<script>
+
+    jQuery(document).ready(function () {
+        ComponentsPickers.init();
+        $('#txtAppointmentDate').val(getTodate());
+            EnrolledDialysisList();
+            CompletedDialysisList();
+        });
+
+    function getTodate() {
+        var dob = new Date();
+        var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+        var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+        return (month + "/" + day + "/" + dob.getFullYear());
+    }
+
+        function searchHistory() {
+            EnrolledDialysisList();
+            CompletedDialysisList();
+        }
+
+        function EnrolledDialysisList() {
+            App.blockUI();
+            var el = $("#enrolled_dialysis");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("EnrolledList", "PatientDialysis", new { Area = "Dialysis" }))",
+                data: { "EnrolledDate": $('#txtAppointmentDate').val() },
+                dataType: "html",
+                success: function (res) {
+                    App.unblockUI();
+                    el.html(res);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load enrolled list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+    function CompletedDialysisList() {
+            App.blockUI();
+            var el = $("#completed_dialysis");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("CompletedList", "PatientDialysis", new { Area = "Dialysis" }))",
+                data: { "CompletedDate": $('#txtAppointmentDate').val() },
+                dataType: "html",
+                success: function (res) {
+                    App.unblockUI();
+                    el.html(res);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI(el);
+                    var msg = 'Fail to load history taken list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+</script>
+
+}
+
+
+

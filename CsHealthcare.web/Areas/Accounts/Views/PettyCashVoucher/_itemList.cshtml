@@ -1,0 +1,27 @@
+﻿
+@model IEnumerable<CsHealthcare.ViewModel.Accounts.CashItemModel>
+
+
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.items)
+        </td>
+        @*<td style="width: 15% !important">
+                @Html.DisplayFor(modelItem => item.particulars)
+            </td>*@
+        <td style="width: 15% !important" id="txtTotal">
+            @item.amount
+        </td>
+        <td style="width: 15% !important">
+            <a class="btn btn-primary btn-icon legitRipple" title="Edit" onclick="javascript: EditExpense('@item.items');"><i class="icon-pencil"></i></a>
+            <a class="btn btn-xs btn-danger" title="Delete" onclick="javascript: if (confirm('Are you sure you want to delete?') == false) return false; DeleteEdit('@item.Id'); "><i class="icon-trash"></i></a>
+        </td>
+    </tr>
+}
+

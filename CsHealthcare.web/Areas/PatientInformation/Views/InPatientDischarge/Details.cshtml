@@ -1,0 +1,669 @@
+﻿@using CsHealthcare.DataAccess.Migrations
+@model CsHealthcare.ViewModel.Patient.InViewModel
+@{
+    Layout = null;
+}
+
+
+<style type="text/css">
+    @@page {
+        size: auto;
+          margin: 5mm 5mm 5mm 5mm;
+    }
+
+    .page {
+        width: 21cm;
+        min-height: 29.7cm;
+        padding: 1cm;
+        background: white;
+       
+    }
+
+    .subpage {
+        padding: 1cm;
+        height: 256mm;
+        outline: 2cm #FFEAEA solid;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    table {
+        border-spacing: 5px;
+    }
+
+    th, td {
+        padding: 3px;
+    }
+
+    @@print {
+        .hide-from-printer {
+            display: none;
+        }
+    }
+</style>
+
+
+
+<div class="page">
+    <h2 style="text-align: center; ">Better Life Hospital Ltd</h2>
+    <div style="text-align: center;">1 East Rampura, D.I.T. Road , Dhaka-1219</div>
+    <div style="text-align: center;">
+        Hot Line:<a class="tel">09639786786,&nbsp;</a><a class="tel">09678786787</a>
+    </div>
+    <div style="text-align: center;margin: 10px auto;"><span style="text-decoration: underline;">Patient Discharge Copy</span> </div>
+<div>
+    @*<p >PurchaseDate: &nbsp;@Model.RecordDate.ToString("d")</p>
+            <p >Company Name: &nbsp;@Model.DRUG_MANUFACTURERName</p>*@
+
+    <table style="width: 567px; margin: 0 auto; border: 1px solid" width="700">
+        <tbody>
+        <tr>
+            <td style="width: 120px;">Pateint Code</td>
+            <td style="width: 376px;">@Model.PatientCode</td>
+            <td style="width: 114px;">Date</td>
+            <td style="width: 216px;">@DateTime.Now.ToString("d")</td>
+        </tr>
+        <tr>
+            <td style="width: 96px;">Admission Date</td>
+            <td style="width: 376px;">@Model.AdmissionDate</td>
+            <td style="width: 114px;">Discharge Date</td>
+            <td style="width: 216px;">@Model.DischargeDate</td>
+        </tr>
+        <tr>
+            <td style="width: 96px;">Cabin</td>
+            <td style="width: 376px;">@Model.CabinName</td>
+            <td style="width: 114px;">Admission Fee</td>
+            <td style="width: 216px;">@Model.AdmissionFee</td>
+        </tr>
+        @if (Model.PackageName != "" && Model.PackageName != null)
+        {
+            <tr>
+                <td style="width: 96px;">Package Name</td>
+                <td style="width: 376px;">@Model.PackageName</td>
+                <td style="width: 114px;">Package Amount</td>
+                <td style="width: 216px;">@Model.PackageAmount</td>
+            </tr>
+        }
+
+        </tbody>
+    </table>
+</div>
+<br/><br/>
+    @if (Model.PackageName != "" && Model.PackageName != null)
+    {
+        <div style="width: 100%;text-align: center;"><span>Package Details</span></div>
+        <table style="height: 105px; margin: 10px auto;border:1px solid" width="700">
+            <tbody>
+                <tr>
+
+                    <td style="width: 350px;">Name</td>
+                    <td style="width: 75px;">Price</td>
+
+                </tr>
+                @{
+                    // csharp code block
+                    // everything in here is code, don't have to use @
+                    int counter0 = 1;
+                }
+                @foreach (var item in Model.PackageDetailsModels)
+                {
+
+                    <tr>
+
+
+                        <td style="width: 350px;">@item.Name &nbsp;&nbsp;</td>
+                        <td style="width: 75px; text-align: right">@item.Price </td>
+
+
+
+                    </tr>
+
+                }
+
+                <tr>
+
+                    <td style="width: 350px; text-align: right">&nbsp;Total:</td>
+                    <td style="width: 75px; text-align: right">@Model.PackageAmount </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="width: 100%;text-align: left;padding-left: 40px"><span><u>Package Excludes</u></span></div>
+       
+            foreach (var item in Model.PackageExcludesModels)
+            {
+
+
+                <div style="width: 100%;text-align: left; padding-left: 40px;padding-top: 20px"><span>&#9830;@item.Excludes</span></div>
+
+                <p style="width: 350px;"> &nbsp;&nbsp;</p>
+
+
+                
+
+
+
+            }
+
+            }
+    
+
+@if (@Model.InPatientDrugBillViewModels.Count > 0)
+
+{
+    <div style="width: 100%;text-align: center;"><span>Daily Drug Bill</span></div>
+<table style="height: 105px; margin: 10px auto; border: 1px solid" width="700">
+    <tbody>
+    <tr>
+        <td style="width: 35px;">SL</td>
+        <td style="width: 350px;">Drug Name</td>
+        <td style="width: 75px;">Quantity</td>
+        <td style="width: 75px;">Unit Price</td>
+
+        <td style="width: 150px;">Total Price</td>
+    </tr>
+    @{
+        // csharp code block
+        // everything in here is code, don't have to use @
+        int counter = 1;
+    }
+    @foreach (var item in Model.InPatientDrugBillViewModels)
+    {
+        int qty = (int) item.DrugQuantity;
+        var a = (decimal) item.DrugTotal/qty;
+        <tr>
+            <td style="width: 35px;">@counter</td>
+            <td style="width: 350px;">@item.DrugName &nbsp;&nbsp;</td>
+            <td style="width: 75px; text-align: right">@qty </td>
+            <td style="width: 75px; text-align: right">@a </td>
+            <td style="width: 75px; text-align: right">@item.DrugTotal </td>
+
+        </tr>
+        counter++;
+    }
+
+    <tr>
+        <td style="width: 35px;">&nbsp;</td>
+        <td style="width: 35px;">&nbsp;</td>
+        <td style="width: 35px;">&nbsp;</td>
+        <td style="width: 350px; text-align: right">&nbsp;Total:</td>
+        <td style="width: 75px; text-align: right">@Model.InPatientDrugBillViewModels.Sum(x=>x.DrugTotal) </td>
+    </tr>
+    </tbody>
+</table>
+}
+
+@if (@Model.InPatientDrugReturnBillViewModels.Count > 0)
+
+{
+    <div style="width: 100%; text-align: center;"><span> Drug Return Bill</span></div>
+    <table style="height: 105px; margin: 10px auto; border: 1px solid" width="700">
+        <tbody>
+        <tr>
+            <td style="width: 35px;">SL</td>
+            <td style="width: 350px;">Drug Name</td>
+            <td style="width: 75px;">Quantity</td>
+            <td style="width: 75px;">Unit Price</td>
+
+            <td style="width: 150px;">Total Price</td>
+        </tr>
+        @{
+            // csharp code block
+            // everything in here is code, don't have to use @
+            int counter1 = 1;
+        }
+        @foreach (var item in Model.InPatientDrugReturnBillViewModels)
+        {
+            //int qty = (int)item.DrugQuantity;
+            //var a = (decimal)item.DrugTotal / qty;
+            <tr>
+                <td style="width: 35px;">@counter1</td>
+                <td style="width: 350px;">@item.DrugName &nbsp;&nbsp;</td>
+                <td style="width: 75px; text-align: right">@item.DrugQuantity </td>
+                <td style="width: 75px; text-align: right">@item.UnitPrice </td>
+                <td style="width: 75px; text-align: right">@item.DrugTotal </td>
+
+            </tr>
+            counter1++;
+        }
+
+        <tr>
+            <td style="width: 35px;">&nbsp;</td>
+            <td style="width: 35px;">&nbsp;</td>
+            <td style="width: 35px;">&nbsp;</td>
+            <td style="width: 350px; text-align: right">&nbsp;Total:</td>
+            <td style="width: 75px; text-align: right">@Model.InPatientDrugReturnBillViewModels.Sum(x => x.DrugTotal) </td>
+        </tr>
+        </tbody>
+    </table>
+}
+
+@if (@Model.InPatientTestBillViewModels.Count > 0)
+
+{
+    <div style="width: 100%; text-align: center;"><span>Daily Test Bill</span></div>
+    <table style="height: 105px; margin: 10px auto; border: 1px solid" width="700">
+        <tbody>
+        <tr>
+
+            <td style="width: 350px;">Date</td>
+            <td style="width: 350px;">Test Name</td>
+            <td style="width: 75px;">Quantity</td>
+
+            <td style="width: 150px;">Total Price</td>
+        </tr>
+        @{
+            // csharp code block
+            // everything in here is code, don't have to use @
+            int count = 1;
+        }
+        @foreach (var item in Model.InPatientTestBillViewModels)
+        {
+            int qty = (int) item.ItemQuantity;
+            <tr>
+
+                <td style="width: 35px;">@item.Date.Value.ToString("d")</td>
+                <td style="width: 350px;">@item.TestName &nbsp;&nbsp;</td>
+                <td style="width: 75px; text-align: right">@qty </td>
+                <td style="width: 75px; text-align: right">@item.TestTotalAmount </td>
+
+            </tr>
+
+        }
+
+        <tr>
+            <td style="width: 35px;">&nbsp;</td>
+            <td style="width: 35px;">&nbsp;</td>
+            <td style="width: 35px;">&nbsp;</td>
+            <td style="width: 350px; text-align: right">&nbsp;Total :</td>
+            <td style="width: 75px; text-align: right">@Model.TestBill </td>
+        </tr>
+        </tbody>
+    </table>
+}
+@if (@Model.InPatientDailyBillViewModels.Count > 0)
+
+{
+    <div style="width: 100%; text-align: center;"><span>Daily Bill</span></div>
+    <table style="height: 105px; margin: 10px auto; border: 1px solid" width="700">
+        <tbody>
+        <tr>
+
+            <td style="width: 350px;">Date</td>
+            <td style="width: 350px;">Procedure</td>
+            <td style="width: 75px;">Quantity</td>
+
+            <td style="width: 150px;">Total Price</td>
+        </tr>
+        @{
+            // csharp code block
+            // everything in here is code, don't have to use @
+            int count1 = 1;
+        }
+        @foreach (var item in Model.InPatientDailyBillViewModels)
+        {
+            int qty = (int) item.Quantity;
+            <tr>
+
+                <td style="width: 35px;">@item.Date.Value.ToString("d")</td>
+                <td style="width: 350px;">@item.PurposeName &nbsp;&nbsp;</td>
+                <td style="width: 75px; text-align: right">@qty </td>
+                <td style="width: 75px; text-align: right">@item.Total </td>
+
+            </tr>
+
+        }
+
+        <tr>
+            <td style="width: 35px;">&nbsp;</td>
+            <td style="width: 35px;">&nbsp;</td>
+            <td style="width: 35px;">&nbsp;</td>
+            <td style="width: 350px; text-align: right">&nbsp;Total :</td>
+            <td style="width: 75px; text-align: right">@Model.DailyBill </td>
+        </tr>
+        </tbody>
+    </table>
+}
+@if (@Model.InPatientDoctorInvoiceModels.Count > 0)
+
+{
+    <div style="width: 100%; text-align: center;"><span>Doctors Bill</span></div>
+    <table style="height: 105px; margin: 10px auto; border: 1px solid" width="700">
+        <tbody>
+        <tr>
+
+            <td style="width: 350px;">Date</td>
+            <td style="width: 350px;">Doctor</td>
+            <td style="width: 75px;">Amount</td>
+
+
+        </tr>
+        @{
+            // csharp code block
+            // everything in here is code, don't have to use @
+            int count2 = 1;
+        }
+        @foreach (var item in Model.InPatientDoctorInvoiceModels)
+        {
+
+            <tr>
+
+                <td style="width: 35px;">@item.Date.ToString("d")</td>
+                <td style="width: 350px;">@item.DoctorName &nbsp;&nbsp;</td>
+
+                <td style="width: 75px; text-align: right">@item.Amount </td>
+
+            </tr>
+
+        }
+
+        <tr>
+            <td style="width: 35px;">&nbsp;</td>
+
+            <td style="width: 350px; text-align: right">&nbsp;Total:</td>
+            <td style="width: 75px; text-align: right">@Model.DoctorBill </td>
+        </tr>
+        </tbody>
+    </table>
+}
+@if(@Model.OperationTheatreModels.Count>0)
+
+    {
+    <div style="width: 100%;text-align: center;"><span>Operation Theater Bill</span></div>
+    <table style="height: 105px; margin: 10px auto; border: 1px solid" width="700">
+        <tbody>
+            <tr>
+
+                <td style="width: 350px;">Date</td>
+                <td style="width: 350px;">Operation Name</td>
+                <td style="width: 75px;">Start Time</td>
+                <td style="width: 75px;">End Time</td>
+
+            </tr>
+            @{
+                // csharp code block
+                // everything in here is code, don't have to use @
+                int count3 = 1;
+            }
+            @foreach (var item in Model.OperationTheatreModels)
+            {
+
+                <tr>
+
+                    <td style="width: 35px;">@item.OperationDate.ToString("d")</td>
+                    <td style="width: 350px;">@item.OperationName &nbsp;&nbsp;</td>
+
+                    <td style="width: 75px; text-align: right">@item.OperationStartTime </td>
+                    <td style="width: 75px; text-align: right">@item.OperationEndTime </td>
+                    <td style="width: 75px; text-align: right">@item.TotalAmount </td>
+                </tr>
+
+            }
+
+            <tr>
+                <td style="width: 35px;">&nbsp;</td>
+
+                <td style="width: 350px; text-align: right">&nbsp;Total:</td>
+                <td style="width: 75px; text-align: right">@Model.OperationTheatreModels.Sum(x=>x.TotalAmount) </td>
+            </tr>
+        </tbody>
+</table> 
+    }
+
+    @if (@Model.OperationTheatreViewModels.Count > 0)
+
+    {
+        <div style="width: 100%; text-align: center;"><span>Anesthesia Bill</span></div>
+        <table style="height: 105px; margin: 10px auto; border: 1px solid" width="700">
+            <tbody>
+                <tr>
+
+
+                    <td style="width: 350px;"> Name</td>
+                    <td style="width: 75px;">Amount</td>
+
+
+                </tr>
+                @{
+                    // csharp code block
+                    // everything in here is code, don't have to use @
+                    int count5 = 1;
+                }
+                @foreach (var item in Model.OperationTheatreViewModels)
+                {
+
+                    <tr>
+
+                        <td style="width: 35px;">@item.AnesthesiaName</td>
+                        <td style="width: 350px;">@item.Price &nbsp;&nbsp;</td>
+
+
+                    </tr>
+
+                }
+
+                <tr>
+                    <td style="width: 35px;">&nbsp;</td>
+
+                    <td style="width: 350px; text-align: right">&nbsp;Total:</td>
+                    <td style="width: 75px; text-align: right">@Model.OperationTheatreViewModels.Sum(x => x.Price) </td>
+                </tr>
+            </tbody>
+        </table>
+
+                    }
+@if (@Model.SurgeonNameModels.Count > 0)
+
+{
+    <div style="width: 100%; text-align: center;"><span>Surgeon Bill</span></div>
+    <table style="height: 105px; margin: 10px auto; border: 1px solid" width="700">
+        <tbody>
+        <tr>
+
+
+            <td style="width: 350px;">Surgeon Name</td>
+            <td style="width: 75px;">Amount</td>
+
+
+        </tr>
+        @{
+            // csharp code block
+            // everything in here is code, don't have to use @
+            int count4 = 1;
+        }
+        @foreach (var item in Model.SurgeonNameModels)
+        {
+
+            <tr>
+
+                <td style="width: 35px;">@item.DoctorName</td>
+                <td style="width: 350px;">@item.SurgeonAmount &nbsp;&nbsp;</td>
+
+
+            </tr>
+
+        }
+
+        <tr>
+            <td style="width: 35px;">&nbsp;</td>
+
+            <td style="width: 350px; text-align: right">&nbsp;Total:</td>
+            <td style="width: 75px; text-align: right">@Model.SurgeonNameModels.Sum(x => x.SurgeonAmount) </td>
+        </tr>
+        </tbody>
+    </table>
+
+}
+@if (@Model.AssistantDoctorModels.Count > 0)
+
+{
+
+    <div style="width: 100%; text-align: center;"><span>Assistant Surgeon Bill</span></div>
+    <table style="height: 105px; margin: 10px auto; border: 1px solid" width="700">
+        <tbody>
+        <tr>
+
+
+            <td style="width: 350px;">Surgeon Name</td>
+            <td style="width: 75px;">Amount</td>
+
+
+        </tr>
+        @{
+            // csharp code block
+            // everything in here is code, don't have to use @
+            int count6 = 1;
+        }
+        @foreach (var item in Model.AssistantDoctorModels)
+        {
+
+            <tr>
+
+                <td style="width: 35px;">@item.DoctorName</td>
+                <td style="width: 350px;">@item.SurgeonAmount &nbsp;&nbsp;</td>
+
+
+            </tr>
+
+        }
+
+        <tr>
+            <td style="width: 35px;">&nbsp;</td>
+
+            <td style="width: 350px; text-align: right">&nbsp;Total:</td>
+            <td style="width: 75px; text-align: right">@Model.AssistantDoctorModels.Sum(x => x.SurgeonAmount) </td>
+        </tr>
+        </tbody>
+    </table>
+}
+
+@if (@Model.PurposeOnOTModels.Count > 0)
+
+{
+    <div style="width: 100%; text-align: center;"><span>Purpose Bill</span></div>
+    <table style="height: 105px; margin: 10px auto; border: 1px solid" width="700">
+        <tbody>
+        <tr>
+
+
+            <td style="width: 350px;">Purpose Name</td>
+            <td style="width: 75px;">Amount</td>
+
+
+        </tr>
+        @{
+            // csharp code block
+            // everything in here is code, don't have to use @
+            int count5 = 1;
+        }
+        @foreach (var item in Model.PurposeOnOTModels)
+        {
+
+            <tr>
+
+                <td style="width: 35px;">@item.PurposeName</td>
+                <td style="width: 350px;">@item.PurposeAmount &nbsp;&nbsp;</td>
+
+
+            </tr>
+
+        }
+
+        <tr>
+            <td style="width: 35px;">&nbsp;</td>
+
+            <td style="width: 350px; text-align: right">&nbsp;Total:</td>
+            <td style="width: 75px; text-align: right">@Model.PurposeOnOTModels.Sum(x => x.PurposeAmount) </td>
+        </tr>
+        </tbody>
+    </table>
+
+}
+@if (Model.PackageName != "" && Model.PackageName != null)
+{
+    <div style="width: 100%; margin-top: 0px; text-align: center; float: left;">
+
+
+        <div class="col-xs-4" style="width: 45%; float: left;"></div>
+        <div class="col-xs-4" style="width: 45%; float: right;"></div>
+        <div class="col-xs-4" style="width: 45%; float: right; text-align: right;">Package Amount :&nbsp;&nbsp; @Model.PackageAmount</div>
+    </div>
+}
+    <div style="width: 100%;margin-top: 0px;text-align: center;float: left;">
+
+
+        <div class="col-xs-4" style="width: 45%; float: left;"></div>
+        <div class="col-xs-4" style="width: 45%;float: right;"></div>
+        <div class="col-xs-4" style="width: 45%;float: right;text-align: right;">Cabin Amount :&nbsp;&nbsp; @Model.CabinAmount</div>
+    </div>
+    <div style="width: 100%;margin-top: 0px;text-align: center;float: left;">
+        
+       
+        <div class="col-xs-4" style="width: 45%; float: left;"></div>
+        <div class="col-xs-4" style="width: 45%;float: right;"></div>
+        <div class="col-xs-4" style="width: 45%;float: right;text-align: right;">Daily Bill :&nbsp;&nbsp; @Model.DailyBill</div>
+    </div>
+    <div style="width: 100%;margin-top: 0px;text-align: center;float: left;">
+            <div class="col-xs-4" style="width: 45%;float: left;"></div>
+            <div class="col-xs-4" style="width: 45%;float: left;"></div>
+            <div class="col-xs-4" style="width: 45%;float: right; text-align: right;">Total Drug Bill:&nbsp;&nbsp;@Model.DrugBill</div>
+        </div>
+        <div style="width: 100%;margin-top: 0px;text-align: center;float: left;">
+            <div class="col-xs-4" style="width: 45%;float: left;"></div>
+            <div class="col-xs-4" style="width: 45%;float: left;"></div>
+            <div class="col-xs-4" style="width: 45%;float: right;text-align: right;">Total Test Bill:&nbsp;&nbsp;@Model.TestBill</div>
+        </div>
+<div style="width: 100%; margin-top: 0px; text-align: center; float: left;">
+    <div class="col-xs-4" style="width: 45%; float: left;"></div>
+    <div class="col-xs-4" style="width: 45%; float: left;"></div>
+    <div class="col-xs-4" style="width: 45%; float: right; text-align: right;">Total Doctor Bill:&nbsp;&nbsp;@Model.DoctorBill</div>
+</div>
+    @*<div style="width: 100%; margin-top: 0px; text-align: center; float: left;">
+        <div class="col-xs-4" style="width: 45%; float: left;"></div>
+        <div class="col-xs-4" style="width: 45%; float: left;"></div>
+        <div class="col-xs-4" style="width: 45%; float: right; text-align: right;"> Doctor Discount:&nbsp;&nbsp;@Model.DoctorBill</div>
+    </div>*@
+    <div style="width: 100%;margin-top: 0px;text-align: center;float: left;">
+        <div class="col-xs-4" style="width: 45%;float: left;"></div>
+        <div class="col-xs-4" style="width: 45%;float: left;"></div>
+        <div class="col-xs-4" style="width: 45%;float: right;text-align: right;">Service Charge:&nbsp;&nbsp;@Model.ServiceCharge</div>
+    </div>
+    <div style="width: 100%;margin-top: 0px;text-align: center;float: left;">
+        <div class="col-xs-4" style="width: 45%;float: left;"></div>
+        <div class="col-xs-4" style="width: 45%;float: left;"></div>
+        <div class="col-xs-4" style="width: 45%;float: right;text-align: right;">Total  Bill:&nbsp;&nbsp;@Model.TotalPrice</div>
+    </div>
+    <div style="width: 100%;margin-top: 60px;text-align: center;float: left;">
+        <div style="width: 33%;float: left;">Prepared By :@User.Identity.Name </div>
+        @*<div style="width: 33%;float: left;">Checked By</div>
+            <div style="width: 33%;float: left;">Approved By</div>*@
+    </div>
+    <div style="width: 100%; text-align: center;">
+        <button id="btnPrint" onclick="myFunction()" class="hide-from-printer" style="margin-top:10%">Print </button>
+        <a id="btnCancel" href="@Url.Action("Create", "InPatientDischarge", new {Area = "MedicineCorner"})" type="button" class="" style="margin-left: 1%;" class="hide-from-printer">Cancel</a>
+    </div>
+</div>
+
+
+<script>
+    function myFunction() {
+        //Get the print button and put it into a variable
+        var printButton = document.getElementById("btnPrint");
+        var cancelButton = document.getElementById("btnCancel");
+        //Set the print button visibility to 'hidden'
+        printButton.style.visibility = 'hidden';
+        cancelButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print();
+        //Set the print button to 'visible' again
+        //[Delete this line if you want it to stay hidden after printing]
+        printButton.style.visibility = 'visible';
+        cancelButton.style.visibility = 'visible';
+
+
+    }
+</script>
+

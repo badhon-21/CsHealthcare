@@ -1,0 +1,35 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Patient.TestGroupWise>
+
+
+
+@foreach (var item in Model)
+{
+
+    <tr>
+        <td>
+            <a href="javascript:;"> @Html.DisplayFor(modelItem => item.GroupName) </a>
+        </td>
+        <td>@Html.DisplayFor(modelItem => item.NoOfProduct) </td>
+        <td style="text-align: right">@Html.DisplayFor(modelItem => item.Amount) </td>
+        <td>
+            <a href="@(Url.Action("Report4", "PatientTestReport", new {area = "PatientInformation",  id = item.GroupId,FromDate = item.FromDate, ToDate= item.ToDate}))" class="btn btn-sm btn-default">
+                <i class="fa fa-search" ></i> View
+            </a>
+        </td>
+    </tr>
+   
+}
+
+<tr>
+    <td>
+        
+    </td>
+    <td> </td>
+    <td style="font-weight: bold; text-align: right">@Model.Sum(x=>x.Amount)</td>
+    <td>
+       
+    </td>
+</tr>
+
+
+

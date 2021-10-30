@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.MedicineCorner.DrugSaleReturnModel>
+
+
+
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @item.ReturnDate.ToString("d")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemoNo)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ReturnQty)
+        </td>
+        <td style="text-align: right;">
+            @Html.DisplayFor(modelItem => item.ReturnPrice)
+        </td>
+       
+       
+    </tr>
+}
+
+<tr>
+    
+    <td colspan="4" style="text-align: right; font-weight: bold;">
+       Total
+    </td>
+    <td style="text-align: right; font-weight: bold;">
+        @Model.Sum(x=>x.ReturnPrice)
+    </td>
+
+
+</tr>

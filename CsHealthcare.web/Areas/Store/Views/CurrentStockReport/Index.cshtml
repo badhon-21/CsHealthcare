@@ -1,0 +1,154 @@
+﻿@model CsHealthcare.ViewModel.Store.StockInSummaryModel
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@media print {
+        .printOnly {
+            display: block;
+        }
+        /* write your css rules*/
+        .form-group {
+            margin-bottom: 2px;
+        }
+
+        .page-content {
+            padding: 0 !important;
+        }
+
+        .print-nopadding {
+            padding: 0 !important;
+        }
+    }
+    /*for desktop*/
+    @@media screen {
+        .printOnly {
+            display: none;
+        }
+        /*for all display view*/
+
+    }
+</style>
+
+<div class="page-container">
+    <!-- Page content -->
+    <div class="page-content">
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <div class="col-xs-12 printOnly">
+                <hgroup class="title-group text-center" style="margin: 5px 0; padding: 0">
+                    <h3>Better Life Hospital</h3>
+                    <h5 class="subtitle">1 East Rampura, D.I.T. Road , Dhaka-1219</h5>
+                    <h5 class="subtitle">Current Stock Item</h5>
+                </hgroup>
+            </div>
+            <div class="panel">
+                @*<div class="col-md-1">
+                    </div>*@
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-bell font-green-sharp"></i>
+                            <span class="caption-subject uppercase font-green-sharp">Current Stock Report</span>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-body">
+                        <div class="panel-body"id="tblTest">
+
+                            
+
+                           
+                            @*<table class="table datatable-basic">
+                             
+                                <tbody ></tbody>
+
+
+                            </table>*@
+
+                            <br /><br />
+                            <button id="btnPrint" onclick="myFunction()" class="btn btn-lg blue hidden-print margin-bottom-5" style="background-color: #1e90ff; color: white;float: right;">Print <i class="icon-printer2"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section page_styles {
+
+
+
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+
+
+
+}
+
+
+@section Scripts {
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="~/assets/global/plugins/datatables/datatables.min.js"></script>
+<script src="~/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            loadStatement();
+        });
+        function myFunction() {
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("btnPrint");
+           
+            printButton.style.visibility = 'hidden';
+            
+            window.print();
+            //Set the print button to 'visible' again
+            //[Delete this line if you want it to stay hidden after printing]
+            printButton.style.visibility = 'visible';
+           
+        }
+
+        function loadStatement() {
+            var loadArea = $("#tblTest");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("Report", "CurrentStockReport", new {Area = "Store" }))",
+                data: {   },
+            dataType: "html",
+            success: function (result) {
+                loadArea.html(result);
+                
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                var msg = 'Fail to load  List.';
+                alert(msg);
+            }
+        });
+        }
+
+
+    </script>
+
+}
+
+
+
+
+
+
+

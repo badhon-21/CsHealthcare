@@ -1,0 +1,179 @@
+﻿
+@model CsHealthcare.ViewModel.Doctor.DoctorInformationModel
+
+@{
+    ViewBag.Title = "Doctor Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+    <div class="row">
+
+        <div class="col-md-3"></div>
+
+        <div class="col-md-6">
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-moon-o"></i>
+                        <span class="caption-subject uppercase">@ViewBag.Title</span>
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="fullscreen">
+                        </a>
+                    </div>
+
+                </div>
+                <div class="portlet-body portlet-empty">
+
+                    <div class="form-horizontal">
+
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.HospitalId)
+
+                        <div class="form-group">
+                            <div class="control-label col-md-3">Name</div>
+                            <div class="col-md-8">
+                                <input name="Name" value="@Model.Name" class="form-control" required maxlength="50" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="control-label col-md-3">Degree</div>
+                            <div class="col-md-8">
+                                <textarea name="Degree" cols="36" class="form-control">@Model.Degree</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="control-label col-md-3">License</div>
+                            <div class="col-md-8">
+                                <input name="License" value="@Model.License" class="form-control" maxlength="50" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="control-label col-md-3">Speciality</div>
+                            <div class="col-md-8">
+                                <input name="Speciality" value="@Model.Speciality" class="form-control" maxlength="50" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="control-label col-md-3">Office Address</div>
+                            <div class="col-md-8">
+                                <textarea name="OfficeAddress" cols="36" class="form-control">@Model.OfficeAddress</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="control-label col-md-3">Office Phone</div>
+                            <div class="col-md-8">
+                                <input name="OfficePhone" value="@Model.OfficePhone" class="form-control" maxlength="50" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="control-label col-md-3">Chamber Address</div>
+                            <div class="col-md-8">
+                                <textarea name="ChamberAddress" cols="36" class="form-control">@Model.ChamberAddress</textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="control-label col-md-3">Chamber Phone</div>
+                            <div class="col-md-8">
+                                <input name="ChamberPhone" value="@Model.ChamberPhone" class="form-control" maxlength="50" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="control-label col-md-3">Mobile No</div>
+                            <div class="col-md-8">
+                                <input name="MobileNO" value="@Model.MobileNumber" class="form-control" maxlength="50" />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="control-label col-md-3">Email</div>
+                            <div class="col-md-8">
+                                <input name="Email" value="@Model.Email" class="form-control" maxlength="50" type="email" required/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label class="control-label col-md-3">Doctor Image</label>
+                                <div class="col-md-9">
+                                    @if (Model.Image != null && Model.Image != " ")
+                                    {
+                                        <img id="DoctorImage" Title="@Model.Name" style="width: 44%; margin-top: 5px;" class="doctor-pic img-responsive"
+                                             src="/@Model.Image " alt="Employee Image" />
+                                    }
+                                    else
+                                    {
+                                        <img id="DoctorImage" Title="No Image" style="width: 45%; margin-top: 5px;" class="doctor-pic img-responsive"
+                                             src="~/Image/no-image.jpg" alt="No Image" />
+                                    }
+
+                                    <a class="btn blue-ebonyclay" href="@Url.Action("DoctorImage", "Doctor", new {Area = "DoctorManagement"})" data-modal="" style="margin-top: 5px;">
+                                        <i class="fa fa-upload"></i>
+                                        Upload Image
+                                    </a>
+                                    @Html.Hidden("filePath", string.Empty, new { id = "filePath" })
+                                </div>
+                            </div>
+
+                <div class="col-md-2"></div>
+
+
+
+        </div>
+
+
+
+
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <div class="col-md-4"></div>
+                                <input type="submit" value="Update" class="btn btn-circle blue-ebonyclay btn-default col-md-2" />
+                                <a href="@Url.Action("Index", "Doctor", new {area = "DoctorManagement"})" class="btn btn-circle blue-dark btn-default col-md-2">Cancel</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!-- END Portlet PORTLET-->
+        </div>
+
+    </div>
+
+}
+
+
+
+@section page_styles {
+    <link href="~/assets/global/plugins/jcrop/css/jquery.Jcrop.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/Assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" />
+}
+@section Scripts {
+    <script src="~/assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-process.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js"></script>
+
+}

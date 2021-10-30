@@ -1,0 +1,638 @@
+﻿@model CsHealthcare.ViewModel.Patient.InPatientTransferBackModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("Create", "ICUToCabinTransfer", new { area = "PatientInformation" }, FormMethod.Post, new { @id = "sale_form", @class = "" }))
+{
+    <div ng-app="">
+        <div class="row">
+
+
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-question font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp uppercase">Patient Search</span>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+                            <a href="javascript:;" class="fullscreen">
+                            </a>
+                        </div>
+                        <div class="actions margin-right-10">
+
+                        </div>
+                    </div>
+                    <div class="portlet-body portlet-empty" style="min-height: 150px; margin-top: 0px">
+                        <div class="modal-body">
+                            <div class="form-horizontal">
+
+                                <div class="col-md-12">
+                                    <div class="form-group col-md-5 ">
+                                        <div class="control-label col-md-5 text-right" style="margin-left: 0px">Patient Code</div>
+                                        <div class="col-md-7" style="margin-left: 0px">
+                                            <input id="txtPatientCode" name="txtPatientCode" value="" class="form-control " />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2 ">
+                                        <div style="display: ;" id="">
+                                            <div class="actions ">
+                                                <a class="btn btn-circle green-jungle" style="width: 70% !important;" onclick=" javascript: getPatientInformation(); ">
+                                                    <i class="fa fa-search"></i> Search
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+
+                                        <div class="control-label col-md-4 text-center" style="margin-left: 0px">Patient Name</div>
+                                        <div class="col-md-7" style="margin-left: 0px">
+                                            <input id="txtPatientName" name="txtPatientName" value="" class="form-control " />
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+
+
+                                    <div class="col-md-12" style="margin-top: 0px">
+
+                                    </div>
+
+
+
+                                </div>
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                <input type="hidden" id="tId" name="tId" value="" />
+                                <input type="hidden" id="PatientId" name="PatientId" value="" />
+                                <input type="hidden" id="CabinId" name="CabinId" value="" />
+                                <input type="hidden" id="ICUId" name="ICUId" value="" />
+                                <input type="hidden" id="BedId" name="BedId" value="" />
+                            </div>
+
+                            <br /><br />
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div>
+
+
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-question font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp uppercase">Advance Entry Details</span>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+                            <a href="javascript:;" class="fullscreen">
+                            </a>
+                        </div>
+                        <div class="actions margin-right-10">
+
+                        </div>
+                    </div>
+                    <div class="portlet-body portlet-empty" style="min-height: 200px; margin-top: 20px">
+                        <div class="modal-body">
+                            <div class="form-horizontal">
+                                @*<div class="caption">
+                                        <i class="fa fa-question font-green-sharp"></i>
+                                        <span class="caption-subject font-green-sharp uppercase">Test Information</span>
+                                    </div>*@
+                                <br />
+                                <div class="col-md-12 row form-group">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="col-md-6">Transfer Date :</div>
+                                            <div class="col-md-6">
+                                                <input id="TransferDate" name="TransferDate" class="form-control" value="" />
+                                            </div>
+                                        </div>
+
+                                        @*<div class="col-md-3">
+                                                <input id="Discount" name="Discount" class="form-control twodigitdecimalnumber" placeholder="Discount" oninput="calculate()" />
+                                            </div>*@
+
+                                        <div class="col-md-6">
+                                            <div class="col-md-6">Patient Code :</div>
+                                            <div class="col-md-6">
+                                                <input id="PatientCode" name="PatientCode" class="form-control " placeholder="Patient Code" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row form-group">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="col-md-6">ICU discharge Date  :</div>
+                                            <div class="col-md-6">
+                                                <input id="BackDate" name="BackDate" class="form-control" value="@DateTime.Today.ToString("d")" />
+                                            </div>
+                                        </div>
+
+                                        @*<div class="col-md-3">
+                                                <input id="Discount" name="Discount" class="form-control twodigitdecimalnumber" placeholder="Discount" oninput="calculate()" />
+                                            </div>*@
+
+                                        <div class="col-md-6">
+                                            <div class="col-md-6">Patient Name :</div>
+                                            <div class="col-md-6">
+                                                <input id="PatientName" name="PatientName" class="form-control " placeholder="Patient Name" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row form-group">
+                                    <div class="col-md-12">
+                                       
+
+                                        
+                                    </div>
+                                </div>
+
+
+                                <br /><br /><br /><br />
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- END Portlet PORTLET-->
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-question font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp uppercase">ICU Details</span>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+                            <a href="javascript:;" class="fullscreen">
+                            </a>
+                        </div>
+                        <div class="actions margin-right-10">
+
+                        </div>
+                    </div>
+                    <div class="portlet-body portlet-empty" style="min-height: 150px; margin-top: 20px">
+                        <div class="modal-body">
+                            <div class="form-horizontal">
+                                @*<div class="caption">
+                                        <i class="fa fa-question font-green-sharp"></i>
+                                        <span class="caption-subject font-green-sharp uppercase">Test Information</span>
+                                    </div>*@
+                                <br />
+
+
+                                <div class="col-md-12 row form-group">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="col-md-6">ICU Name :</div>
+                                            <div class="col-md-6">
+                                                <input id="ICUName" name="ICUName" class="form-control" value="" placeholder="ICUName " />
+                                            </div>
+                                        </div>
+
+                                        @*<div class="col-md-3">
+                                                <input id="Discount" name="Discount" class="form-control twodigitdecimalnumber" placeholder="Discount" oninput="calculate()" />
+                                            </div>*@
+
+                                        <div class="col-md-6">
+                                            <div class="col-md-6">Bed :</div>
+                                            <div class="col-md-6">
+                                                <input id="BedName" name="BedName" class="form-control"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row form-group" id="chequeNo">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="col-md-6">Bed Type :</div>
+                                            <div class="col-md-6">
+                                                @*<select id="BedType" name="BedType" class="form-control">
+                                                    <option value="">Select</option>
+                                                    <option value="Daily">Daily</option>
+                                                    <option value="Hourly">Hourly</option>
+                                                </select>*@
+                                                <input id="BedType" name="BedType" class="form-control" value="" placeholder=" " />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="col-md-6">Bed Price :</div>
+                                            <div class="col-md-6">
+                                                <input id="Price" name="Price" class="form-control" value="" placeholder=" " />
+                                            </div>
+                                        </div>
+
+                                       
+                                    </div>
+                                </div>
+                                <div class="col-md-12 row form-group" id="chequeNo">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6" id="days">
+                                            <div class="col-md-6">No Of Days :</div>
+                                            <div class="col-md-6">
+                                                @*<select id="BedType" name="BedType" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Daily">Daily</option>
+                            <option value="Hourly">Hourly</option>
+                        </select>*@
+                                                <input id="NoOfDays" name="NoOfDays" class="form-control" value="0" placeholder=" " />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6" id="hour">
+                                            <div class="col-md-6">No Of Hour :</div>
+                                            <div class="col-md-6">
+                                                <input id="NoOfHour" name="NoOfHour" class="form-control" value="0" placeholder=" "/>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12 row form-group" id="chequeNo">
+                                    <div class="col-md-12">
+                                        <div class="col-md-6" id="">
+                                            <div class="col-md-6">Total Price :</div>
+                                            <div class="col-md-6">
+                                                @*<select id="BedType" name="BedType" class="form-control">
+                            <option value="">Select</option>
+                            <option value="Daily">Daily</option>
+                            <option value="Hourly">Hourly</option>
+                        </select>*@
+                                                <input id="BedPrice" name="BedPrice" class="form-control" value="" placeholder=" " />
+                                            </div>
+                                        </div>
+                                       
+
+
+                                    </div>
+                                </div>
+                                <br /><br /><br /><br />
+                                <div class="row ">
+                                    <div class="" style="text-align: center;">
+
+                                        <a class="btn default" style="width: 15%;margin-top: 60px" href="@Url.Action("Index", "CabinToICUTransfer", new {Area = "PatientInfromation"})">Cancel</a>
+                                        <input id="btnSave" type="submit" value="Save" class="btn green" style="width: 15%;margin-top: 60px" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- END Portlet PORTLET-->
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false" style="margin: 0 auto;background-color: #fff; width: 600px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id='myModalContent'></div>
+            </div>
+        </div>
+    </div>
+}
+
+@section page_styles
+{
+    <link href="~/assets/global/plugins/jcrop/css/jquery.Jcrop.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/typeahead/typeahead.css" rel="stylesheet" />
+    @*<link href="~/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>*@
+    <link href="~/assets/global/plugins/select2/css/select2.css" rel="stylesheet" />
+    <link href="~/Assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" />
+
+    <style>
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+            width: 422px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+            .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+                color: #fff;
+                background-color: #0097cf;
+            }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+}
+
+
+@section Scripts {
+    <script src="~/Scripts/angular.min.js"></script>
+
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/scripts/jquery.format.1.05.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/select2/js/select2.min.js"></script>
+    @*<script src="~/assets/global/plugins/jcrop/js/jquery.Jcrop.js"></script>*@
+    @*<script src="~/assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+        <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+        <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
+        <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-process.js"></script>
+        <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js"></script>
+        <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
+        <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js"></script>*@
+
+
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script src="~/assets/pages/components-pickers.js"></script>
+
+    <script src="~/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            allowInt();
+            initPatientCodeAutoComplete();
+            //initICUAutoComplete();
+            //initDoctorAutoComplete();
+
+            //$('#txtPatientType').val('Old');
+
+            //$(".datetimepicker").datepicker();
+
+            //ComponentsPickers.init();
+            //$('#txtDateOfBirth').val(getTodate());
+            $('#BedType').on('change', function () {
+                BedType();
+
+            });
+            $('#BedName').on('change', function () {
+                BedId();
+
+            });
+        });
+
+
+        function getTodate() {
+            var dob = new Date();
+            var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+            var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+            return (month + "/" + day + "/" + dob.getFullYear());
+        }
+
+        function allowInt() {
+            $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+        }
+
+
+        function initPatientCodeAutoComplete() {
+            $('#txtPatientCode').typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 2,
+                    limit: 8
+                }, {
+                    source: function (searchString, cb) {
+                        return $.ajax({
+                            dataType: 'json',
+                            type: 'POST',
+                            contentType: "application/json; charset=utf-8",
+                            url: " /PatientInformation/ICUToCabinTransfer/LoadPatientCode",
+                            data: "{'SearchString':'" + searchString + "'}",
+                            chache: false,
+                            success: function (data) {
+                                var result = [];
+                                $.each(data, function (index, val) {
+                                    result.push({
+                                        Id: val.Id,
+                                        Name: val.PatientCode,
+                                        value: val.PatientCode
+                                    });
+                                });
+                                cb(result);
+                            }
+                        });
+                    }
+                }).on("typeahead:selected", function (obj, patient) {
+                    $("#tId").val(patient.Id);
+                    getPatientId();
+                    //LoadPrice();
+                    //$("#txtPatientName").val(patient.Name);
+                    //$("#txtMobileNumber").val(patient.Mobile);
+                });
+
+        }
+
+        function getPatientId() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("GetPatientId", "ICUToCabinTransfer", new {Area = "PatientInformation" }))",
+                data: { "Id": $("#tId").val(), "PatientCode": $("#txtPatientCode").val() },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+
+                $('#PatientId').val(t);
+
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+        function getPatientInformation() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("PatientInformation", "ICUToCabinTransfer", new {Area = "PatientInformation" }))",
+                data: { "PatientId": $("#PatientId").val(), "PatientCode": $("#txtPatientCode").val() },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+
+                $('#txtPatientName').val(t.PatientName);
+                $('#PatientName').val(t.PatientName);
+                $('#PatientCode').val(t.PatientCode);
+                $('#ICUName').val(t.ICUName);
+                $('#BedName').val(t.BedName);
+                $('#BedType').val(t.Type);
+                $('#Price').val(t.Price);
+
+
+                var dateString = (t.TransferDate).substr(6);
+                var currentTime = new Date(parseInt(dateString));
+                var month = currentTime.getMonth() + 1;
+                var day = currentTime.getDate();
+                var year = currentTime.getFullYear();
+                var date = month + "/" + day + "/" + year;
+                $('#TransferDate').val(date);
+
+                //var newFormattedDate = $.datepicker.formatDate('mm/dd/yy', new Date(Date(your_JSON_date_string)));
+                //$('#ExpDate').val(value.ExpDate);
+
+                getdayandhour();
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+
+
+
+        function getdayandhour() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DaysOrHour", "ICUToCabinTransfer", new {Area = "PatientInformation" }))",
+                data: { "TransferDate": $("#TransferDate").val(), "BackDate": $("#BackDate").val(), "Type": $("#BedType").val() },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+
+                if (t.Type == "Daily") {
+                    $('#NoOfDays').val(t.Count);
+                    $('#hour').hide();
+                    totalprice();
+                } else {
+                    $('#NoOfHour').val(t.Count);
+                    $('#days').hide();
+                    totalprice1();
+                }
+
+               
+
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+        function totalprice() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("TotalPrice", "ICUToCabinTransfer", new {Area = "PatientInformation" }))",
+                data: { "Price": $("#Price").val(), "NoOfDays": $("#NoOfDays").val() },
+            dataType: "html",
+            success: function (result) {
+
+
+
+
+                $('#BedPrice').val(result);
+
+
+
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+        function totalprice1() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("TotalPrice1", "ICUToCabinTransfer", new {Area = "PatientInformation" }))",
+                data: { "Price": $("#Price").val(), "NoOfHour": $("#NoOfHour").val() },
+            dataType: "html",
+            success: function (result) {
+
+
+
+
+                $('#BedPrice').val(result);
+
+
+
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+
+    </script>
+}

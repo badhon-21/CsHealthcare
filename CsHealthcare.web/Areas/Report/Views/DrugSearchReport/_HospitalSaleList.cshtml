@@ -1,0 +1,42 @@
+﻿
+@model IEnumerable<CsHealthcare.ViewModel.MedicineCorner.DrugSearchModel>
+
+<div class="col-md-12 text-center">
+    <h3>Hospital Sale Report</h3>
+
+</div>
+<table class="table">
+    <tr>
+        <th>
+            Sale Date
+        </th>
+        <th>
+            Drug Name
+        </th>
+        <th>
+            Sale Quantity
+        </th>
+
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @item.HospitalSaleDate.ToString("d")
+            </td>
+            <td>
+                @item.TradeName
+            </td>
+            <td>
+                @item.DepartmentwiseStockOutQuantity
+            </td>
+
+
+        </tr>
+    }
+
+</table>
+

@@ -1,0 +1,365 @@
+﻿@model CsHealthcare.ViewModel.Patient.HospitalCollectionViewModel
+
+
+
+<input type="hidden" name="FromDate" value="@Model.FromDate">
+<input type="hidden" name="ToDate" value="@Model.ToDate">
+<div class="col-md-12 ">
+    <div class="portlet-body">
+        <div class="col-md-4">
+            <a id="test" href="@Url.Action("Test", "HospitalCollection", new {area = "Report" ,FromDate=@Model.FromDate,ToDate=@Model.ToDate })"  class="tile  bg-blue-hoki">
+                <div class="portlet red-sunglo box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" data-value="1349" id="TotalTest" value="">@Model.TestCollection</span>
+                                </h3>
+                                <small>@*<a href="@Url.Action("Test", "HospitalCollection", new {area = "Report" })" >*@Total Test Collection@*</a>*@</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-blood-test"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+        </div>
+        <div class="col-md-4">
+            @*<div class="portlet red-sunglo box">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="fa fa-cogs"></i>Total Sale Price
+                        </div>
+
+                    </div>
+                    <div class="portlet-body">
+                        <div class="" id="" style="height: 50px" data-rail-visible="1" data-rail-color="yellow" data-handle-color="#a1b2bd">
+                        </div>
+                    </div>
+                </div>*@
+            <a href="@Url.Action("Emergency", "HospitalCollection", new {area = "Report",FromDate=@Model.FromDate,ToDate=@Model.ToDate })" class="tile  bg-blue-hoki">
+                <div class="portlet green-meadow box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup"  id="TotalEmergencye" value="">@Model.OPDCollection</span>
+                                </h3>
+                                <small>Total Emergency Collection</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+
+        <div class="col-md-4">
+            <a href="@Url.Action("OPDTherapy", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+                <div class="portlet red-sunglo box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" id="TotalTherapyPrice" value="">@Model.OPDTherapyCollection</span>
+                                </h3>
+                                <small>Total OPD Therapy Collection</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+</div>
+    </div>
+
+</div>
+
+<div class="col-md-12 ">
+    <div class="portlet-body">
+        <div class="col-md-4">
+            <a href="@Url.Action("Due", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+                <div class="portlet green-meadow box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" data-value="1349" id="TotalTestDue" value="">@Model.TestDue</span>
+                                </h3>
+                                <small>Total Test Due </small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+</div>
+        <div class="col-md-4">
+            <a href="@Url.Action("DueCollection", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+                <div class="portlet red-sunglo box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" id="TotalTestDueCollection" value="">@Model.TestDueCollection</span>
+                                </h3>
+                                <small>Total Test Due Collection</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+</div>
+        <div class="col-md-4">
+            <a href="@Url.Action("Advance", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+                <div class="portlet green-meadow box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" id="IPDAdvance" value="">@Model.IPDAdvanceCollection</span>
+                                </h3>
+                                <small>IPD Advance Collection</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+</div>
+    </div>
+
+</div>
+
+
+<div class="col-md-12 ">
+    <div class="portlet-body">
+        <div class="col-md-4">
+            <a href="@Url.Action("IPDTest", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+                <div class="portlet red-sunglo box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" data-value="1349" id="TotalIPDTest" value="">@Model.TotalIPDTestCollection</span>
+                                </h3>
+                                <small>Total IPD Test Collection</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+</div>
+        <div class="col-md-4">
+            <a href="@Url.Action("IPDDrug", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+                <div class="portlet green-meadow box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" id="TotalIPDDrug" value="">@Model.TotalIPDDrugCollection</span>
+                                </h3>
+                                <small>Total IPD Drug Collection</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+</div>
+        <div class="col-md-4">
+            <a href="@Url.Action("OPDDrug", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+                <div class="portlet red-sunglo box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" data-value="1349" id="DrugSale" value="">@Model.TotalOPDDrugSaleCollection</span>
+                                </h3>
+                                <small>Total OPD Drug Sale Collection</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+</div>
+    </div>
+
+</div>
+
+<div class="col-md-12 ">
+    <div class="portlet-body">
+        <a href="@Url.Action("HospitalSale", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+            <div class="col-md-4">
+                <div class="portlet green-meadow box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" data-value="1349" id="HopitalSale" value="">@Model.TotalHospitalSale</span>
+                                </h3>
+                                <small>Total Hospital Sale </small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </a>
+
+        <div class="col-md-4">
+            <a href="@Url.Action("IPDDischarge", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+                <div class="portlet red-sunglo box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" data-value="1349" id="IPDDischarge" value="">@Model.IPDDischargeCollection</span>
+                                </h3>
+                                <small>Total IPD Discharge Collection</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+        </div>
+        <div class="col-md-4">
+            <a href="@Url.Action("CardCollection", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+                <div class="portlet green-meadow box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" data-value="1349" id="OTCollection">@Model.PatientCardCollection</span>
+                                </h3>
+                                <small>Patient Card Collection</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="col-md-12 ">
+    <div class="portlet-body">
+        <div class="col-md-4">
+            <a href="@Url.Action("Dialysis", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+                <div class="portlet red-sunglo box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" data-value="1349" id="TotalIPDTest" value="">@Model.DialysisCollection</span>
+                                </h3>
+                                <small>Total Dialysis Collection</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+        </div>
+        <div class="col-md-4">
+            <a href="@Url.Action("DoctorAppointment", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+                <div class="portlet green-meadow box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" id="TotalIPDDrug" value="">@Model.DoctorAppointmentCollection</span>
+                                </h3>
+                                <small>Total Chember Collection</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+        </div>
+        <div class="col-md-4">
+            <a href="@Url.Action("IPDDoctor", "HospitalCollection", new {area = "Report", FromDate = @Model.FromDate, ToDate = @Model.ToDate})" class="tile  bg-blue-hoki">
+                <div class="portlet red-sunglo box">
+                    <div class="dashboard-stat2 ">
+                        <div class="display">
+                            <div class="number">
+                                <h3 class="font-red-haze">
+                                    <span data-counter="counterup" data-value="1349" id="DrugSale" value="">@Model.IPDDoctorCollection</span>
+                                </h3>
+                                <small>Total IPD Doctor Collection</small>
+                            </div>
+                            <div class="icon">
+                                <i class="icofont icofont-drug"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+</div>

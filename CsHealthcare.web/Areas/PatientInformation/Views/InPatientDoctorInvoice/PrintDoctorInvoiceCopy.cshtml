@@ -1,0 +1,134 @@
+﻿
+@using Microsoft.AspNet.Identity
+@model CsHealthcare.ViewModel.Patient.InPatientDoctorInvoiceModel
+@{
+    ViewBag.Title = "Print Doctor Invoice Copy";
+    Layout = null;
+}
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    .page {
+        width: 21cm;
+        min-height: 29.7cm;
+        padding: 1cm;
+        background: white;
+    }
+
+    .subpage {
+        padding: 1cm;
+        height: 256mm;
+        outline: 2cm #FFEAEA solid;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    table {
+        border-spacing: 5px;
+    }
+
+    th, td {
+        padding: 3px;
+    }
+
+    @@print {
+        .hide-from-printer {
+            display: none;
+        }
+    }
+</style>
+
+<div class="page">
+
+    <h2 style="text-align: center; line-height: 0px;">Better Life Hospital Ltd</h2>
+    <div style="text-align: center;">1 East Rampura, D.I.T. Road , Dhaka-1219</div>
+    <div style="text-align: center;">
+        Hot Line:<a class="tel">09639786786,&nbsp;</a><a class="tel">09678786787</a>
+    </div>
+    <div style="text-align: center;margin: 10px auto;"><h4 style="text-decoration: underline;">Doctor Invoice Copy </h4> </div>
+  
+
+    <br />
+  
+    <div style="width: 100%;Display:block"></div><br />
+
+    <table style="height: 105px; margin: 10px auto; width: 500px;">
+        <tbody>
+            <tr>
+                <td style="width: 96px;">Date</td>
+                <td style="width: 150px;">@Model.CreatedDate.ToString("dd/MM/yyyy")</td>
+            </tr>
+
+
+        <tr>
+
+            <td style="width: 96px;">Patient Code</td>
+            <td style="width: 150px;">@Model.PatientCode</td>
+        </tr>
+        <tr>
+
+            <td style="width: 96px;">Patient Name</td>
+            <td style="width: 376px;">@Model.PatientName</td>
+        </tr>
+        <tr>
+            <td style="width: 96px;">Doctor Name</td>
+            <td style="width: 150px;">@Model.DoctorName</td>
+        </tr>
+
+        <tr>
+            <td style="width: 96px;">Amount</td>
+            <td style="width: 150px;">@Model.Amount</td>
+        </tr>
+
+
+        </tbody>
+    </table>
+
+
+    <div style="width: 100%;display:block; text-align: Center;">User Name: <span>@User.Identity.GetUserName()</span></div>
+
+
+
+    <div style="width: 100%; text-align: center;">
+        <button id="btnPrint" onclick="myFunction()" class="hide-from-printer" style="margin-top:10%">Print </button>
+        <a id="btnCancel" href="@Url.Action("Create", "InPatientDoctorInvoice", new {Area = "PatientInformation"})" type="button" class="" style="margin-left: 1%;" class="hide-from-printer">Cancel</a>
+    </div>
+
+</div>
+<script>
+function myFunction() {
+    //Get the print button and put it into a variable
+    var printButton = document.getElementById("btnPrint");
+    var cancelButton = document.getElementById("btnCancel");
+    //Set the print button visibility to 'hidden'
+    printButton.style.visibility = 'hidden';
+    cancelButton.style.visibility = 'hidden';
+    //Print the page content
+    window.print();
+    //Set the print button to 'visible' again
+    //[Delete this line if you want it to stay hidden after printing]
+    printButton.style.visibility = 'visible';
+    cancelButton.style.visibility = 'visible';
+
+
+}
+jQuery(document).ready(function () {
+
+
+});
+
+</script>
+
+
+
+
+
+
+
+

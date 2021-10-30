@@ -1,0 +1,428 @@
+﻿
+@model CsHealthcare.ViewModel.Diagnostic.CBCTestModel
+@{
+    ViewBag.Title = "Print Urin Routine Examination";
+    Layout = null;
+}
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@print {
+        .hide-from-printer {
+            display: none;
+        }
+    }
+</style>
+<div class="page">
+    <div style="min-height: 400px; width: 460px; font-size: 12px; margin-right: 20%; margin-left: 20%;margin-top: 2%">
+        <h2 style="text-align: center; ">Better Life Hospital Ltd</h2>
+        <div style="text-align: center;">1 East Rampura, D.I.T. Road , Dhaka-1219</div>
+        <div style="width: 100%; text-align: center">
+            <h3>
+                <b>Clinical Pathology Haemogram</b>
+            </h3>
+        </div>
+
+
+
+        <div style="width: 100%; display: table;">
+            <div style="width: 60%; float: left; display: table-cell;">
+                <div style="width: 42%; float: left;font-weight: bold;">Patient Name</div>
+                <div id="Id" style="width: 58%; float: left;">@Model.PatientName</div>
+
+            </div>
+            <div style="width: 30%; float: right;">
+                <div style="float: left; margin-right: 5px;font-weight: bold;">Patient Code</div>
+                <div style="float: left; margin-right: 5px;">@Model.PatientCode</div>
+
+            </div>
+        </div>
+
+        <div style="float: left; width: 100%; display: table; margin-bottom: 5px;">
+
+            <div style="width: 60%; float: left; display: table-cell;">
+                <div style="width: 42%; float: left; font-weight: bold;">Reference By</div>
+                <div style="width: 58%; float: left;">@Model.ReferanceName</div>
+
+            </div>
+
+            <div style="width: 30%; float: right;">
+                <div style="float: left;width: 42%;font-weight: bold;">Age</div>
+                <div style="float: left;width: 58%;">@Model.Age</div>
+
+            </div>
+
+        </div>
+
+        <div style="float: left; width: 100%; display: table; margin-bottom: 5px;">
+
+            <div style="width: 60%; float: left; display: table-cell;">
+                <div style="width: 42%; float: left; font-weight: bold;">Report Date</div>
+                <div style="width: 58%; float: left;">@Model.Date.ToString("dd/MM/yyyy")</div>
+
+            </div>
+            <div style="width: 30%; float: right;">
+                <div style="float: left;width: 42%;font-weight: bold;">Dept</div>
+                <div style="float: left;width: 58%;">@Model.Department</div>
+
+            </div>
+
+        </div>
+        @*<div style="float: left; width: 500px; margin-bottom: 10px;">
+
+
+                <div style="width: 150px; float:left;">
+                    <div style="width: 50%; float: left;"> Report Date</div>
+                    <div style="width: 50%; float: left;">@Model.Date </div>
+
+                </div>
+            </div>*@
+        <div style="width: 100%; Display: block"></div>
+        <div style="width: 100%; margin-top: 5px; float: left; border-top: dotted 1px; border-bottom: dotted 1px;">
+
+
+            <table style="width: 100%; height: 310px; margin-left: auto; margin-right: auto;" border="1px  solid">
+                <caption>&nbsp;</caption>
+                <thead>
+                    <tr>
+                        <th>Investigation</th>
+                        <th> Result</th>
+                        <th> Unit</th>
+                            <th> Refference Range</th>
+                    </tr>
+                </thead>
+
+
+                <tbody>
+                    <tr>
+                        <td><b>Red Cells</b></td>
+                        <td></td>
+                        <td></td>
+                            <td></td>
+                    </tr>
+                    <tr>
+                        <td>Haemoglobin</td>
+
+                        <td> @Model.Haemoglobin</td>
+
+                        <td>@Model.HaemoglobinUnit</td>
+                        <td>@Model.HaemoglobinRefer</td>
+                    </tr>
+
+                    <tr>
+                        <td>Hematocrit</td>
+
+                        <td>@Model.Hematocrit </td>
+
+                        <td>@Model.HematocritUnit</td>
+                        <td>@Model.HematocritRefer</td>
+                    </tr>
+                    <tr>
+                        <td>RedCellsCount</td>
+
+                        <td>@Model.RedCellsCount</td>
+
+                        <td>@Model.RedCellsCountUnit</td>
+                        <td>@Model.RedCellsCountRefer</td>
+                    </tr>
+
+
+                    <tr>
+
+
+                        <td>Mean Cell Volume</td>
+
+                        <td>@Model.MeanCellVolume</td>
+                        <td>@Model.MeanCellVolumeUnit</td>
+                        <td>@Model.MeanCellVolumeRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>Mean Cell Haemoglobin</td>
+
+                        <td>@Model.MeanCellHaemoglobin</td>
+                        <td>@Model.MeanCellHaemoglobinUnit</td>
+                        <td>@Model.MeanCellHaemoglobinRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>Mean Cell Haemoglobin Concentration</td>
+
+                        <td>@Model.MeanCellHaemoglobinConcentration</td>
+                        <td>@Model.MeanCellHaemoglobinConcentrationUnit</td>
+                        <td>@Model.MeanCellHaemoglobinConcentrationRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>Red Cell Distribution Width</td>
+
+                        <td>@Model.RedCellDistributionWidth</td>
+               
+                        <td>@Model.RedCellDistributionWidthUnit</td>
+                        <td>@Model.RedCellDistributionWidthRefer</td>
+                    </tr>
+
+
+                    <tr>
+
+
+                        <td>Nucleated Red Blood Cells</td>
+
+                        <td>@Model.NucleatedRedBloodCells</td>
+
+                        <td>@Model.NucleatedRedBloodCellsUnit</td>
+                        <td>@Model.NucleatedRedBloodCellsRefer</td>
+                    </tr>
+
+                    <tr>
+                        <td><b>Total Count</b></td>
+
+                        <td></td>
+
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Total Wbc Count
+                        </td>
+                        <td>@Model.TotalWbcCount</td>
+                        <td>@Model.TotalWbcCountUnit</td>
+                        <td>@Model.TotalWbcCountRefer</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Neutrophil
+                        </td>
+                        <td>@Model.Neutrophil</td>
+                        <td>@Model.NeutrophilUnit</td>
+                        <td>@Model.NeutrophilRefer</td>
+                    </tr>
+                    <tr>
+
+
+                        <td>Lymphocyte</td>
+
+                        <td>@Model.Lymphocyte</td>
+                        <td>@Model.LymphocyteUnit</td>
+                        <td>@Model.LymphocyteRefer</td>
+                    </tr>
+
+                    <tr>
+
+                        <td>Monocyte</td>
+
+                        <td>@Model.Monocyte</td>
+                        <td>@Model.MonocyteUnit</td>
+                        <td>@Model.MonocyteRefer</td>
+                    </tr>
+                    <tr>
+
+
+                        <td>Eosinophil</td>
+
+                        <td>@Model.Eosinophil</td>
+                        <td>@Model.EosinophilUnit</td>
+                        <td>@Model.EosinophilRefer</td>
+                    </tr>
+                    <tr>
+
+
+                        <td>Basophil</td>
+
+                        <td>@Model.Basophil</td>
+                        <td>@Model.BasophilUnit</td>
+                        <td>@Model.BasophilRefer</td>
+                    </tr>
+                    <tr>
+
+
+                        <td>Immature Granulocytes</td>
+
+                        <td>@Model.ImmatureGranulocytes</td>
+                        <td>@Model.ImmatureGranulocytesUnit</td>
+                        <td>@Model.ImmatureGranulocytesRefer</td>
+                    </tr>
+
+
+                    <tr>
+                        <td><b>Diffrential WBC Count</b></td>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+
+                    </tr>
+
+                    <tr>
+
+
+                        <td>Neutrophils %</td>
+
+                        <td>@Model.Neutrophils</td>
+                        <td>@Model.NeutrophilsUnit</td>
+                        <td>@Model.NeutrophilsRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>Lymphocytes %</td>
+
+                        <td>@Model.Lymphocytes</td>
+                        <td>@Model.LymphocytesUnit</td>
+                        <td>@Model.LymphocytesRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>Monocytes %</td>
+
+                        <td>@Model.Monocytes</td>
+                        <td>@Model.MonocytesUnit</td>
+                        <td>@Model.MonocytesRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>Eosinophils %</td>
+
+
+                        <td>@Model.Eosinophils</td>
+                        <td>@Model.EosinophilsUnit</td>
+                        <td>@Model.EosinophilsRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>Basophils %</td>
+
+                        <td>@Model.Basophils</td>
+                        <td>@Model.BasophilsUnit</td>
+                        <td>@Model.BasophilsRefer</td>
+                    </tr>
+                    <tr>
+
+
+                        <td>Immature Granulocytes %</td>
+
+                        <td>@Model.ImmatureGranulocytess</td>
+                        <td>@Model.ImmatureGranulocytessUnit</td>
+                        <td>@Model.ImmatureGranulocytessRefer</td>
+                       
+                    </tr>
+                    <tr>
+
+
+                        <td><b>Platelets & others</b></td>
+
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+
+
+                    <tr>
+
+
+                        <td>Platelets Count</td>
+
+                        <td>@Model.PlateletsCount</td>
+                        <td>@Model.RedCellsCountUnit</td>
+                        <td>@Model.PlateletsCountRefer</td>
+                    </tr>
+
+                    <tr>
+
+
+                        <td>Erythrocyte Sedimentation Rate</td>
+
+                        <td>@Model.ErythrocyteSedimentationRate</td>
+
+                        <td>@Model.ErythrocyteSedimentationRateUnit</td>
+                        <td>@Model.ErythrocyteSedimentationRateRefer</td>
+                    </tr>
+
+
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+
+
+
+
+        <div style="width: 100%; text-align: center;">
+            <button id="btnPrint" onclick=" myFunction() " class="hide-from-printer" style="margin-top: 10%">Print </button>
+            <a id="btnCancel" href="@Url.Action("Create", "CBC", new {Area = "Hospital"})" type="button" class="" style="margin-left: 1%;" class="hide-from-printer">Cancel</a>
+        </div>
+
+    </div>
+</div>
+<script>
+function myFunction() {
+    //Get the print button and put it into a variable
+    var printButton = document.getElementById("btnPrint");
+    var cancelButton = document.getElementById("btnCancel");
+    //Set the print button visibility to 'hidden'
+    printButton.style.visibility = 'hidden';
+    cancelButton.style.visibility = 'hidden';
+    //Print the page content
+    window.print();
+    //Set the print button to 'visible' again
+    //[Delete this line if you want it to stay hidden after printing]
+    printButton.style.visibility = 'visible';
+    cancelButton.style.visibility = 'visible';
+
+
+}
+jQuery(document).ready(function () {
+    getTotal();
+
+});
+function getTotal() {
+    $.ajax({
+
+        type: "GET",
+        cache: false,
+        url: "@(@Url.Action("LoadTotalPrice", "Patient", new {Area = "PatientInformation" }))",
+        data: { "Id": $("#Id").val() },
+    dataType: "html",
+    success: function (result) {
+
+        //var t = JSON.parse(result);
+        //$('#Price').val(t.T_Price);
+        $('#totalPrice').text(result);
+        // $('#quantity').focus();
+    },
+    error: function (error) {
+        //Metronic.unblockUI();
+        var msg = 'Fail to load .';
+        alert(msg);
+    }
+});
+}
+</script>
+
+
+
+
+
+
+
+

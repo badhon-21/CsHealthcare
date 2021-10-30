@@ -1,0 +1,643 @@
+﻿@using Cs.Utility
+@model CsHealthcare.ViewModel.Doctor.DoctorAppointmentModel
+
+@{
+    ViewBag.Title = "Appointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="page-content" style="min-height:247px">
+            <div class="container-fluid">
+
+                <div class="portlet light">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-social-dribbble font-green-sharp"></i>
+                            <span class="caption-subject uppercase font-green-sharp">@ViewBag.Title</span>
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+                            <a href="javascript:;" class="fullscreen">
+                            </a>
+                        </div>
+                        <div class="actions margin-right-10">
+                            <a class="btn btn-circle green-jungle" href="@SessionManager.DashBoard">
+                                <i class="fa fa-arrow-left"></i>Back
+                            </a>
+                        </div>
+                    </div>
+                    <div class="portlet-body">
+                        <div class="modal-body">
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="control-label col-md-1">Date</div>
+                                    <div class="col-md-3">
+                                        <input id="txtAppointmentDate" required="required" name="txtAppointmentDate" value="" class="form-control date-picker" placeholder="Appointment Date" type="text" />
+                                    </div>
+                                    <div class="control-label col-md-1">Consultant</div>
+                                    <div class="col-md-4">
+                                        @*<select id="ddlDoctorInformation" class="form-control hide"></select>*@
+                                        <input id="ddlDoctorInformation" required="required" name="ddlDoctorInformation" value="" class="form-control hide" placeholder="" type="text" />
+                                        <input id="txtConsultant" required="required" name="txtConsultant" value="" class="form-control" placeholder="" type="text" />
+                                    </div>
+                                    <div class="actions margin-right-10">
+                                        <a class="btn btn-circle green-jungle"  onclick="javascript:CurrentAppointmentList();">
+                                            <i class="fa fa-search"></i> Search
+                                        </a>
+                                        @*<a class="btn btn-circle green-jungle" style="width: 8% !important;" target="_blank" href="@Url.Action("ReportSample", "Appointment", new {area = "AppointmentSystem"})">
+                                            <i class="fa fa-print"></i> Print
+                                        </a>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="appointment_list_container" class="row" style="">
+                    <div class="col-md-4">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-bell font-green-sharp"></i>
+                                    <span class="caption-subject uppercase font-green-sharp">New Appointment</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse">
+                                    </a>
+
+                                    <a href="javascript:;" class="fullscreen">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body portlet-empty">
+                                <form id="setAppointment">
+
+                                    <div class="modal-body">
+                                        <div class="form-horizontal">
+
+                                            <div class="form-group">
+                                                <div class="row col-md-12 radio-list text-center">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" onclick="javascript:forRadOne();" name="optionsRadios" class="PatientType" id="radOld" value="Old" checked> Old
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" onclick="javascript:forRadTwo();"  name="optionsRadios" class="PatientType" id="radNew" value="New"> New
+                                                    </label>
+                                                    <div style="display: none;">
+                                                        <input type="hidden" id="txtPatientType" name="txtPatientType" value="1" />
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group patient_name">
+
+                                                <div class="col-md-12 form-group">
+                                                    <span>Patient Code</span>
+                                                    <div class="input-group">
+                                                        <input id="txtPatientId" required="required" type="text" class="form-control" placeholder="Search for...">
+                                                        <span class="input-group-btn">
+                                                            <button id="btnSearch" class="btn green" type="button" onclick="javascript: getPatientInformation();">Go!</button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 form-group">
+                                                    <span>Patient Name</span>
+                                                    <div>
+                                                        <span id="patNameId1">
+                                                            <input id="txtPatientName" maxlength="50" required="required" name="txtPatientName" class="form-control patientname" />
+                                                        </span>
+                                                        <span id="patNameId2" style="display: none;">
+                                                            <input id="txtPatName" required="required" name="txtPatName" class="form-control" type="text" />
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 form-group">
+                                                    <span>Time</span>
+                                                    <div class="">
+                                                        <input id="txtAppointmentTime" maxlength="20" required="required" name="txtAppointmentTime" value="" class="form-control timepicker-no-seconds" type="text" />
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 form-group">
+                                                    <div class="">Apt Type</div>
+                                                    <div class="">
+                                                        <select id="ddlAppointmentType" class="form-control">
+                                                            <option value="Visit">Visit</option>
+                                                            <option value="Report">Report</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 form-group">
+                                                    <div class="">Location</div>
+                                                    <div class="">
+                                                        <select id="ddlLocation" class="form-control">
+                                                            <option value="RAMPURA">RAMPURA</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 form-group">
+                                                    <div class="">Mobile No</div>
+                                                    <div class="">
+                                                        <input id="txtMobileNumber" maxlength="50" required="required" name="txtMobileNumber" value="" class="form-control" type="text" />
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="button" data-dismiss="modal" class="btn green-jungle" onclick="javascript:SetAppointment();">Set Appointment</button>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-bell font-green-sharp"></i>
+                                    <span class="caption-subject uppercase font-green-sharp">Appointment List</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse">
+                                    </a>
+
+                                    <a href="javascript:;" class="fullscreen">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="portlet-body portlet-empty" id="loadData">
+
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section page_styles {
+    @*<link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/select2/css/select2.css" />*@
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css"/>
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css"/>
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/typeahead/typeahead.css"/>
+<style>
+    .tt-query {
+        -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    }
+
+    .tt-hint {
+        color: #999;
+    }
+
+    .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+        width: 422px;
+        margin-top: 4px;
+        padding: 4px 0;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    }
+
+    .tt-suggestion {
+        padding: 3px 20px;
+        line-height: 24px;
+    }
+
+        .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+            color: #fff;
+            background-color: #0097cf;
+        }
+
+        .tt-suggestion p {
+            margin: 0;
+        }
+</style>
+
+}
+
+@section Scripts {
+    @*<script type="text/javascript" src="~/Assets/global/plugins/select2/js/select2.min.js"></script>*@
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/typeahead/typeahead.bundle.min.js"></script>
+    <script src="~/Assets/Pages/components-pickers.js"></script>
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+
+    <script>
+
+        jQuery(document).ready(function () {
+            ComponentsPickers.init();
+            $('#txtPatientType').val('Old');
+            $('#txtAppointmentDate').val(getTodate());
+            allowInt();
+            initPatientNameAutoComplete();
+            initConsultantAutoComplete();
+            //LoadDoctorList();
+            //initPatientType();
+            //initPatientIdAutoComplete();
+        });
+
+        function forRadOne() {
+            $('#txtPatientId').val();
+            $('#txtPatientId').prop('disabled', false);
+            $('#btnSearch').prop('disabled', false);
+            $('#txtPatientType').val('Old');
+        }
+
+        function forRadTwo() {
+            $('#txtPatientId').val();
+            $('#txtPatientId').prop('disabled', true);
+            $('#btnSearch').prop('disabled', true);
+            $('#txtPatientType').val('New');
+
+        }
+
+        function allowInt() {
+            $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+        }
+
+        function getPatientInformation() {
+            App.blockUI();
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("getPatientInformation", "Appointment", new { Area = "AppointmentSystem" }))",
+                data: { "PatientId": $('#txtPatientId').val() },
+                dataType: "html",
+                success: function (result) {
+                    var t = JSON.parse(result);
+                    if (t.Id != 0) {
+                        $('#txtPatientName').val(t.Name);
+                        $('#txtMobileNumber').val(t.MobileNumber);
+                    } else {
+                        $('#txtPatientId').val('');
+                        $('#txtPatientName').val('');
+                        $('#txtMobileNumber').val('');
+                    }
+                    App.unblockUI();
+                },
+                error: function (error) {
+                    $('#txtPatientId').val('');
+                    App.unblockUI();
+                    //var msg = 'Fail to load patient information.';
+                    //alert(msg);
+                }
+            });
+        }
+
+        function getTodate() {
+            var dob = new Date();
+            var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+            var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+            return (month + "/" + day + "/" + dob.getFullYear());
+        }
+
+        function LoadDoctorList() {
+            App.blockUI();
+            var options = $("#ddlDoctorInformation");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadDoctorList", "Appointment", new {Area = "AppointmentSystem"}))",
+                data: {},
+                dataType: "html",
+                success: function (result) {
+                    var t = JSON.parse(result);
+                    $.each(t, function () {
+                        options.append($("<option />").val(this.Id).text(this.Name));
+                    });
+                    CurrentAppointmentList();
+                    App.unblockUI();
+                },
+                error: function (error) {
+                    App.unblockUI();
+                    var msg = 'Fail to load consultant list';
+                    alert(msg);
+                }
+            });
+        }
+
+        function initPatientIdAutoComplete() {
+            $('.patientid').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " Appointment/GetPatientInformationById",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.Name,
+                                    Mobile: val.MobileNo,
+                                    value: val.Id
+                                });
+                            });
+                            cb(result);
+                            //$('.nationality').removeClass('spinner');
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                $("#txtPatientName").val(patient.Name);
+                $("#txtMobileNumber").val(patient.Mobile);
+            });
+        }
+
+        function initPatientNameAutoComplete() {
+            $('.patientname').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: " Appointment/GetPatientInformationByName",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    PatientCode: val.PatientCode,
+                                    Mobile: val.MobileNumber,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                            //$('.nationality').removeClass('spinner');
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                $("#txtPatientId").val(patient.PatientCode);
+                $("#txtMobileNumber").val(patient.Mobile);
+            });
+
+        }
+
+        function initConsultantAutoComplete() {
+            $('#txtConsultant').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        //  url: 'http://gd.geobytes.com/AutoCompleteCity?callback=?&q=' + q,ko
+                        url: "@(@Url.Action("LoadDoctorList", "Appointment", new {Area = "AppointmentSystem"}))",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                            //$('.nationality').removeClass('spinner');
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                $("#ddlDoctorInformation").val(patient.Id);
+            });
+
+        }
+
+        function initPatientType() {
+            $(".PatientType").change(function () {
+                $('#txtPatientId').val('');
+                if ($("#radOld").attr("checked")) {
+                    $('#txtPatientType').val('Old');
+                    $("#txtPatientId").prop('disabled', false);
+                    $("#btnSearch").prop('disabled', false);
+                    $("#patNameId1").show();
+                    $("#patNameId2").hide();
+                } else {
+                    $('#txtPatientType').val('New');
+                    $("#txtPatientId").prop('disabled', true);
+                    $("#btnSearch").prop('disabled', true);
+                    $("#patNameId1").hide();
+                    $("#patNameId2").show();
+                }
+            });
+        }
+
+        function searchValidationCheck() {
+            if ($('#txtAppointmentDate').val() == "") {
+                alert("Please insert appointment date.");
+                $('#txtAppointmentDate').focus();
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function CurrentAppointmentList() {
+            if (searchValidationCheck()) {
+                App.blockUI();
+                var el = $("#loadData");
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("AppolintmentList", "Appointment", new {Area = "AppointmentSystem"}))",
+                    data: { "AppointmentDate": $('#txtAppointmentDate').val(), "DoctorId": $('#ddlDoctorInformation').val() },
+                    dataType: "html",
+                    success: function (res) {
+                        App.unblockUI();
+                        el.html(res);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        App.unblockUI();
+                        var msg = 'Fail to load appointment list.';
+                        if (error == "toastr" && toastr) {
+                            toastr.error(msg);
+                        } else if (error == "notific8" && $.notific8) {
+                            $.notific8('zindex', 11500);
+                            $.notific8(msg, {
+                                theme: 'ruby',
+                                life: 3000
+                            });
+                        } else {
+                            alert(msg);
+                        }
+                    }
+                });
+            }
+        }
+
+        function validationCheck() {
+            //if ($('#ddlDoctorInformation').val() ==null) {
+            //    alert("Please insert doctor information.");
+            //    $('#ddlDoctorInformation').focus();
+            //    return false;
+            //}
+
+            if ($('#ddlDoctorInformation').val() == "") {
+                alert("Please insert doctor information.");
+                $('#ddlDoctorInformation').focus();
+                return false;
+            }
+
+            if ($('#txtPatientType').val() == "Old") {
+                if ($('#txtPatientId').val() == "") {
+                    alert("Please insert patient id.");
+                    $('#txtPatientId').focus();
+                    return false;
+                } else if ($('#txtPatientName').val() == "") {
+                    alert("Please insert patient name.");
+                    $('#txtPatientName').focus();
+                    return false;
+                }
+            } else {
+                if ($('#txtPatientName').val() == "") {
+                    alert("Please insert patient name.");
+                    $('#txtPatientName').focus();
+                    return false;
+                }
+            }
+            if ($('#txtAppointmentTime').val() == "") {
+                alert("Please insert appointment time.");
+                $('#txtAppointmentTime').focus();
+                return false;
+            } else if ($('#txtMobileNumber').val() == "") {
+                alert("Please insert mobile number.");
+                $('#txtMobileNumber').focus();
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function SetAppointment() {
+
+            if (validationCheck()) {
+                App.blockUI();
+                var PatientId = 0;
+                var PatientName = 0;
+                if ($('#txtPatientType').val() == "Old") {
+                    PatientId = $('#txtPatientId').val();
+                    PatientName = $('#txtPatientName').val();
+                } else {
+                    PatientName = $('#txtPatientName').val();
+                }
+                $.ajax({
+                    type: "POST",
+                    url: "@(@Url.Action("SetAppointment", "Appointment", new {Area = "AppointmentSystem"}))",
+                    data: { "PatientCode": PatientId, "PatientName": PatientName, "DoctorId": $('#ddlDoctorInformation').val(), "PatientType": $('#txtPatientType').val(), "AppointmentDate": $('#txtAppointmentDate').val(), "AppointmentTime": $('#txtAppointmentTime').val(), "AppointmentType": $('#ddlAppointmentType').val(), "MobileNumber": $('#txtMobileNumber').val(), "Location": $('#ddlLocation').val() },
+                    success: function (data) {
+                        $('#txtPatientId').val("");
+                        $('#txtPatientName').val("");
+                        $('#txtPatName').val("");
+                        //$('#txtAppointmentTime').val("");
+                        $('#ddlAppointmentType').val("Visit");
+                        $('#txtMobileNumber').val("");
+                        CurrentAppointmentList();
+                        App.unblockUI();
+                        ComponentsPickers.init();
+                        alert(data.message);
+                    },
+                    error: function (error) {
+                        App.unblockUI();
+                        var msg = 'Fail to set appointment.';
+                        alert(msg);
+                    }
+                });
+            }
+        }
+
+        function DeleteAppointment(AppointmentId) {
+            App.blockUI();
+            var el = $("#loadData");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DeleteAppointment", "Appointment", new {Area = "AppointmentSystem"}))",
+                data: { "AppointmentId": AppointmentId, "appDate": $('#txtAppointmentDate').val(), "DoctorId": $('#ddlDoctorInformation').val() },
+                dataType: "html",
+                success: function (res) {
+                    App.unblockUI();
+                    el.html(res);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI();
+                    var msg = 'Fail to load appointment list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+    </script>
+
+}

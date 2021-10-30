@@ -1,0 +1,137 @@
+﻿@model CsHealthcare.ViewModel.MedicineCorner.DrugMenufacturerModel
+
+@{
+    ViewBag.Title = "Edit";
+    @*Layout = "~/Views/Shared/_Layout.cshtml";*@
+}
+
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+        <h4 class="modal-title caption-subject font-green-sharp uppercase">@ViewBag.Title</h4>
+    </div>
+
+        @using (Html.BeginForm())
+        {
+            <div class="modal-body">
+                @*@Html.AntiForgeryToken()*@
+
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+
+                @Html.HiddenFor(model => model.DM_ID)
+
+
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DM_NAME, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.DM_NAME, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.DM_NAME, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DM_TYPE, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.DM_TYPE, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.DM_TYPE, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DM_CONTACT_PERSON, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.DM_CONTACT_PERSON, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.DM_CONTACT_PERSON, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DM_ADDRESS, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.DM_ADDRESS, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.DM_ADDRESS, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DM_MOBILE, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.DM_MOBILE, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.DM_MOBILE, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DM_PHONE, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.DM_PHONE, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.DM_PHONE, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DM_FAX, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.DM_FAX, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.DM_FAX, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DM_EMAIL, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.DM_EMAIL, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.DM_EMAIL, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DM_WEB, htmlAttributes: new {@class = "control-label col-md-3"})
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.DM_WEB, new {htmlAttributes = new {@class = "form-control"}})
+                        @Html.ValidationMessageFor(model => model.DM_WEB, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DM_STATUS, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-6">
+
+                        @Html.DropDownList("DM_STATUS", new List<SelectListItem>() { new SelectListItem { Text = "Active", Value = "A" }, new SelectListItem { Text = "Inactive", Value = "I" } }, new { @class = "form-control", Style = "width:auto" })
+
+
+                    </div>
+                </div>
+            </div>
+                </div>
+               
+
+
+                <div class="modal-footer">
+                          <button type="button" data-dismiss="modal" class="btn default" style="width: 15%;">Cancel</button>
+                      <input type="submit" value="Update" class="btn green" style="width: 15%;" />
+                   </div>
+
+        }
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+
+    <script type="text/javascript">
+
+        jQuery(document).ready(function () {
+            $('#DM_STATUS').val('@ViewBag.D_STATUS');
+          
+
+        });
+
+
+    </script>
+
+}

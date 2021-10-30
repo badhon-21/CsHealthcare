@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Stock.DrugStockInReportViewModel>
+
+
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.DrugName)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.ExpDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MafDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RemainingQuantity)
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugName)
+        </td>
+        
+        <td>
+            @item.ExpDate.Value.ToString("d")
+        </td>
+        <td>
+            @item.MafDate.Value.ToString("d")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RemainingQuantity)
+        </td>
+        
+    </tr>
+}
+
+</table>

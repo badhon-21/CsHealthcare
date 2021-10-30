@@ -1,0 +1,21 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.MedicineCorner.PharmacyRequisitionDetailsModel>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugName) &nbsp;@item.PresenatationType&nbsp;@item.UnitStrength
+        </td>
+        <td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.GenericName)
+        </td>
+        <td style="width: 10% !important">
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+       
+  
+        @*<td style="width: 15% !important">
+            <a class="btn btn-primary btn-icon legitRipple" title="Edit" onclick="javascript: EditTest('@item.DrugId');"><i class="icon-pencil"></i></a>
+        </td>*@
+    </tr>
+}

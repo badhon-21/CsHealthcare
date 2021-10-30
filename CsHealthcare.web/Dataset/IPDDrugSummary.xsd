@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="IPDDrugSummary" targetNamespace="http://tempuri.org/IPDDrugSummary.xsd" xmlns:mstns="http://tempuri.org/IPDDrugSummary.xsd" xmlns="http://tempuri.org/IPDDrugSummary.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="IPDDrugSummary" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="IPDDrugSummary" msprop:Generator_UserDSName="IPDDrugSummary">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="VW_IPD_DRUG_SALE_TOTAL" msprop:Generator_TableClassName="VW_IPD_DRUG_SALE_TOTALDataTable" msprop:Generator_TableVarName="tableVW_IPD_DRUG_SALE_TOTAL" msprop:Generator_TablePropName="VW_IPD_DRUG_SALE_TOTAL" msprop:Generator_RowDeletingName="VW_IPD_DRUG_SALE_TOTALRowDeleting" msprop:Generator_RowChangingName="VW_IPD_DRUG_SALE_TOTALRowChanging" msprop:Generator_RowEvHandlerName="VW_IPD_DRUG_SALE_TOTALRowChangeEventHandler" msprop:Generator_RowDeletedName="VW_IPD_DRUG_SALE_TOTALRowDeleted" msprop:Generator_UserTableName="VW_IPD_DRUG_SALE_TOTAL" msprop:Generator_RowChangedName="VW_IPD_DRUG_SALE_TOTALRowChanged" msprop:Generator_RowEvArgName="VW_IPD_DRUG_SALE_TOTALRowChangeEvent" msprop:Generator_RowClassName="VW_IPD_DRUG_SALE_TOTALRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VID" msprop:Generator_ColumnVarNameInTable="columnVID" msprop:Generator_ColumnPropNameInRow="VID" msprop:Generator_ColumnPropNameInTable="VIDColumn" msprop:Generator_UserColumnName="VID" type="xs:string" minOccurs="0" />
+              <xs:element name="AdmissionNo" msprop:Generator_ColumnVarNameInTable="columnAdmissionNo" msprop:Generator_ColumnPropNameInRow="AdmissionNo" msprop:Generator_ColumnPropNameInTable="AdmissionNoColumn" msprop:Generator_UserColumnName="AdmissionNo" type="xs:string" minOccurs="0" />
+              <xs:element name="PatientCode" msprop:Generator_ColumnVarNameInTable="columnPatientCode" msprop:Generator_ColumnPropNameInRow="PatientCode" msprop:Generator_ColumnPropNameInTable="PatientCodeColumn" msprop:Generator_UserColumnName="PatientCode" type="xs:string" minOccurs="0" />
+              <xs:element name="PatientName" msprop:Generator_ColumnVarNameInTable="columnPatientName" msprop:Generator_ColumnPropNameInRow="PatientName" msprop:Generator_ColumnPropNameInTable="PatientNameColumn" msprop:Generator_UserColumnName="PatientName" type="xs:string" minOccurs="0" />
+              <xs:element name="DrugSale" msprop:Generator_ColumnVarNameInTable="columnDrugSale" msprop:Generator_ColumnPropNameInRow="DrugSale" msprop:Generator_ColumnPropNameInTable="DrugSaleColumn" msprop:Generator_UserColumnName="DrugSale" type="xs:decimal" minOccurs="0" />
+              <xs:element name="DrugReturn" msprop:Generator_ColumnVarNameInTable="columnDrugReturn" msprop:Generator_ColumnPropNameInRow="DrugReturn" msprop:Generator_ColumnPropNameInTable="DrugReturnColumn" msprop:Generator_UserColumnName="DrugReturn" type="xs:decimal" minOccurs="0" />
+              <xs:element name="TotalSale" msprop:Generator_ColumnVarNameInTable="columnTotalSale" msprop:Generator_ColumnPropNameInRow="TotalSale" msprop:Generator_ColumnPropNameInTable="TotalSaleColumn" msprop:Generator_UserColumnName="TotalSale" type="xs:decimal" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

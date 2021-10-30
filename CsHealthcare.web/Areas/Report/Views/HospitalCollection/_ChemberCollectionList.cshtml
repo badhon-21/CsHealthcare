@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Doctor.DoctorAppointmentPaymentModel>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Voucher)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+       
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Voucher)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+       
+        
+        <td>
+            <a class="btn btn-xs green" title="Copy" href="@(Url.Action("Copy", "HospitalCollection", new {Area = "Report", id = item.Id}))"><i class=""></i>Copy</a>
+        </td>
+    </tr>
+}
+
+</table>

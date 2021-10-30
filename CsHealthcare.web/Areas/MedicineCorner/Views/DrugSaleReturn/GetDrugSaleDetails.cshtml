@@ -1,0 +1,68 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.MedicineCorner.DrugSaleDetailsModel>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td class="hidden pd-Id">
+            @Html.DisplayFor(modelItem => item.Id)
+        </td>
+        <td class="hidden pd-name">
+            @Html.DisplayFor(modelItem => item.DrugId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugName)
+        </td>
+        @*<td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.DrugType)
+        </td>*@
+        @*<td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.DrugUnitStrength)
+        </td>
+        <td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.MafDate)
+        </td>
+        <td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.ExpDate)
+        </td>
+        <td style="width: 10% !important">
+            @Html.DisplayFor(modelItem => item.StockQuantity)
+        </td>*@
+        <td style="width: 15% !important">
+            <span id="UnitPrice">@Html.DisplayFor(modelItem => item.UnitPrice)</span>
+        </td>
+        <td style="width: 15% !important">
+            @*@Html.DisplayFor(modelItem => item.Quantity)*@
+            <input id="Quantity" name="Quantity" class="form-control pd-quantity" value="@item.Quantity" placeholder="Quantity"/>
+        </td>
+        <td style="width: 15% !important">
+            <span id="SaleDiscount">@Html.DisplayFor(modelItem => item.SaleDiscount)</span>
+        </td>
+        <td style="width: 15% !important">
+            <span id="Total">@item.Total</span>
+        </td>
+        <td style="width: 15% !important">
+            @*<a class="btn btn-primary btn-icon legitRipple" title="Edit" onclick="javascript: Quantity('@item.DrugId');"><i class="icon-pencil"></i></a>*@
+            <a class="btn btn-primary btn-icon legitRipple btnSelect" title="Edit"><i class="icon-pencil"></i></a>
+        </td>
+
+
+        @*<td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.SubTotalPrice)
+        </td>*@
+
+
+        @*<td style="width: 15% !important">
+            <a class="btn btn-primary btn-icon legitRipple" title="Edit" onclick="javascript: EditDrugsale('@item.DrugId');"><i class="icon-pencil"></i></a>
+            <a class="btn btn-xs btn-danger" title="Delete" onclick="javascript: if (confirm('Are you sure you want to do operation?') == false) return false; DeleteTestDetails('@item.Id','@item.TestNameId'); "><i class="icon-trash"></i></a>
+        </td>*@
+    </tr>
+}
+
+<script>
+    
+   
+
+
+   
+
+</script>

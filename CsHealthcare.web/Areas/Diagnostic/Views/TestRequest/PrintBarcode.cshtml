@@ -1,0 +1,63 @@
+﻿@using CsHealthcare.Utility
+@model IEnumerable<CsHealthcare.web.Areas.Diagnostic.Controllers.ShowImage>
+@{
+    ViewBag.Title = "PrintBarcode";
+    Layout = null;
+}
+
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@print {
+        .hide-from-printer {
+            display: none;
+        }
+    }
+</style>
+@*@foreach (var item in Model)
+{
+    <img style="margin-left: 106px;" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(item.PictureImage))"/><br/><br/><br/>
+    <img style="width: 50px; margin-top: -75px; margin-left: 220px;" src="~/Image/no-image.jpg" /><br /><br /><br />
+}*@
+
+<div style="margin-left: 107px; font-size: 10px; margin-top: -10px;">
+    @OperationStatus.BARCODE_LEVEL
+</div>
+
+<div style="margin-left: 107px;">
+    <img style="width: 235px;" src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(@Model.First().PictureImage))" />
+</div>
+<br/><br/>
+<div style="margin-left: 107px; width: 87px; font-size: 10px; margin-top: -40px; float: left;">
+    @ViewBag.TestList
+</div>
+
+
+<img style="width: 50px; margin-top: -75px; margin-left: 220px;" src="~/Image/no-image.jpg" />
+
+<div>
+    <button style="margin-left: 102.5px;" id="btnPrint" onclick="myFunction();" class="hide-from-printer">Print </button>
+    <a id="btnCancel" href="@(Url.Action("Index", "TestRequest", new {Area = "Diagnostic"}))" type="button" class="" style="margin-left: 1%;" class="hide-from-printer">Back</a>
+</div>
+
+
+<script>
+    function myFunction() {
+        //Get the print button and put it into a variable
+        var printButton = document.getElementById("btnPrint");
+        var cancelButton = document.getElementById("btnCancel");
+        //Set the print button visibility to 'hidden'
+        printButton.style.visibility = 'hidden';
+        cancelButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print();
+        //Set the print button to 'visible' again
+        //[Delete this line if you want it to stay hidden after printing]
+        printButton.style.visibility = 'visible';
+        cancelButton.style.visibility = 'visible';
+    }
+</script>
+

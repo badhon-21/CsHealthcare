@@ -1,0 +1,255 @@
+﻿@using Cs.Utility
+
+@{
+    ViewBag.Title = "Employee Daily Attendance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="page-content" style="min-height: 247px">
+            <div class="container-fluid">
+
+                <div id="appointment_list_container" class="row" style="">
+
+                    <div class="col-md-12">
+
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-user font-green-sharp"></i>
+                                    <span class="caption-subject uppercase font-green-sharp">Daily Appointment</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse"></a>
+                                    <a href="javascript:;" class="fullscreen"></a>
+                                </div>
+                            </div>
+                            <div class="portlet-body">
+                                <div class="modal-body">
+                                    <div class="form-horizontal">
+
+                                        <div class="form-group patient_name">
+                                            <div class="control-label col-md-1">Date</div>
+                                            <div class="col-md-6">
+                                                <input id="txtAppointmentDate" required="required" name="txtAppointmentDate" value="" class="form-control date-picker" placeholder="Appointment Date" type="text"/>
+                                            </div>
+                                            <div class="actions margin-right-10">
+                                                <a class="btn btn-circle green-jungle" onclick="javascript: EnrolledList(); ">
+                                                    <i class="fa fa-search"></i> Process
+                                                </a>
+                                                <a class="btn btn-circle green-jungle" onclick="javascript: viewDailyAttendance(); ">
+                                                    <i class="fa fa-search"></i> View
+                                                </a>
+                                                <a class="btn btn-circle green-jungle" onclick="javascript: DeleteDailyAttendanceList(); ">
+                                                    <i class="fa fa-search"></i> Delete
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="portlet light">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="fa fa-calendar font-green-sharp"></i>
+                                    <span class="caption-subject uppercase font-green-sharp">Daily Addendance</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse"></a>
+                                    <a href="javascript:;" class="fullscreen"></a>
+                                </div>
+                            </div>
+                            <div class="portlet-body portlet-empty" id="loadEnrolledList">
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section page_styles {
+    @*<link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/select2/css/select2.css" />*@
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/typeahead/typeahead.css" />
+    <style>
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+            width: 422px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+            .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+                color: #fff;
+                background-color: #0097cf;
+            }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+}
+
+@section Scripts {
+    @*<script type="text/javascript" src="~/Assets/global/plugins/select2/js/select2.min.js"></script>*@
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/typeahead/typeahead.bundle.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Assets/Pages/components-pickers.js"></script>
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+
+    <script>
+
+        jQuery(document).ready(function () {
+            App.blockUI();
+            ComponentsPickers.init();
+            $('#txtAppointmentDate').val(getTodate());
+            App.unblockUI();
+            //EnrolledList();
+        });
+        
+        function allowInt() {
+            $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+        }
+
+        function searchValidationCheck() {
+            if ($('#txtAppointmentDate').val() == "") {
+                alert("Please insert appointment date.");
+                $('#txtAppointmentDate').focus();
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+        function EnrolledList() {
+            var el = $("#loadEnrolledList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("getDailyAttendance", "EmployeeCheckedInOut", new {Area = "HumanResource" }))",
+                data: { "AppointmentDate": $('#txtAppointmentDate').val() },
+                dataType: "html",
+                success: function (res) {
+                    el.html(res);
+                    $("#appointment_list_container").show();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    App.unblockUI(el);
+                    var msg = 'Fail to load enrolled list.';
+                    if (error == "toastr" && toastr) {
+                        toastr.error(msg);
+                    } else if (error == "notific8" && $.notific8) {
+                        $.notific8('zindex', 11500);
+                        $.notific8(msg, {
+                            theme: 'ruby',
+                            life: 3000
+                        });
+                    } else {
+                        alert(msg);
+                    }
+                }
+            });
+        }
+
+        function DeleteDailyAttendanceList() {
+            var el = $("#loadEnrolledList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("deleteDailyAttendance", "EmployeeCheckedInOut", new {Area = "HumanResource" }))",
+                data: { "AppointmentDate": $('#txtAppointmentDate').val() },
+            dataType: "html",
+            success: function (res) {
+                el.html(res);
+                $("#appointment_list_container").show();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                App.unblockUI(el);
+                var msg = 'Fail to delete list.';
+                alert(msg);
+            }
+        });
+        }
+
+        function viewDailyAttendance() {
+            var el = $("#loadEnrolledList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("viewDailyAttendance", "EmployeeCheckedInOut", new {Area = "HumanResource" }))",
+                data: { "AppointmentDate": $('#txtAppointmentDate').val() },
+            dataType: "html",
+            success: function (res) {
+                el.html(res);
+                $("#appointment_list_container").show();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                App.unblockUI(el);
+                var msg = 'Fail to load enrolled list.';
+                if (error == "toastr" && toastr) {
+                    toastr.error(msg);
+                } else if (error == "notific8" && $.notific8) {
+                    $.notific8('zindex', 11500);
+                    $.notific8(msg, {
+                        theme: 'ruby',
+                        life: 3000
+                    });
+                } else {
+                    alert(msg);
+                }
+            }
+        });
+        }
+
+        function getTodate() {
+            var dob = new Date();
+            var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+            var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+            return (month + "/" + day + "/" + dob.getFullYear());
+        }
+     
+    </script>
+
+}

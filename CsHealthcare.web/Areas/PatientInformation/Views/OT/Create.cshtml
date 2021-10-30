@@ -1,0 +1,1094 @@
+﻿@model CsHealthcare.ViewModel.Patient.OperationTheatreModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="row ">
+        <div class="col-md-12">
+            <!-- BEGIN SAMPLE FORM PORTLET-->
+            <div class="portlet light ">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-share font-dark"></i>
+                        <span class="caption-subject font-dark bold uppercase">More Form Samples</span>
+                    </div>
+                   
+                </div>
+                <div class="portlet-body" style="overflow: hidden">
+                    <h4>Patient Code</h4>
+                    <div class="search-bar ">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="input-group">
+                                    @*<input type="text" class="form-control" placeholder="Search for...">*@
+                                    <input id="txtPatientCode" name="PatientCode" value="" placeholder="Search for patient..." class="form-control " />
+                                    <span class="input-group-btn">
+                                        @*<button class="btn blue uppercase bold" type="button">Search</button>*@
+                                        <a class="btn blue uppercase bold" onclick="javascript: getPatientInformation(); ">
+                                            <i class="fa fa-search"></i> Search
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                @*<p class="search-desc clearfix"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec efficitur pellentesque auctor. Morbi lobortis, leo in tristique scelerisque. </p>*@
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+
+                                        @*<div class="control-label col-md-4 text-center" style="margin-left: 0px">Patient Name</div>*@
+                                        <div class="col-md-7" style="margin-left: 0px">
+                                            <input id="txtPatientName" name="txtPatientName" value=""  type="hidden"  class="form-control " />
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                @*<input type="hidden" id="pId" name="pId" value="" />
+        <input type="hidden" id="tId" name="tId" value="" />*@
+                                <input type="hidden" id="PatientId" name="PatientId" value="" />
+                            
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <div class="col-md-12 ">
+                        <!-- BEGIN Portlet PORTLET-->
+                        <div class="portlet box red">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icofont icofont-bed-patient"></i>Admited Patient Information
+                                </div>
+                                
+                            </div>
+                            <div class="portlet-body" style="overflow: hidden">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="">Date Of Admission :</label>
+                                        <div class="col-md-3">
+                                            <input id="DateOfAdmission" name="DateOfAdmission" class="form-control datetimepicker" type="datetime" readonly="" placeholder="Pick a date" />
+
+                                        </div>
+                                        <label class="col-md-2 control-label" for="">Voucher Number :</label>
+                                        <div class="col-md-3">
+                                            <input id="VoucherNo" name="VoucherNo" class="form-control" readonly="" value="" />
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="">Patient Code  :</label>
+                                        <div class="col-md-3">
+                                            <input id="PatientCode" name="PatientCode" class="form-control " readonly="" placeholder="Patient Code" />
+                                        </div>
+                                        <label class="col-md-2 control-label" for="">Patient Name:</label>
+                                        <div class="col-md-5">
+                                            <input id="PatientName" name="PatientName" class="form-control " readonly="" placeholder="Patient Name" />
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-2 control-label" for="">Cabin Price :</label>
+                                        <div class="col-md-3">
+                                            <input id="CabinAmount" name="CabinAmount" class="form-control" value="" />
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Portlet PORTLET-->
+                    </div>
+                
+                    <hr/>
+                    <div class="col-md-12 ">
+                        <!-- BEGIN Portlet PORTLET-->
+                        <div class="portlet box red">
+                            <div class="portlet-title">
+                                <div class="caption">
+                                    <i class="icofont icofont-bed-patient"></i>Oparation Basic Information
+                                </div>
+
+                            </div>
+                            <div class="portlet-body" style="overflow: hidden">
+                                <div class="form-horizontal">
+                                    @*<div class="caption">
+                <i class="fa fa-question font-green-sharp"></i>
+                <span class="caption-subject font-green-sharp uppercase">Test Information</span>
+            </div>*@
+                                    <br />
+                                    <div class="col-md-12 row form-group">
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <div class="col-xs-6">Date Of Operation :</div>
+                                                <div class="col-xs-6">
+                                                    <input id="OperationDate" name="OperationDate" class="form-control datetimepicker" type="datetime" placeholder="Pick a date" />
+
+                                                </div>
+                                            </div>
+
+                                            @*<div class="col-md-3">
+                        <input id="Discount" name="Discount" class="form-control twodigitdecimalnumber" placeholder="Discount" oninput="calculate()" />
+                    </div>*@
+
+                                            <div class="col-md-6">
+                                                <div class="col-xs-6">Operation Name :</div>
+                                                <div class="col-xs-6">
+                                                    <input id="OperationName" name="OperationName" class="form-control " placeholder="Operation Name" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 row form-group">
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <div class="col-xs-6">Operation Start Time :</div>
+                                                <div class="col-xs-6">
+                                                    @Html.EditorFor(model => model.OperationStartTime, new { htmlAttributes = new { @class = "form-control timepicker-default" } })
+                                                    @Html.ValidationMessageFor(model => model.OperationStartTime, "", new { @class = "text-danger" })
+                                                    @*<input id="OperationStartTime" name="OperationStartTime" class="form-control" value="" />*@
+                                                </div>
+                                            </div>
+
+                                            @*<div class="col-md-3">
+                        <input id="Discount" name="Discount" class="form-control twodigitdecimalnumber" placeholder="Discount" oninput="calculate()" />
+                    </div>*@
+
+                                            <div class="col-md-6">
+                                                <div class="col-xs-6">Operation End Time :</div>
+                                                <div class="col-xs-6">
+                                                    @Html.EditorFor(model => model.OperationEndTime, new { htmlAttributes = new { @class = "form-control timepicker-default" } })
+                                                    @Html.ValidationMessageFor(model => model.OperationEndTime, "", new { @class = "text-danger" })
+
+
+                                                    @*<input id="OperationEndTime" name="OperationEndTime" class="form-control " placeholder="Patient Name"/>*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 row form-group">
+                                        <div class="col-md-12">
+                                            <div class="col-md-6">
+                                                <div class="col-xs-6">Operation Type :</div>
+                                                <div class="col-xs-6">
+                                                    <input id="OperationType" name="OperationType" class="form-control" value="" />
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END Portlet PORTLET-->
+
+                    </div>
+                    </div>
+            </div>
+            <!-- END SAMPLE FORM PORTLET-->
+        </div>
+    </div>
+        
+   
+    <div>
+
+
+
+        <div class="row">
+
+            <div class="col-md-12" id="">
+                <div class="portlet light">
+                    <div class="portlet-title hide-from-printer">
+                        <div class="caption">
+                            <i class="fa fa-question font-green-sharp"></i>
+                            <span class="caption-subject font-green-sharp uppercase">Operation  Details</span>
+                        </div>
+                       
+                    </div>
+                    <div class="portlet-body from">
+                        <div class="row">
+                            <div class="col-md-8 ">
+                                <!-- BEGIN Portlet PORTLET-->
+                                <div class="portlet box red">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icofont icofont-bed-patient"></i>Surgeon Information
+                                        </div>
+
+                                    </div>
+                                    <div class="portlet-body from">
+                                        <div class="row">
+                                          
+                                                <input id="DoctorId" name="DoctorId" class="form-control" type="hidden" />
+                                                <div class="col-md-12  form-group">
+                                                    <div class="col-md-6">
+                                                        <input id="DoctorName" name="DoctorName" class="form-control" placeholder="Surgeon Name" />
+                                                    </div>
+                                                    
+
+                                                    <div class="col-md-3">
+                                                        <input id="SurgeonAmount" name="SurgeonAmount" class="form-control twodigitdecimalnumber" placeholder="Amount" oninput="" />
+                                                    </div>
+
+
+                                                    <div class="col-md-2">
+                                                        <a id="addbtn" onclick=" javascript: SetSurgeonList(); " class="btn btn-primary dropdown-toggle"> <i class="fa fa-plus"></i>
+                                                            Add
+                                                        </a>
+                                                        <a id="updatebtn" onclick=" javascript: SetSurgeonList(); " class="btn btn-primary dropdown-toggle" style="display: none;">
+                                                            Update
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="col-md-12 form-group">
+                                                    <table class="table table-striped table-bordered table-hover" id="tabChiefComplaintList">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width: 45% !important">
+                                                                    Surgeon Name
+                                                                </th>
+                                                            
+                                                                <th style="width: 15% !important">
+                                                                    Amount
+                                                                </th>
+
+                                                                <th style="width: 15% !important">Action</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="surgeonDetailsList"></tbody>
+                                                    </table>
+                                                </div>
+
+                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END Portlet PORTLET-->
+                                <!-- BEGIN Portlet PORTLET-->
+                                <div class="portlet box red">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icofont icofont-bed-patient"></i>Anesthetist Information
+                                        </div>
+
+                                    </div>
+                                    <div class="portlet-body from">
+                                        <div class="row">
+
+                                            <div class="col-md-12 row form-group">
+                                                <div class="col-md-6">
+                                                    <input id="AnesthesiaName" name="AnesdthesiaName" class="form-control" placeholder="Anesthesia Name" />
+                                                </div>
+
+
+
+                                                <div class="col-md-3">
+                                                    <input id="AnesthesiaPrice" name="AnesthesiaPrice" class="form-control twodigitdecimalnumber" placeholder="Amount" oninput="" />
+                                                </div>
+
+
+                                                <div class="col-md-2">
+                                                    <a id="addbtn" onclick=" javascript: SetAnesthesiaList(); " class="btn btn-primary dropdown-toggle"> <i class="fa fa-plus"></i>
+                                                        Add
+                                                    </a>
+                                                    <a id="updatebtn" onclick=" javascript: SetAnesthesiaList(); " class="btn btn-primary dropdown-toggle" style="display: none;">
+                                                        Update
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <table class="table table-striped table-bordered table-hover" id="tabChiefComplaintList">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 45% !important">
+                                                                Anesthesia
+                                                            </th>
+                                                         
+                                                            <th style="width: 15% !important">
+                                                                Amount
+                                                            </th>
+
+                                                            <th style="width: 15% !important">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="anesthesiaDetailsList"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END Portlet PORTLET-->
+                                
+                                <!-- BEGIN Portlet PORTLET-->
+                                <div class="portlet box red">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icofont icofont-bed-patient"></i>Anesthetist Information
+                                        </div>
+
+                                    </div>
+                                    <div class="portlet-body from">
+                                        <div class="row">
+                                            <input id="DoctorId1" name="DoctorId1" class="form-control" type="hidden" />
+                                            <div class="col-md-12 row form-group">
+                                                <div class="col-md-6">
+                                                    <input id="DoctorName1" name="DoctorName1" class="form-control" placeholder="Assistant Doctor " />
+                                                </div>
+
+
+
+                                                <div class="col-md-3">
+                                                    <input id="SurgeonAmount1" name="SurgeonAmount1" class="form-control twodigitdecimalnumber" placeholder="Amount" oninput="" />
+                                                </div>
+
+
+                                                <div class="col-md-2">
+                                                    <a id="addbtn" onclick=" javascript: SetAssistantDoctorList(); " class="btn btn-primary dropdown-toggle"><i class="fa fa-plus"></i>
+                                                        Add
+                                                    </a>
+                                                    <a id="updatebtn" onclick=" javascript: SetAssistantDoctorList(); " class="btn btn-primary dropdown-toggle" style="display: none;">
+                                                        Update
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 form-group">
+                                                <table class="table table-striped table-bordered table-hover" id="tabChiefComplaintList">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 45% !important">
+                                                                Assistant Doctor Name
+                                                            </th>
+
+                                                            <th style="width: 15% !important">
+                                                                Amount
+                                                            </th>
+
+                                                            <th style="width: 15% !important">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="assistantDoctorList"></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END Portlet PORTLET-->
+                                
+                                <!-- BEGIN Portlet PORTLET-->
+                                <div class="portlet box red">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="icofont icofont-bed-patient"></i>Procedure Information
+                                        </div>
+
+                                    </div>
+                                    <div class="portlet-body from">
+                                        <div class="row">
+                                            <input id="PurposeId" name="PurposeId" class="form-control" placeholder="" type="hidden" />
+                                            <div class="col-md-12 row form-group">
+                                                <div class="col-md-4">
+                                                    <input id="PurposeName" name="PurposeName" class="form-control" placeholder="Purpose Name" />
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <input id="PurposeAmount" name="PurposeAmount" class="form-control twodigitdecimalnumber" placeholder="Amount"  oninput="calculate1()" />
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <input id="quantity" name="Quantity" class="form-control " placeholder="Quantity" oninput="calculate1()" />
+                                                </div>
+                                               
+                                              
+                                                <div class="col-md-2">
+                                                    <input id="PurposeSubTotal" name="PurposeSubTotal" class="form-control " placeholder="Total" style="width:100px" />
+                                                </div>
+
+                                                <div class="col-md-2">
+                                                    <a id="addbtn" onclick=" javascript: SetPurposeList(); " class="btn btn-primary dropdown-toggle"> <i class="fa fa-plus"></i>
+                                                        Add
+                                                    </a>
+                                                    <a id="updatebtn" onclick=" javascript: SetPurposeList(); " class="btn btn-primary dropdown-toggle" style="display: none;">
+                                                        Update
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 form-group">
+                                                <table class="table table-striped table-bordered table-hover" id="tabChiefComplaintList">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 45% !important">
+                                                                Procedure
+                                                            </th>
+                                                          
+                                                            <th style="width: 15% !important">
+                                                                Amount
+                                                            </th>
+
+                                                            <th style="width: 15% !important">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="purposeDetailsList"></tbody>
+                                                </table>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- END Portlet PORTLET-->
+                            </div>
+                        
+                        <div class="col-md-4">
+                            <!-- BEGIN Portlet PORTLET-->
+                            <div class="portlet box red">
+                                <div class="portlet-title">
+                                    <div class="caption">
+                                        <i class="icofont icofont-bed-patient"></i>Bill Summary
+                                    </div>
+
+                                </div>
+                                <div class="portlet-body from">
+                                    <div class="row">
+
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-6 text-right">Surgeon Team</div>
+                                            <div class="col-md-6">
+                                                <input id="TotalAmount4" name="TotalAmount4" class="form-control twodigitdecimalnumber" readonly="" oninput="calculate()" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-6 text-right">Anstestist Team</div>
+                                            <div class="col-md-6">
+                                                <input id="TotalAmount1" name="TotalAmount1" class="form-control twodigitdecimalnumber" readonly="" oninput="calculate()" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-6 text-right">Assistent</div>
+                                            <div class="col-md-6">
+                                                <input id="TotalAmount2" name="TotalAmount2" class="form-control twodigitdecimalnumber" readonly="" oninput="calculate()" />
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-12 form-group">
+                                            <div class="col-md-6 text-right">Procedure </div>
+                                            <div class="col-md-6">
+                                                <input id="TotalAmount3" name="TotalAmount3" class="form-control twodigitdecimalnumber" readonly="" oninput="calculate()" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- END Portlet PORTLET-->
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+                                </div>
+                                <div class="row ">
+                                    <div class="" style="text-align: center;">
+
+                                        <a class="btn default" style="width: 15%; margin-top: 60px" href="@Url.Action("Index", "OT", new {Area = "PatientInfromation"})">Cancel</a>
+                                        <input id="btnSave" type="submit" value="Save" class="btn green" style="width: 15%; margin-top: 60px" />
+                                    </div>
+                                </div>
+                                <br /><br /><br /><br />
+
+                            @*</div>
+                        </div>
+                    </div>*@
+
+                    <!-- END Portlet PORTLET-->
+                @*</div>
+            </div>
+
+
+
+        </div>*@
+
+   
+
+
+        <div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false" style="margin: 0 auto;background-color: #fff; width: 600px;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div id='myModalContent'></div>
+                </div>
+            </div>
+        </div>
+}
+
+@section page_styles
+{
+    <link href="~/assets/global/plugins/jcrop/css/jquery.Jcrop.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/typeahead/typeahead.css" rel="stylesheet" />
+    @*<link href="~/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet"/>*@
+    <link href="~/assets/global/plugins/select2/css/select2.css" rel="stylesheet" />
+    <link href="~/Assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet"/>
+   
+<link href="~/Content/icofont/css/icofont.css" rel="stylesheet" />
+<link href="~/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" />
+
+    <style>
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+            width: 422px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+            .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+                color: #fff;
+                background-color: #0097cf;
+            }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+}
+
+
+@section Scripts {
+    <script src="~/Scripts/angular.min.js"></script>
+
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/scripts/jquery.format.1.05.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/select2/js/select2.min.js"></script>
+ 
+<script src="~/assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script src="~/assets/pages/components-pickers.js"></script>
+
+    <script src="~/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript">
+            jQuery(document).ready(function () {
+                allowInt();
+                initPatientCodeAutoComplete();
+
+
+
+                initDoctorAutoComplete();
+                initAssitantDoctorAutoComplete();
+                //$('#txtPatientType').val('Old');
+
+                $(".datetimepicker").datepicker();
+                initPurposeAutoComplete();
+                //ComponentsPickers.init();
+                //$('#txtDateOfBirth').val(getTodate());
+                //$('#AdvanceType').on('change', function () {
+                //    AdvanceType();
+
+                //});
+                initTime();
+            });
+
+            function getTodate() {
+                var dob = new Date();
+                var day = (dob.getDate() < 10 ? '0' : '') + dob.getDate();
+                var month = ((dob.getMonth() + 1) < 10 ? '0' : '') + (dob.getMonth() + 1);
+                return (month + "/" + day + "/" + dob.getFullYear());
+            }
+
+            function allowInt() {
+                $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+            }
+
+
+            function initTime() {
+                $('.timepicker-default').timepicker({
+                    autoclose: true,
+                    showSeconds: true,
+                    minuteStep: 1
+                });
+            }
+
+            function initPatientCodeAutoComplete() {
+                $('#txtPatientCode').typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 2,
+                    limit: 8
+                }, {
+                    source: function (searchString, cb) {
+                        return $.ajax({
+                            dataType: 'json',
+                            type: 'POST',
+                            contentType: "application/json; charset=utf-8",
+                            url: " /PatientInformation/OT/LoadPatientCode",
+                            data: "{'SearchString':'" + searchString + "'}",
+                            chache: false,
+                            success: function (data) {
+                                var result = [];
+                                $.each(data, function (index, val) {
+                                    result.push({
+                                        Id: val.Id,
+                                        Name: val.PatientCode,
+                                        value: val.PatientCode
+
+                                    });
+                                });
+                                cb(result);
+                            }
+                        });
+                    }
+                }).on("typeahead:selected", function (obj, patient) {
+                    $("#PatientId").val(patient.Id);
+                    //getPatientId();
+                    //$("#txtPatientName").val(patient.Name);
+                    //$("#txtMobileNumber").val(patient.Mobile);
+                });
+
+            }
+            function getPatientId() {
+                $.ajax({
+
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("GetPatientId", "InPatientDischarge", new {Area = "PatientInformation" }))",
+                    data: { "Id": $("#tId").val(), "PatientCode": $("#txtPatientCode").val() },
+                    dataType: "html",
+                    success: function (result) {
+
+                        var t = JSON.parse(result);
+
+                        $('#PatientId').val(t);
+
+                    },
+                    error: function (error) {
+                        //Metronic.unblockUI();
+                        var msg = 'Fail to load .';
+                        alert(msg);
+                    }
+                });
+            }
+
+            function getPatientInformation() {
+                $.ajax({
+
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("PatientInformation", "OT", new {Area = "PatientInformation" }))",
+                    data: { "PatientId": $("#PatientId").val(), "PatientCode": $("#txtPatientCode").val() },
+                    dataType: "html",
+                    success: function (result) {
+
+                        var t = JSON.parse(result);
+
+                        $('#txtPatientName').val(t.PatientName);
+                        $('#PatientName').val(t.PatientName);
+                        $('#PatientCode').val(t.PatientCode);
+                        $('#CabinId').val(t.CabinId);
+                        $('#VoucherNo').val(t.VoucherNo);
+                        $('#CabinAmount').val(t.CabinPrice);
+
+                        var dateString = (t.DateOfAdmission).substr(6);
+                        var currentTime = new Date(parseInt(dateString));
+                        var month = currentTime.getMonth() + 1;
+                        var day = currentTime.getDate();
+                        var year = currentTime.getFullYear();
+                        var date = month + "/" + day + "/" + year;
+                        $('#DateOfAdmission').val(date);
+
+                    },
+                    error: function (error) {
+                        //Metronic.unblockUI();
+                        var msg = 'Fail to load .';
+                        alert(msg);
+                    }
+                });
+            }
+
+        function initDoctorAutoComplete() {
+                $('#DoctorName').typeahead({
+                    hint: true,
+                    highlight: true,
+                    minLength: 2,
+                    limit: 8
+                }, {
+                    source: function (searchString, cb) {
+                        return $.ajax({
+                            dataType: 'json',
+                            type: 'POST',
+                            contentType: "application/json; charset=utf-8",
+                            url: " /PatientInformation/OT/LoadDoctor",
+                            data: "{'SearchString':'" + searchString + "'}",
+                            chache: false,
+                            success: function (data) {
+                                var result = [];
+                                $.each(data, function (index, val) {
+                                    result.push({
+                                        Id: val.Id,
+                                        Name: val.Name,
+                                        value: val.Name
+
+                                    });
+                                });
+                                cb(result);
+                            }
+                        });
+                    }
+                }).on("typeahead:selected", function (obj, patient) {
+                    $("#DoctorId").val(patient.Id);
+
+                    //$("#txtPatientName").val(patient.Name);
+                    //$("#txtMobileNumber").val(patient.Mobile);
+                });
+
+        }
+
+        function initAssitantDoctorAutoComplete() {
+            $('#DoctorName1').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /PatientInformation/OT/LoadDoctor",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.Name,
+                                    value: val.Name
+
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                $("#DoctorId1").val(patient.Id);
+
+                //$("#txtPatientName").val(patient.Name);
+                //$("#txtMobileNumber").val(patient.Mobile);
+            });
+
+        }
+
+        function initPurposeAutoComplete() {
+            $('#PurposeName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /PatientInformation/OT/LoadPurpose",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.PurposeDescription,
+                                    value: val.PurposeDescription
+
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                $("#PurposeId").val(patient.Id);
+
+                //$("#txtPatientName").val(patient.Name);
+                //$("#txtMobileNumber").val(patient.Mobile);
+            });
+
+        }
+
+        function SetSurgeonList() {
+            //if (SellsDetailsValidationCheck()) {
+            //App.blockUI();
+            var loadArea = $("#surgeonDetailsList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("SetSurgeonList", "OT", new {Area = "PatientInformation" }))",
+                data: { "DoctorId": $('#DoctorId').val(), "Amount": $('#SurgeonAmount').val() },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+
+                loadArea.html(result);
+                $('#DoctorId').val('');
+                $('#DoctorName').val('');
+                $('#SurgeonAmount').val('');
+
+
+                $('#addbtn').show();
+                $('#updatebtn').hide();
+
+                loadSurgeonDetails();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set  list.';
+                alert(msg);
+            }
+        });
+        // }
+        }
+
+        function loadSurgeonDetails() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadSurgeonDetails", "OT", new {Area = "PatientInformation" }))",
+                data: { },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+
+                $('#TotalAmount4').val(t);
+
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+
+        function SetAnesthesiaList() {
+            //if (SellsDetailsValidationCheck()) {
+            //App.blockUI();
+            var loadArea = $("#anesthesiaDetailsList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("SetAnesthesiaList", "OT", new {Area = "PatientInformation" }))",
+                data: { "AnesthesiaName": $('#AnesthesiaName').val(), "Amount": $('#AnesthesiaPrice').val() },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+                //loadtherapyDetails();
+                loadArea.html(result);
+
+                $('#AnesthesiaName').val('');
+                $('#AnesthesiaPrice').val('');
+
+
+                $('#addbtn').show();
+                $('#updatebtn').hide();
+                loadAnesthesiaDetails();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set  list.';
+                alert(msg);
+            }
+        });
+        // }
+        }
+
+
+        function loadAnesthesiaDetails() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadAnesthesiaDetails", "OT", new {Area = "PatientInformation" }))",
+                data: { },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+
+                $('#TotalAmount1').val(t);
+
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+
+        function SetAssistantDoctorList() {
+            //if (SellsDetailsValidationCheck()) {
+            //App.blockUI();
+            var loadArea = $("#assistantDoctorList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("SetDoctorList", "OT", new {Area = "PatientInformation" }))",
+                data: { "DoctorId": $('#DoctorId1').val(), "Amount": $('#SurgeonAmount1').val() },
+            dataType: "html",
+            success: function (result) {
+                alert(result);
+                //App.unblockUI();
+                //loadtherapyDetails();
+                loadArea.html(result);
+                $('#DoctorId1').val('');
+                $('#DoctorName1').val('');
+                $('#SurgeonAmount1').val('');
+
+
+                $('#addbtn').show();
+                $('#updatebtn').hide();
+                loadAssistantDoctorDetails();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set  list.';
+                alert(msg);
+            }
+        });
+        // }
+        }
+
+        function calculate1() {
+            var myBox1 = document.getElementById('PurposeAmount').value;
+            var myBox2 = document.getElementById('quantity').value;
+            //var result = document.getElementById('SubTotal');
+            var total = document.getElementById('PurposeSubTotal');
+            //var total1 = document.getElementById('DeuPrice');
+            var myResult = myBox1 * myBox2;
+            total.value = myResult;
+            //total.value = total;
+        }
+
+        function loadAssistantDoctorDetails() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadAssistantDoctorDetails", "OT", new {Area = "PatientInformation" }))",
+                data: { },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+
+                $('#TotalAmount2').val(t);
+
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+
+        function SetPurposeList() {
+            //if (SellsDetailsValidationCheck()) {
+            //App.blockUI();
+            var loadArea = $("#purposeDetailsList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("SetPurposeList", "OT", new {Area = "PatientInformation" }))",
+                data: { "PurposeId": $('#PurposeId').val(), "Amount": $('#PurposeSubTotal').val() },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+                //loadtherapyDetails();
+                loadArea.html(result);
+                $('#PurposeId').val('');
+                $('#PurposeName').val('');
+                $('#PurposeAmount').val('');
+
+
+                $('#addbtn').show();
+                $('#updatebtn').hide();
+                loadPurposeDetails();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set  list.';
+                alert(msg);
+            }
+        });
+        // }
+        }
+
+        function loadPurposeDetails() {
+            $.ajax({
+
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadPurposeDetails", "OT", new {Area = "PatientInformation" }))",
+                data: { },
+            dataType: "html",
+            success: function (result) {
+
+                var t = JSON.parse(result);
+
+                $('#TotalAmount3').val(t);
+
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+        }
+    </script>
+}

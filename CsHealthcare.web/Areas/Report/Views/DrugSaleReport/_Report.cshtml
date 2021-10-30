@@ -1,0 +1,24 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.MedicineCorner.DrugSaleModel>
+
+
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @item.CreatedDate.ToString("d")
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemoNo)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.SaleQty)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalePrice)
+        </td>
+
+
+    </tr>
+}

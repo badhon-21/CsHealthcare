@@ -1,0 +1,569 @@
+﻿
+@model CsHealthcare.ViewModel.HumanResource.ItemStockOutModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "New Stock Out Item Information";
+}
+
+
+<div class="row">
+    @using (Html.BeginForm("Edit", "ItemStockOut", new { area = "Department" }, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-12">
+
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div class="caption">
+                                <i class="icon-puzzle font-grey-gallery"></i>
+                                <span class="caption-subject bold font-grey-gallery uppercase">
+                                    @ViewBag.Title
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="portlet-body portlet-empty" style="min-height:220px ">
+
+
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @*<input type="hidden" id="Id" name="Id" value="" />*@
+                        <input type="hidden" id="depId" name="DepartmentId" value="" />
+
+
+                        <div class="col-md-12 row form-group">
+                            <div class="col-md-5">
+
+                                <div class="control-label col-md-4" style="text-align: left">
+                                    <label>Receipt  No</label>
+                                </div>
+                                <div class="col-md-4 row">
+                                    @Html.EditorFor(model => model.MemoNo, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MemoNo, "", new { @class = "text-danger" })
+
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-5">
+                                <div class="control-label col-md-4" style="text-align: left">Stock Out Date </div>
+                                <div class="col-md-7">
+
+                                    @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control datetimepicker", @type = "datetime", @required = "required", } })
+                                    @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 row form-group">
+                            <div class="col-md-8">
+                                <div class="control-label col-md-2" style="text-align: left">
+                                    <label>Department </label>
+                                </div>
+                                <div class="col-md-6">
+                                    <input class="form-control" id="DeptName" name="DepartmentName" value="@Model.DepartmentName" placeholder="" />
+                                    @Html.ValidationMessageFor(model => model.DepartmentName, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12 row form-group">
+                            <div class="col-md-8">
+                                <div class="control-label col-md-2" style="text-align: left">
+                                    <label>Purpose </label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Purpose, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Purpose, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 row form-group">
+                            <div class="col-md-8">
+                                <div class="control-label col-md-2" style="text-align: left">
+                                    <label>Purpose By </label>
+                                </div>
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.PurposeBy, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.PurposeBy, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-12">
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        @*<i class="fa fa-question font-green-sharp"></i>*@
+                        <span class="caption-subject font-green-sharp uppercase">StockOut Details</span>
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+                        <a href="javascript:;" class="fullscreen">
+                        </a>
+                    </div>
+                    <div class="actions margin-right-10">
+
+                    </div>
+                </div>
+
+                <div class="portlet-body portlet-empty">
+                    <div class="col-md-12 form-group">
+                        <table class="table table-striped table-bordered table-hover" id="tabChiefComplaintList">
+                            <thead>
+                                <tr>
+                                    <th style="width: 15% !important">
+                                        Item
+                                    </th>
+
+
+                                    <th style="width: 10% !important">
+                                        Qty
+                                    </th>
+                                    @*<th style="width: 15% !important">
+                                            UnitPrice
+                                        </th>
+
+                                        <th style="width: 15% !important">
+                                            SubTotal
+                                        </th>*@
+                                    <th style="width: 15% !important">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="StockDetailsList"></tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-12 row form-group">
+                        <div class="col-md-3 row">
+                            <div class="col-md-12">
+
+                                <input type="hidden" id="dId" name="dId" value="" />
+                                <input type="hidden" id="StockOutItemId" name="StockItemId" value="" />
+                                <div class="">
+
+                                    <input class="form-control" id="StoreItemId" name="StoreItemId" value="" placeholder="Item Name" />
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-9 row" style="padding-left: 0px">
+
+
+                            <div class="col-md-2 row" style="padding-left: 35px; width: 25% !important">
+
+                                <div class="">
+                                    <input id="Quantity" name="Quantity" class="form-control " />
+                                </div>
+                            </div>
+                            @*<div class="col-md-3 row" style="padding-left: 30px; width: 34% !important">
+
+                                    <div class="">
+                                        <input id="UnitPrice" name="UnitPrice" class="form-control " readonly="" />
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 row" style="padding-left: 30px;width: 35% !important">
+
+                                    <div class="">
+                                        <input id="SubTotal" name="SubTotal" class="form-control " oninput="calculate()" />
+                                    </div>
+                                </div>*@
+                            <div class="col-md-1" style="padding-left:10%;">
+
+                                <a id="addbtn" onclick="javascript: SetStockDetails(); " class="btn btn-primary dropdown-toggle">
+                                    Add
+                                </a>
+                                <a id="updatebtn" onclick="javascript: SetStockDetails();" class="btn btn-primary dropdown-toggle" style="display: none;">
+                                    Update
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <br /><br /><br /><br />
+
+                    @*<div class="col-md-12">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-7">
+                                <div class="col-md-6" style="margin-top: 30px">
+                                    <div class="col-md-6">
+                                        TotalQuantity
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input id="TotalQuantity" name="TotalQty" class="form-control " placeholder="" />
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 row" style="padding-left: 30px;margin-top: 30px">
+                                    <div class="col-md-6">
+                                        TotalAmount
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input id="TotalAmount" name="Amount" class="form-control " placeholder="" />
+                                    </div>
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-1">
+
+                            </div>
+                        </div>*@
+
+
+                    <div class="" style="text-align: center;">
+                        <a class="btn default" style="width: 15%;margin-top: 30px" href="@Url.Action("Index", "ItemStockOut", new {Area = "Department"})">Cancel</a>
+                        <input type="submit" value="Save" class="btn green" style="width: 15%;margin-top: 30px" />
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+
+
+    }
+</div>
+
+@section page_styles {
+    <link href="~/assets/global/plugins/jcrop/css/jquery.Jcrop.css" rel="stylesheet" />
+    <link href="~/assets/global/plugins/jquery-file-upload/css/jquery.fileupload.css" rel="stylesheet" />
+    <link href="~/Assets/global/plugins/bootstrap-summernote/summernote.css" rel="stylesheet" />
+
+    <link href="~/assets/global/plugins/typeahead/typeahead.css" rel="stylesheet" />
+
+    <style>
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+            width: 422px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            max-height: 200px;
+            overflow: auto;
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+            .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+                color: #fff;
+                background-color: #0097cf;
+            }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+}
+@section Scripts {
+    <script src="~/assets/global/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.iframe-transport.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-process.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-image.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-validate.js"></script>
+    <script src="~/assets/global/plugins/jquery-file-upload/js/jquery.fileupload-ui.js"></script>
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/assets/pages/components-pickers.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".datetimepicker").datepicker('setDate', 'now');;
+            initStoreItemAutoComplete();
+            initDeptItemAutoComplete();
+            loadStockDetails();
+        });
+
+        function initStoreItemAutoComplete() {
+            $('#StoreItemId').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /Department/ItemStockOut/LoadItem",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.StockOutItemName,
+                                    value: val.StockOutItemName
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, store) {
+                $("#dId").val(store.Id);
+                LoadQuantity();
+
+                LoadStockOutItemId();
+            });
+
+        }
+
+        function initDeptItemAutoComplete() {
+            $('#DeptName').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /Department/ItemStockOut/LoadDepartment",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    Id: val.Id,
+                                    Name: val.Name,
+                                    value: val.Name
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, dept) {
+                $("#depId").val(dept.Id);
+
+
+            });
+
+        }
+
+        //function calculate() {
+        //    var myBox1 = document.getElementById('Quantity').value;
+        //    var myBox2 = document.getElementById('UnitPrice').value;
+        //    //var result = document.getElementById('SubTotal');
+        //    var total = document.getElementById('SubTotal');
+        //    //var total1 = document.getElementById('DeuPrice');
+        //    var myResult = (myBox1 * myBox2);
+        //    total.value = myResult;
+        //    //total.value = total;
+        //}
+
+
+       function SetStockDetails() {
+            //if (SellsDetailsValidationCheck()) {
+            //App.blockUI();
+            var loadArea = $("#StockDetailsList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("EditStockOutDetailsList", "ItemStockOut", new {Area = "Department" }))",
+                data: { "storeItemId": $('#StockOutItemId').val(), "Quantity": $('#Quantity').val() },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+                //loadsellsDetails();
+                loadArea.html(result);
+                $('#StoreItemId').val('');
+
+
+
+                $('#Quantity').val('');
+
+
+                $('#addbtn').show();
+                $('#updatebtn').hide();
+
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set StoreItem Details list.';
+                alert(msg);
+            }
+        });
+        // }
+       }
+
+
+        function EditStore(StoreItemId) {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("EditStoreItem", "ItemStockOut", new {Area = "Department" }))",
+                data: { "storeId": StoreItemId },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+                var value = JSON.parse(result);
+
+                $('#StockOutItemId').val(value.StoreItemId);
+                $('#StoreItemId').val(value.StoreItemName);
+
+
+
+                $('#Quantity').val(value.Quantity);
+
+
+
+                $('#addbtn').hide();
+                $('#updatebtn').show();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to load test information.';
+                alert(msg);
+            }
+        });
+        }
+
+
+        function LoadQuantity() {
+            //Metronic.blockUI();
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadQuantity", "ItemStockOut", new {Area = "Department"}))",
+                data: { "storeId": $('#dId').val() },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                //alert(result)
+                //var t = JSON.parse(result);
+                $('#Quantity').val(result);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load quantity list.';
+                alert(msg);
+            }
+        });
+        }
+        function LoadStockOutItemId() {
+            //Metronic.blockUI();
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadStockOutItemId", "ItemStockOut", new {Area = "Department"}))",
+                data: { "stockId": $('#dId').val() },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                //alert(result)
+                //var t = JSON.parse(result);
+                $('#StockOutItemId').val(result);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load Id list.';
+                alert(msg);
+            }
+        });
+        }
+
+
+        function loadStockDetails() {
+            var loadArea = $("#StockDetailsList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("loadStockOutList", "ItemStockOut", new { Area = "Department" }))",
+                data: {},
+            dataType: "html",
+            success: function (result) {
+                //loadsellsDetails();
+                loadArea.html(result);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+            }
+        });
+        }
+
+
+        function deleteItem(Id,storeId) {
+            var loadArea = $("#StockDetailsList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DeleteStockItem", "ItemStockOut", new {Area = "Department" }))",
+                data: {"Id":Id, "storeId": storeId },
+            dataType: "html",
+            success: function (result) {
+                //loadsellsDetails();
+                loadArea.html(result);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+            }
+        });
+        }
+    </script>
+}

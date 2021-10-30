@@ -1,0 +1,283 @@
+﻿
+@model CsHealthcare.ViewModel.Accounts.CashInsertModel
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+    <div class="col-md-8 col-md-offset-2">
+        <div class="page-container">
+            <!-- Page content -->
+            <div class="page-content">
+                <!-- Main content -->
+                <div class="content-wrapper">
+                    <div class="panel" style="position: static;">
+                        <div class="panel-heading"style="background-color: #2196f3; border-color: #2196f3;color: #fff;">
+                            <h6 class="panel-title" >Petty cash voucher<a class="heading-elements-toggle"><i class="icon-more"></i></a></h6>
+                        
+                        </div>
+
+                        <div class="panel-body">
+
+                            @using (Html.BeginForm("Voucher", "PettyCashVoucher", new { area = "Accounts" }, FormMethod.Post, new { @class = "" }))
+                            {
+                                <fieldset class="content-group">
+
+
+                                    <div class="form-group">
+                                        <label class="col-md-2">Voucher No:</label>
+                                        <div class="col-md-4">
+                                            <input type="text" placeholder="" name="VoucherNo" class="form-control">
+                                        </div>
+
+                                        <label class="col-md-2">Date:</label>
+                                        <div class="col-md-4">
+                                            <input class="form-control datetimepicker" type="datetime" name="TransDate">
+                                        </div>
+                                    </div>
+
+
+                                </fieldset>
+                                <fieldset class="content-group">
+                                    <legend class="text-semibold">
+                                        <i class="icon-basket position-left"></i>
+                                        Add Items
+
+                                    </legend>
+
+
+                                    <div class="form-group row">
+                                        <label class="col-md-2 control-label">Item</label>
+                                        <div class="col-md-4">
+                                            @*<input type="text" id="iid" class="form-control hidden">*@
+                                            <input type="text" id="item" placeholder="Item" class="form-control">
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="form-group row hidden">
+                                        <label class="col-md-2 control-label">Particulars</label>
+                                        <div class="col-md-10">
+                                            <input type="text" id="particulars" placeholder="Particulars" class="form-control">
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <div class="form-group row ">
+                                        <label class="col-md-2 control-label">Amount</label>
+                                        <div class="col-md-4">
+                                            <input type="text" id="amount" placeholder="Amount" class="form-control">
+
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a class="btn btn-primary dropdown-toggle " style="width: 56px;" onclick="javascript: SetSellsList();">
+                                                Add
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12 row margin-top-10">
+                                        <table class="table table-striped table-bordered table-hover" id="tabChiefComplaintList">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 15% !important">
+                                                        SL
+                                                    </th>
+                                                    <th style="width: 15% !important">
+                                                        Item
+                                                    </th>
+                                                    @*<th style="width: 15% !important">
+                                                            Perticulars
+                                                        </th>*@
+                                                    <th style="width: 15% !important">
+                                                        Amount
+                                                    </th>
+
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody id="sellsDetailsList"></tbody>
+
+                                        </table>
+                                        <div class="row " style="margin-top: 10px">
+                                            <div class="col-md-offset-6 col-md-1">
+                                                Total
+                                            </div>
+                                            <div class="col-md-1">
+                                                <span id="total"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>
+
+
+
+                                <div class="text-right">
+                                    <button type="submit" class="btn bg-teal-400 btn-labeled legitRipple"><b><i class="icon-floppy-disk"></i></b> Save</button>
+                                </div>
+
+
+
+
+
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+<script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            allowInt();
+            $(".datetimepicker").datepicker();
+        });
+
+        function allowInt() {
+            $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+        }
+        function SellsDetailsValidationCheck() {
+
+            return true;
+
+        }
+
+        function SetSellsList() {
+            if (SellsDetailsValidationCheck()) {
+                //App.blockUI();
+                var loadArea = $("#sellsDetailsList");
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: "@(@Url.Action("itemList", "PettyCashVoucher", new {Area = "Accounts" }))",
+                    data: { "id": $('#iid').val(), "item": $('#item').val(), "particulars": $('#particulars').val(), "amount": $('#amount').val() },
+                dataType: "html",
+                success: function (result) {
+                    //App.unblockUI();
+                    // loadsellsDetails();
+                    loadArea.html(result);
+                    $('#iid').val('');
+                    $('#item').val('');
+                    $('#particulars').val('');
+                    $('#amount').val('');
+
+                    $('#addbtn').show();
+                    $('#updatebtn').hide();
+                    getTotal();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //App.unblockUI();
+                    var msg = 'Fail to set cash list.';
+                    alert(msg);
+                }
+            });
+        }
+        }
+
+        function getTotal() {
+
+            //App.blockUI();
+            var loadArea = $("#sellsDetailsList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("ItemListTotal", "PettyCashVoucher", new {Area = "Accounts" }))",
+                data: {  },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+                // loadsellsDetails();
+                var value = JSON.parse(result);
+
+                $('#total').text(value);
+
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set cash list.';
+                alert(msg);
+            }
+        });
+        }
+
+
+         function EditExpense(Item) {
+                    //App.blockUI();
+                    $.ajax({
+                        type: "GET",
+                        cache: false,
+                        url: "@(@Url.Action("EditExpense", "PettyCashVoucher", new {Area = "Accounts" }))",
+                        data: { "Item": Item },
+                    dataType: "html",
+                    success: function (result) {
+                        //App.unblockUI();
+                        var value = JSON.parse(result);
+
+                        $('#item').val(value.items);
+                        //$('#month').val(value.Month);
+                        //$('#year').val(value.Year);
+                        $('#amount').val(value.amount);
+                        //$('#total').val(value.total);
+
+                        //$('#quantity').val(value.Quantity);
+                        //$('#unitPrice').val(value.UnitPrice);
+                        //$('#Total').val(value.Total);
+                        //$('#addbtn').hide();
+                        //$('#updatebtn').show();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //App.unblockUI();
+                        var msg = 'Fail to load.';
+                        alert(msg);
+                    }
+                });
+                }
+
+
+        function DeleteEdit(id) {
+            //App.blockUI();
+            var loadArea = $("#sellsDetailsList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("Deleteitem", "PettyCashVoucher", new {Area = "Accounts" }))",
+                data: { "id": id },
+            dataType: "html",
+            success: function (result) {
+                 getTotal();
+                loadArea.html(result);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+            }
+        });
+        }
+
+    </script>
+
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,30 @@
+﻿
+@model IEnumerable<CsHealthcare.ViewModel.Patient.InPatientDrugDetailsModel>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugName)
+        </td>
+        <td>
+            
+        </td>
+        <td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.UnitPrice)
+        </td>
+        <td style="width: 15% !important">
+        @Html.DisplayFor(modelItem => item.Quantity)
+    </td>
+        <td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td style="width: 15% !important">
+            <a class="btn btn-xs btn-icon btn-primary legitRipple" title="Edit" onclick="javascript: EditTest('@item.DrugId');"><i class="icon-pencil"></i></a>
+            <a class="btn btn-xs btn-danger" title="Delete" onclick="javascript: if (confirm('Are you sure you want to do operation?') == false) return false; DeleteSaleDetails('@item.Id','@item.DrugId'); "><i class="icon-trash"></i></a>
+        </td>
+    </tr>
+}
+
+
+

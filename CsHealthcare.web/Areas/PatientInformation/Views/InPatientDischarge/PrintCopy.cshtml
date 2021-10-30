@@ -1,0 +1,105 @@
+﻿
+@{
+    ViewBag.Title = "Print";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<input type="hidden" id="PatientId" name="PatientId" value="@ViewBag.PatientId">
+<input type="hidden" id="PatientCode" name="PatientCode" value="@ViewBag.PatientCode">
+
+
+<div id="getDailyBill"></div>
+<div id="DrugBill"></div>
+<div id="TestBill"></div>
+
+
+
+
+
+
+
+
+
+
+
+<Script>
+    jQuery(document).ready(function () {
+        getDailyBill();
+
+
+
+
+    });
+    function getDailyBill() {
+
+        var loadArea = $("#getDailyBill");
+        $.ajax({
+
+            type: "GET",
+            cache: false,
+            url: "@(@Url.Action("getDailyBill", "InPatientDischarge", new {Area = "PatientInformation" }))",
+            data: { "PatientId": $("#PatientId").val(), "PatientCode": $("#PatientCode").val() },
+            dataType: "html",
+            success: function (result) {
+
+                loadArea.html(result);
+                getDailyDrugBill();
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+    }
+    function getDailyDrugBill() {
+
+        var loadArea = $("#DrugBill");
+        $.ajax({
+
+            type: "GET",
+            cache: false,
+            url: "@(@Url.Action("drugBill", "InPatientDischarge", new {Area = "PatientInformation" }))",
+            data: { "PatientId": $("#PatientId").val(), "PatientCode": $("#PatientCode").val() },
+            dataType: "html",
+            success: function (result) {
+
+                loadArea.html(result);
+                getDailyTestBill();
+
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+    }
+
+    function getDailyTestBill() {
+
+        var loadArea = $("#TestBill");
+        $.ajax({
+
+            type: "GET",
+            cache: false,
+            url: "@(@Url.Action("testBill", "InPatientDischarge", new {Area = "PatientInformation" }))",
+            data: { "PatientId": $("#PatientId").val(), "PatientCode": $("#PatientCode").val() },
+            dataType: "html",
+            success: function (result) {
+
+                loadArea.html(result);
+
+            },
+            error: function (error) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load .';
+                alert(msg);
+            }
+        });
+    }
+</Script>
+

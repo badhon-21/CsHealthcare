@@ -1,0 +1,121 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.MedicineCorner.DrugCurrentStockModel>
+
+
+<table class="table table-striped table-bordered table-hover" id="listDrugGroup">
+    <thead>
+        <tr>
+            <th style="width: 20% !important">
+                Id
+            </th>
+            <th style="width: 15% !important">
+                Trade Name
+            </th>
+            <th style="width: 15% !important">
+                Manufacturer
+            </th>
+            <th style="width: 15% !important; text-align: right;">
+                Reorder Level
+            </th>
+            <th style="width: 15% !important; text-align: right;">
+                Remaining Quantity
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width: 15% !important">
+                    @item.DrugId
+                </td>
+                <td style="width: 20% !important">
+                   @item.PresentationType @item.TradeName (@item.UnitStrength)
+                </td>
+                <td style="width: 20% !important">
+                    @item.ManufacturerName
+                </td>
+                <td style="width: 15% !important; text-align: right;">
+                    @item.ReorderLevel
+                </td>
+                @if (item.ReorderLevel >= item.RemainingQuantity)
+                {
+                    <td style="width: 15% !important; color: red; text-align: right;">
+                        @item.RemainingQuantity
+                    </td>
+                }
+                else
+                {
+                    <td style="width: 15% !important; text-align: right;">
+                        @item.RemainingQuantity
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*<script src="~/Assets/global/Page/table-managed.js"></script>*@
+<script>
+    jQuery(document).ready(function () {
+
+        var table = $('#listDrugGroup');
+
+        // begin first table
+        table.dataTable({
+
+            // Internationalisation. For more info refer to http://datatables.net/manual/i18n
+            "language": {
+                "aria": {
+                    "sortAscending": ": activate to sort column ascending",
+                    "sortDescending": ": activate to sort column descending"
+                },
+                "emptyTable": "No data available in table",
+                "info": "Showing _START_ to _END_ of _TOTAL_ entries",
+                "infoEmpty": "No entries found",
+                "infoFiltered": "(filtered1 from _MAX_ total entries)",
+                "lengthMenu": "Show _MENU_ entries",
+                "search": "Search:",
+                "zeroRecords": "No matching records found"
+            },
+
+            "bStateSave": true, // save datatable state(pagination, sort, etc) in cookie.
+
+
+            "lengthMenu": [
+                [15, 25, 50, -1],
+                [15, 25, 50, "All"] // change per page values here
+            ],
+            // set the initial value
+            "pageLength": 15,
+            "pagingType": "bootstrap_full_number",
+            "language": {
+                "search": "My search: ",
+                "lengthMenu": "  _MENU_ records",
+                "paginate": {
+                    "previous": "Prev",
+                    "next": "Next",
+                    "last": "Last",
+                    "first": "First"
+                }
+            },
+            "columnDefs": [{  // set default column settings
+                'orderable': false,
+                'targets': [4]
+            }, {
+                "searchable": false,
+                "targets": [4]
+            }],
+            "order": [
+                [1, "asc"]
+            ] // set first column as a default sort by asc
+        });
+
+        var tableWrapper = jQuery('#OptionList_wrapper');
+
+        tableWrapper.find('.dataTables_length select').addClass("form-control input-xsmall input-inline"); // modify table per page dropdown
+    });
+</script>
+
+
+
+

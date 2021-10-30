@@ -1,0 +1,31 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Canteen.CanteenFoodInPatientDetailsModel>
+
+
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td style="width: 15% !important">
+            <span></span> @item.UnitPrice.ToString("N")
+        </td>
+        <td style="width: 15% !important">
+            <span></span> @item.Total.ToString("N")
+        </td>
+        <td style="width: 15% !important">
+            <a class="btn btn-primary btn-icon legitRipple" title="Edit" onclick="javascript: EditSells('@item.ProductId');"><i class="icon-pencil"></i></a>
+            <a class="btn btn-xs btn-danger" title="Delete" onclick="javascript: if (confirm('Are you sure you want to do operation?') == false) return false; DeleteSellsDetails('@item.Id','@item.ProductId'); "><i class="icon-trash"></i></a>
+        </td>
+    </tr>
+}
+
+@*</table>*@
+
+
+
+

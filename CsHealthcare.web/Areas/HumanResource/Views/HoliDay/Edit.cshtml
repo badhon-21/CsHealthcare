@@ -1,0 +1,181 @@
+﻿
+@model CsHealthcare.ViewModel.HumanResource.HolidayModel
+
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-question font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp uppercase">Edit HoliDay Information</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+
+                </div>
+            </div>
+            <hr style="margin-top: 0;">
+            <div class="portlet-body portlet-empty">
+
+
+                @using (Html.BeginForm())
+                {
+                    @*@Html.AntiForgeryToken()*@
+
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(model => model.Id)
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.StartDaY, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+
+                                    <input class="form-control datetimepicker" type="datetime" name="StartDaY" id="startday" value="@Model.StartDaY" placeholder="">
+                                    @*@Html.EditorFor(model => model.StartDaY, new {htmlAttributes = new {@class = "form-control"}})*@
+                                    @Html.ValidationMessageFor(model => model.StartDaY, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.EndDaY, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+
+                                    <input class="form-control datetimepicker" type="datetime" name="EndDaY" id="endday" value="@Model.EndDaY" placeholder="">
+                                    @*@Html.EditorFor(model => model.EndDaY, new {htmlAttributes = new {@class = "form-control"}})*@
+                                    @Html.ValidationMessageFor(model => model.EndDaY, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.NoDay, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+
+                                    <select id="noDay" name="NoDay" class="form-control" value="@Model.NoDay">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+
+                                    </select>
+                                    @*@Html.EditorFor(model => model.NoDay, new {htmlAttributes = new {@class = "form-control"}})
+                @Html.ValidationMessageFor(model => model.NoDay, "", new {@class = "text-danger"})*@
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Notes, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Notes, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a class="btn default" style="width: 15%;" href="@Url.Action("Index", "HoliDay", new {Area = "HumanResource" })">Cancel</a>
+                        <input type="submit" value="Update" class="btn green" style="width: 15%;" />
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+<script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            $(".datetimepicker").datepicker();
+            $('#noDay').val('@ViewBag.noday');
+            $('#endday').on('change', function () {
+                LoadDay();
+
+            });
+        });
+
+        function LoadDay() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("NoOfDays", "HoliDay", new {Area = "HumanResource" }))",
+                data: { "StartDay": $('#startday').val(), "EndDay": $('#endday').val() },
+
+                dataType: "html",
+                success: function (result) {
+                    //var t = JSON.parse(result);
+                    //alert(t);
+                    //$('#Rate').val(t.price);
+                    $('#noDay').val(result);
+                },
+                error: function (error) {
+                    //Metronic.unblockUI();
+                    var msg = 'Fail to load .';
+                    alert(msg);
+                }
+            });
+        }
+
+
+    </script>
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

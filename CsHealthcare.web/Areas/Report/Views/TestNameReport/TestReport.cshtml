@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Diagnostic.TestReportSummaryModel>
+
+@*<div><a href="@Url.Action("ExportCustomers")"> Report PDF </a></div>*@ 
+
+@*@Html.ActionLink("Print testname data", "ExportTestname", "TestName",new {area= "Diagnostic" },null);*@
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+          
+            @Html.DisplayFor(modelItem => item.Code)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.TestCategoryTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+     
+    </tr>
+}
+
+
+
+
+

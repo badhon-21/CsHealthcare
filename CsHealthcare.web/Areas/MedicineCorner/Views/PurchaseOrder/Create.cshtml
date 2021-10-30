@@ -1,0 +1,511 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @*<div class="col-md-1"></div>*@
+        <div class="col-md-12">
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        @*<i class="fa fa-question font-green-sharp"></i>*@
+                        <span class="caption-subject font-green-sharp uppercase">Drug Stock In</span>
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+                        <a href="javascript:;" class="fullscreen">
+                        </a>
+                    </div>
+                    <div class="actions margin-right-10">
+
+                    </div>
+                </div>
+
+                <div class="portlet-body portlet-empty">
+
+                    <div class="col-md-12 row form-group">
+
+                        <div class="col-md-5">
+                            <div class="col-md-3">Entry Date </div>
+                            <div class="col-md-7">
+                                <input id="RecordDate" name="RecordDate" class="form-control datetimepicker" type="datetime" value="@DateTime.Now.ToString("d")" placeholder="" />
+                            </div>
+                        </div>
+
+
+                        @*<div class="col-md-3">
+                            <div class="col-md-5">Lot No: </div>
+                            <div class="col-md-7">
+                                <input id="LotId" name="LotId" class="form-control " value="" placeholder="" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="col-md-5">Inv No: </div>
+                            <div class="col-md-7">
+                                <input id="InvNo" name="InvNo" class="form-control twodigitdecimalnumber" placeholder="" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="col-md-5">Inv Date: </div>
+                            <div class="col-md-7">
+                                <input id="InvDate" name="InvDate" class="form-control datetimepicker " type="datetime" value="@DateTime.Now.ToString("d")" placeholder="" />
+                            </div>
+                        </div>*@
+                        @*<div class="col-md-1">
+                                <a id="addbtn" onclick=" javascript: SetTestList(); " class="btn btn-primary dropdown-toggle">
+                                    Add
+                                </a>
+                                <a id="updatebtn" onclick=" javascript: SetTestList(); " class="btn btn-primary dropdown-toggle" style="display: none;">
+                                    Update
+                                </a>
+                            </div>*@
+
+                    </div>
+                    <div class="col-md-5">
+                        <div class="col-md-4">Company : </div>
+                        <div class="col-md-8">
+                            @*@Html.DropDownList("DRUG_MANUFACTURERId", null, htmlAttributes: new {@class = "form-control border-radius-4"})*@
+                            <select id="DRUG_MANUFACTURERId" name="DRUG_MANUFACTURERId" class="form-control" value="" placeholder=""></select>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="col-md-4">Department : </div>
+                        <div class="col-md-8">
+                            <input id="LotId" name="LotId" class="form-control " value="" placeholder="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-md-1"></div>*@
+        </div>
+
+
+        <div class="col-md-12">
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        @*<i class="fa fa-question font-green-sharp"></i>*@
+                        <span class="caption-subject font-green-sharp uppercase">Drug Details</span>
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+                        <a href="javascript:;" class="fullscreen">
+                        </a>
+                    </div>
+                    <div class="actions margin-right-10">
+
+                    </div>
+                </div>
+
+                <div class="portlet-body portlet-empty">
+                    <div class="col-md-12 form-group">
+                        <table class="table table-striped table-bordered " id="tabChiefComplaintList">
+                            <thead>
+                            <tr>
+                                <th class="hidden">
+                                    ID
+                                </th>
+                                <th style="width: 25% !important">
+                                    Drug
+                                </th>
+                                @*<th style="width: 15% !important">
+                                        Drug Type & UnitStrength
+                                    </th>*@
+
+                                <th style="width: 15% !important">
+                                    Re-Order Level
+                                </th>
+                                <th style="width: 15% !important">
+                                    Remaining Qty
+                                </th>
+                                <th style="width: 15% !important">
+                                    Pack Qty
+                                </th>
+                                <th style="width: 10% !important">
+                                    Order Qty
+                                </th>
+                                @*<th style="width: 15% !important">
+                                        UnitPrice
+                                    </th>
+                                   
+                                    
+                                    <th style="width: 15% !important">
+                                        SubTotal
+                                    </th>*@
+
+                            </tr>
+                            </thead>
+                            <tbody id="drugStockDetailsList"></tbody>
+                        </table>
+                    </div>
+                    
+
+
+                    <br /><br /><br /><br />
+
+                    <div class="col-md-12">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-7">
+                            <div class="col-md-6" style="margin-top: 30px">
+                                <div class="col-md-6">
+                                    TotalQuantity
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="TotalQty" name="TotalQty" class="form-control  " readonly placeholder="" />
+                                </div>
+
+                            </div>
+
+                            @*<div class="col-md-6 row" style="padding-left: 30px;margin-top: 30px">
+                                <div class="col-md-6">
+                                    TotalAmount
+                                </div>
+                                <div class="col-md-6">
+                                    <input id="TotalAmount" name="InvAmount" class="form-control " placeholder="" />
+                                </div>
+
+                            </div>*@
+
+                        </div>
+                        <div class="col-md-1">
+
+                        </div>
+                    </div>
+
+
+                    <div class="" style="text-align: center;">
+                        <a class="btn default" style="width: 15%;margin-top: 30px" href="@Url.Action("Index", "PurchaseOrder", new {Area = "MedicineCorner"})">Cancel</a>
+                        <input type="submit" value="Save" class="btn green" style="width: 15%;margin-top: 30px" />
+                    </div>
+                </div>
+
+            </div>
+            @*<div class="col-md-1"></div>*@
+        </div>
+    }
+</div>
+
+
+
+@section Scripts {
+
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            //LoadDrug1();
+            LoadManufacturer1();
+            //initDrugAutoComplete();
+            $(".datetimepicker").datepicker();
+            $('#DRUG_MANUFACTURERId').on('change', function () {
+                LoadDrugList();
+
+            });
+
+            //$('#DrugId').on('change', function () {
+            //    LoadDrugType();
+
+            //});
+            //$('#DrugTypeId').on('change', function () {
+            //    LoadDrugStrength();
+
+            //});
+
+            $("#tabChiefComplaintList").on('click', '.btnSelect', function () {
+                // get the current row
+                var currentRow = $(this).closest("tr");
+               
+                var col1 = currentRow.find(".pd-price").val(); // get current row 1st table cell TD value
+                var col2 = currentRow.find(".pd-name").html(); // get current row 2nd table cell TD value
+                if (col1 != 0) {
+                    currentRow.css('background-color', 'darkseagreen');
+                } else {
+                    currentRow.css('background-color', '');
+                }
+                //var data = col1 + "\n" + col2;
+
+                //alert(data);
+                QuantityS(col2, col1);
+            });
+        });
+
+       
+
+
+
+
+        function LoadManufacturer1() {
+            //Metronic.blockUI();
+            $('#DRUG_MANUFACTURERId').find('option').remove();
+            var options = $("#DRUG_MANUFACTURERId");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadManufacturer1", "DrugStockIn", new {Area = "MedicineCorner"}))",
+                data: {  },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                var t = JSON.parse(result);
+                options.append($("<option />").val("").text("-Select -"));
+                $.each(t, function () {
+                    options.append($("<option />").val(this.DM_ID).text(this.DM_NAME));
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+
+
+
+        function LoadManufacturer() {
+            //Metronic.blockUI();
+            $('#DRUG_MANUFACTURERId').find('option').remove();
+            var options = $("#DRUG_MANUFACTURERId");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadManufacturer", "DrugStockIn", new {Area = "MedicineCorner"}))",
+                data: { "dId": $("#dId").val() },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                var t = JSON.parse(result);
+                options.append($("<option />").val("").text("-Select -"));
+                $.each(t, function () {
+                    options.append($("<option />").val(this.DM_ID).text(this.DM_NAME));
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+
+        function LoadDrug1() {
+            //Metronic.blockUI();
+            $('#DrugId').find('option').remove();
+            var options = $("#DrugId");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadMedicine", "DrugStockIn", new {Area = "MedicineCorner"}))",
+                data: { },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                var t = JSON.parse(result);
+                options.append($("<option />").val("").text("-Select -"));
+                $.each(t, function () {
+                    options.append($("<option />").val(this.D_ID).text(this.D_TRADE_NAME));
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+
+        function LoadDrug() {
+            //Metronic.blockUI();
+            $('#DrugId').find('option').remove();
+            var options = $("#DrugId");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadDrugs", "DrugStockIn", new {Area = "MedicineCorner"}))",
+                data: { "DRUG_MANUFACTURERId": $("#DRUG_MANUFACTURERId").val() },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                var t = JSON.parse(result);
+                options.append($("<option />").val("").text("-Select -"));
+                $.each(t, function () {
+                    options.append($("<option />").val(this.D_ID).text(this.D_TRADE_NAME));
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+
+
+
+
+
+
+
+
+
+        function LoadDrugList() {
+            //if (SellsDetailsValidationCheck()) {
+            //App.blockUI();
+            var loadArea = $("#drugStockDetailsList");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadDrug", "PurchaseOrder", new {Area = "MedicineCorner" }))",
+                data: { "DRUG_MANUFACTURERId": $('#DRUG_MANUFACTURERId').val(),  },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+                //loadsellsDetails();
+                loadArea.html(result);
+                //$('#DrugId').val('');
+                //$('#DrugTypeId').val('');
+                //$('#MafDate').val('');
+                //$('#ExpDate').val('');
+                //$('#StockQuantity').val('');
+                //$('#UnitPrice').val('');
+                //$('#CostPrice').val('');
+                //$('#TotalCostPrice').val('');
+
+                //$('#addbtn').show();
+                //$('#updatebtn').hide();
+
+                //getTotal();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to set Drug Details list.';
+                alert(msg);
+            }
+        });
+        // }
+        }
+
+        function Quantity(DrugId) {
+          
+            
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("GetQuantity", "PurchaseOrder", new {Area = "MedicineCorner" }))",
+                data: { "DrugId":DrugId, "Quantity": $('#Quantity').val(), },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+                getTotalQuantity();
+                var value = JSON.parse(result);
+
+                $('#DrugId').val(value.DrugName);
+                //$('#ProductCategoryId').val(value.ProductCategoryName);
+                //$('#ProId').val(value.ProductId);
+                //$('#ProductId').val(value.ProductName);
+
+
+
+
+                $('#DrugTypeId').val(value.DrugTypeId);
+                $('#MafDate').val(value.MafDate);
+                $('#ExpDate').val(value.ExpDate);
+                $('#StockQuantity').val(value.StockQuantity);
+                $('#UnitPrice').val(value.UnitPrice);
+                $('#TotalCostPrice').val(value.Total);
+
+                $('#addbtn').hide();
+                $('#updatebtn').show();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to load test information.';
+                alert(msg);
+            }
+        });
+        }
+
+        function QuantityS(DrugId,Qty) {
+          
+            
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("GetQuantity", "PurchaseOrder", new {Area = "MedicineCorner" }))",
+                data: { "DrugId":DrugId, "Quantity": Qty },
+            dataType: "html",
+            success: function (result) {
+                //App.unblockUI();
+                getTotalQuantity();
+                var value = JSON.parse(result);
+
+                $('#DrugId').val(value.DrugName);
+                //$('#ProductCategoryId').val(value.ProductCategoryName);
+                //$('#ProId').val(value.ProductId);
+                //$('#ProductId').val(value.ProductName);
+
+
+
+
+                $('#DrugTypeId').val(value.DrugTypeId);
+                $('#MafDate').val(value.MafDate);
+                $('#ExpDate').val(value.ExpDate);
+                $('#StockQuantity').val(value.StockQuantity);
+                $('#UnitPrice').val(value.UnitPrice);
+                $('#TotalCostPrice').val(value.Total);
+
+                $('#addbtn').hide();
+                $('#updatebtn').show();
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to load test information.';
+                alert(msg);
+            }
+        });
+        }
+        function calculate() {
+            var myBox1 = document.getElementById('StockQuantity').value;
+            var myBox2 = document.getElementById('UnitPrice').value;
+            //var result = document.getElementById('SubTotal');
+            var total = document.getElementById('SubTotalPrice');
+            //var total1 = document.getElementById('DeuPrice');
+            var myResult = myBox1 * myBox2 ;
+            total.value = myResult;
+            //total.value = total;
+        }
+
+
+
+        function getTotalQuantity() {
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("GetTotalQuantity", "PurchaseOrder", new {Area = "MedicineCorner" }))",
+                data: { },
+            dataType: "html",
+            success: function (result) {
+               
+                
+                $('#TotalQty').val(result);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Please Insert Quantity!';
+                alert(msg);
+            }
+        });
+        }
+    </script>
+}
+

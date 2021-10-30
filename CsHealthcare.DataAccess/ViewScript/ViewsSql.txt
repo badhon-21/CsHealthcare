@@ -1,0 +1,130 @@
+﻿
+// --- Start ---//
+CREATE VIEW [dbo].[VW_DRUG_AVILABLE_STOCK]
+AS
+SELECT  [D_ID] as DrugID,[drugName], [D_TRADE_NAME] , D_UNIT_STRENGTH, DPT_DESCRIPTION, MAX([UnitPrice]) AS COST_PRICE,
+SUM([AvailableQuantity]) AS QTY ,MAX([SalePrice]) AS PRICE,min([DiscountPercent]) as DISCOUNT
+FROM VW_DRUG_STOCK WHERE [AvailableQuantity]<>0
+GROUP BY [D_ID], [drugName], [D_TRADE_NAME], D_UNIT_STRENGTH,DPT_DESCRIPTION
+GO
+//-- End ---//
+
+// --- Start ---//
+
+/****** Object: View [dbo].[VW_IPD_DRUG_SALE]   Script Date: 04/01/2018 12:45:05 AM ******/
+USE [betterlife];
+GO
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+
+CREATE VIEW [dbo].[VW_IPD_DRUG_SALE]
+AS
+SELECT NEWID() AS VID,  a.Id,a.VoucherNo,a.AdmissionNo,b.Id as PatientId, a.PatientCode,b.[Name] as PatientName,
+c.DrugId,d.Presentation+' '+d.TradeName+' '+d.UnitStrength as DrugName,  
+c.UnitPrice,c.Quantity,c.SubTotal,ISNULL(c.SaleDiscount,0.000) as SaleDiscount ,c.Total, SaleDateTime,   a.CreatedDate, a.CreatedBy
+FROM InPatientDrugs a
+join PatientInformations b ON b.Id = a.PatientId
+join InPatientDrugDetails c ON a.Id = c.InPatientDrugId
+join dbo.V_Drugs d ON d.DrugID = c.DrugId
+
+GO
+
+
+// --- Start ---//
+
+/****** Object: View [dbo].[VW_IPD_DRUG_SALE_RETURN]   Script Date: 04/01/2018 12:45:05 AM ******/
+USE [betterlife];
+GO
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+
+CREATE VIEW [dbo].[VW_IPD_DRUG_SALE_RETURN]
+AS
+SELECT NEWID() AS VID,  a.Id,a.MemoNo as VoucherNo,a.AdmissionNo, b.Id as PatientId, 
+a.PatientCode,b.[Name] as PatientName,
+c.DrugId,d.Presentation+' '+d.TradeName+' '+d.UnitStrength as DrugName,  
+(c.ReturnPrice/c.ReturnQty) as UnitPrice,c.ReturnQty as Quantity,c.ReturnPrice, ReturnDate,   a.CreatedDate, a.CreatedBy
+FROM InPatientDrugSaleReturns a
+join PatientInformations b ON b.PatientCode = a.PatientCode
+join dbo.InPatientDrugSaleReturnDetails c ON a.Id = c.InPatientDrugSaleReturnId
+join dbo.V_Drugs d ON d.DrugID = c.DrugId
+
+GO
+
+
+// --- Start ---//
+
+
+select AdmissionNo,  PatientCode, PatientName, sum(DrugSale) as DrugSale, sum(DrugReturn) as DrugReturn, sum(DrugSale-DrugReturn) as TotalSale
+from
+(
+SELECT  AdmissionNo, PatientCode, PatientName, Total as DrugSale, 0 as DrugReturn
+FROM betterlife.dbo.VW_IPD_DRUG_SALE
+union
+SELECT  AdmissionNo,  PatientCode, PatientName, 0 as DrugSale,  ReturnPrice as DrugReturn
+FROM betterlife.dbo.VW_IPD_DRUG_SALE_RETURN
+) as tab
+group by AdmissionNo,  PatientCode, PatientName
+
+
+// --- Start ---//
+
+USE [betterlife];
+GO
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+CREATE VIEW [dbo].[VW_IPD_DRUG_SALE_TOTAL]
+AS
+select  NEWID() AS VID, AdmissionNo,  PatientCode, PatientName, sum(DrugSale) as DrugSale, sum(DrugReturn) as DrugReturn, sum(DrugSale-DrugReturn) as TotalSale
+from
+(
+SELECT  AdmissionNo, PatientCode, PatientName, sum(Total) as DrugSale, 0 as DrugReturn
+FROM betterlife.dbo.VW_IPD_DRUG_SALE group by AdmissionNo,  PatientCode, PatientName
+union
+SELECT  AdmissionNo,  PatientCode, PatientName, 0 as DrugSale,  sum(ReturnPrice) as DrugReturn
+FROM betterlife.dbo.VW_IPD_DRUG_SALE_RETURN group by AdmissionNo,  PatientCode, PatientName
+) as tab
+group by AdmissionNo,  PatientCode, PatientName
+GO
+
+
+// --- Start ---//
+USE [betterlife];
+GO
+SET ANSI_NULLS ON;
+GO
+SET QUOTED_IDENTIFIER ON;
+GO
+CREATE VIEW [dbo].[VW_DAILY_USER_COLLECTION]
+AS
+select  NEWID() AS VID, CollectionType,Id,VoucherNo,  PatientCode, PatientName, TotalAmount, collectedAmount, CreatedDate,CreatedBy
+from
+(
+SELECT 'MedicalTest' as CollectionType, Id,VoucherNo,  PatientCode,[Name] as PatientName,TotalAmount,GivenAmount as collectedAmount, CreatedDate,CreatedBy--, , Status,  GivenAmount, DeuAmount,  Discount, TotalAmount, MarketingBy, RecStatus,ModifiedDate, CreatedBy, ModifiedBy, CreatedIpAddress, ModifiedIpAddress 
+FROM betterlife.dbo.Patients
+UNION
+SELECT 'Emargency' as CollectionType, Id,VoucherNo, PatientCode, PatientName,TotalAmount, GivenAmount as collectedAmount,  CreatedDate,CreatedBy
+FROM betterlife.dbo.OptPatientBills
+union
+SELECT 'Theraoy' as CollectionType, Id,VoucherNo, PatientCode, PatientName, TotalAmount, GivenAmount as collectedAmount,  CreatedDate,CreatedBy--, TotalPrice, MarketingBy, Status 
+FROM betterlife.dbo.OPDTherapies
+union
+SELECT 'New Patient' as CollectionType, Id,VoucherNo, PatientCode, PatientName, RegistrationFee as TotalAmount,RegistrationFee as collectedAmount,  CreatedDate ,CreatedBy
+FROM betterlife.dbo.PatientCards
+union
+SELECT 'IPD Advance' as CollectionType, Id, VoucherNo, PatientCode,'' as PatientName,0 as TotalAmount, AdvanceAmount as collectedAmount,  CreatedDate,CreatedBy --, CreatedBy, AdmissionNo, RecStatus, ModifiedDate, ModifiedBy, CreatedIpAddress, ModifiedIpAddress 
+FROM betterlife.dbo.PatientLasers
+union
+SELECT 'MedicalTest Due' as CollectionType,  a.Id, a.VoucherNo,a.PatientCode,b.[Name] as PatientName,0 as TotalAmount,  a.CollectedDue as collectedAmount,  a.CollectionDate as CreatedDate, a.CreatedBy --, a.PreviousDue,a.DueAmount,   a.PatientId,  a.TestId 
+FROM PatientDueCollections a
+join Patients b on a.PatientCode = b.PatientCode and a.VoucherNo = b.VoucherNo
+
+) as tab
+
+GO

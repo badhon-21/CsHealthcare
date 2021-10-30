@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Store.StoreItemSummaryModel>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ItemName)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ReOrderLevel)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @item.ItemName
+            </td>
+
+            <td>
+                @item.CategoryName
+            </td>
+
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ReOrderLevel)
+            </td>*@
+            <td style="">
+                @item.ReOrderLevel
+            </td>
+            @if (item.ReOrderLevel >= item.Quantity)
+            {
+                <td style="color: red;">
+                    @item.Quantity
+                </td>
+            }
+            else
+            {
+                <td>
+                    @item.Quantity
+                </td>
+            }
+
+        </tr>
+    }
+
+</table>

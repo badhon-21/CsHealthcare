@@ -1,0 +1,121 @@
+﻿
+@{
+    ViewBag.Title = "LC Ledger Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    @*<div class="col-md-1"></div>*@
+    <div class="col-md-12">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-bullseye font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp uppercase">@ViewBag.Title</span>
+                </div>
+                <div class="col-md-12">
+                    <form>
+                        <div class="col-xs-5">
+
+                            <div class="form-group">
+                                <div class="col-xs-4">
+                                    <h5>From Date</h5>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                        <input type="text" class="form-control datetimepicker" name="FromDate" id="FromDate" placeholder="pick a date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+
+                            <div class="form-group">
+                                <div class="col-xs-4">
+                                    <h5>To Date</h5>
+                                </div>
+                                <div class="col-xs-8">
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="icon-calendar"></i></span>
+                                        <input type="text" class="form-control datetimepicker" name="ToDate" id="ToDate" placeholder="pick a date">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="">
+                                <input type="button" id="balance" class="btn btn-success" value="Summary" onclick="javascript: loadStatement(); ">
+                            </div>
+                        </div>
+
+
+
+                    </form>
+
+                </div>
+                <div class="tools">
+
+
+
+                </div>
+                <div class="actions margin-right-10">
+
+                </div>
+            </div>
+            <hr style="margin-top: 0;">
+            <div class="row">
+                <div class="portlet-body portlet-empty" id="tblLc">
+                
+
+                   
+                </div>
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+    @*<div class="col-md-1"></div>*@
+</div>
+@section Scripts {
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+    <script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            allowInt();
+            $(".datetimepicker").datepicker();
+        });
+
+        function allowInt() {
+            $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+        }
+
+
+        function loadStatement() {
+            var loadArea = $("#tblLc");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("List", "LCSummary", new {Area = "Accounts" }))",
+                data: { "FromDate": $('#FromDate').val(), "ToDate": $('#ToDate').val() },
+            dataType: "html",
+            success: function (result) {
+                loadArea.html(result);
+                
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                var msg = 'Fail to load  List.';
+                alert(msg);
+            }
+        });
+        }
+
+
+
+
+
+    </script>
+
+}
+

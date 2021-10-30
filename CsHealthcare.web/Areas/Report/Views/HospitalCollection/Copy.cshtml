@@ -1,0 +1,180 @@
+﻿@model CsHealthcare.DataAccess.Doctor.DoctorAppointmentPayment
+@{
+    ViewBag.Title = "Print Doctor Appointment Payment Slip";
+    Layout = null;
+}
+
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@print {
+        .hide-from-printer {
+            display: none;
+        }
+    }
+</style>
+<div style="min-height: 400px; width:460px; font-size: 12px; margin: 20%">
+
+    <div style="width: 70%; text-align: center">
+        <h3>BETTER LIFE HOSPITAL LTD</h3>
+    </div>
+
+    <div style="width: 65%; text-align: center">
+        <h4>Cash Receipt</h4>
+    </div>
+    <div style="width: 100%;">
+        <div style="width: 50%; float: left;">
+            <div style="width: 30%; float: left;">Receipt No:</div>
+            <div style="width: 70%; float: left;">@Model.Voucher</div>
+        </div>
+        <div style="width: 50%; float: right;">
+            <div style="width: 15%; float: left;">Date:</div>
+            <div style="width: 70%; float: left;">@Model.CreatedDate.ToString("dd/MM/yyyy hh:mm tt")</div>
+        </div>
+    </div>
+    <div style="width: 100%;">
+        <div style="width: 50%; float: left;">
+            <div style="width: 30%; float: left;">Patient Id:</div>
+            <div style="width: 70%; float: left; font-weight: bold;">@Model.PatientEnroll.PatientInformation.PatientCode</div>
+        </div>
+        <div style="width: 50%; float: right;">
+
+        </div>
+    </div>
+
+    <div style="width: 100%;">
+        <div style="width: 50%; float: left;">
+            <div style="width: 30%; float: left;">Patient Name:</div>
+            <div style="width: 70%; float: left; font-weight: bold;">@Model.PatientEnroll.PatientInformation.Name</div>
+        </div>
+        <div style="width: 50%; float: right;">
+            <div style="width: 30%; float: left;">DOB:</div>
+            <div style="width: 70%; float: left;">@Model.PatientEnroll.PatientInformation.DateOfBirth.ToString("dd/MM/yyyy")</div>
+        </div>
+    </div>
+
+    <div style="width: 100%;">
+        <div style="width: 50%; float: left;">
+            <div style="width: 30%; float: left;">Doctor Name:</div>
+            <div style="width: 70%; float: left;">@Model.PatientEnroll.DoctorInformation.Name</div>
+        </div>
+        <div style="width: 50%; float: right;">
+            <div style="width: 30%; float: left;">Department:</div>
+            <div style="width: 70%; float: left;">@Model.PatientEnroll.DoctorInformation.Speciality</div>
+        </div>
+    </div>
+
+    <div style="width: 100%;">
+        <div style="width: 50%; float: left;">
+            <div style="width: 30%; float: left;">Appointment Date:</div>
+            <div style="width: 70%; float: left;">@Model.PatientEnroll.Date.ToString("dd/MM/yyyy")</div>
+        </div>
+        <div style="width: 50%; float: right;">
+            <div style="width: 30%; float: left;">Appointment Time:</div>
+            <div style="width: 70%; float: left;">@Model.PatientEnroll.Time</div>
+        </div>
+    </div>
+
+    <div style="width: 100%; margin-top: 20px; float: left;">
+        <div style="width: 50%; float: left; font-weight: bold;">Item Details</div>
+        <div style="width: 10%; float: left; font-weight: bold;">Units</div>
+        <div style="width: 15%; float: left; font-weight: bold;">Amount TK</div>
+    </div>
+
+    <div style="width: 100%; float: left; margin-bottom: 10px;">
+        <div style="width: 50%; float: left;">CONSULTAION FEES</div>
+        <div style="width: 10%; float: left;">1</div>
+        <div style="width: 15%; float: left;">@Model.Amount</div>
+    </div>
+
+    <div style="width: 100%; float: left;">
+        <div style="width: 40%; float: left;">
+            <div style="width: 35%; float: left;"></div>
+            <div style="width: 65%; float: left;"></div>
+        </div>
+        <div style="width: 60%; float: right; font-weight: bold;">
+            <div style="width: 33%; float: left;">Total:</div>
+            <div style="width: 35%; float: left;">@Model.Amount</div>
+        </div>
+    </div>
+
+    @*<div style="width: 100%; float: left;">
+            <div style="width: 40%; float: left;">
+                <div style="width: 35%; float: left;"></div>
+                <div style="width: 65%; float: left;"></div>
+            </div>
+            <div style="width: 60%; float: right; font-weight: bold;">
+                <div style="width: 33%; float: left;">VAT Amount:</div>
+                <div style="width: 35%; float: left;">0</div>
+            </div>
+        </div>*@
+
+    @*<div style="width: 100%; float: left;">
+            <div style="width: 40%; float: left;">
+                <div style="width: 35%; float: left;"></div>
+                <div style="width: 65%; float: left;"></div>
+            </div>
+            <div style="width: 60%; float: right; font-weight: bold;">
+                <div style="width: 33%; float: left;">Bill Amount:</div>
+                <div style="width: 35%; float: left;">@Model.Amount</div>
+            </div>
+        </div>*@
+
+    @*<div style="width: 100%; float: left;">
+            <div style="width: 40%; float: left;">
+                <div style="width: 35%; float: left;"></div>
+                <div style="width: 65%; float: left;"></div>
+            </div>
+            <div style="width: 60%; float: right; font-weight: bold;">
+                <div style="width: 33%; float: left;">Net Amt Received:</div>
+                <div style="width: 35%; float: left;">@Model.Amount</div>
+            </div>
+        </div>*@
+
+    <div style="width: 100%; float: left; margin-top: 25px;">
+        <div style="width: 40%; float: left;">
+            <div style="width: 35%; float: left;"></div>
+            <div style="width: 65%; float: left;"></div>
+        </div>
+        <div style="width: 60%; float: right; font-weight: bold;">
+            <div style="width: 33%; float: left;"></div>
+            <div style="width: 70%; float: right;">Signature</div>
+        </div>
+    </div>
+
+    <div style="float: left; width: 100%; margin-bottom: 20px; margin-top: 20px;">
+        <div style="width: 60%; float: left;">
+            <div style="width: 25%; float: left;">Prepared By:</div>
+            <div style="width: 65%; float: left;">@Model.CreatedBy</div>
+        </div>
+        <div style="width: 40%;">
+            <div style="width: 50%; float: left;"></div>
+            <div style="width: 50%; float: left;"></div>
+        </div>
+    </div>
+
+    <div style="width: 65%; text-align: center;">
+        <button id="btnPrint" onclick="myFunction();" class="hide-from-printer">Print </button>
+        <a id="btnCancel" href="@Url.Action("Index", "Enroll", new {area = "AppointmentSystem"})" type="button" class="" style="margin-left: 1%;" class="hide-from-printer">Back</a>
+    </div>
+
+</div>
+<script>
+    function myFunction() {
+        //Get the print button and put it into a variable
+        var printButton = document.getElementById("btnPrint");
+        var cancelButton = document.getElementById("btnCancel");
+        //Set the print button visibility to 'hidden'
+        printButton.style.visibility = 'hidden';
+        cancelButton.style.visibility = 'hidden';
+        //Print the page content
+        window.print();
+        //Set the print button to 'visible' again
+        //[Delete this line if you want it to stay hidden after printing]
+        printButton.style.visibility = 'visible';
+        cancelButton.style.visibility = 'visible';
+    }
+</script>

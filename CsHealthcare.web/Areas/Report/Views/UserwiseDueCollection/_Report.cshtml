@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Patient.PatientDueCollectionModel>
+
+
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.CollectionDate.ToString("d")
+        </td>
+        <td>
+            @item.PatientCode
+        </td>
+        <td>
+            @item.VoucherNo
+        </td>
+        <td>
+            @item.CollectedDue
+        </td>
+        <td>
+            @item.CreatedBy
+        </td>
+        
+        
+       
+    </tr>
+}
+
+

@@ -1,0 +1,307 @@
+﻿
+@{
+    ViewBag.Title = "CabinRentCopy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Agent Copy</title>
+    <style>
+        body {
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjust: none;
+            font-size: 14px;
+            font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+        }
+
+        p {
+            padding: 0;
+            margin: 0 0 10px 0;
+        }
+
+        .text-left {
+            text-align: left !important;
+        }
+
+        .text-right {
+            text-align: right !important;
+        }
+
+        .full-width {
+            width: 100% !important;
+        }
+
+        .half-width {
+            width: 50% !important;
+        }
+
+        .quarter-width {
+            width: 25% !important;
+        }
+
+        .quarter-with-half-width {
+            width: 12.5% !important;
+        }
+
+        .quarter-with-quarter-width {
+            width: 6.25% !important;
+        }
+
+        .pull-left {
+            float: left !important;
+        }
+
+        .pull-right {
+            float: right !important;
+        }
+
+        .border {
+            border: 1px solid #999999 !important;
+        }
+
+        .border-dotted {
+            border: 1px dotted #999999 !important;
+        }
+
+        .margin-bottom-15 {
+            margin-bottom: 15px !important;
+        }
+
+        table.border td.bg, table.border-dotted td.bg, table th.bg {
+            background-color: #999999;
+        }
+
+        table.border td, table.border-dotted td {
+            border-bottom: 1px dotted #999999 !important;
+            border-right: 1px dotted #999999 !important;
+        }
+
+            table.border td:first-child, table.border-dotted td:first-child {
+                border-left: none !important;
+            }
+
+            table.border td:last-child, table.border-dotted td:last-child {
+                border-right: none !important;
+            }
+
+        table.border tr:last-child td, table.border-dotted tr:last-child td {
+            border-bottom: none !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="max-width: 1024px; margin: 0px auto;">
+        <!-- HEADER -->
+        <table class="full-width margin-bottom-15">
+            <tr>
+                <td>
+
+                    <!-- column 1 -->
+                    <table class="half-width pull-left">
+                        <thead>
+                            <tr>
+                                <th colspan="2" class="text-left">Pre-Paid Trip Voucher</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="quarter-width">Title</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td> Destination</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Duration</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tour Includes</strong></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table><!-- /column 1 -->
+                    <!-- column 2 -->
+                    <table class="half-width pull-left text-right" cellpadding="3" cellspacing="0">
+                        <tr>
+                            <td>
+                                <p>
+                                    <img src="~/Assets/frontend/images/logo.png" alt="Logo" style="max-width: 150px;" />
+                                </p>
+                                <h3 style="margin-bottom: 5px;"></h3>
+                                <p style="width: 63%; float: right;">
+                                    <strong></strong><br />
+                                    @*<strong>@ConfigurationManager.AppSettings["admin.contact.no"]</strong><br />*@
+                                    <strong><a href=""></a></strong>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- /column 2 -->
+                    <span class="clear" style="display: block; clear: both;"></span>
+
+                </td>
+            </tr>
+        </table>
+        <!-- /HEADER -->
+        <!-- BODY -->
+
+
+        <table class="full-width margin-bottom-15 border" cellpadding="3" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="quarter-width" colspan="2">Booked on</td>
+                    <td class="quarter-width" colspan="2"></td>
+                    <td class="quarter-width" colspan="2"></td>
+                    <td class="quarter-width" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td class="quarter-width" colspan="2"></td>
+                    <td class="quarter-width" colspan="2"></td>
+                    <td class="quarter-width" colspan="2"></td>
+                    <td class="quarter-width" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td class="quarter-width bg" colspan="2">PAX Details</td>
+                    <td class="quarter-with-half-width">Sgl:&nbsp;&nbsp;৳ </td>
+                    <td class="quarter-with-half-width">Dbl/Tpl: &nbsp;&nbsp;৳ </td>
+                    <td class="quarter-with-half-width">CWB: &nbsp;&nbsp;৳</td>
+                    <td class="quarter-with-half-width" colspan="2">CWOB: &nbsp;&nbsp;</td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <table class="full-width margin-bottom-15 border" cellpadding="3" cellspacing="0">
+            <tbody>
+                @*<tr>
+                        <td class="quarter-width bg" colspan="2"><strong>Tour Start</strong></td>
+                        <td class="quarter-width" colspan="2">@Model.ArrivalDate.ToString("D")</td>
+                        <td class="quarter-width bg" colspan="2"><strong>Tour End</strong></td>
+                        <td class="quarter-width" colspan="2">@Model.DepartureDate.ToString("D")</td>
+                    </tr>
+                    <tr>
+                        <td class="quarter-width" colspan="2">Arrival Details</td>
+                        <td class="quarter-with-half-width">Flight: @Model.ArrivalFlightNumber</td>
+                        <td class="quarter-with-half-width">Time: @Model.ArrivalTime</td>
+                        <td class="quarter-width" colspan="2">Departure Details</td>
+                        <td class="quarter-with-half-width">Flight: @Model.DepartureFlightNumber</td>
+                        <td class="quarter-with-half-width">Time: @Model.DepartureTime</td>
+                    </tr>*@
+                <tr>
+                    <td class="quarter-width" colspan="2">Emergency Contact</td>
+                    <td class="quarter-width" colspan="2">Model.EmrContactName</td>
+                    <td class="half-width" colspan="4">Model.EmrContactNumber</td>
+                </tr>
+            </tbody>
+        </table>
+
+        @*foreach (var VARIABLE in Model)
+        {*@
+            <table class="full-width margin-bottom-15 border" cellpadding="3" cellspacing="0">
+                <tbody>
+                    <tr>
+                        <td class="quarter-width">
+                            <strong>Room</strong><strong></strong>
+                        </td>
+                        <td colspan="3">Model.BookingType</td>
+                    </tr>
+                    <tr>
+                        <td class="quarter-width">
+                            Adult
+                        </td>
+                        <td class="quarter-width">
+                            Child
+                        </td>
+
+                        <td class="quarter-width">
+                            Sub Total
+                        </td>
+                    </tr>
+                    <tr>
+                        @*<td class="quarter-width">
+                            @foreach (var adult in VARIABLE.B2BAdults)
+                            {
+                                <span>@iAdult. </span>
+                                <span>@adult.Title.ToString()</span>
+                                <span>@adult.SurName.ToString()</span>
+                                <span>@adult.ForeName.ToString()</span>
+
+                                <br />
+                                iAdult = iAdult + 1;
+                            }
+                        </td>*@
+                        @*<td class="quarter-width">
+                            @foreach (var child in VARIABLE.B2BChildren)
+                            {
+                                <span>ichild. </span>
+                                <span>child.Title.ToString()</span>
+                                <span>child.SurName.ToString()</span>
+                                <span>child.ForeName.ToString()</span>
+
+                                <br />
+                                ichild = ichild + 1;
+                            }
+                        </td>*@
+
+                        <td class="quarter-width">
+                            <span style="font-size: 18px;">&nbsp;&nbsp;৳ </span>VARIABLE.SubTotalWithB2BMarkup
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="quarter-width">
+                            Cancelling Policy
+                        </td>
+                        @*<td colspan="3" class="border-room-last">
+                            @foreach (var val in @Model.PackageTourCancellationPolicyModels.ToList())
+                            {
+                                @i<span>. Before </span>@val.Days.ToString()
+                                <span> days </span>
+                                @val.Percentage
+                                <span>% charge applicable</span><br />
+                                i = i + 1;
+                            }
+                        </td>*@
+                    </tr>
+
+                </tbody>
+            </table>
+        @*  *@}
+
+        <table class="full-width border margin-bottom-15" cellpadding="3" cellspacing="0">
+            <tbody>
+                <tr>
+                    <td class="quarter-with-half-width bg"><strong>In Word</strong></td>
+                    <td style="text-transform: capitalize" id="TotalInWords" colspan="2"></td>
+                    <td class="quarter-with-half-width bg"><strong>Total</strong></td>
+                    <td colspan="2" class="quarter-with-half-width"><span style="font-size: 18px;">&nbsp;&nbsp;৳ </span></td>
+
+                </tr>
+
+            </tbody>
+        </table>
+        <div class="margin-bottom-15">Thank you for booking with us. If you requird any further clarification, please hesitate to contact with us.</div>
+        <div class="margin-bottom-15" style="padding: 15px 0;">
+            <strong>Reservation Team: </strong> 
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+   
+
+</script>
+
+

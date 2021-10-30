@@ -1,0 +1,40 @@
+﻿@model IEnumerable<CsHealthcare.DataAccess.Entity.Views.VW_DRUG_STOCK>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.D_TRADE_NAME)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ExpDate)
+        </th>
+        
+        <th>
+            @Html.DisplayNameFor(model => model.RemainingQuantity)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                 @item.D_TRADE_NAME (@item.D_UNIT_STRENGTH )
+            </td>
+
+            <td>
+                @item.ExpDate.ToString("d")
+            </td>
+           
+            <td>
+                @Html.DisplayFor(modelItem => item.RemainingQuantity)
+            </td>
+
+        </tr>
+    }
+
+</table>

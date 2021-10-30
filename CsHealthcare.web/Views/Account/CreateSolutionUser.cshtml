@@ -1,0 +1,156 @@
+﻿@model CsHealthcare.web.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "User Information";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <!-- BEGIN Portlet PORTLET-->
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="fa fa-user"></i>
+                        <span class="caption-subject uppercase dark">@ViewBag.Title</span>
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:;" class="collapse">
+                        </a>
+
+                        <a href="javascript:;" class="fullscreen">
+                        </a>
+                    </div>
+
+                </div>
+                <div class="portlet-body portlet-empty">
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            <div class="control-label col-md-4">Role Name</div>
+                            <div class="col-md-6">
+                                @Html.DropDownList("RoleName", null, String.Empty, new { @class = "col-md-1 form-control" })
+                            </div>
+                        </div>
+
+                        <div id="doctor_div" class="form-group">
+                            <div class="control-label col-md-4">Doctor</div>
+                            <div class="col-md-6">
+                                @Html.DropDownList("DI_ID", null, String.Empty, new { @class = "col-md-1 form-control" })
+                            </div>
+                        </div>
+
+                        <div id="employee_div" class="form-group">
+                            <div class="control-label col-md-4">Employee</div>
+                            <div class="col-md-6">
+                                @Html.DropDownList("EI_ID", null, String.Empty, new { @class = "col-md-1 form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.UserName, new { @class = "col-md-4 control-label" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @required = "required" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, new { @class = "col-md-4 control-label" })
+                            <div class="col-md-6">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control", @required = "required" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-4 control-label" })
+                            <div class="col-md-6">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @required = "required" })
+                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class=" col-md-12">
+                                <div class="col-md-4"></div>
+                                <input id="submit" type="submit" value="Save" class="btn btn-circle blue-ebonyclay btn-default col-md-2" />
+                                <a href="@Url.Action("UserIndex", "Account")" class="btn btn-circle blue-dark btn-default col-md-2">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- END Portlet PORTLET-->
+        </div>
+
+    </div>
+
+}
+
+@section page_styles {
+
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/select2/select2.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+
+}
+
+@section Scripts {
+
+    <script type="text/javascript">
+
+        jQuery(document).ready(function () {
+
+            $("#doctor_div").hide();
+            $("#employee_div").show();
+            $("#RoleName").selectedIndex = 0;
+            $('#RoleName :selected').val("");
+
+            $("#RoleName").change(function () {
+                if ($('#RoleName :selected').text() == "Doctor") {
+                    $("#doctor_div").show();
+                    $("#employee_div").hide();
+
+                    $('#employee_div :selected').val("");
+
+                } else if ($('#RoleName :selected').text() == "Patient Appointment") {
+                    $("#doctor_div").hide();
+                    $("#employee_div").show();
+
+                    $('#doctor_div :selected').val("");
+
+                }else if ($('#RoleName :selected').text() == "Patient History") {
+                    $("#doctor_div").hide();
+                    $("#employee_div").show();
+
+                    $('#doctor_div :selected').val("");
+                } else if ($('#RoleName :selected').text() == "Patient Accounts") {
+                    $("#doctor_div").hide();
+                    $("#employee_div").show();
+
+                    $('#doctor_div :selected').val("");
+                }
+            });
+
+
+        })
+
+
+        $(document).ready(function () {
+            $('#submit').click(function (event) {
+
+                if ($('#Password').val() != $('#ConfirmPassword').val()) {
+                    alert("Password and Confirm Password don't match");
+                    event.preventDefault();
+                }
+
+            });
+        });
+    </script>
+
+
+}

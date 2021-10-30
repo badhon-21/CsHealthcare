@@ -1,0 +1,87 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.MedicineCorner.PurchaseOrderDetailsModel>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td class="hidden pd-name">
+            @Html.DisplayFor(modelItem => item.DrugId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DrugPresentationType)&nbsp; @Html.DisplayFor(modelItem => item.DrugName)&nbsp; @Html.DisplayFor(modelItem => item.DrugUnitStrength)
+        </td>
+
+        <td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.ReorderLevel)
+        </td>
+        <td style="width: 15% !important">
+            @*@Html.DisplayFor(modelItem => item.RemainingQuantity)*@
+        </td>
+        <td style="width: 15% !important">
+            @Html.DisplayFor(modelItem => item.PackSize)
+        </td>
+        <td style="width: 10% !important">
+            <input id="Quantity" name="Quantity" class="form-control pd-price" placeholder="" value="@item.Quantity" />
+        </td>
+        <td style="width: 15% !important">
+            @*<a class="btn btn-primary btn-icon legitRipple" title="Edit" onclick="javascript: Quantity('@item.DrugId');"><i class="icon-pencil"></i></a>*@
+            <a class="btn btn-primary btn-icon legitRipple btnSelect" title="Edit"><i class="icon-pencil"></i></a>
+        </td>
+
+        @*<td style="width: 15% !important">
+                @Html.DisplayFor(modelItem => item.CostPrice)
+            </td>*@
+
+        @*<td style="width: 15% !important">
+                <input id="SubTotalPrice" name="SubTotalPrice" class="form-control " placeholder="" />
+            </td>*@
+
+
+        @*<td style="width: 15% !important">
+                <a class="btn btn-primary btn-icon legitRipple" title="Edit" onclick="javascript: EditDrugStock('@item.D_ID');"><i class="icon-pencil"></i></a>
+                <a class="btn btn-xs btn-danger" title="Delete" onclick="javascript: if (confirm('Are you sure you want to do operation?') == false) return false; DeleteTestDetails('@item.Id','@item.TestNameId'); "><i class="icon-trash"></i></a>
+            </td>*@
+    </tr>
+}
+
+<script>
+    //$("#Quantity").keyup(function () {
+    //    Quantity();
+    //});
+
+    @*function Quantity() {
+        $.ajax({
+            type: "GET",
+            cache: false,
+            url: "@(@Url.Action("GetQuantity", "PurchaseOrder", new {Area = "MedicineCorner" }))",
+            data: {  },
+        dataType: "html",
+        success: function (result) {
+            //App.unblockUI();
+            var value = JSON.parse(result);
+
+            $('#DrugId').val(value.DrugName);
+            //$('#ProductCategoryId').val(value.ProductCategoryName);
+            //$('#ProId').val(value.ProductId);
+            //$('#ProductId').val(value.ProductName);
+
+
+
+
+            $('#DrugTypeId').val(value.DrugTypeId);
+            $('#MafDate').val(value.MafDate);
+            $('#ExpDate').val(value.ExpDate);
+            $('#StockQuantity').val(value.StockQuantity);
+            $('#UnitPrice').val(value.UnitPrice);
+            $('#TotalCostPrice').val(value.Total);
+
+            $('#addbtn').hide();
+            $('#updatebtn').show();
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            //App.unblockUI();
+            var msg = 'Fail to load test information.';
+            alert(msg);
+        }
+    });
+    }*@
+</script>

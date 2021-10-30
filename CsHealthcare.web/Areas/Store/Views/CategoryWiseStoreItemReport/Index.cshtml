@@ -1,0 +1,218 @@
+﻿
+@using Cs.Utility
+
+
+@{
+    ViewBag.Title = "Categorywise Store Item";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@media print {
+        .printOnly {
+            display: block;
+        }
+        /* write your css rules*/
+        .form-group {
+            margin-bottom: 2px;
+        }
+
+        .page-content {
+            padding: 0 !important;
+        }
+
+        .print-nopadding {
+            padding: 0 !important;
+        }
+    }
+    /*for desktop*/
+    @@media screen {
+        .printOnly {
+            display: none;
+        }
+        /*for all display view*/
+
+    }
+</style>
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="page-content" style="min-height:500px">
+            <div class="container-fluid">
+
+                <div id="appointment_list_container" class="row" style="">
+
+                    <div class="col-md-12">
+                        <div class="portlet light">
+                            <div class="col-xs-12 printOnly">
+                                <hgroup class="title-group text-center" style="margin: 5px 0; padding: 0">
+                                    <h3>Better Life Hospital</h3>
+                                    <h5 class="subtitle">1 East Rampura, D.I.T. Road , Dhaka-1219</h5>
+                                   <h5 class="subtitle">CategoryWise Store Item List</h5>
+                                </hgroup>
+                            </div>
+                            <div class="portlet-title" id="titlebtn">
+                                <div class="caption">
+                                    <i class="fa fa-bell font-green-sharp"></i>
+                                    <span class="caption-subject uppercase font-green-sharp">@ViewBag.Title</span>
+                                </div>
+                                <div class="tools">
+                                    <a href="javascript:;" class="collapse"></a>
+                                    <a href="javascript:;" data-load="true" class="reload"></a>
+                                    <a href="javascript:;" class="fullscreen"></a>
+                                </div>
+
+                            </div>
+                            <form>
+
+
+
+                                <div class="col-xs-6" id="btncategory">
+
+                                    <div class="content-group">
+                                        <div class="col-xs-5">
+                                            <h4 class="">Category Name :</h4>
+                                        </div>
+                                        <div class="col-xs-7">
+                                            <div class="input-group" style="width: 300px; padding-left: 14%; padding-top: 5px">
+                                                <select id="CategoryId" name="CategoryId" class="form-control" value="" style="width: 212px" placeholder=""></select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-2" id="Search">
+                                    <div class="" style="padding-top: 5px">
+                                        <input type="button" class="btn bg-indigo-300 legitRipple" value="Search" onclick="javascript:loadStatement(); " id="incomebtn">
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="portlet-body portlet-empty " id="tblTest">
+
+
+                            </div>
+                            <button id="btnPrint" onclick="myFunction()" class="btn btn-lg blue hidden-print " style="background-color: #1e90ff; color: white;float: right;">Print <i class="icon-printer2"></i></button>
+
+                            <br/><br/><br/>
+                                    </div>
+               
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id='myModal' class='modal fade in' tabindex="-1" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+</div>
+
+@section page_styles {
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/select2/css/select2.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Assets/global/plugins/typeahead/typeahead.css" />
+}
+
+@section Scripts {
+    <script type="text/javascript" src="~/Assets/global/plugins/select2/js/select2.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+    <script type="text/javascript" src="~/Assets/global/plugins/typeahead/typeahead.bundle.min.js"></script>
+    <script src="~/Assets/Pages/components-pickers.js"></script>
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+
+    <script>
+
+        jQuery(document).ready(function () {
+            LoadCategoryName();
+        });
+
+        function myFunction() {
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("btnPrint");
+            var searchButton = document.getElementById("Search");
+            var categoryButton = document.getElementById("btncategory");
+            var title = document.getElementById("titlebtn");
+
+            printButton.style.visibility = 'hidden';
+           
+
+            searchButton.style.visibility = 'hidden';
+            categoryButton.style.visibility = 'hidden';
+            title.style.visibility = 'hidden';
+            window.print();
+            //Set the print button to 'visible' again
+            //[Delete this line if you want it to stay hidden after printing]
+            printButton.style.visibility = 'visible';
+            searchButton.style.visibility = 'visible';
+            categoryButton.style.visibility = 'visible';
+            title.style.visibility = 'visible';
+        }
+
+        function loadStatement() {
+            var loadArea = $("#tblTest");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("Report", "CategoryWiseStoreItemReport", new {Area = "Store" }))",
+                data: { "categoryId": $('#CategoryId').val() },
+            dataType: "html",
+            success: function (result) {
+                //var value = JSON.parse(result);
+
+                loadArea.html(result);
+
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //App.unblockUI();
+                var msg = 'Fail to load Category list.';
+                alert(msg);
+            }
+        });
+        }
+
+        function LoadCategoryName() {
+            //Metronic.blockUI();
+            $('#CategoryId').find('option').remove();
+            var options = $("#CategoryId");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("LoadCategory", "CategoryWiseStoreItemReport", new {Area = "Store"}))",
+                data: {  },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                var t = JSON.parse(result);
+                options.append($("<option />").val("").text("-Select -"));
+                $.each(t, function () {
+                    options.append($("<option />").val(this.Id).text(this.Name));
+                });
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+    </script>
+
+}

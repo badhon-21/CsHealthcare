@@ -1,0 +1,205 @@
+﻿
+@model CsHealthcare.ViewModel.Physiotherapy.PhysiotherapyModel
+
+@{
+    ViewBag.Title = "Physiotherapy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <!-- BEGIN Portlet PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-question font-green-sharp"></i>
+                    <span class="caption-subject font-green-sharp uppercase">Physiotherapy</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+                <div class="actions margin-right-10">
+
+                </div>
+            </div>
+           
+            <div class="portlet-body portlet-empty">
+
+                @using (Html.BeginForm())
+                {
+                    <div class="modal-body">
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+                            
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    <input id="Price" name="Price" class="form-control" value="" placeholder="" />
+                                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Category, htmlAttributes: new { @class = "control-label col-md-3" })
+                                <div class="col-md-8">
+                                    <select id="Category" class="form-control" name="Category">
+                                        <option value="">Select</option>
+                                        <option value="Electrotherapy">Electrotherapy</option>
+                                        <option value="Rehabilitation">Rehabilitation Therapy</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            
+
+                           
+
+
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <a class="btn default" style="width: 15%;" href="@Url.Action("Index", "Physiotherapy", new {Area = "Physiotherapy" })">Cancel</a>
+                        <input type="submit" value="Save" class="btn green" style="width: 15%;" />
+                    </div>
+
+                }
+            </div>
+        </div>
+        <!-- END Portlet PORTLET-->
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+
+
+
+
+@section page_styles
+{
+
+    <link href="~/assets/global/plugins/typeahead/typeahead.css" rel="stylesheet" />
+
+
+    <style>
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+
+        .tt-hint {
+            color: #999;
+        }
+
+        .tt-dropdown-menu { /* used to be tt-dropdown-menu in older versions */
+            width: 422px;
+            margin-top: 4px;
+            padding: 4px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+            -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+            box-shadow: 0 5px 10px rgba(0,0,0,.2);
+        }
+
+        .tt-suggestion {
+            padding: 3px 20px;
+            line-height: 24px;
+        }
+
+            .tt-suggestion.tt-cursor, .tt-suggestion:hover {
+                color: #fff;
+                background-color: #0097cf;
+            }
+
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>
+}
+@section Scripts {
+    <script src="~/Scripts/jquery.format.1.05.js"></script>
+    <script src="~/Scripts/typeahead.bundle.min.js"></script>
+
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            allowInt();
+            initGenericNameAutoComplete();
+        });
+
+        function allowInt() {
+            $(".integer").format({ precision: 0, allow_negative: false, autofix: true });
+        }
+
+        function initGenericNameAutoComplete() {
+            $('#D_GENERIC_NAME').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 2,
+                limit: 8
+            }, {
+                source: function (searchString, cb) {
+                    return $.ajax({
+                        dataType: 'json',
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        url: " /MedicineCorner/Drug/LoadGenericName",
+                        data: "{'SearchString':'" + searchString + "'}",
+                        chache: false,
+                        success: function (data) {
+                            var result = [];
+                            $.each(data, function (index, val) {
+                                result.push({
+                                    //Id: val.Id,
+                                    Name: val.D_GENERIC_NAME,
+                                    value: val.D_GENERIC_NAME
+                                });
+                            });
+                            cb(result);
+                        }
+                    });
+                }
+            }).on("typeahead:selected", function (obj, patient) {
+                // $("#ReferenceName").val(patient.Name);
+                //LoadPrice();
+                //$("#txtPatientName").val(patient.Name);
+                //$("#txtMobileNumber").val(patient.Mobile);
+            });
+
+        }
+
+
+
+
+
+
+    </script>
+
+}
+
+
+
+

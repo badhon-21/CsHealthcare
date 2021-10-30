@@ -1,0 +1,69 @@
+﻿
+
+@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.PageTitle = "Dashboard";
+}
+
+<!-- BEGIN PROFILE CONTENT -->
+<div class="container">
+    <div class="profile-content">
+        <div class="row">
+
+
+            <div class="col-md-6">
+                <!-- BEGIN PORTLET -->
+                <div class="portlet light ">
+                    <div class="portlet-title">
+                        <div class="caption caption-md">
+                            <i class="icon-bar-chart theme-font hide"></i>
+                            <span class="caption-subject font-blue-madison bold uppercase">Quick Menu</span>
+                            <span class="caption-helper hide">weekly stats...</span>
+                        </div>
+
+                        <div class="tools">
+                            <a href="javascript:;" class="collapse">
+                            </a>
+
+                            @*  <a href="javascript:;" data-load="true" data-url="@Url.Action("patientLocationHistory", "Patient", new {Area = "MsAdmin", id = Model.Id})" c class="reload">
+                                </a>*@
+                            <a href="javascript:;" class="remove">
+                            </a>
+                        </div>
+
+                    </div>
+                    <div class="portlet-body  portlet-empty">
+                        <div class="tiles">
+                            <a href="@Url.Action("Index", "Nurse", new {area = "NurseManagement"})" class="tile  bg-blue-hoki">
+
+                                <div class="tile-body">
+                                    <i class="fa fa-moon-o"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        Doctor Information
+                                    </div>
+                                    <div class="number">
+
+                                    </div>
+                                </div>
+                            </a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <!-- END PORTLET -->
+            </div>
+
+
+
+
+        </div>
+
+    </div>
+    <!-- END PROFILE CONTENT -->
+</div>
+
+

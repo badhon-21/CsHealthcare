@@ -1,0 +1,76 @@
+﻿@model IEnumerable<CsHealthcare.ViewModel.Patient.PatientTreatmentModel>
+
+
+<table class="table table-striped table-bordered table-hover" id="tabChiefComplaintList">
+    <thead>
+        <tr>
+            <th style="width: 11.5% !important">
+                Presentation
+            </th>
+            <th style="width: 12% !important">
+                Drug Name
+            </th>
+            <th style="width: 12.5% !important">
+                Generic Name
+            </th>
+            @*<th style="width: 6.5% !important">
+                Manufacturer
+            </th>*@
+            <th style="width: 12.5% !important">
+                Doses
+            </th>
+            <th style="width: 8.5% !important">
+                Duration
+            </th>
+            <th style="width: 14.5% !important">
+                Advice
+            </th>
+            
+            <th style="width: 10% !important">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="width: 11.5% !important">
+                    @Html.DisplayFor(modelItem => item.PresentationTypeName)
+                </td>
+                <td style="width: 12% !important">
+                    @Html.DisplayFor(modelItem => item.DrugName) @*@Html.DisplayFor(modelItem => item.UnitStrength)*@
+                </td>
+                <td style="width: 12.5% !important">
+                    @Html.DisplayFor(modelItem => item.GenericName)
+                </td>
+                @*<td style="width: 6.5% !important">
+                    @Html.DisplayFor(modelItem => item.ManufacturerName)
+                </td>*@
+                <td style="width: 12.5% !important;  font-family: SutonnyMJ;">
+                    @Html.DisplayFor(modelItem => item.DrugDoseDescription)
+                </td>
+                <td style="width: 8.5% !important;  font-family: SutonnyMJ;">
+                    @Html.DisplayFor(modelItem => item.DrugDurationDescription)
+                </td>
+                <td style="width: 14.5% !important;  font-family: SutonnyMJ;">
+                    @Html.DisplayFor(modelItem => item.DoctorNote)
+                </td>
+                <td style="width: 10% !important">
+                    <a class="btn btn-xs green" title="Edit" onclick="javascript: ViewPatientMadicationList(@item.DrugId);"><i class="fa fa-edit"></i></a>
+                    <a class="btn btn-xs btn-danger" title="Delete" onclick="javascript: if (confirm('Are you sure you want to do operation?') == false) return false; deletePatientMadicationList(@item.DrugId); "><i class="fa fa-trash-o"></i></a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+
+@*<script src="~/Assets/Page/table-managed.js"></script>*@
+<script>
+    jQuery(document).ready(function () {
+
+       
+    });
+</script>

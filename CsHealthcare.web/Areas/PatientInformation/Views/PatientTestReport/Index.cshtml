@@ -1,0 +1,214 @@
+﻿@model CsHealthcare.ViewModel.Patient.PatientReportSummaryModel
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    @@page {
+        size: auto;
+        margin: 0;
+    }
+
+    @@media print {
+        .printOnly {
+            display: block;
+        }
+        /* write your css rules*/
+        .form-group {
+            margin-bottom: 2px;
+        }
+
+        .page-content {
+            padding: 0 !important;
+        }
+
+        .print-nopadding {
+            padding: 0 !important;
+        }
+    }
+    /*for desktop*/
+    @@media screen {
+        .printOnly {
+            display: none;
+        }
+        /*for all display view*/
+
+    }
+</style>
+
+<div class="page-container">
+    <!-- Page content -->
+    <div class="page-content">
+        <!-- Main content -->
+        <div class="content-wrapper">
+            <div class="col-md-12 printOnly">
+                <hgroup class="title-group text-center" style="margin: 5px 0; padding: 0">
+                    <h3></h3>
+                    <h5 class="subtitle"></h5>
+                    @*<h5 class="subtitle">Training On Basic Biotechnology</h5>*@
+                </hgroup>
+            </div>
+            <div class="panel">
+                @*<div class="col-md-1">
+                    </div>*@
+                <div class="portlet light">
+
+                    <div class="modal-body">
+                        <div class="panel-body">
+
+                            <div class="row">
+                                <form>
+
+                                    <div class="col-xs-5">
+
+                                        <div class="content-group">
+                                            <div class="col-xs-4">
+                                                <h6 class="">From Date</h6>
+                                            </div>
+                                            <div class="col-xs-8">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                                    <input  class="form-control datetimepicker" type="datetime" name="FromDate" id="FromDate" placeholder="pick a date">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-5">
+
+                                        <div class="content-group">
+                                            <div class="col-xs-3">
+                                                <h6 class="">To Date</h6>
+                                            </div>
+                                            <div class="col-xs-9">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><i class="icon-calendar5"></i></span>
+                                                    <input  class="form-control datetimepicker" type="datetime" name="ToDate" id="ToDate" placeholder="pick a date">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="">
+                                            <input type="button" class="btn bg-indigo-300 legitRipple" value="Search" onclick="javascript: loadStatement(); " id="incomebtn">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <br /><br /><br />
+                            <table class="table datatable-basic">
+                                <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Patient Name</th>
+                                    <th>Voucher Number</th>
+                                    <th> Amount</th>
+                                    
+                                    @*<th>Length</th>
+                        <th>Width</th>*@
+                                    @*<th>Height</th>*@
+                                    @*<th class="text-center">Actions</th>*@
+                                </tr>
+                                </thead>
+                                <tbody id="tblTest"></tbody>
+
+
+                            </table>
+                           
+                            <br /><br />
+                            <button id="btnPrint" onclick="myFunction()" class="btn btn-lg blue hidden-print margin-bottom-5" style="background-color: #1e90ff; color: white;float: right;">Print <i class="icon-printer2"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+<script src="~/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            $(".datetimepicker").datepicker("setDate", new Date());;
+            loadTodayStatement();
+        });
+        function myFunction() {
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("btnPrint");
+            var button = document.getElementById("incomebtn");
+            var sale = document.getElementById("sales");
+            //var cancelButton = document.getElementById("btnCancel");
+            //Set the print button visibility to 'hidden'
+            printButton.style.visibility = 'hidden';
+            button.style.visibility = 'hidden';
+            sale.style.visibility = 'hidden';
+            //cancelButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print();
+            //Set the print button to 'visible' again
+            //[Delete this line if you want it to stay hidden after printing]
+            printButton.style.visibility = 'visible';
+            button.style.visibility = 'visible';
+            sale.style.visibility = 'visible';
+        }
+
+
+        function loadTodayStatement() {
+            var loadArea = $("#tblTest");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("Report2", "PatientTestReport", new {Area = "PatientInformation" }))",
+                data: { },
+            dataType: "html",
+            success: function (result) {
+                loadArea.html(result);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                var msg = 'Fail to load  List.';
+                alert(msg);
+            }
+        });
+        }
+
+
+
+
+        function loadStatement() {
+            var loadArea = $("#tblTest");
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("Report", "PatientTestReport", new {Area = "PatientInformation" }))",
+                data: {  "FromDate": $('#FromDate').val(), "ToDate": $('#ToDate').val() },
+            dataType: "html",
+            success: function (result) {
+                loadArea.html(result);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                var msg = 'Fail to load  List.';
+                alert(msg);
+            }
+        });
+        }
+
+
+
+
+
+
+    </script>
+
+}
+

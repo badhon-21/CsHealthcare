@@ -1,0 +1,114 @@
+﻿@model CsHealthcare.DataAccess.Entity.HumanResource.Shift
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Shift</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MorningStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MorningStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MorningEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MorningEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EveningStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EveningStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EveningEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EveningEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NightStart)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NightStart)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NightEnd)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NightEnd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RecStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModifiedBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

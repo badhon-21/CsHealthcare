@@ -1,0 +1,675 @@
+﻿
+
+@{
+    ViewBag.Title = "Dashboard";
+    ViewBag.PageTitle = "Dashboard";
+}
+
+<style>
+    .tiles .tile {
+    
+    height: 135px;
+    width: 235px !important;
+    
+}
+     
+</style>
+
+
+<!-- BEGIN PROFILE CONTENT -->
+<div class="container">
+
+<div class="page-content-inner">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat2 ">
+                <div class="display">
+                    <div class="number">
+                        <h3 class="font-green-sharp">
+                            <span data-counter="counterup" data-value="7800" id="totalPatient">0</span>
+                            <small class="font-green-sharp"></small>
+                        </h3>
+                        <small>TOTAL PATIENTS</small>
+                    </div>
+                    <div class="icon">
+                        <i class="icon-users"></i>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat2 ">
+                <div class="display">
+                    <div class="number">
+                        <h3 class="font-red-haze">
+                            <span data-counter="counterup" data-value="1349" id="TotalTestAmount" >0</span>
+                        </h3>
+                        <small>Test Collection</small>
+                    </div>
+                    <div class="icon">
+                        <i class="icofont icofont-blood-test"></i>
+                    </div>
+                </div>
+                @*<div class="progress-info">
+                    <div class="progress">
+                        <span style="width: 85%;" class="progress-bar progress-bar-success red-haze">
+                            <span class="sr-only">85% change</span>
+                        </span>
+                    </div>
+                    <div class="status">
+                        <div class="status-title"> change </div>
+                        <div class="status-number"> 85% </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat2 ">
+                <div class="display">
+                    <div class="number">
+                        <h3 class="font-blue-sharp">
+                            <span data-counter="counterup" data-value="567" id="totalPhaSale">0</span>
+                        </h3>
+                        <small>Total Pharmacy Sale</small>
+                    </div>
+                    <div class="icon">
+                        <i class="icon-basket"></i>
+                    </div>
+                </div>
+                @*<div class="progress-info">
+                    <div class="progress">
+                        <span style="width: 45%;" class="progress-bar progress-bar-success blue-sharp">
+                            <span class="sr-only">45% grow</span>
+                        </span>
+                    </div>
+                    <div class="status">
+                        <div class="status-title"> grow </div>
+                        <div class="status-number"> 45% </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat2 ">
+                <div class="display">
+                    <div class="number">
+                        <h3 class="font-purple-soft">
+                            <span data-counter="counterup" data-value="276" id="DailasisCollection">0</span>
+                        </h3>
+                        <small>Dailasis Collection</small>
+                    </div>
+                    <div class="icon">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+                @*<div class="progress-info">
+                    <div class="progress">
+                        <span style="width: 57%;" class="progress-bar progress-bar-success purple-soft">
+                            <span class="sr-only">56% change</span>
+                        </span>
+                    </div>
+                    <div class="status">
+                        <div class="status-title"> change </div>
+                        <div class="status-number"> 57% </div>
+                    </div>
+                </div>*@
+            </div>
+            
+           
+
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat2 ">
+                <div class="display">
+                    <div class="number">
+                        <h3 class="font-purple-soft">
+                            <span data-counter="counterup" data-value="276" id="OPDCollection">0</span>
+                        </h3>
+                        <small>OPD Collection</small>
+                    </div>
+                    <div class="icon">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+                @*<div class="progress-info">
+                    <div class="progress">
+                        <span style="width: 57%;" class="progress-bar progress-bar-success purple-soft">
+                            <span class="sr-only">56% change</span>
+                        </span>
+                    </div>
+                    <div class="status">
+                        <div class="status-title"> change </div>
+                        <div class="status-number"> 57% </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat2 ">
+                <div class="display">
+                    <div class="number">
+                        <h3 class="font-purple-soft">
+                            <span data-counter="counterup" data-value="276" id="IpdColletion">0</span>
+                        </h3>
+                        <small>IPD Collection</small>
+                    </div>
+                    <div class="icon">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+                @*<div class="progress-info">
+                    <div class="progress">
+                        <span style="width: 57%;" class="progress-bar progress-bar-success purple-soft">
+                            <span class="sr-only">56% change</span>
+                        </span>
+                    </div>
+                    <div class="status">
+                        <div class="status-title"> change </div>
+                        <div class="status-number"> 57% </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <div class="dashboard-stat2 ">
+                <div class="display">
+                    <div class="number">
+                        <h3 class="font-purple-soft">
+                            <span data-counter="counterup" data-value="276" id="canteenCollection">0</span>
+                        </h3>
+                        <small>Canteen Collection</small>
+                    </div>
+                    <div class="icon">
+                        <i class="icon-user"></i>
+                    </div>
+                </div>
+                @*<div class="progress-info">
+                    <div class="progress">
+                        <span style="width: 57%;" class="progress-bar progress-bar-success purple-soft">
+                            <span class="sr-only">56% change</span>
+                        </span>
+                    </div>
+                    <div class="status">
+                        <div class="status-title"> change </div>
+                        <div class="status-number"> 57% </div>
+                    </div>
+                </div>*@
+            </div>
+        </div>
+</div>
+<div class="profile-content ">
+    <div class="row hidden">
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 margin-bottom-10">
+            <div class="dashboard-stat blue">
+                <div class="visual">
+                    <i class="icofont icofont-user-male fa-icon-medium"></i>
+                </div>
+                <div class="details">
+                    <div class="number"> $168,492.54 </div>
+                    <div class="desc"> No Of Patient </div>
+                </div>
+                <a class="more" href="javascript:;">
+                    View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="dashboard-stat red">
+                <div class="visual">
+                    <i class="fa fa-shopping-cart"></i>
+                </div>
+                <div class="details">
+                    <div class="number"> 1,127,390 </div>
+                    <div class="desc"> Total Orders </div>
+                </div>
+                <a class="more" href="javascript:;">
+                    View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            <div class="dashboard-stat green">
+                <div class="visual">
+                    <i class="fa fa-group fa-icon-medium"></i>
+                </div>
+                <div class="details">
+                    <div class="number"> $670.54 </div>
+                    <div class="desc"> Average Orders </div>
+                </div>
+                <a class="more" href="javascript:;">
+                    View more
+                    <i class="m-icon-swapright m-icon-white"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+<div class="row">
+
+
+<div class="col-md-6">
+    <!-- BEGIN PORTLET -->
+    <div class="portlet light ">
+        <div class="portlet-title">
+            <div class="caption caption-md">
+                <i class="icon-bar-chart theme-font hide"></i>
+                <span class="caption-subject font-blue-madison bold uppercase">Quick Menu</span>
+                <span class="caption-helper hide">weekly stats...</span>
+            </div>
+
+            <div class="tools">
+                <a href="javascript:;" class="collapse">
+                </a>
+
+                @*  <a href="javascript:;" data-load="true" data-url="@Url.Action("patientLocationHistory", "Patient", new {Area = "MsAdmin", id = Model.Id})" c class="reload">
+                                </a>*@
+                <a href="javascript:;" class="remove">
+                </a>
+            </div>
+
+        </div>
+        <div class="portlet-body  portlet-empty" style="min-height: 200px">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="tiles" style="">
+                        <a href="#" class="tile  bg-blue-hoki">
+
+                            <div class="tile-body">
+                                <i class="fa fa-adn"></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name" style="">
+                                    Administrator
+                                </div>
+                                <div class="number">
+
+                                </div>
+                                <br/><br/><br/>
+
+                            </div>
+
+                        </a>
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    @*<div class="portlet-body  portlet-empty">*@
+                    <div class="tiles">
+                        <a href="@Url.Action("TotalAdmittedPatient", "PatientAdmission", new {area = "Cabin"})" class="tile  bg-after-green">
+
+                            <div class="tile-body" style="background-color: seagreen">
+                                <i class="fa fa-adn"></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name">
+                                    Admitted Patient Report
+                                </div>
+                                <div class="number">
+
+                                </div>
+                                @*<div class="">
+                                TotoalAmount
+                            </div>
+                            <div class="">
+                                <span id="doctoramount"></span>
+                            </div>*@
+
+                            </div>
+                        </a>
+
+
+
+                    </div>
+                    @*</div>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END PORTLET -->
+</div>
+
+<div class="col-md-6">
+    <!-- BEGIN PORTLET -->
+    <div class="portlet light ">
+        <div class="portlet-title">
+            <div class="caption caption-md">
+                <i class="icon-bar-chart theme-font hide"></i>
+                <span class="caption-subject font-blue-madison bold uppercase">Todays Report</span>
+                <span class="caption-helper hide">weekly stats...</span>
+            </div>
+
+            <div class="tools">
+                <a href="javascript:;" class="collapse">
+                </a>
+
+                @*  <a href="javascript:;" data-load="true" data-url="@Url.Action("patientLocationHistory", "Patient", new {Area = "MsAdmin", id = Model.Id})" c class="reload">
+                        </a>*@
+                <a href="javascript:;" class="remove">
+                </a>
+            </div>
+
+        </div>
+        <div class="portlet-body  portlet-empty" style="min-height: 350px">
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="tiles" style="">
+                        @*<a href="@Url.Action("Index", "PatientTestReport", new {area = "PatientInformation"})" class="tile  bg-after-green">*@
+                        <a href="@Url.Action("TestGroupWise", "PatientTestReport", new {area = "PatientInformation"})" class="tile  bg-after-green">
+
+                            <div class="tile-body" style="background-color: seagreen">
+                                <i class="fa fa-adn"></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name" style="">
+                                    No Of Test<br/>TotalAmount
+                                </div>
+                                <div class="number">
+                                    <span id="noOftest"></span><br/><span id="testAmount" style="margin-left: 10px"></span>
+                                </div>
+                                <br/><br/><br/>
+
+                            </div>
+
+                        </a>
+
+
+
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    @*<div class="portlet-body  portlet-empty">*@
+                    <div class="tiles">
+                        <a href="@Url.Action("DailyAppointmentSummaryUser", "UserWiseDailyAppointmentSummeryReport", new {area = "AppointmentSystem"})" class="tile  bg-blue-hoki">
+
+                            <div class="tile-body" style="background-color: seagreen">
+                                <i class="fa fa-user"></i>
+                            </div>
+                            <div class="tile-object">
+                                <div class="name">
+                                    NoOf DoctorAppointment <br/>TotoalAmount
+                                </div>
+                                <div class="number">
+                                    <span id="noOfAppointment"></span><br/><span id="doctoramount"></span>
+                                </div>
+                                @*<div class="">
+                                TotoalAmount
+                            </div>
+                            <div class="">
+                                <span id="doctoramount"></span>
+                            </div>*@
+
+                            </div>
+                        </a>
+
+
+
+                    </div>
+                    @*</div>*@
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <div class="portlet-body  portlet-empty">
+                        <div class="tiles">
+                            <a href="@Url.Action("GroupWise", "OpdPatientBill", new {area = "PatientInformation"})" class="tile  bg-blue-hoki">
+
+                                <div class="tile-body bg-blue-hoki" >
+                                    <i class="fa fa-adn"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        NoOf Emergencypatient<br /> TotoalAmount
+                                    </div>
+                                    <div class="number">
+                                        <span id="noOfemergency"></span><br /><span id="emergencyAmount"></span>
+                                    </div>
+
+
+                                </div>
+                            </a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="portlet-body  portlet-empty">
+                        <div class="tiles">
+                            <a href="#" class="tile  bg-blue-hoki">
+
+                                <div class="tile-body">
+                                    <i class="fa fa-adn"></i>
+                                </div>
+                                <div class="tile-object">
+                                    <div class="name">
+                                        NoOf AdmittedPatient<br/> TotoalAmount
+                                    </div>
+                                    <div class="number">
+                                        <span id="noOfadmission"></span><br/><span id="admissionAmount"></span>
+                                    </div>
+
+
+                                </div>
+                            </a>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PORTLET -->
+    </div>
+
+
+
+
+
+</div>
+
+</div>
+<!-- END PROFILE CONTENT -->
+</div>
+</div>
+</div>
+@section page_styles {
+
+<link href="~/Content/icofont/css/icofont.css" rel="stylesheet" />
+ 
+
+
+}
+@section Scripts {
+
+
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            loadTotalTest();
+            loadTotalAppointment();
+            loadTestAmount();
+            loadAppointmentAmount();
+            loadTotalEmergencyamount();
+            loadTotalEmergency();
+            loadTotalInfo()
+        });
+
+
+        function loadTotalTest() {
+            //Metronic.blockUI();
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("NoOfTest", "AdministrativeDashBoard", new {Area = ""}))",
+                data: {  },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                //var t = JSON.parse(result);
+
+                $('#noOftest').text(result);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+        function loadTestAmount() {
+            //Metronic.blockUI();
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("TotalTestAmount", "AdministrativeDashBoard", new {Area = ""}))",
+                data: {  },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                //var t = JSON.parse(result);
+
+                $('#testAmount').text(result);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+        function loadTotalAppointment() {
+            //Metronic.blockUI();
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("DoctorAppointmentPayment", "AdministrativeDashBoard", new {Area = ""}))",
+                data: {  },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                //var t = JSON.parse(result);
+
+                $('#noOfAppointment').text(result);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+        function loadAppointmentAmount() {
+            //Metronic.blockUI();
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("TotalDoctorAppointmentPayment", "AdministrativeDashBoard", new {Area = ""}))",
+                data: {  },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                //var t = JSON.parse(result);
+
+                $('#doctoramount').text(result);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+
+        function loadTotalEmergency() {
+            //Metronic.blockUI();
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("totalEmergencyPatient", "AdministrativeDashBoard", new {Area = ""}))",
+                data: {  },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                //var t = JSON.parse(result);
+
+                $('#noOfemergency').text(result);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+
+        function loadTotalEmergencyamount() {
+            //Metronic.blockUI();
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("TotalAmountEmergencyPatient", "AdministrativeDashBoard", new {Area = ""}))",
+                data: {  },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                var t = JSON.parse(result);
+
+                $('#emergencyAmount').text(t.OptAmount);
+                $('#noOfadmission').text(t.admissionCount);
+                $('#admissionAmount').text(t.admissionAmount);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+
+
+        function loadTotalInfo() {
+            //Metronic.blockUI();
+
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "@(@Url.Action("TotalAmountInfo", "AdministrativeDashBoard", new {Area = ""}))",
+                data: {  },
+            dataType: "html",
+            success: function (result) {
+                //Metronic.unblockUI();LoadProduct();
+                var t = JSON.parse(result);
+
+                $('#OPDCollection').text(t.OptAmount);
+                $('#IpdColletion').text(t.InpationPatient);
+                $('#canteenCollection').text(t.canteenSall);
+                $('#totalPatient').text(t.noOfPatient);
+                $('#TotalTestAmount').text(t.testCollection);
+                $('#totalPhaSale').text(t.pharCollection);
+                $('#DailasisCollection').text(t.dalCollection);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                //Metronic.unblockUI();
+                var msg = 'Fail to load category list.';
+                alert(msg);
+            }
+        });
+        }
+    </script>
+}

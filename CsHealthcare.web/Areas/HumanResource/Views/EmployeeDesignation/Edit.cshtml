@@ -1,0 +1,94 @@
+﻿@model CsHealthcare.ViewModel.HumanResource.EmployeeDesignationModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i> Department
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse" data-original-title="" title=""> </a>
+                    <a href="" class="fullscreen" data-original-title="" title=""> </a>
+                    <a href="#portlet-config" data-toggle="modal" class="config" data-original-title="" title=""> </a>
+                </div>
+                <div class="actions margin-right-10">
+
+                </div>
+            </div>
+            <div class="portlet-body portlet-empty">
+
+                @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ED_ID)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ED_DESIGNATION, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ED_DESIGNATION, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
+                    @Html.ValidationMessageFor(model => model.ED_DESIGNATION, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ED_SHORT_FORM, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ED_SHORT_FORM, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ED_SHORT_FORM, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ED_NO_POSITION, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ED_NO_POSITION, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ED_NO_POSITION, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ED_HOUR_PER_WEEK, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ED_HOUR_PER_WEEK, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ED_HOUR_PER_WEEK, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ED_FLSA_CODE, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ED_FLSA_CODE, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ED_FLSA_CODE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ED_GL_ID, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8">
+                    @Html.EditorFor(model => model.ED_GL_ID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ED_GL_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a class="btn default" style="width: 15%;" href="@Url.Action("Index", "EmployeeDesignation", new {Area = "HumanResource" })">Cancel</a>
+                <input type="submit" value="Save" class="btn green" style="width: 15%;" />
+            </div>
+        </div>
+        }
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
